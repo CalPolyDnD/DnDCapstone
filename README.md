@@ -12,10 +12,8 @@ This is where you can find documentation on our:
     System Architecture
     
     Horizontal Prototype
-    
-    Continuous Integration
-    
-
+        
+To learn more about our development and build environment you can check out our wiki pages.
 
 
 
