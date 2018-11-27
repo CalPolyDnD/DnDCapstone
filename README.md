@@ -5,13 +5,15 @@ Here the DnD team is developing a DataMaster a data classifier.
 To learn more about our project view the documents directory. 
 This is where you can find documentation on our:
 
-    -Vision
+    Product Vision
     
-    -System Requirements Specifications
+    System Requirements Specifications
     
-    -System Architecture
+    System Architecture
     
-    -Continuous Integration
+    Horizontal Prototype
+    
+    Continuous Integration
     
 
 
