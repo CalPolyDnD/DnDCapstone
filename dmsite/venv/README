@@ -1,0 +1,32 @@
+How to start the server:
+
+<python command> manage.py runserver
+ex. "py manage.py runserver"
+Run from the root 'dmsite' directory (i.e. <filepath to git repo>/src/dmsite)
+
+Site should be located at 'localhost:8000' or '127.0.0.1:8000'
+
+This is a dev server command, so we need to switch this later when we move to prod (I'll figure it out later...)
+
+
+
+
+Alright, here's a rundown of what I think is going on with these files. In order -
+
+'build' contains the compiled React code and other stuff related to the webpage itself.
+'dmsite' contains some settings and some management stuff for the web server; you probably won't have to touch this
+    except for when you're working on classification.
+'node_modules' is self explanatory - was needed for setting up react.
+'public' is web stuff? I guess?
+'src' contains all of the source code for React, such as the JS files that end up being compiled.
+
+The only other file to worry about is manage.py, since that's what starts the server.
+
+
+
+In terms of making changes to the default webpage, here's what's going on:
+
+Django redirects a base webpage call (or just a localhost call) to 'index.html' in the 'build' folder.
+To make changes to the webpage, edit the 'App.js' file in the 'src' folder (i.e. repo/src/src) and then recompile using 'npm run build'
+You need to do this every time you edit 'App.js'
+Also, of note, you can keep the django server running the entire time
