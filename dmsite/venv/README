@@ -2,7 +2,7 @@ How to start the server:
 
 <python command> manage.py runserver
 ex. "py manage.py runserver"
-Run from the root 'dmsite' directory (i.e. <filepath to git repo>/src/dmsite)
+Run from the root 'dmsite' directory (i.e. <filepath to git repo>/dmsite/venv)
 
 Site should be located at 'localhost:8000' or '127.0.0.1:8000'
 
@@ -27,6 +27,6 @@ The only other file to worry about is manage.py, since that's what starts the se
 In terms of making changes to the default webpage, here's what's going on:
 
 Django redirects a base webpage call (or just a localhost call) to 'index.html' in the 'build' folder.
-To make changes to the webpage, edit the 'App.js' file in the 'src' folder (i.e. repo/src/src) and then recompile using 'npm run build'
+To make changes to the webpage, edit the 'App.js' file in the 'src' folder (i.e. repo/dmsite/venv/src) and then recompile using 'npm run build'
 You need to do this every time you edit 'App.js'
 Also, of note, you can keep the django server running the entire time
