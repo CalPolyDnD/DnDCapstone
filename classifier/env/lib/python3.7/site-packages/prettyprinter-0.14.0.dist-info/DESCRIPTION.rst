@@ -1,0 +1,258 @@
+=============
+PrettyPrinter
+=============
+
+Documentation_
+
+Syntax-highlighting, declarative and composable pretty printer for Python 3.5+
+
+.. code:: bash
+
+    pip install prettyprinter
+
+- Drop in replacement for the standard library ``pprint``: just rename ``pprint`` to ``prettyprinter`` in your imports.
+- Uses a modified Wadler-Leijen layout algorithm for optimal formatting
+- Write pretty printers for your own types with a dead simple, declarative interface
+
+.. image:: prettyprinterscreenshot.png
+    :alt:
+
+.. image:: ../prettyprinterscreenshot.png
+    :alt:
+
+.. image:: prettyprinterlightscreenshot.png
+    :alt:
+
+.. image:: ../prettyprinterlightscreenshot.png
+    :alt:
+
+Pretty print common Python values:
+
+.. code:: python
+
+    >>> from datetime import datetime
+    >>> from prettyprinter import pprint
+    >>> pprint({'beautiful output': datetime.now()})
+    {
+        'beautiful output': datetime.datetime(
+            year=2017,
+            month=12,
+            day=12,
+            hour=0,
+            minute=43,
+            second=4,
+            microsecond=752094
+        )
+    }
+
+As well as your own, without any manual string formatting:
+
+.. code:: python
+
+    >>> class MyClass:
+    ...     def __init__(self, one, two):
+    ...         self.one = one
+    ...         self.two = two
+
+    >>> from prettyprinter import register_pretty, pretty_call
+
+    >>> @register_pretty(MyClass)
+    ... def pretty_myclass(value, ctx):
+    ...     return pretty_call(ctx, MyClass, one=value.one, two=value.two)
+
+    >>> pprint(MyClass((1, 2, 3), {'a': 1, 'b': 2}))
+    MyClass(one=(1, 2, 3), two={'a': 1, 'b': 2})
+
+    >>> pprint({'beautiful output': datetime.now(), 'beautiful MyClass instance': MyClass((1, 2, 3), {'a': 1, 'b': 2})})
+    {
+        'beautiful MyClass instance': MyClass(
+            one=(1, 2, 3),
+            two={'a': 1, 'b': 2}
+        ),
+        'beautiful output': datetime.datetime(
+            year=2017,
+            month=12,
+            day=12,
+            hour=0,
+            minute=44,
+            second=18,
+            microsecond=384219
+        )
+    }
+
+Comes packaged with the following pretty printer definitions:
+
+- ``datetime`` - (installed by default)
+- ``enum`` - (installed by default)
+- ``pytz`` - (installed by default)
+- ``dataclasses`` - any new class you create will be pretty printed automatically
+- ``attrs`` - any new class you create will be pretty printed automatically
+- ``django`` - your Models and QuerySets will be pretty printed automatically
+- ``requests`` - automatically pretty prints Requests, Responses, Sessions, and more from the ``requests`` library
+
+* Free software: MIT license
+* Documentation: Documentation_.
+
+.. _Documentation: https://prettyprinter.readthedocs.io
+
+
+=======
+History
+=======
+
+0.14.0 (2018-07-25)
+-------------------
+
+Most likely no breaking changes.
+
+* Added definitions for ``pathlib`` standard library module thanks to GitHub user ``RazerM``
+* Fixed unexpected error output inside Jupyter notebooks thanks to GitHub user ``jdanbrown``
+* Fixed missing commas in ``setup.py`` requirements list
+
+0.13.2 (2018-05-29)
+-------------------
+
+No breaking changes.
+
+* Fixed the dataclasses pretty printer that had regressed after changes to the dataclasses API. Fix was contributed by GitHub user ``dangirsh``.
+
+0.13.1 (2018-02-03)
+-------------------
+
+No breaking changes.
+
+* Fixed GH issue #17 where Django models showed an incorrect display name for fields with choices.
+
+0.13.0 (2018-02-03)
+-------------------
+
+No breaking changes.
+
+* Added definitions for the ``ast`` standard library module thanks to GitHub user ``johnnoone``.
+
+0.12.0 (2018-01-22)
+-------------------
+
+No breaking changes.
+
+* Added a definition for classes that look like they were built with ``collections.namedtuple``
+* If a pretty printer raises an exception, it is caught and emitted as a warning, and the default repr implementation will be used instead.
+* Added definitions for ``collections.ChainMap``, ``collections.defaultdict``, ``collections.deque``, ``functools.partial``, and for exception objects.
+* Made pretty printers for primitive types (dict, list, set, etc.) render a subclass constructor around them
+
+
+0.11.0 (2018-01-20)
+-------------------
+
+No breaking changes.
+
+* Added Python 3.5 support
+* Added ``pretty_call_alt`` function that doesn't depend on ``dict`` maintaining insertion order
+* Fixed bug in ``set_default_config`` where most configuration values were not updated
+* Added ``get_default_config``
+
+0.10.1 (2018-01-10)
+-------------------
+
+No breaking changes.
+
+* Fixed regression with types.MappingProxyType not being properly registered.
+
+0.10.0 (2018-01-09)
+-------------------
+
+No breaking changes.
+
+* Added support for deferred printer registration, where instead of a concrete type value, you can pass a qualified path to a type as a ``str`` to ``register_pretty``. For an example, see `the deferred printer registration for uuid.UUID <https://github.com/tommikaikkonen/prettyprinter/blob/05187126889ade1c2bf0557a40800e5c44a32bab/prettyprinter/pretty_stdlib.py#L38-L40>`_
+
+0.9.0 (2018-01-03)
+------------------
+
+No breaking changes.
+
+* Added pretty printer definition for ``types.MappingProxyType`` thanks to GitHub user `Cologler <https://github.com/Cologler/>`_
+* Added support for ``_repr_pretty_`` in the extra ``ipython_repr_pretty``.
+
+
+0.8.1 (2018-01-01)
+------------------
+
+* Fixed issue #7 where having a ``str`` value for IPython's ``highlighting_style`` setting was not properly handled in ``prettyprinter``'s IPython integration, and raised an exception when trying to print data.
+
+0.8.0 (2017-12-31)
+------------------
+
+Breaking changes:
+
+* by default, ``dict`` keys are printed in the default order (insertion order in CPython 3.6+). Previously they were sorted like in the ``pprint`` standard library module. To let the user control this, an additional keyword argument ``sort_dict_keys`` was added to ``cpprint``, ``pprint``, and ``pformat``. Pretty printer definitions can control ``dict`` key sorting with the ``PrettyContext`` instance passed to each pretty printer function.
+
+Non-breaking changes:
+
+* Improved performance of rendering colorized output by caching colors.
+* Added ``prettyprinter.pretty_repr`` that is assignable to ``__repr__`` dunder methods, so you don't need to write it separately from the pretty printer definition.
+* Deprecated use of ``PrettyContext.set`` in favor of less misleading ``PrettyContext.assoc``
+* Defined pretty printing for instances of ``type``, i.e. classes.
+* Defined pretty printing for functions
+
+
+
+0.7.0 (2017-12-23)
+------------------
+
+Breaking change: instances of lists, sets, frozensets, tuples and dicts will be truncated to 1000 elements by default when printing.
+
+* Added pretty printing definitions for ``dataclasses``
+* Improved performance of splitting strings to multiple lines by ~15%
+* Added a maximum sequence length that applies to subclasses of lists, sets, frozensets, tuples and dicts. The default is 1000. There is a trailing comment that indicates the number of truncated elements. To remove truncation, you can set ``max_seq_len`` to ``None`` using ``set_default_config`` explained below.
+* Added ability to change the default global configuration using ``set_default_config``. The functions accepts zero to many keyword arguments and replaces those values in the global configuration with the ones provided.
+
+.. code:: python
+
+    from prettyprinter import set_default_config
+
+    set_default_config(
+        style='dark',
+        max_seq_len=1000,
+        width=79,
+        ribbon_width=71,
+        depth=None,
+    )
+
+0.6.0 (2017-12-21)
+------------------
+
+No backwards incompatible changes.
+
+* Added pretty printer definitions for the ``requests`` library. To use it, include ``'requests'`` in your ``install_extras`` call: ``prettyprinter.install_extras(include=['requests'])``.
+
+0.5.0 (2017-12-21)
+------------------
+
+No backwards incompatible changes.
+
+* Added integration for the default Python shell
+* Wrote docs to explain integration with the default Python shell
+* Check ``install_extras`` arguments for unknown extras
+
+0.4.0 (2017-12-14)
+------------------
+
+* Revised ``comment`` to accept both normal Python values and Docs, and reversed the argument order to be more Pythonic
+
+0.3.0 (2017-12-12)
+------------------
+
+* Add ``set_default_style`` function, improve docs on working with a light background
+
+0.2.0 (2017-12-12)
+------------------
+
+* Numerous API changes and improvements.
+
+
+0.1.0 (2017-12-07)
+------------------
+
+* First release on PyPI.
+
+
