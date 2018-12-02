@@ -2,20 +2,8 @@ import React, { Component } from 'react';
 import 'filepond/dist/filepond.min.css';
 import { Container, Row, Col, Card, CardBody, ListGroup, ListGroupItem } from 'reactstrap';
 
-class FilterColumn extends Component {
+class DisplayData extends Component {
 
-parseData(data) {
-    const parsedData = data.map(name => {
-
-            return (
-                <ListGroupItem>
-                    {name}
-                </ListGroupItem>
-
-            )
-        })
-     return parsedData;
-}
 render() {
 
 const Testdata = ["String1", "String2", "String3", "String4"];
@@ -27,8 +15,9 @@ return (
             <Card>
                 <CardBody>
                     <ListGroup flush>
-                              {DynamicData}
+                                {DynamicData}
                                 <ListGroupItem>
+                                    Test
                                                 </ListGroupItem>
                               </ListGroup>
                 </CardBody>
@@ -38,4 +27,4 @@ return (
    }
 }
 
-export default FilterColumn;
+export default DisplayData;

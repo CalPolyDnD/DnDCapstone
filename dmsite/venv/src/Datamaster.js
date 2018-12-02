@@ -1,17 +1,20 @@
 import React, { Component } from 'react';
 import 'filepond/dist/filepond.min.css';
-import { Container, Row, Column, Card, CardBody } from 'reactstrap';
-
+import { Container, Row, Col, Card, CardBody } from 'reactstrap';
+import  FilterColumn from './FilterColumn';
 class DataMaster extends Component {
+
 render() {
 return (
        <Container>
+          <h1>DataMaster</h1>
           <Row>
             <FilterColumn />
-            <FilterColumn />
+            <DisplayColumn />
           </Row>
+
        </Container>
-        <h1>Hey</h1>
+
 
     )
    }
