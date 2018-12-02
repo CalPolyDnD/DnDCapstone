@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
-import Header from './Header.js'
 import { FilePond } from 'react-filepond';
 import 'filepond/dist/filepond.min.css';
+import DataMaster from './Datamaster';
 
 class App extends Component {
 render() {
 return (
-  <Header/>
+   <div className="App">
+          <DataMaster />
+   </div>
+
 );
 }
 }
