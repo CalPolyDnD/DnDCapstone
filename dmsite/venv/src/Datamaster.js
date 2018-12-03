@@ -4,6 +4,7 @@ import { Container, Row, Col, Card, CardBody, Input } from 'reactstrap';
 import  FilterColumn from './FilterColumn';
 import DisplayData from './DisplayData';
 import Results from './Results';
+import Logo from './images/DnDLogo2.png';
 
 class DataMaster extends Component {
     constructor(props) {
@@ -37,6 +38,7 @@ render() {
 return (
        <Container fluid>
           <div className="d-inline-flex">
+              <img id="logo" width="130" height="50" src={Logo}/>
             <h1>DataMaster</h1>
             <Input type="search" className="ml-4" placeholder="Search Dataset"/>
           </div>
