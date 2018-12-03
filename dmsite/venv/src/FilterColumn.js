@@ -5,6 +5,10 @@ import FilterButton from './FilterButton';
 
 class FilterColumn extends Component {
 
+  _heyShane() {
+    console.log("Hey Shane");
+  }
+
 parseData(data) {
     const parsedData = data.map(name => {
 
