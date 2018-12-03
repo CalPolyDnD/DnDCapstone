@@ -24,19 +24,17 @@ const Testdata = ["String1", "String2", "String3", "String4"];
 const DynamicData =  this.parseData(Testdata);
 
 return (
-       <Col className="p-1">
-            <Card>
-                <CardTitle className="pl-4 pt-4">{this.props.type}</CardTitle>
-                <CardBody>
-                    <ListGroup flush>
-                      {DynamicData}
-                        <ListGroupItem>
-                                        </ListGroupItem>
-                      </ListGroup>
-                      <FilterButton/>
-                </CardBody>
-            </Card>
-       </Col>
+        <Card>
+            <CardTitle className="pl-4 pt-4">{this.props.name}</CardTitle>
+            <CardBody>
+                <ListGroup className="filter-list" flush>
+                  {DynamicData}
+                    <ListGroupItem>
+                                    </ListGroupItem>
+                  </ListGroup>
+                  <FilterButton/>
+            </CardBody>
+        </Card>
     )
    }
 }

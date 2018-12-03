@@ -1,33 +1,56 @@
 import React, { Component } from 'react';
 import 'filepond/dist/filepond.min.css';
-import { Container, Row, Col, Card, CardBody } from 'reactstrap';
+import { Container, Row, Col, Card, CardBody, Input } from 'reactstrap';
 import  FilterColumn from './FilterColumn';
 import DisplayData from './DisplayData';
+import Results from './Results';
+
 class DataMaster extends Component {
-//    constructor() {
-//        super(props);
-//        this.state = {
-//            data: null
-//        }
+    constructor(props) {
+        super(props);
+        this.state = {
+            data: null,
+            error: ''
+        }
+    }
+
+//    componentDidMount() {
+//        this.getData();
 //    }
 //
-//componentDidMount() {
-//    this.getData();
-//}
-//
-//getDAta() {
-//    this.setSTate({ data: data });
-//}
+//    getDAta() {
+//        this.setSTate({ data: data });
+//    }
+
+//    _filterCampaign(query) {
+//       fetch(`someendpoint/?query=${query}`)
+//        .then((json) => {
+//           this.setState({ data: json.data });
+//        })
+//        .catch((error) => {
+//            this.setState({ error });
+//        })
+//    }
 
 
 render() {
 return (
        <Container fluid>
-          <h1>DataMaster</h1>
+          <div className="d-inline-flex">
+            <h1>DataMaster</h1>
+            <Input type="search" className="ml-4" placeholder="Search Dataset"/>
+          </div>
           <Row>
-            <FilterColumn type={'Campaigns'} />
-            <FilterColumn type={'Datasets'} />
-            <DisplayData />
+            <Col md="3">
+               <FilterColumn name={'Campaigns'} />
+               <FilterColumn name={'Datasets'} />
+            </Col>
+            <Col md="5">
+                <DisplayData />
+            </Col>
+            <Col md="4">
+                <Results name={"Classifications"} />
+            </Col>
           </Row>
 
        </Container>

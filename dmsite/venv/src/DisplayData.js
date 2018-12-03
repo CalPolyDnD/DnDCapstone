@@ -25,7 +25,6 @@ const Testdata = ["String1", "String2", "String3", "String4"];
 const DynamicData =  this.parseData(Testdata);
 
 return (
-       <Col>
             <Card>
                 <CardBody>
                     <Table>
@@ -60,7 +59,6 @@ return (
                       </Table>
                 </CardBody>
             </Card>
-       </Col>
     )
    }
 }

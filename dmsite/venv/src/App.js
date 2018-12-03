@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { FilePond } from 'react-filepond';
 import 'filepond/dist/filepond.min.css';
 import DataMaster from './Datamaster';
+import './App.css';
 
 class App extends Component {
 render() {
