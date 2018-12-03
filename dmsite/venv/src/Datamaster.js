@@ -1,17 +1,37 @@
 import React, { Component } from 'react';
 import 'filepond/dist/filepond.min.css';
-import { Container, Row, Column, Card, CardBody } from 'reactstrap';
-
+import { Container, Row, Col, Card, CardBody } from 'reactstrap';
+import  FilterColumn from './FilterColumn';
+import DisplayData from './DisplayData';
 class DataMaster extends Component {
+//    constructor() {
+//        super(props);
+//        this.state = {
+//            data: null
+//        }
+//    }
+//
+//componentDidMount() {
+//    this.getData();
+//}
+//
+//getDAta() {
+//    this.setSTate({ data: data });
+//}
+
+
 render() {
 return (
-       <Container>
+       <Container fluid>
+          <h1>DataMaster</h1>
           <Row>
-            <FilterColumn />
-            <FilterColumn />
+            <FilterColumn type={'Campaigns'} />
+            <FilterColumn type={'Datasets'} />
+            <DisplayData />
           </Row>
+
        </Container>
-        <h1>Hey</h1>
+
 
     )
    }
