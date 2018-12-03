@@ -3,7 +3,6 @@ import pprint
 from decimal import Decimal
 import pandas as pd
 
-pp = pprint.PrettyPrinter(indent=4)
 
 dynamodb = boto3.resource('dynamodb')
 dynamodb_client = boto3.client('dynamodb')
@@ -45,8 +44,7 @@ def dataframe_from_dynamo_map(dynamo_map):
 
 
 def put_dataset_header(user_id, dataset_id, dataframe):
-    dataframe_as_dict = _convert_to_dynamodb_types(dataframe.head(50))
-    data = {str(k1): {str(k2): v2 for k2, v2 in dataframe_as_dict[k1].items()} for k1, v1 in dataframe_as_dict.items()}
+    data = _convert_to_dynamodb_types(dataframe.head(50))
     table = dynamodb.Table(_HEADERS_TABLE_NAME)
     table.put_item(
         Item={
