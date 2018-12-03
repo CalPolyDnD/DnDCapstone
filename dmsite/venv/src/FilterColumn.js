@@ -18,7 +18,7 @@ parseData(data) {
 }
 render() {
 
-const Testdata = ["String1", "String2", "String3", "String4"];
+const Testdata = ["Campaign1", "Campaign2", "Campaign3", "Campaign4"];
 
 const DynamicData =  this.parseData(Testdata);
 
