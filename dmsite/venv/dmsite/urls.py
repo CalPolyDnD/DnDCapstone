@@ -28,9 +28,13 @@ from django.conf.urls.static import static
 from django.urls import path
 from django.views.generic import TemplateView
 
+# Manage file uploads
+from dmsite.upload import views as upload_views
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', TemplateView.as_view(template_name='index.html')),
+    path('upload/', TemplateView.as_view(template_name='index.html')),
+    path('upload/push_file', upload_views.upload_file)
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
