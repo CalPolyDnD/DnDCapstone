@@ -2,7 +2,10 @@ import os
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from .forms import UploadFileForm
-from dmsite.file_manager import file_manager as fm
+import dmsite.file_manager.file_manager as fm
+import dmsite.db_manager.db_manager as dbm
+import dmsite.data_classifier.data_wrangler as dw
+
 
 # Imaginary function to handle an uploaded file.
 
@@ -22,5 +25,12 @@ def handle_uploaded_file(f):
     with open(fName, 'wb+') as destination:
         for chunk in f.chunks():
             destination.write(chunk)
+
+    file = open(fName, 'rb')
+
+    parser = dw.Wrangler(file, ".csv")
+    parser.parse_file()
+    dbm.put_dataset_header("userName", f.name, parser.data)
+
     fm.upload_file_from_path(fName)
     os.remove(fName)
