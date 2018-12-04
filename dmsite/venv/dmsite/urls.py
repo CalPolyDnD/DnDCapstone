@@ -33,7 +33,8 @@ from dmsite.upload import views as upload_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('upload/', TemplateView.as_view(template_name='index.html')),
+    path('', TemplateView.as_view(template_name='index.html')),
+    path('upload', TemplateView.as_view(template_name='index.html')),
     path('upload/push_file', upload_views.upload_file)
 ]
 
