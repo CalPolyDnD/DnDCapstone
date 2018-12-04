@@ -25,6 +25,10 @@ class Wrangler:
         return 0
 
     def _calculate_column_metrics(self):
+        """
+        This method is an internal method used to calculate metadata about the table built from the file associated with
+        an instance of DataWrangler. The results of this function are found in the property self.metrics
+        """
         self.metrics = pd.DataFrame(columns=["Name", "DType", "Average", "Minimum", "Maximum"])
         for col in self.data:
             col_name = col.replace("\"", "").strip()
@@ -63,7 +67,9 @@ class Wrangler:
         #     #print("Error reading file")
 
     def _parse_csv(self):
-        print("Parsing csv")
+        """Internal function that should be used to parse CSV files. It will also generate metadata about the info in
+           the CSV file.
+        """
         try:
             self.data = pd.read_csv(self.file)
             self._calculate_column_metrics()
@@ -81,7 +87,6 @@ class Wrangler:
     }
 
     def __init__(self, file, file_type: str):
-        print(file_type)
         self.file = file
         self.file_type = file_type
         self.data = None
