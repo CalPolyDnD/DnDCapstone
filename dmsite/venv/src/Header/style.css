@@ -1,0 +1,21 @@
+#logo {
+  align-self: center;
+  justify-content: center;
+}
+
+#header {
+  align-self: center;
+  justify-content: center;
+}
+
+#searchForm {
+  flex-direction: row;
+  align-self: center;
+  justify-content: center;
+}
+
+#searchBar {
+  flex: auto;
+  align-self: center;
+  justify-content: center;
+}

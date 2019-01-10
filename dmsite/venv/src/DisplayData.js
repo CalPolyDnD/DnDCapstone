@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import 'filepond/dist/filepond.min.css';
-import { Container, Row, Col, Card, CardBody, ListGroup, ListGroupItem, Table } from 'reactstrap';
+import { Card, CardBody, ListGroupItem, Table } from 'reactstrap';
 
 class DisplayData extends Component {
 

@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import 'filepond/dist/filepond.min.css';
-import { Switch, Route } from 'react-router-dom'
-import Home from './HomeComponent'
+import { Switch, Route } from 'react-router-dom';
+import Header from './Header/Header';
+import Home from './HomeComponent';
+import SearchResultsPage from './SearchResultsPage/SearchResultsPage';
 
 class DataMaster extends Component {
     constructor(props) {
@@ -34,9 +36,11 @@ class DataMaster extends Component {
 render() {
 return (
     <main>
-        <Switch>
-            <Route path = '/' component={Home} />
-        </Switch>
+      <Header />
+      <Switch>
+        <Route path = '/search' component={SearchResultsPage} />
+        <Route path = '/' component={Home} />
+      </Switch>
     </main>
     )
    }
