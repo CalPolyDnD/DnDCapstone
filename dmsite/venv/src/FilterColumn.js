@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import 'filepond/dist/filepond.min.css';
-import { Container, Row, Col, Card, CardBody, CardTitle, ListGroup, ListGroupItem } from 'reactstrap';
+import { Card, CardBody, CardTitle, ListGroup, ListGroupItem } from 'reactstrap';
 import FilterButton from './FilterButton';
 
 class FilterColumn extends Component {
