@@ -34,7 +34,7 @@ class SearchResultsPage extends React.Component {
     ];
     return searchResults.map(result => (
       <ListGroupItem>
-        <SearchResultsCell dataset={result} />
+        <SearchResultsCell dataset={result} history={this.props.history} />
       </ListGroupItem>));
   }
 

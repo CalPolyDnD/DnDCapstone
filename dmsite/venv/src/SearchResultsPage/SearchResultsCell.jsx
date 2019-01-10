@@ -5,8 +5,9 @@ import PropTypes from 'prop-types';
 class SearchResultsCell extends React.Component {
   render() {
     const dataset = this.props.dataset;
+    // TODO: modify the onClick to route the the appropriate link
     return (
-      <ListGroupItem>
+      <ListGroupItem action onClick={() => { this.props.history.push('/'); }}>
         <h4>{dataset.name}</h4>
         <h6>{`Classifications: ${dataset.classifications.toString()}`}</h6>
         <h6>{`Attributes: ${dataset.attributes.toString()}`}</h6>
