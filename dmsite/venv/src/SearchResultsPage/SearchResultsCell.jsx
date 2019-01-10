@@ -1,5 +1,9 @@
 import React from 'react';
-import { ListGroupItem } from 'reactstrap';
+import {
+  ListGroupItem,
+  ListGroupItemHeading,
+  ListGroupItemText,
+} from 'reactstrap';
 import PropTypes from 'prop-types';
 
 class SearchResultsCell extends React.Component {
@@ -7,10 +11,14 @@ class SearchResultsCell extends React.Component {
     const dataset = this.props.dataset;
     // TODO: modify the onClick to route the the appropriate link
     return (
-      <ListGroupItem action onClick={() => { this.props.history.push('/'); }}>
-        <h4>{dataset.name}</h4>
-        <h6>{`Classifications: ${dataset.classifications.toString()}`}</h6>
-        <h6>{`Attributes: ${dataset.attributes.toString()}`}</h6>
+      <ListGroupItem action key={this.props.key} onClick={() => { this.props.history.push('/'); }}>
+        <ListGroupItemHeading>{dataset.name}</ListGroupItemHeading>
+        <ListGroupItemText>
+          {`Classifications: ${dataset.classifications.toString()}`}
+        </ListGroupItemText>
+        <ListGroupItemText>
+          {`Attributes: ${dataset.attributes.toString()}`}
+        </ListGroupItemText>
       </ListGroupItem>
     );
   }
@@ -26,6 +34,7 @@ SearchResultsCell.propTypes = {
     classifications: PropTypes.array,
     attributes: PropTypes.array,
   }).isRequired,
+  key: PropTypes.number.isRequired,
 };
 
 export default SearchResultsCell;
