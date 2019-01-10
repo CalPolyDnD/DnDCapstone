@@ -38,7 +38,7 @@ class Header extends React.Component {
         <Row>
           <div className="d-inline-flex">
             <img id="logo" alt="DnDlogo" width="90" height="70" src={Logo} />
-            <h1 id="header">DataMaster</h1>
+            <h1 id="header" onClick={() => { this.props.history.push('/'); }}>DataMaster</h1>
             <Form inline>
               <Input id="searchBar" type="search" className="ml-4" placeholder="Search Dataset" onChange={(event) => {this.updateSearchBarText(event)}} />
               {this.renderButton()}
