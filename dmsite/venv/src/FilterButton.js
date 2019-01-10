@@ -20,7 +20,7 @@ return (
             <Input placeholder="Filter Campaign" />
             <div className="d-flex justify-content-center pt-2">
                 <Button color="primary" size="md" className="mr-1 btn-block mt-0" onClick={this.uploadPressed}>Add</Button>
-                <Button color="primary"size="md" className="btn-block mt-0">Edit Campaigns</Button>
+                <Button color="primary"size="md" className="btn-block mt-0">Edit {this.props.name}</Button>
             </div>
             <Route path='/upload' component={Upload} />
         </div>
