@@ -17,14 +17,13 @@ class Home extends Component{
                 </div>
                 <Row>
                     <Col md="3">
-                        <FilterColumn name={'Campaigns'} />
                         <FilterColumn name={'Datasets'} />
-                    </Col>
-                    <Col md="5">
                         <DisplayData />
                     </Col>
-                    <Col md="4">
+                    <Col md="5">
                         <Results name={"Classifications"} />
+                    </Col>
+                    <Col md="4">
                     </Col>
                 </Row>
             </Container>
