@@ -37,7 +37,7 @@ class Header extends React.Component {
       <div>
         <Row>
           <div className="d-inline-flex">
-            <img id="logo" alt="DnDlogo" width="130" height="50" src={Logo} />
+            <img id="logo" alt="DnDlogo" width="90" height="70" src={Logo} />
             <h1 id="header">DataMaster</h1>
             <Form inline>
               <Input id="searchBar" type="search" className="ml-4" placeholder="Search Dataset" onChange={(event) => {this.updateSearchBarText(event)}} />
