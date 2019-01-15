@@ -8,14 +8,31 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-
-
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
-.dataset-details-col-left {
-	width: 40%;
+.dataset-details-page {
+	width: 100%;
+}
+
+.dataset-details-col {
+	width: 50%;
 	height: 100%;
+	padding: 10px;
+}
+
+.dataset-details-col-left {
+	width: 50%;
+	height: 100%;
+	padding: 10px;
+	align: left;
+}
+
+.dataset-details-col-right {
+	width: 50%;
+	height: 100%;
+	padding: 10px;
+	align: right;
 }

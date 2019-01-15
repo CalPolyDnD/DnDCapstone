@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import 'filepond/dist/filepond.min.css';
-import { Switch, Route } from 'react-router-dom'
-import Home from './HomeComponent'
+import { Switch, Route } from 'react-router-dom';
+import Home from './HomeComponent';
+import DatasetDetails from './DatasetDetails';
 
 class DataMaster extends Component {
     constructor(props) {
@@ -35,6 +36,7 @@ render() {
 return (
     <main>
         <Switch>
+			<Route path = '/detail' component={DatasetDetails} />;
             <Route path = '/' component={Home} />
         </Switch>
     </main>
