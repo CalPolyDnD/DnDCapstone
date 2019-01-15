@@ -3,6 +3,7 @@ import 'filepond/dist/filepond.min.css';
 import { Switch, Route } from 'react-router-dom';
 import Header from './Header/Header';
 import Home from './HomeComponent';
+import Login from './Login';
 import SearchResultsPage from './SearchResultsPage/SearchResultsPage';
 
 class DataMaster extends Component {
@@ -39,7 +40,8 @@ return (
       <Header />
       <Switch>
         <Route path = '/search' component={SearchResultsPage} />
-        <Route path = '/' component={Home} />
+        <Route path = '/home' component={Home} />
+        <Route path = '/' component={Login}/>
       </Switch>
     </main>
     )
