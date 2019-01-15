@@ -73,7 +73,7 @@ class Header extends React.Component {
               {this.state.searchFilterOrder[2]}
             </DropdownItem>
           </DropdownMenu>
-          <Button color="primary" onClick={() => { this.props.history.push(`/search/${this.state.searchbarText}`); }}>Search</Button>
+          <Button color="primary" onClick={() => { this.props.history.push(`/search/${this.state.searchFilterOrder[0]}${this.state.searchbarText}`); }}>Search</Button>
         </InputGroupButtonDropdown>
       </Form>
     );

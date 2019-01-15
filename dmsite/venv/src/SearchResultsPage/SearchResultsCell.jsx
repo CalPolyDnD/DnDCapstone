@@ -11,7 +11,7 @@ class SearchResultsCell extends React.Component {
     const dataset = this.props.dataset;
     // TODO: modify the onClick to route the the appropriate link
     return (
-      <ListGroupItem action key={this.props.key} onClick={() => { this.props.history.push('/'); }}>
+      <ListGroupItem action onClick={() => { this.props.history.push('/'); }}>
         <ListGroupItemHeading>{dataset.name}</ListGroupItemHeading>
         <ListGroupItemText>
           {`Classifications: ${dataset.classifications.toString()}`}
@@ -34,7 +34,6 @@ SearchResultsCell.propTypes = {
     classifications: PropTypes.array,
     attributes: PropTypes.array,
   }).isRequired,
-  key: PropTypes.number.isRequired,
 };
 
 export default SearchResultsCell;
