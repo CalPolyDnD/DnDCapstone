@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import 'filepond/dist/filepond.min.css';
-import { Container, Row, Col, Card, Button,CardTitle, CardBody, ListGroup, ListGroupItem, Table } from 'reactstrap';
+import { Card, Button,CardTitle, CardBody, ListGroup, ListGroupItem } from 'reactstrap';
 
 const parseData = (data) => {
     const finalData = data.map((obj, index) => {
