@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
 import 'filepond/dist/filepond.min.css';
 import { Switch, Route } from 'react-router-dom';
-<<<<<<< HEAD
-import Home from './HomeComponent';
-import DatasetDetails from './DatasetDetails';
-=======
 import Header from './Header/Header';
 import Home from './HomeComponent';
+import DatasetDetails from './DatasetDetails';
 import SearchResultsPage from './SearchResultsPage/SearchResultsPage';
->>>>>>> 1d63195106b75df92ff2c93db20ddcf7605dbde3
+
 
 class DataMaster extends Component {
     constructor(props) {
