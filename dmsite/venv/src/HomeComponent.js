@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { Container, Row, Col } from 'reactstrap';
-import FilterColumn from './FilterColumn';
-import DisplayData from './DisplayData';
-import DisplayColumn from './DisplayColumn';
-import Results from './Results';
+import FilterColumn from './DataColumn/FilterColumn';
+import DisplayData from './DataColumn/DisplayData';
+import DisplayColumn from './VisualColumn/DisplayColumn';
+import Results from './ClassificationColumn/Results';
 
 class Home extends Component{
     render(){

@@ -79,6 +79,7 @@ class VisualDisplay extends Component {
 
     return (
       <Carousel
+        style={{position: "absolute", justifyContent: 'center'}}
         activeIndex={activeIndex}
         next={this.next}
         previous={this.previous}

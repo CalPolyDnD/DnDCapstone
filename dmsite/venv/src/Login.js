@@ -5,12 +5,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { Container, Row, Col, Button} from 'reactstrap';
-import { Switch, Route } from 'react-router-dom'
-import FilterColumn from './FilterColumn';
-import DisplayData from './DisplayData';
-import DisplayColumn from './DisplayColumn';
-import Results from './Results';
-import HomeComponent from './HomeComponent';
+import { Switch, Route } from 'react-router-dom';
 
 class Login extends Component{
     constructor(props){

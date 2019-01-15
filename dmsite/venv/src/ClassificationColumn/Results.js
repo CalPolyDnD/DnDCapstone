@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import 'filepond/dist/filepond.min.css';
 import { Input, Card, Button,CardTitle, CardBody, ListGroup, ListGroupItem } from 'reactstrap';
-import FilterButton from './FilterButton';
 
 const parseData = (data) => {
     const finalData = data.map((obj, index) => {
