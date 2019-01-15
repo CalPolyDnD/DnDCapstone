@@ -3,21 +3,25 @@ import { withRouter } from 'react-router-dom';
 import { Container, Row, Col } from 'reactstrap';
 import FilterColumn from './FilterColumn';
 import DisplayData from './DisplayData';
+import DisplayColumn from './DisplayColumn';
 import Results from './Results';
 
 class Home extends Component{
     render(){
         return (
             <Container fluid>
+                <h1>Campaign: Current Campaign</h1>
+                <p> This campaign organizes Data1, Data2, Data3 </p>
                 <Row>
                     <Col md="3">
                         <FilterColumn name={'Datasets'} />
-                        <DisplayData />
+                        <DisplayData name={'File'}/>
                     </Col>
                     <Col md="5">
                         <Results name={"Classifications"} />
                     </Col>
                     <Col md="4">
+                        <DisplayColumn name={'Display Actions'} />
                     </Col>
                 </Row>
             </Container>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import 'filepond/dist/filepond.min.css';
-import { Card, CardBody, ListGroupItem, Table } from 'reactstrap';
+import { Button, CardTitle, Card, CardBody, ListGroupItem, Table } from 'reactstrap';
 
 class DisplayData extends Component {
 
@@ -26,7 +26,9 @@ const DynamicData =  this.parseData(Testdata);
 
 return (
             <Card>
+                <CardTitle className="pl-4 pt-4">{this.props.name}-Header</CardTitle>
                 <CardBody>
+                    <p> This is a description of meta data on the individual file </p>
                     <Table>
                         <thead>
                           <tr>
@@ -58,6 +60,7 @@ return (
                         </tbody>
                       </Table>
                 </CardBody>
+                <Button onClick={this._handleClick} color="primary">Save and Download</Button>
             </Card>
     )
    }
