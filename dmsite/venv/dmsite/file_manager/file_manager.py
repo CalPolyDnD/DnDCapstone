@@ -2,7 +2,7 @@ import boto3
 import os
 
 s3 = boto3.resource('s3')
-BUCKET_NAME = 'dnd-datamaster-datasets'  # change this to your bucket name
+BUCKET_NAME = 'dm-data-file-storage-test'  # change this to your bucket name
 
 
 def upload_file_from_path(path_to_file):
@@ -15,6 +15,7 @@ def upload_file(file, name):
 
 
 def fetch_file(self, file_name):
+    # commented out so boto doesn't scream
     # s3.Bucket(BUCKET_NAME).download_file(file_name, 'testDownload.csv')
     pass
 
