@@ -37,6 +37,7 @@ urlpatterns = [
     path('upload', TemplateView.as_view(template_name='index.html')),
     path('upload/push_file', upload_views.upload_file),
     path('details', TemplateView.as_view(template_name='index.html'))
+    path('search/*', TemplateView.as_view(template_name='index.html')),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

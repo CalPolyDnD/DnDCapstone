@@ -17,12 +17,11 @@ class FilterButton extends Component {
 render() {
 return (
         <div>
-            <Input placeholder="Filter Campaign" />
+            <Input placeholder="Search Result" />
             <div className="d-flex justify-content-center pt-2">
-                <Button color="primary" size="md" className="mr-1 btn-block mt-0" onClick={this.uploadPressed}>Add</Button>
-                <Button color="primary"size="md" className="btn-block mt-0">Edit {this.props.name}</Button>
+                <Button color="primary" size="md" className="mr-1 btn-block mt-0" onClick={this.uploadPressed}>Add File</Button>
+                <Button color="primary"size="md" className="btn-block mt-0">Classify Me</Button>
             </div>
-            <Route path='/upload' component={Upload} />
         </div>
     )
    }

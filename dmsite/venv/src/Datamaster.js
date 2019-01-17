@@ -4,6 +4,7 @@ import { Switch, Route } from 'react-router-dom';
 import Header from './Header/Header';
 import Home from './HomeComponent';
 import DatasetDetails from './DatasetDetails';
+import Login from './Login';
 import SearchResultsPage from './SearchResultsPage/SearchResultsPage';
 
 
@@ -40,8 +41,9 @@ class DataMaster extends Component {
                 <Header />
                 <Switch>
                     <Route path = '/search' component={SearchResultsPage} />
-                    <Route path = '/details' component={DatasetDetails} />;
-                    <Route path = '/' component={Home} />
+                    <Route path = '/details' component={DatasetDetails} />
+                    <Route path = '/home' component={Home} />
+                    <Route path = '/' component={Login}/>
                 </Switch>
             </main>
         )
