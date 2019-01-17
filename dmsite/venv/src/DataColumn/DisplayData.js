@@ -60,7 +60,7 @@ return (
                         </tbody>
                       </Table>
                 </CardBody>
-                <Button onClick={this._handleClick} color="primary">Save and Download</Button>
+                <Button onClick={this._handleClick} color="primary">Download File</Button>
             </Card>
     )
    }

@@ -15,24 +15,6 @@ class DataMaster extends Component {
         }
     }
 
-//    componentDidMount() {
-//        this.getData();
-//    }
-//
-//    getDAta() {
-//        this.setSTate({ data: data });
-//    }
-
-//    _filterCampaign(query) {
-//       fetch(`someendpoint/?query=${query}`)
-//        .then((json) => {
-//           this.setState({ data: json.data });
-//        })
-//        .catch((error) => {
-//            this.setState({ error });
-//        })
-//    }
-
 
 render() {
 return (
