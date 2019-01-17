@@ -34,19 +34,18 @@ class DataMaster extends Component {
 //        })
 //    }
 
-
-render() {
-return (
-    <main>
-      <Header />
-      <Switch>
-        <Route path = '/search' component={SearchResultsPage} />
-		<Route path = '/detail' component={DatasetDetails} />;
-        <Route path = '/' component={Home} />
-      </Switch>
-    </main>
-    )
-   }
+    render() {
+        return (
+            <main>
+                <Header />
+                <Switch>
+                    <Route path = '/search' component={SearchResultsPage} />
+                    <Route path = '/details' component={DatasetDetails} />;
+                    <Route path = '/' component={Home} />
+                </Switch>
+            </main>
+        )
+    }
 }
 
 export default DataMaster;
