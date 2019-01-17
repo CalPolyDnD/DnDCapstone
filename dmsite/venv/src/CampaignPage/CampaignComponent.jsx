@@ -1,11 +1,25 @@
 import React from 'react';
-import { Container, ListGroup, ListGroupItem } from 'reactstrap';
+import { Container, ListGroup, ListGroupItem, Card, CardBody, CardTitle, Button } from 'reactstrap';
+import './style.css';
 
 class CampaignComponent extends React.Component {
 
   render() {
     return (
-        <h1> Hey </h1>
+        <div id="div">
+           <Card id="card">
+                <h1 align="center"> Campaigns </h1>
+                <CardTitle className="pl-4 pt-4">{this.props.name}</CardTitle>
+                <CardBody>
+                    <ListGroup align="center" className="campaign-list" flush>
+                        <ListGroupItem>Campaign 1</ListGroupItem>
+                        <ListGroupItem>Campaign 2</ListGroupItem>
+                        <ListGroupItem>Campaign 3</ListGroupItem>
+                      </ListGroup>
+                      <Button color="primary"size="md" className="btn-block mt-0">Create New Campaign</Button>
+                </CardBody>
+            </Card>
+        </div>
     );
   }
 }
