@@ -2,9 +2,9 @@
 
 import React from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-import VisualDisplay from './VisualDisplay';
+import VisualTableDisplay from './VisualTableDisplay';
 
-class VisualModal extends React.Component {
+class VisualTableModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -23,11 +23,12 @@ class VisualModal extends React.Component {
   render() {
     return (
       <div>
-        <Button color="danger" onClick={this.toggle}>{this.props.buttonLabel}</Button>
-        <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-          <ModalHeader toggle={this.toggle}>Modal title</ModalHeader>
+      <Button color="primary" size="md" className="mr-1 btn-block mt-0" onClick={this.toggle}>TABLE</Button>
+
+        <Modal size='lg' isOpen={this.state.modal} toggle={this.toggle} className={this.props.className} >
+          <ModalHeader toggle={this.toggle}>Table Visualization</ModalHeader>
           <ModalBody>
-            <VisualDisplay/>
+            <VisualTableDisplay/>
           </ModalBody>
           <ModalFooter>
             <Button color="primary" onClick={this.toggle}>Do Something</Button>{' '}
@@ -39,4 +40,4 @@ class VisualModal extends React.Component {
   }
 }
 
-export default VisualModal;
+export default VisualTableModal;

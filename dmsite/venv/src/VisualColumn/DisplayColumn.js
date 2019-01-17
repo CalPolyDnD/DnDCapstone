@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import 'filepond/dist/filepond.min.css';
 import { Card, CardBody, CardTitle, ListGroup, ListGroupItem, Button } from 'reactstrap';
-import VisualDisplay from './VisualDisplay';
-import VisualModal from './VisualModal';
+import VisualTableModal from './VisualTableModal';
+import VisualGraphModal from './VisualGraphModal';
 
 class DisplayColumn extends Component {
 
@@ -37,15 +37,14 @@ return (
                     <Card>
                         <CardBody>
                             <div className="d-flex justify-content-center pt-2">
-                                <VisualModal/>
-                                  <Button color="primary" size="md" className="mr-1 btn-block mt-0" onClick={this.uploadPressed}>TABLE</Button>
+                                <VisualTableModal/>
                             </div>
                         </CardBody>
                     </Card>
                     <Card>
                         <CardBody>
                             <div className="d-flex justify-content-center pt-2">
-                                  <Button color="primary" size="md" className="mr-1 btn-block mt-0" onClick={this.uploadPressed}>GRAPH</Button>
+                                  <VisualGraphModal/>
                             </div>
                         </CardBody>
                     </Card>
