@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import 'filepond/dist/filepond.min.css';
-import { Card, Button,CardTitle, CardBody, ListGroup, ListGroupItem } from 'reactstrap';
+import { Input, Card, Button,CardTitle, CardBody, ListGroup, ListGroupItem } from 'reactstrap';
 
 const parseData = (data) => {
     const finalData = data.map((obj, index) => {
@@ -25,11 +25,12 @@ class Results extends Component {
 
 render() {
     const { name } = this.props;
-    const testData = [{name: "test1", age: 2}, {name: "test2", age: 4}, {name: "test3", age: 5}];
+    const testData = [{name: "Classify1", age: 2}, {name: "Classify2", age: 4}, {name: "Classify3", age: 5}];
     const data = parseData(testData);
 
 return (
             <Card>
+
                 <CardTitle className="pl-4 pt-4 pb-0">{name}</CardTitle>
                 <hr />
                 <CardBody>
@@ -38,7 +39,8 @@ return (
                    </ListGroup>
 
                 </CardBody>
-                <Button onClick={this._handleClick} color="primary">Edit Classifications</Button>
+                <Input placeholder="Search Classification" />
+                <Button onClick={this._handleClick} color="primary">Add Classifications</Button>
             </Card>
     )
    }

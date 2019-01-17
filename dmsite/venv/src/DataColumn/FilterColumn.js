@@ -19,7 +19,7 @@ parseData(data) {
 }
 render() {
 
-const Testdata = ["String1", "String2", "String3", "String4"];
+const Testdata = ["File1.jsv", "File2.jsv", "File3.jsv", "File4.jsv"];
 
 const DynamicData =  this.parseData(Testdata);
 
