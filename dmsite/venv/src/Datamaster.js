@@ -3,7 +3,7 @@ import 'filepond/dist/filepond.min.css';
 import { Switch, Route } from 'react-router-dom';
 import Header from './Header/Header';
 import Home from './HomeComponent';
-import DatasetDetails from './DatasetDetails';
+import DatasetDetails from './DatasetDetails/DatasetDetails';
 import Login from './Login';
 import SearchResultsPage from './SearchResultsPage/SearchResultsPage';
 

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { ListGroup, ListGroupItem, Button, Input } from 'reactstrap';
+import './DatasetDetails.css'
 
 class DatasetDetails extends Component {
 	constructor(props) {
