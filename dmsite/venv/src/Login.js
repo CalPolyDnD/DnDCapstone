@@ -4,8 +4,9 @@
 
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import { Container, Row, Col, Button} from 'reactstrap';
+import { Container, Button, Card, CardTitle, CardBody, Input, Label} from 'reactstrap';
 import { Switch, Route } from 'react-router-dom';
+import TextField from './TextField.js';
 
 class Login extends Component{
     constructor(props){
@@ -19,11 +20,29 @@ class Login extends Component{
     render(){
         return (
             <Container fluid>
-                <h1>Login page</h1>
-                <Button onClick={this.uploadPressed}>
-                    Login
-                </Button>
+                <Card id="card">
+                    <h1 align="center"> Login </h1>
+                    <CardTitle className="pl-4 pt-4">{this.props.name}</CardTitle>
+                    <CardBody>
+
+                        <TextField>
+                            <Label> Enter </Label>
+                            <Input style ={{color: "gray"}}>
+                                id={1}
+                                label="Field label"
+                                predicted="California"
+                                locked={false}
+                                active={false}
+                            </Input>
+                        </TextField>
+
+                        <Button color="primary"size="md" className="btn-block mt-0" onClick={this.uploadPressed}>
+                            Login
+                        </Button>
+                    </CardBody>
+                </Card>
             </Container>
+
         )
     }
 }
