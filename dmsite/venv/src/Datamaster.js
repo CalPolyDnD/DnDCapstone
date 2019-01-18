@@ -3,9 +3,11 @@ import 'filepond/dist/filepond.min.css';
 import { Switch, Route } from 'react-router-dom';
 import Header from './Header/Header';
 import Home from './HomeComponent';
+import DatasetDetails from './DatasetDetails/DatasetDetails';
 import Login from './Login';
 import Profile from './ProfileComponent';
 import SearchResultsPage from './SearchResultsPage/SearchResultsPage';
+
 
 class DataMaster extends Component {
     constructor(props) {
@@ -30,6 +32,23 @@ return (
     </main>
     )
    }
+//    componentDidMount() {
+//        this.getData();
+//    }
+//
+//    getDAta() {
+//        this.setSTate({ data: data });
+//    }
+
+//    _filterCampaign(query) {
+//       fetch(`someendpoint/?query=${query}`)
+//        .then((json) => {
+//           this.setState({ data: json.data });
+//        })
+//        .catch((error) => {
+//            this.setState({ error });
+//        })
+//    }
 }
 
 export default DataMaster;

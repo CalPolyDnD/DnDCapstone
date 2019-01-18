@@ -36,12 +36,12 @@ urlpatterns = [
     path('', TemplateView.as_view(template_name='index.html')),
     path('home', TemplateView.as_view(template_name='index.html')),
     path('upload', TemplateView.as_view(template_name='index.html')),
-<<<<<<< HEAD
     path('search/*', TemplateView.as_view(template_name='index.html')),
-=======
-    path('search', TemplateView.as_view(template_name='index.html')),
->>>>>>> Larrys-Branch
     path('upload/push_file', upload_views.upload_file)
+    path('home/upload', TemplateView.as_view(template_name='index.html')),
+    path('home/upload/push_file', upload_views.upload_file),
+    path('details', TemplateView.as_view(template_name='index.html')),
+    path('search/*', TemplateView.as_view(template_name='index.html')),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

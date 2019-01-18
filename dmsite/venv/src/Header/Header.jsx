@@ -58,7 +58,7 @@ class Header extends React.Component {
 
   renderSearchBar() {
     return (
-      <Form inline>
+      <Form inline onSubmit={() => { this.props.history.push(`/search/${this.state.searchFilterOrder[0]}${this.state.searchbarText}`); }}>
         <Input id="searchBar" type="search" className="ml-4" placeholder="Search Dataset" onChange={(event) => { this.updateSearchBarText(event); }} />
         <InputGroupButtonDropdown addonType="append" isOpen={this.state.dropdownOpen} toggle={this.toggleDropDown}>
           <DropdownToggle outline caret>
@@ -73,8 +73,8 @@ class Header extends React.Component {
               {this.state.searchFilterOrder[2]}
             </DropdownItem>
           </DropdownMenu>
-          <Button color="primary" onClick={() => { this.props.history.push(`/search/${this.state.searchFilterOrder[0]}${this.state.searchbarText}`); }}>Search</Button>
         </InputGroupButtonDropdown>
+        <Button type="submit" color="primary">Search</Button>
       </Form>
     );
   }

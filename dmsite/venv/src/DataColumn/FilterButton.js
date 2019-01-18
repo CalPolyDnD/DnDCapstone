@@ -11,9 +11,10 @@ class FilterButton extends Component {
         this.uploadPressed = this.uploadPressed.bind(this)
     }
     uploadPressed(){
-        let path = '/upload'
+        let path = '/home/upload'
         this.props.history.push(path)
     }
+
 render() {
 return (
         <div>
@@ -22,7 +23,7 @@ return (
                 <Button color="primary" size="md" className="mr-1 btn-block mt-0" onClick={this.uploadPressed}>Add File</Button>
                 <Button color="primary"size="md" className="btn-block mt-0">Classify Me</Button>
             </div>
-            <Route path='/upload' component={Upload} />
+            <Route path='/home/upload' component={Upload} />
         </div>
     )
    }

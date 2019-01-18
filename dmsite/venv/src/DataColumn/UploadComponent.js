@@ -4,7 +4,7 @@ import "filepond/dist/filepond.min.css"
 
 const Upload = () => (
     <div>
-        <FilePond allowMultiple={true} server="http://localhost:8000/upload/push_file"/>
+        <FilePond allowMultiple={true} server="http://localhost:8000/home/upload/push_file"/>
     </div>
 )
 

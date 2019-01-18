@@ -28,11 +28,11 @@ return (
             <CardTitle className="pl-4 pt-4">{this.props.name}</CardTitle>
             <CardBody>
                 <ListGroup className="filter-list" flush>
-                  {DynamicData}
-                    <ListGroupItem>
-                                    </ListGroupItem>
-                  </ListGroup>
-                  <FilterButton/>
+					<ListGroupItem>
+						{DynamicData}
+					</ListGroupItem>
+				</ListGroup>
+				<FilterButton name={this.props.name} />
             </CardBody>
         </Card>
     )
