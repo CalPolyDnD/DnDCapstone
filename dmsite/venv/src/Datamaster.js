@@ -28,6 +28,7 @@ return (
         <Route path = '/home' component={Home} />
         <Route path = '/login' component={Login}/>
         <Route path = '/profile' component={Profile}/>
+
       </Switch>
     </main>
     )

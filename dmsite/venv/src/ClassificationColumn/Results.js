@@ -30,9 +30,7 @@ render() {
 
 return (
             <Card>
-
                 <CardTitle className="pl-4 pt-4 pb-0">{name}</CardTitle>
-                <hr />
                 <CardBody>
                    <ListGroup flush>
                        {data}
