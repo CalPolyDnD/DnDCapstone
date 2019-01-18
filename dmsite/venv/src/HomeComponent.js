@@ -9,7 +9,11 @@ import Results from './ClassificationColumn/Results';
 class Home extends Component{
     render(){
         return (
-            <Container fluid>
+            <Container fluid styles = {{
+                                                                          backgroundImage: 'url(require("images/DND.jpg"))',
+                                                                          overflow: 'hidden',
+                                                                      }}>
+
                 <h1>Campaign: Current Campaign</h1>
                 <p> This campaign organizes Data1, Data2, Data3 </p>
                 <Row>
@@ -24,6 +28,7 @@ class Home extends Component{
                         <DisplayColumn name={'Display Actions'} />
                     </Col>
                 </Row>
+
             </Container>
         )
     }

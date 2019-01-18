@@ -7,8 +7,6 @@ import DatasetDetails from './DatasetDetails/DatasetDetails';
 import Login from './Login';
 import Profile from './ProfileComponent';
 import SearchResultsPage from './SearchResultsPage/SearchResultsPage';
-
-
 class DataMaster extends Component {
     constructor(props) {
         super(props);
@@ -28,7 +26,6 @@ return (
         <Route path = '/home' component={Home} />
         <Route path = '/login' component={Login}/>
         <Route path = '/profile' component={Profile}/>
-
       </Switch>
     </main>
     )
