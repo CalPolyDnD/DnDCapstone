@@ -4,6 +4,7 @@ import { Switch, Route } from 'react-router-dom';
 import Header from './Header/Header';
 import Home from './HomeComponent';
 import Login from './Login';
+import Profile from './ProfileComponent';
 import SearchResultsPage from './SearchResultsPage/SearchResultsPage';
 
 class DataMaster extends Component {
@@ -23,7 +24,8 @@ return (
       <Switch>
         <Route path = '/search' component={SearchResultsPage} />
         <Route path = '/home' component={Home} />
-        <Route path = '/' component={Login}/>
+        <Route path = '/login' component={Login}/>
+        <Route path = '/profile' component={Profile}/>
       </Switch>
     </main>
     )
