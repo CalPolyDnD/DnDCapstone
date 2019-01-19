@@ -4,8 +4,7 @@
 
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import { Container, Row, Col, Button} from 'reactstrap';
-import { Switch, Route } from 'react-router-dom';
+import { Container, Button} from 'reactstrap';
 
 class Login extends Component{
     constructor(props){
