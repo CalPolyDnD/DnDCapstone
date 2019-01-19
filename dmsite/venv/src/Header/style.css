@@ -5,7 +5,7 @@
 }
 
 #header {
-  align-self: center;
+  align-items: center;
   justify-content: center;
 }
 
@@ -19,4 +19,9 @@
   flex: auto;
   align-self: center;
   justify-content: center;
+}
+
+#header-container {
+  justifyContent: center;
+  alignSelf: center;
 }

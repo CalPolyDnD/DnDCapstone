@@ -88,12 +88,13 @@ class Header extends React.Component {
 
     return (
       <div>
-        <Row>
-          <div className="d-inline-flex">
+        <Row style={{ width: '100%', justifyContent: 'space-between' }}>
+          <div className="d-inline-flex" id="header-container">
             <img id="logo" alt="DnDlogo" width="90" height="70" src={Logo} />
-            <h1 id="header" onClick={() => { this.props.history.push('/'); }}>DataMaster</h1>
+            <h1 style={{ justifyContent: 'center', alignSelf: 'center' }} onClick={() => { this.props.history.push('/home'); }}>DataMaster</h1>
             {this.renderSearchBar()}
           </div>
+          <Button color="primary" style={{height: '50%', justifyContent: 'center', alignSelf: "center"}} position="right" onClick={() => { this.props.history.push(`/profile`); }}>User Profile</Button>
         </Row>
         <Row>
           <hr style={horizontalLineStyling} />

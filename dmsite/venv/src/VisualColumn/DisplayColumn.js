@@ -51,7 +51,7 @@ return (
                     <Card>
                         <CardBody>
                             <div className="d-flex justify-content-center pt-2">
-                                  <Button color="primary" size="md" className="mr-1 btn-block mt-0" onClick={this.uploadPressed}>SAVE</Button>
+                                  <Button color="primary" size="md" className="mr-1 btn-block mt-0" onClick={this.uploadPressed}>Download Campaign </Button>
                             </div>
                         </CardBody>
                     </Card>
