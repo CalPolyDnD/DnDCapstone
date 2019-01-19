@@ -6,16 +6,15 @@ import { withRouter } from 'react-router-dom';
 import Header from './Header/Header';
 
 const { Content, Footer } = Layout;
-const { children } = this.props.children;
 
 class DataMaster extends Component {
   render() {
     return (
       <Layout className="Layout">
-        <Header />
+        <Header {...this.props} />
         <Content style={{ rightPadding: 50 }}>
           <div style={{ background: '#fff', padding: 24, minHeight: 'calc(100vh - 55px)' }}>
-            { children }
+            { this.props.children }
           </div>
         </Content>
         <Footer className="footer">
