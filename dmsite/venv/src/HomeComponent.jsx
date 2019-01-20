@@ -1,28 +1,31 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { Container, Row, Col } from 'reactstrap';
-import FilterColumn from './DataColumn/FilterColumn';
-import DisplayData from './DataColumn/DisplayData';
+import DatasetsColumn from './DataColumn/DatasetsColumn';
 import DisplayColumn from './VisualColumn/DisplayColumn';
-import Results from './ClassificationColumn/Results';
+import ClassificationColumn from './ClassificationColumn/ClassificationsColumn';
 
-const Home = (props) => {
-  <Container fluid>
+class Home extends React.Component {
+  render() {
+    return (
+      <Container fluid>
         <h1>Campaign: Current Campaign</h1>
         <p> This campaign organizes Data1, Data2, Data3 </p>
         <Row>
-            <Col md="3">
-                <FilterColumn name={'Datasets'} />
-                <DisplayData name={'File'}/>
-            </Col>
-            <Col md="5">
-                <Results name={"Classifications"} />
-            </Col>
-            <Col md="4">
-                <DisplayColumn name={'Display Actions'} />
-            </Col>
+          <Col md="3">
+            <DatasetsColumn />
+            <ClassificationColumn />
+          </Col>
+          <Col md="7">
+            <ClassificationColumn name="Classifications" />
+          </Col>
+          <Col md="2">
+            <DisplayColumn name="Display Actions" />
+          </Col>
         </Row>
-    </Container>
-}
+      </Container>
+    );
+  }
+};
 
 export default withRouter(Home);
