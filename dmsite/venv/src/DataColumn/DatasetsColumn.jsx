@@ -5,52 +5,75 @@ import {
   Card,
   CardBody,
   CardTitle,
+  CardHeader,
   ListGroup,
   ListGroupItem,
   ButtonGroup,
   Input,
 } from 'reactstrap';
 
-class FilterColumn extends React.Component {
+import Upload from './UploadComponent';
+
+class DatasetsColumn extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      uploading: false,
+    };
+  }
+
   parseData = data => (data.map(name => (
-    <ListGroupItem>
+    <ListGroupItem action>
       {name}
     </ListGroupItem>
   )));
 
+  uploadClickHandler = () => {
+    this.setState({ uploading: true });
+  };
+
+  cancelUploadClicked = () => {
+    this.setState({ uploading: false });
+  };
+
   render() {
     const Testdata = ['File1.jsv', 'File2.jsv', 'File3.jsv', 'File4.jsv'];
-
     const DynamicData = this.parseData(Testdata);
-
+    const { uploading } = this.state;
     return (
       <Card>
-        <CardTitle className="pl-4 pt-4">{this.props.name}</CardTitle>
+        <CardHeader tag="h3">Datasets</CardHeader>
         <CardBody>
           <ListGroup className="filter-list" flush>
-            <ListGroupItem>
-              {DynamicData}
-            </ListGroupItem>
+            {DynamicData}
           </ListGroup>
           <Input placeholder="Search Result" className="mt-1" />
-          <ButtonGroup className="d-flex justify-content-center pt-2">
+          <ButtonGroup className="d-flex justify-content-center pt-2 pb-2">
             <Button
-              color="primary" size="md" className="mr-1 btn-block mt-0"
-              onClick={this.props.addButtonHandler}
+              color="primary"
+              size="md"
+              className="mr-1 btn-block mt-0"
+              onClick={this.uploadClickHandler}
             >
               Add File
             </Button>
             <Button
-              color="primary" size="md" className="btn-block mt-0"
+              color="primary"
+              size="md"
+              className="btn-block mt-0"
             >
               Classify Me
             </Button>
           </ButtonGroup>
-          {/* <FilterButton name={this.props.name} /> */}
+          {uploading && <Upload /> }
+          {
+            uploading
+            && <Button close onClick={this.cancelUploadClicked} />
+          }
         </CardBody>
       </Card>
     );
   }
 }
 
-export default FilterColumn;
+export default DatasetsColumn;
