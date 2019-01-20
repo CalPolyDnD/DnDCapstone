@@ -9,12 +9,13 @@ const { Content, Footer } = Layout;
 
 class DataMaster extends Component {
   render() {
+    const { children } = this.props;
     return (
       <Layout className="Layout">
         <Header {...this.props} />
         <Content style={{ rightPadding: 50 }}>
           <div style={{ background: '#fff', padding: 24, minHeight: 'calc(100vh - 55px)' }}>
-            { this.props.children }
+            { children }
           </div>
         </Content>
         <Footer className="footer">
