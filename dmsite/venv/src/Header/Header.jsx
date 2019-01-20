@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom';
 
 import {
   Button,
+  ButtonGroup,
   DropdownItem,
   DropdownMenu,
   DropdownToggle,
@@ -10,6 +11,7 @@ import {
   InputGroupButtonDropdown,
   Form,
   Row,
+  Navbar, NavbarBrand,
 } from 'reactstrap';
 
 import Logo from '../images/DnDLogo2.png';
@@ -86,15 +88,47 @@ class Header extends React.Component {
       width: '100%',
     };
 
+    const { isAuthenticated, history } = this.props;
     return (
       <div>
         <Row style={{ width: '100%', justifyContent: 'space-between' }}>
           <div className="d-inline-flex" id="header-container">
             <img id="logo" alt="DnDlogo" width="90" height="70" src={Logo} />
-            <h1 style={{ justifyContent: 'center', alignSelf: 'center' }} onClick={() => { this.props.history.push('/home'); }}>DataMaster</h1>
+            <h1 style={{ justifyContent: 'center', alignSelf: 'center' }} onClick={() => { history.push('/home'); }}>DataMaster</h1>
             {this.renderSearchBar()}
           </div>
-          <Button color="primary" style={{height: '50%', justifyContent: 'center', alignSelf: "center"}} position="right" onClick={() => { this.props.history.push(`/profile`); }}>User Profile</Button>
+          <ButtonGroup>
+            {
+              isAuthenticated
+                ? [
+                  <Button
+                    color="primary"
+                    style={{ height: '50%', justifyContent: 'center', alignSelf: 'center' }}
+                    position="right"
+                    href="/profile"
+                  >
+                    Profile
+                  </Button>,
+                  <Button
+                    color="secondary"
+                    type="link"
+                    style={{ height: '50%', justifyContent: 'center', alignSelf: 'center' }}
+                  >
+                    Logout
+                  </Button>,
+                ]
+                : (
+                  <Button
+                    color="primary"
+                    type="link"
+                    href="/login"
+                    style={{ height: '50%', justifyContent: 'center', alignSelf: 'center' }}
+                  >
+                  Login
+                  </Button>
+                )
+            }
+          </ButtonGroup>
         </Row>
         <Row>
           <hr style={horizontalLineStyling} />
