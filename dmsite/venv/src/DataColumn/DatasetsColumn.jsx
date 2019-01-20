@@ -9,6 +9,7 @@ import {
   ListGroup,
   ListGroupItem,
   ButtonGroup,
+  ButtonToolbar,
   Input,
 } from 'reactstrap';
 
@@ -48,23 +49,14 @@ class DatasetsColumn extends React.Component {
             {DynamicData}
           </ListGroup>
           <Input placeholder="Search Result" className="mt-1" />
-          <ButtonGroup className="d-flex justify-content-center pt-2 pb-2">
-            <Button
-              color="primary"
-              size="md"
-              className="mr-1 btn-block mt-0"
-              onClick={this.uploadClickHandler}
-            >
-              Add File
-            </Button>
-            <Button
-              color="primary"
-              size="md"
-              className="btn-block mt-0"
-            >
-              Classify Me
-            </Button>
-          </ButtonGroup>
+          <Button
+            color="primary"
+            size="md"
+            className="mr-0 btn-block mt-2 mb-2"
+            onClick={this.uploadClickHandler}
+          >
+            Add File
+          </Button>
           {uploading && <Upload /> }
           {
             uploading
