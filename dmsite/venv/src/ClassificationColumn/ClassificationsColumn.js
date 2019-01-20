@@ -1,6 +1,15 @@
 import React, { Component } from 'react';
 import 'filepond/dist/filepond.min.css';
-import { Input, Card, Button,CardTitle, CardBody, ListGroup, ListGroupItem } from 'reactstrap';
+import {
+  Input,
+  Card,
+  Button,
+  CardTitle,
+  CardBody,
+  ListGroup,
+  ListGroupItem,
+  CardHeader
+} from 'reactstrap';
 
 const parseData = (data) => {
   const finalData = data.map((obj, index) => {
@@ -16,7 +25,7 @@ const parseData = (data) => {
 }
 
 
-class Results extends Component {
+class ClassificationsColumn extends Component {
 
   _handleClick(e) {
     e.preventDefault();
@@ -24,14 +33,12 @@ class Results extends Component {
   }
 
   render() {
-    const { name } = this.props;
     const testData = [{name: "Classify1", age: 2}, {name: "Classify2", age: 4}, {name: "Classify3", age: 5}];
     const data = parseData(testData);
 
     return (
       <Card>
-        <CardTitle className="pl-4 pt-4">{name}</CardTitle>
-        <hr />
+        <CardHeader tag="h3">Classifications</CardHeader>
         <CardBody>
           <ListGroup flush>
             {data}
@@ -44,4 +51,4 @@ class Results extends Component {
   }
 }
 
-export default Results;
+export default ClassificationsColumn;
