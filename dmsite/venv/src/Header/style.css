@@ -25,3 +25,11 @@
   justifyContent: center;
   alignSelf: center;
 }
+
+.navbar {
+  height: 65px;
+}
+
+.navbar .navbar-brand {
+  line-height: 32px;
+}
