@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { connect } from 'react-redux';
 import 'filepond/dist/filepond.min.css';
+import 'antd/dist/antd.css';
+import PropTypes from 'prop-types';
+
 import DataMaster from './Datamaster';
 import './App.css';
 import BaseRouter from './routes';
@@ -9,7 +12,8 @@ import * as actions from './store/actions/auth';
 
 class App extends Component {
   componentDidMount() {
-    this.props.onTryAutoSignup();
+    const { onTryAutoSignUp } = this.props;
+    onTryAutoSignUp();
   }
 
   render() {
@@ -25,16 +29,16 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    isAuthenticated: state.token !== null,
-  };
-}
+App.propTypes = {
+  onTryAutoSignUp: PropTypes.func.isRequired,
+};
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    onTryAutoSignup: () => dispatch(actions.authCheckState),
-  };
-}
+const mapStateToProps = state => ({
+  isAuthenticated: state.token !== null,
+});
+
+const mapDispatchToProps = dispatch => ({
+  onTryAutoSignUp: () => dispatch(actions.authCheckState()),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
