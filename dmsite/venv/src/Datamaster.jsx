@@ -13,7 +13,7 @@ class DataMaster extends Component {
     return (
       <Layout className="Layout">
         <Header {...this.props} />
-        <Content style={{ rightPadding: 50 }}>
+        <Content style={{ rightPadding: 50, paddingTop: 64 }}>
           <div style={{ background: '#fff', padding: 24, minHeight: 'calc(100vh - 55px)' }}>
             { children }
           </div>

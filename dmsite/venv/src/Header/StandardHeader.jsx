@@ -2,23 +2,23 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import ReactRouterPropTypes from 'react-router-prop-types';
-import {
-  Button,
-  ButtonGroup,
-  DropdownItem,
-  DropdownMenu,
-  DropdownToggle,
-  Form,
-  Input,
-  InputGroupButtonDropdown,
-  Nav,
-  Navbar,
-  NavbarBrand,
-  Row,
-} from 'reactstrap';
 
 import Logo from '../images/DnDLogo2.png';
 import './style.css';
+import {
+  Menu,
+  Button,
+  Dropdown,
+  Input,
+  Select,
+} from 'antd';
+
+const MenuItem = Menu.Item;
+const ButtonGroup = Button.Group;
+const DropdownButton = Dropdown.Button;
+const Search = Input.Search;
+const InputGroup = Input.Group;
+const Option = Select.Option;
 
 const SEARCH_FIELDS = {
   name: 'Name',
@@ -38,15 +38,19 @@ class StandardHeader extends React.Component {
         SEARCH_FIELDS.classification,
         SEARCH_FIELDS.attribute,
       ],
+      searchbarFilter: 'Name',
     };
     this.toggleDropDown = this.toggleDropDown.bind(this);
+    this.switchFilter = this.switchFilter.bind(this);
   }
 
   switchFilter(index) {
-    const newOrder = this.state.searchFilterOrder.slice();
-    newOrder[0] = this.state.searchFilterOrder[index];
-    newOrder[index] = this.state.searchFilterOrder[0];
-    this.setState({ searchFilterOrder: newOrder });
+    const { searchFilterOrder } = this.state;
+    this.setState(prevState => (
+      {
+        ...prevState,
+        searchbarFilter: searchFilterOrder[index],
+      }));
   }
 
   toggleDropDown() {
@@ -62,92 +66,131 @@ class StandardHeader extends React.Component {
   }
 
   renderSearchBar() {
+    const { history } = this.props;
+    const { searchFilterOrder, searchbarFilter } = this.state;
     return (
-      <Form inline onSubmit={() => { this.props.history.push(`/search/${this.state.searchFilterOrder[0]}${this.state.searchbarText}`); }}>
-        <Input id="searchBar" type="search" className="ml-4" placeholder="Search Dataset" onChange={(event) => { this.updateSearchBarText(event); }} />
-        <InputGroupButtonDropdown addonType="append" isOpen={this.state.dropdownOpen} toggle={this.toggleDropDown}>
-          <DropdownToggle outline caret>
-            {this.state.searchFilterOrder[0]}
-          </DropdownToggle>
-          <DropdownMenu>
-            <DropdownItem onClick={() => { this.switchFilter(1); }}>
-              {this.state.searchFilterOrder[1]}
-            </DropdownItem>
-            <DropdownItem divider />
-            <DropdownItem onClick={() => { this.switchFilter(2); }}>
-              {this.state.searchFilterOrder[2]}
-            </DropdownItem>
-          </DropdownMenu>
-        </InputGroupButtonDropdown>
-        <Button type="submit" color="primary">Search</Button>
-      </Form>
+      <InputGroup compact className="align-self-center px-4">
+        <Select
+          dropdownMatchSelectWidth={false}
+          defaultValue={0}
+          onSelect={this.switchFilter}
+        >
+          <Option value={0}>{ searchFilterOrder[0] }</Option>
+          <Option value={1}>{ searchFilterOrder[1] }</Option>
+          <Option value={2}>{ searchFilterOrder[2] }</Option>
+        </Select>
+        <Search
+          placeholder={`Search Campaign by ${searchbarFilter}`}
+          onSearch={(searchbarText) => { history.push(`/search/${searchbarFilter}?=${searchbarText}`); }}
+          enterButton
+          style={{ width: '40%', height: '32px' }}
+        />
+      </InputGroup>
+    );
+  }
+
+  renderProfileDropdown() {
+    const { isAuthenticated } = this.props;
+    return (
+      <Menu>
+        <MenuItem>
+          <a href="/profile" key="profile">Profile</a>
+        </MenuItem>
+        {
+          isAuthenticated
+            ? (
+              <MenuItem>
+                <a href="/" key="logout" style={{ color: 'red' }}>Logout</a>
+              </MenuItem>
+            )
+            : (
+              <MenuItem>
+                <a href="/login/" key="login">Login</a>
+              </MenuItem>
+            )
+        }
+
+      </Menu>
     );
   }
 
   renderNavItems() {
-    const { isAuthenticated } = this.props;
     return (
-      <ButtonGroup>
-        {
-          isAuthenticated
-            ? [
-              <Button
-                color="primary"
-                style={{ height: '50%', justifyContent: 'center', alignSelf: 'center' }}
-                position="right"
-                href="/profile"
-              >
-                Profile
-              </Button>,
-              <Button
-                color="secondary"
-                type="link"
-                style={{ height: '50%', justifyContent: 'center', alignSelf: 'center' }}
-              >
-                Logout
-              </Button>,
-            ]
-            : (
-              <Button
-                color="primary"
-                type="link"
-                href="/login"
-                style={{ height: '50%', justifyContent: 'center', alignSelf: 'center' }}
-              >
-                Login
-              </Button>
-            )
-        }
-      </ButtonGroup>
+      <div className="d-inline-flex px-2" id="buttonContainer">
+        <Button
+          title="Help"
+          icon="question"
+          shape="circle"
+          ghost
+          className="mx-1"
+          htmlType="button"
+        />
+        <Button
+          title="Settings"
+          icon="setting"
+          shape="circle-outline"
+          ghost
+          className="mx-1"
+          htmlType="button"
+        />
+        <Dropdown overlay={this.renderProfileDropdown()}>
+          <Button
+            icon="user"
+            shape="circle-outline"
+            ghost
+            className="mx-1"
+            htmlType="button"
+          />
+        </Dropdown>
+      </div>
     );
   }
 
   render() {
     return (
-      <div>
-        <Row style={{ width: '100%', justifyContent: 'space-between' }}>
-          <Navbar color="light" light vertical fixed="top" role="navigation">
-            <NavbarBrand href="/home/">
-              <div className="d-inline-flex" id="logo-container">
-                <img id="logo" alt="" width="65" height="50" src={Logo} />
-                <h2 style={{ justifyContent: 'center', alignSelf: 'center' }}>
-                  DataMaster
-                </h2>
-              </div>
-            </NavbarBrand>
-            {this.renderSearchBar()}
-            <Nav className="ml-auto" navbar>
-              {this.renderNavItems()}
-            </Nav>
-          </Navbar>
-        </Row>
+      <div style={{ height: '64px' }} id="headerContainer">
+        <a className="d-inline-flex px-2" href="/home/" id="logoBanner">
+          <img id="logo" alt="" width="65" height="50" src={Logo} />
+          <h2
+            style={{
+              color: 'white',
+              textDecoration: 'none',
+              height: '50px',
+              alignSelf: 'center',
+              lineHeight: '50px',
+            }}
+          >
+            DataMaster
+          </h2>
+        </a>
+        { this.renderSearchBar() }
+        { this.renderNavItems() }
       </div>
     );
+    { /* <div> */ }
+    { /* <Row style={{ width: '100%', justifyContent: 'space-between' }}> */ }
+    { /* <Navbar color="light" light fixed="top" role="navigation"> */ }
+    { /* <NavbarBrand href="/home/"> */ }
+    { /* <div className="d-inline-flex" id="logo-container"> */ }
+    { /* <img id="logo" alt="" width="65" height="50" src={Logo} /> */ }
+    { /* <h2 className="pt-5 pb-5"> */ }
+    { /* DataMaster */ }
+    { /* </h2> */ }
+    { /* </div> */ }
+    { /* </NavbarBrand> */ }
+    { /* {this.renderSearchBar()} */ }
+    { /* <Nav className="ml-auto" navbar> */ }
+    { /* {this.renderNavItems()} */ }
+    { /* </Nav> */ }
+    { /* </Navbar> */ }
+    { /* </Row> */ }
+    { /* </div> */ }
   }
 }
 
 StandardHeader.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
+  history: ReactRouterPropTypes.history.isRequired,
 };
 
-export default StandardHeader;
+export default withRouter(StandardHeader);

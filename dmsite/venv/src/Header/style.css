@@ -1,7 +1,6 @@
 #logo {
   align-self: center;
   justify-content: center;
-  margin-left: 25px;
 }
 
 #header {
@@ -22,8 +21,12 @@
 }
 
 #header-container {
-  justifyContent: center;
-  alignSelf: center;
+  justify-content: center;
+  align-self: center;
+}
+
+#logoBanner {
+  height: 64px;
 }
 
 .navbar {
@@ -32,4 +35,27 @@
 
 .navbar .navbar-brand {
   line-height: 32px;
+}
+
+#buttonContainer {
+  align-items: center;
+  height: inherit;
+  margin-left: auto;
+  margin-right: 8px;
+  justify-self: flex-end;
+}
+
+#headerContainer {
+  display: inline-flex;
+  flex: auto;
+  flex-direction: row;
+  width: 100%;
+}
+
+.ant-btn {
+  line-height: 50%;
+}
+
+h2, h1 {
+  margin: 0;
 }
