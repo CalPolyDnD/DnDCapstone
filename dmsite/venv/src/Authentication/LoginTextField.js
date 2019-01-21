@@ -50,11 +50,11 @@ class TextField extends React.Component {
 
                     or <a href="/createaccount"> Create an account now!</a>
                 </Form.Item>
-                <Form.Item>
+                {/*<Form.Item>
                     <Button type="primary" htmlType="submit" className="login-form-button">
                     Log in
                     </Button>
-                </Form.Item>
+                </Form.Item>*/}
             </Form>
         );
     }

@@ -170,9 +170,9 @@ class NewAccountTextField extends React.Component {
                         <Checkbox><a href=""> I have read the agreement</a></Checkbox>
                     )}
                 </Form.Item>
-                <Form.Item {...tailFormItemLayout}>
+                {/*<Form.Item {...tailFormItemLayout}>
                     <Button type="primary" htmlType="submit">Create Account</Button>
-                </Form.Item>
+                </Form.Item>*/}
             </Form>
         );
     }
