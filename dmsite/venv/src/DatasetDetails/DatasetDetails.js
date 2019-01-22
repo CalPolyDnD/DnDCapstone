@@ -3,10 +3,6 @@ import { ListGroup, ListGroupItem, Button, Input } from 'reactstrap';
 import './DatasetDetails.css'
 
 class DatasetDetails extends Component {
-	constructor(props) {
-		super(props);
-	}
-	
 	render() {
 		return (
 			<div className="dataset-details-page">
