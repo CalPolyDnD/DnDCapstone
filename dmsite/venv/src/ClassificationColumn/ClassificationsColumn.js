@@ -4,11 +4,10 @@ import {
   Input,
   Card,
   Button,
-  CardTitle,
   CardBody,
   ListGroup,
   ListGroupItem,
-  CardHeader
+  CardHeader,
 } from 'reactstrap';
 
 const parseData = (data) => {

@@ -2,9 +2,6 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import ReactRouterPropTypes from 'react-router-prop-types';
-
-import Logo from '../images/DnDLogo2.png';
-import './style.css';
 import {
   Menu,
   Button,
@@ -13,12 +10,14 @@ import {
   Select,
 } from 'antd';
 
+import Logo from '../images/DnDLogo2.png';
+import './style.css';
+
+
 const MenuItem = Menu.Item;
-const ButtonGroup = Button.Group;
-const DropdownButton = Dropdown.Button;
-const Search = Input.Search;
+const { Search } = Input;
 const InputGroup = Input.Group;
-const Option = Select.Option;
+const { Option } = Select;
 
 const SEARCH_FIELDS = {
   name: 'Name',
@@ -31,8 +30,6 @@ class StandardHeader extends React.Component {
     super(props);
 
     this.state = {
-      dropdownOpen: false,
-      searchbarText: '',
       searchFilterOrder: [
         SEARCH_FIELDS.name,
         SEARCH_FIELDS.classification,
@@ -40,7 +37,6 @@ class StandardHeader extends React.Component {
       ],
       searchbarFilter: 'Name',
     };
-    this.toggleDropDown = this.toggleDropDown.bind(this);
     this.switchFilter = this.switchFilter.bind(this);
   }
 
@@ -53,27 +49,18 @@ class StandardHeader extends React.Component {
       }));
   }
 
-  toggleDropDown() {
-    this.setState(prevState => ({
-      dropdownOpen: !prevState.dropdownOpen,
-    }));
-  }
-
-  updateSearchBarText(event) {
-    this.setState({
-      searchbarText: event.target.value,
-    });
-  }
-
   renderSearchBar() {
     const { history } = this.props;
     const { searchFilterOrder, searchbarFilter } = this.state;
     return (
-      <InputGroup compact className="align-self-center px-4">
+      <InputGroup
+        compact
+        className="align-self-center px-4">
         <Select
           dropdownMatchSelectWidth={false}
           defaultValue={0}
           onSelect={this.switchFilter}
+          className="float-left"
         >
           <Option value={0}>{ searchFilterOrder[0] }</Option>
           <Option value={1}>{ searchFilterOrder[1] }</Option>
@@ -93,15 +80,17 @@ class StandardHeader extends React.Component {
     const { isAuthenticated } = this.props;
     return (
       <Menu>
-        <MenuItem>
-          <a href="/profile" key="profile">Profile</a>
-        </MenuItem>
         {
           isAuthenticated
-            ? (
+            ? ([
+              <MenuItem>
+                <a href="/profile" key="profile">Profile</a>
+              </MenuItem>,
+
               <MenuItem>
                 <a href="/" key="logout" style={{ color: 'red' }}>Logout</a>
-              </MenuItem>
+              </MenuItem>,
+            ]
             )
             : (
               <MenuItem>
@@ -109,7 +98,6 @@ class StandardHeader extends React.Component {
               </MenuItem>
             )
         }
-
       </Menu>
     );
   }
@@ -167,24 +155,6 @@ class StandardHeader extends React.Component {
         { this.renderNavItems() }
       </div>
     );
-    { /* <div> */ }
-    { /* <Row style={{ width: '100%', justifyContent: 'space-between' }}> */ }
-    { /* <Navbar color="light" light fixed="top" role="navigation"> */ }
-    { /* <NavbarBrand href="/home/"> */ }
-    { /* <div className="d-inline-flex" id="logo-container"> */ }
-    { /* <img id="logo" alt="" width="65" height="50" src={Logo} /> */ }
-    { /* <h2 className="pt-5 pb-5"> */ }
-    { /* DataMaster */ }
-    { /* </h2> */ }
-    { /* </div> */ }
-    { /* </NavbarBrand> */ }
-    { /* {this.renderSearchBar()} */ }
-    { /* <Nav className="ml-auto" navbar> */ }
-    { /* {this.renderNavItems()} */ }
-    { /* </Nav> */ }
-    { /* </Navbar> */ }
-    { /* </Row> */ }
-    { /* </div> */ }
   }
 }
 

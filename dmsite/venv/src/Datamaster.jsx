@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Layout } from 'antd';
 import 'filepond/dist/filepond.min.css';
 import { withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import Header from './Header/Header';
 
@@ -24,6 +25,10 @@ class DataMaster extends Component {
       </Layout>
     );
   }
+}
+
+DataMaster.propTypes = {
+  children: PropTypes.oneOfType(PropTypes.node).isRequired,
 }
 
 export default withRouter(DataMaster);

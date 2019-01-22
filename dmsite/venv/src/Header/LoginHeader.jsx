@@ -1,5 +1,4 @@
 import React from 'react';
-
 import Logo from '../images/DnDLogo2.png';
 
 const LoginHeader = () => {
