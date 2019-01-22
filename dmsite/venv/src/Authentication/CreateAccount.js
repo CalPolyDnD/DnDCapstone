@@ -29,9 +29,7 @@ class CreateAccount extends Component {
             <h1 align="center"> Create Account </h1>
             <CardTitle className="pl-4 pt-4">{this.props.name}</CardTitle>
             <CardBody>
-
               <NewAccountTextField />
-
               <Button color="primary" size="md" className="btn-block mt-0" onClick={this.uploadPressed}>
                                 Create Account
                 {/* TO DO */}

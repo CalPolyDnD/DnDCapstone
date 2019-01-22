@@ -7,7 +7,7 @@ import { withRouter } from 'react-router-dom';
 import {
   Container, Button, Card, CardTitle, CardBody,
 } from 'reactstrap';
-import TextField from './LoginTextField';
+import NewLoginTextField from './NewAccountTextField';
 
 class Login extends Component {
   constructor(props) {
@@ -28,7 +28,7 @@ class Login extends Component {
             <h1 align="center"> Login </h1>
             <CardTitle className="pl-4 pt-4">{this.props.name}</CardTitle>
             <CardBody>
-              <TextField />
+              <NewLoginTextField />
               <Button color="primary" size="md" className="btn-block mt-0" onClick={this.uploadPressed}>
                             Login
                 {/* TO DO */}
