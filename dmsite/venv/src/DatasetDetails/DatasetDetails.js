@@ -3,6 +3,21 @@ import { ListGroup, ListGroupItem, Button, Input } from 'reactstrap';
 import './DatasetDetails.css'
 
 class DatasetDetails extends Component {
+	onSavePressed() {
+	    // TODO: all saved stuff
+        this.props.history.push("/home");
+	}
+
+	onLabelAdd() {
+        // TODO: adding a new label
+        console.log("Adding a label...");
+	}
+
+	onClassificationAdd() {
+	    // TODO: adding a new classification
+	    console.log("Adding a classification...");
+	}
+
 	render() {
 		return (
 			<div className="dataset-details-page">
@@ -20,7 +35,7 @@ class DatasetDetails extends Component {
 							<ListGroupItem> d </ListGroupItem>
 							<ListGroupItem> e </ListGroupItem>
 						</ListGroup>
-						<Button className="dataset-details-col-button" color="primary"> Add Label </Button>
+						<Button className="dataset-details-col-button" color="primary" onClick={() => {this.onLabelAdd()}}> Add Label </Button>
 					</div>
 					<div className="dataset-details-col-right">
 						<h4> Classifications </h4>
@@ -31,7 +46,7 @@ class DatasetDetails extends Component {
 							<ListGroupItem> d </ListGroupItem>
 							<ListGroupItem> e </ListGroupItem>
 						</ListGroup>
-						<Button className="dataset-details-col-button" color="primary"> Add Classification </Button>
+						<Button className="dataset-details-col-button" color="primary" onClick={() => {this.onClassificationAdd()}}> Add Classification </Button>
 					</div>
 				</div>
 				<div className="dataset-details-desc">
@@ -47,8 +62,8 @@ class DatasetDetails extends Component {
                         <ListGroupItem> d </ListGroupItem>
                         <ListGroupItem> e </ListGroupItem>
                     </ListGroup>
-                    <Button className="dataset-details-meta-button" color="primary"> Save </Button>
-                    <Button className="dataset-details-meta-button" color="primary"> Cancel </Button>
+                    <Button className="dataset-details-meta-button" color="primary" onClick={() => {this.onSavePressed()}} > Save </Button>
+                    <Button className="dataset-details-meta-button" color="primary" onClick={() => {this.props.history.push('/home');}} > Cancel </Button>
 				</div>
 			</div>
 		)
