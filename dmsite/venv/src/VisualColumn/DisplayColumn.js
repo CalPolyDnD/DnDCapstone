@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import 'filepond/dist/filepond.min.css';
-import { Card, CardBody, CardTitle, ListGroup, ListGroupItem, Button } from 'reactstrap';
+import { Card, CardBody, CardTitle, ListGroupItem, Button } from 'reactstrap';
 import VisualTableModal from './VisualTableModal';
 import VisualGraphModal from './VisualGraphModal';
 
