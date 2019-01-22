@@ -1,12 +1,23 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { withRouter } from 'react-router-dom';
-import FilterColumn from './DataColumn/FilterColumn';
-import DisplayData from './DataColumn/DisplayData';
-import DisplayColumn from './VisualColumn/DisplayColumn';
-import Results from './ClassificationColumn/Results';
-import { Container, Card, Button,CardTitle, CardBody, InputGroup, InputGroupText, InputGroupAddon, Input} from 'reactstrap';
+import { Container, Card, Button, CardTitle, CardBody, InputGroup, InputGroupText, InputGroupAddon, Input, Popover, PopoverHeader, PopoverBody} from 'reactstrap';
 
-class Profile extends Component{
+class Profile extends React.Component{
+
+  constructor(props) {
+    super(props);
+
+    this.toggle = this.toggle.bind(this);
+    this.state = {
+      popoverOpen: false
+    };
+  }
+
+  toggle() {
+    this.setState({
+      popoverOpen: !this.state.popoverOpen
+    });
+  }
     render(){
         return (
             <Container fluid style={{ justifyContent: 'center' }}>
@@ -15,36 +26,52 @@ class Profile extends Component{
                 <CardBody style={{ width: '100%', justifyContent: 'space-between' }}>
                   <InputGroup>
                     <InputGroupAddon addonType="prepend">
-                      <InputGroupText>@Username</InputGroupText>
+                      <Button id="PopoverFocus" type="button">@Username</Button>
+                      <Popover trigger="focus" placement="bottom" target="PopoverFocus">
+                        <PopoverHeader>Focus Trigger</PopoverHeader>
+                        <PopoverBody>Focusing on the trigging element makes this popover appear. Blurring (clicking away) makes it disappear. You cannot select this text as the popover will disappear when you try.</PopoverBody>
+                      </Popover>
                     </InputGroupAddon>
-                    <Input />
+                    <Input placeholder="UsernameMan" />
                   </InputGroup>
                   <br />
                   <InputGroup>
                     <InputGroupAddon addonType="prepend">
-                      <InputGroupText>@Email!</InputGroupText>
+                      <Button id="PopoverFocus" type="button">@Password</Button>
+                      <Popover trigger="focus" placement="bottom" target="PopoverFocus">
+                        <PopoverHeader>Focus Trigger</PopoverHeader>
+                        <PopoverBody>Focusing on the trigging element makes this popover appear. Blurring (clicking away) makes it disappear. You cannot select this text as the popover will disappear when you try.</PopoverBody>
+                      </Popover>
                     </InputGroupAddon>
-                    <Input />
+                    <Input placeholder="Password123" />
                   </InputGroup>
                   <br />
                   <InputGroup>
                     <InputGroupAddon addonType="prepend">
-                      <InputGroupText>@Password</InputGroupText>
+                      <Button id="PopoverFocus" type="button">@Email</Button>
+                      <Popover trigger="focus" placement="bottom" target="PopoverFocus">
+                        <PopoverHeader>Focus Trigger</PopoverHeader>
+                        <PopoverBody>Focusing on the trigging element makes this popover appear. Blurring (clicking away) makes it disappear. You cannot select this text as the popover will disappear when you try.</PopoverBody>
+                      </Popover>
                     </InputGroupAddon>
-                    <Input />
+                    <Input placeholder="Example@ex.com" />
                   </InputGroup>
                   <br />
                   <InputGroup>
                     <InputGroupAddon addonType="prepend">
-                      <InputGroupText>@Security</InputGroupText>
+                      <Button id="PopoverFocus" type="button">@Security</Button>
+                      <Popover trigger="focus" placement="bottom" target="PopoverFocus">
+                        <PopoverHeader>Focus Trigger</PopoverHeader>
+                        <PopoverBody>Focusing on the trigging element makes this popover appear. Blurring (clicking away) makes it disappear. You cannot select this text as the popover will disappear when you try.</PopoverBody>
+                      </Popover>
                     </InputGroupAddon>
-                    <Input />
+                    <Input placeholder="Basic User" />
                   </InputGroup>
                   <br />
                 </CardBody>
                 <div className="d-flex justify-content-center pt-2">
                   <Button color="primary" size="md" className="mr-1 btn-block mt-0" onClick={() => { this.props.history.push('/home'); }} >Save</Button>
-                  <Button color="primary"size="md" className="btn-block mt-0" onClick={() => { this.props.history.push('/home'); }} >Go Back</Button>
+                  <Button color="primary"size="md" className="btn-block mt-0" onClick={() => { this.props.history.push('/home'); }} >Back</Button>
                 </div>
               </Card>
             </Container>
