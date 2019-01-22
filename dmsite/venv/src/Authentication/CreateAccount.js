@@ -21,15 +21,16 @@ class CreateAccount extends Component{
         return (
             <div style={{float : 'right', paddingRight : '35%'}}>
                 <Container fluid>
-                    <Card align="center" >
-                        <h1 align="center"> Create Account </h1>
-                        <CardTitle className="pl-4 pt-4">{this.props.name}</CardTitle>
+                    <Card align='center' >
+                        <h1 align='center'> Create Account </h1>
+                        <CardTitle className='pl-4 pt-4'>{this.props.name}</CardTitle>
                         <CardBody>
 
                             <NewAccountTextField/>
 
-                            <Button color="primary"size="md" className="btn-block mt-0" onClick={this.uploadPressed}>
+                            <Button color='primary'size='md' className='btn-block mt-0' onClick={this.uploadPressed}>
                                 Create Account
+                                {/*TO DO*/}
                             </Button>
                         </CardBody>
                     </Card>

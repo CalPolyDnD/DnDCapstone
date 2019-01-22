@@ -21,13 +21,14 @@ class Login extends Component{
         return (
             <div style={{float : 'right', paddingRight : '35%'}}>
             <Container fluid>
-                <Card align="center" >
-                    <h1 align="center"> Login </h1>
-                    <CardTitle className="pl-4 pt-4">{this.props.name}</CardTitle>
+                <Card align='center' >
+                    <h1 align='center'> Login </h1>
+                    <CardTitle className='pl-4 pt-4'>{this.props.name}</CardTitle>
                     <CardBody>
                         <TextField/>
-                        <Button color="primary"size="md" className="btn-block mt-0" onClick={this.uploadPressed}>
+                        <Button color='primary' size='md' className='btn-block mt-0' onClick={this.uploadPressed}>
                             Login
+                            {/*TO DO*/}
                         </Button>
                     </CardBody>
                 </Card>

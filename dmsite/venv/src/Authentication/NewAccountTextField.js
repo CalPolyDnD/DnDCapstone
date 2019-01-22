@@ -2,11 +2,11 @@
  * Created by christinadaley on 1/21/19.
  */
 
-import React from "react";
-import { render, ReactDOM } from "react-dom";
+import React from 'react';
+import { render, ReactDOM } from 'react-dom';
 import { TransitionMotion, spring } from 'react-motion';
 import { Component } from 'reactstrap';
-import { withRouter } from "react-router-dom";
+import { withRouter } from 'react-router-dom';
 import {
     Form, Input, Tooltip, Icon, Cascader, Select, Row, Col, Checkbox, Button, AutoComplete,
 } from 'antd';
@@ -68,32 +68,18 @@ class NewAccountTextField extends React.Component {
 
         const formItemLayout = {
             labelCol: {
-                xs: { span: 24 },
-                sm: { span: 8 },
+                span: 8,
             },
             wrapperCol: {
-                xs: { span: 24 },
-                sm: { span: 16 },
-            },
-        };
-        const tailFormItemLayout = {
-            wrapperCol: {
-                xs: {
-                    span: 24,
-                    offset: 0,
-                },
-                sm: {
-                    span: 16,
-                    offset: 8,
-                },
+                span: 16,
             },
         };
         const prefixSelector = getFieldDecorator('prefix', {
             initialValue: '86',
         })(
             <Select style={{ width: 70 }}>
-                <Option value="86">+86</Option>
-                <Option value="87">+87</Option>
+                <Option value='86'>+86</Option>
+                <Option value='87'>+87</Option>
             </Select>
         );
 
@@ -105,7 +91,7 @@ class NewAccountTextField extends React.Component {
             <Form onSubmit={this.handleSubmit}>
                 <Form.Item
                     {...formItemLayout}
-                    label="E-mail"
+                    label='E-mail'
                 >
                     {getFieldDecorator('email', {
                         rules: [{
@@ -119,7 +105,7 @@ class NewAccountTextField extends React.Component {
                 </Form.Item>
                 <Form.Item
                     {...formItemLayout}
-                    label="Password"
+                    label='Password'
                 >
                     {getFieldDecorator('password', {
                         rules: [{
@@ -128,12 +114,12 @@ class NewAccountTextField extends React.Component {
                             validator: this.validateToNextPassword,
                         }],
                     })(
-                        <Input type="password" />
+                        <Input type='password' />
                     )}
                 </Form.Item>
                 <Form.Item
                     {...formItemLayout}
-                    label="Confirm Password"
+                    label='Confirm Password'
                 >
                     {getFieldDecorator('confirm', {
                         rules: [{
@@ -142,13 +128,13 @@ class NewAccountTextField extends React.Component {
                             validator: this.compareToFirstPassword,
                         }],
                     })(
-                        <Input type="password" onBlur={this.handleConfirmBlur} />
+                        <Input type='password' onBlur={this.handleConfirmBlur} />
                     )}
                 </Form.Item>
-                <Form.Item
+                {/*<Form.Item
                     {...formItemLayout}
-                    label="Captcha"
-                    extra="We must make sure that your are a human."
+                    label='Captcha'
+                    extra='We must make sure that your are a human.'
                 >
                     <Row gutter={8}>
                         <Col span={12}>
@@ -162,16 +148,16 @@ class NewAccountTextField extends React.Component {
                             <Button>Get captcha</Button>
                         </Col>
                     </Row>
-                </Form.Item>
-                <Form.Item {...tailFormItemLayout}>
+                </Form.Item>*/}
+                {/*<Form.Item {...tailFormItemLayout}>
                     {getFieldDecorator('agreement', {
                         valuePropName: 'checked',
                     })(
-                        <Checkbox><a href=""> I have read the agreement</a></Checkbox>
+                        <Checkbox><a href=''> I have read the agreement</a></Checkbox>
                     )}
-                </Form.Item>
+                </Form.Item>*/}
                 {/*<Form.Item {...tailFormItemLayout}>
-                    <Button type="primary" htmlType="submit">Create Account</Button>
+                    <Button type='primary' htmlType='submit'>Create Account</Button>
                 </Form.Item>*/}
             </Form>
         );
