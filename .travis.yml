@@ -3,8 +3,10 @@ python:
    - "3.6"
 
 #Install dependencies
-install: pip install -r dependencies.txt
-
+install: 
+   - pip install -r dependencies.txt
+   - npm i --prefix dmsite/venv
 #Run Tests
 script:
-   - echo TEST
+   - npm run build --prefix dmsite/venv
+   - python dmsite/venv/manage.py check 

@@ -19,11 +19,6 @@ parseData(data) {
 
 render() {
 
-
-const Testdata = ["String1", "String2", "String3", "String4"];
-
-const DynamicData =  this.parseData(Testdata);
-
 return (
             <Card>
                 <CardTitle className="pl-4 pt-4">{this.props.name}-Header</CardTitle>
