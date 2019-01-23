@@ -5,7 +5,7 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import {
-  Form, Input, Select, AutoComplete,
+  Form, Input,
 } from 'antd';
 
 {/*const { Option } = Select;
@@ -15,7 +15,6 @@ const AutoCompleteOption = AutoComplete.Option;*/}
 class NewAccountTextField extends React.Component {
     state = {
       confirmDirty: false,
-      {/*autoCompleteResult: [],*/}
     };
 
     handleSubmit = (e) => {
