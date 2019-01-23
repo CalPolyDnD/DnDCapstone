@@ -5,10 +5,9 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import {
-  Container, Button, Card, CardTitle, CardBody, Input, Label, Form,
+  Container, Button, Card, CardTitle, CardBody,
 } from 'reactstrap';
-import { Switch, Route } from 'react-router-dom';
-import NewAccountTextField from './NewAccountTextField.js';
+import NewAccountTF from './NewAccountTextField';
 
 class CreateAccount extends Component {
   constructor(props) {
@@ -29,9 +28,9 @@ class CreateAccount extends Component {
             <h1 align="center"> Create Account </h1>
             <CardTitle className="pl-4 pt-4">{this.props.name}</CardTitle>
             <CardBody>
-              <NewAccountTextField />
+              <NewAccountTF />
               <Button color="primary" size="md" className="btn-block mt-0" onClick={this.uploadPressed}>
-                                Create Account
+                Create Account
                 {/* TO DO */}
               </Button>
             </CardBody>
