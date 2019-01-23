@@ -3,8 +3,6 @@
  */
 
 import React from 'react';
-import { ReactDOM } from 'react-dom';
-import { Component } from 'reactstrap';
 import { withRouter } from 'react-router-dom';
 import {
   Form, Input, Select, AutoComplete,
@@ -73,18 +71,18 @@ class NewAccountTextField extends React.Component {
           span: 16,
         },
       };
-      const prefixSelector = getFieldDecorator('prefix', {
+      {/*const prefixSelector = getFieldDecorator('prefix', {
         initialValue: '86',
       })(
         <Select style={{ width: 70 }}>
           <Option value="86">+86</Option>
           <Option value="87">+87</Option>
         </Select>,
-      );
+      );*/}
 
-      const websiteOptions = autoCompleteResult.map(website => (
+      {/*const websiteOptions = autoCompleteResult.map(website => (
         <AutoCompleteOption key={website}>{website}</AutoCompleteOption>
-      ));
+      ));*/}
 
       return (
         <Form onSubmit={this.handleSubmit}>
