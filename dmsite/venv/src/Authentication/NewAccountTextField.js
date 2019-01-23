@@ -3,12 +3,11 @@
  */
 
 import React from 'react';
-import { render, ReactDOM } from 'react-dom';
-import { TransitionMotion, spring } from 'react-motion';
+import { ReactDOM } from 'react-dom';
 import { Component } from 'reactstrap';
 import { withRouter } from 'react-router-dom';
 import {
-  Form, Input, Tooltip, Icon, Cascader, Select, Row, Col, Checkbox, Button, AutoComplete,
+  Form, Input, Select, AutoComplete,
 } from 'antd';
 
 const { Option } = Select;

@@ -3,12 +3,11 @@
  */
 
 import React from 'react';
-import { render, ReactDOM } from 'react-dom';
-import { TransitionMotion, spring } from 'react-motion';
+import { ReactDOM } from 'react-dom';
 import { Component } from 'reactstrap';
 import { withRouter } from 'react-router-dom';
 import {
-  Checkbox, Form, Icon, Input, Button,
+  Checkbox, Form, Icon, Input,
 } from 'antd';
 
 class TextField extends React.Component {
