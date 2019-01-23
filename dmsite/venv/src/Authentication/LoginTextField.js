@@ -48,7 +48,7 @@ class TextField extends React.Component {
             )}
           </Form.Item>
           <Form.Item>
-            <a className="login-form-forgot" href="">Forgot password </a>
+            <a className="login-form-forgot" href="/createaccount">Forgot password </a>
 
             {/* TO DO */}
 
