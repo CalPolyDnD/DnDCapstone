@@ -14,7 +14,7 @@ const AutoCompleteOption = AutoComplete.Option;*/}
 
 class NewAccountTextField extends React.Component {
     state = {
-      confirmDirty: false
+      confirmDirty: false,
       {/*autoCompleteResult: [],*/}
     };
 
