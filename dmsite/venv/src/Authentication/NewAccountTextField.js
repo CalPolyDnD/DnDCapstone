@@ -8,14 +8,14 @@ import {
   Form, Input, Select, AutoComplete,
 } from 'antd';
 
-const { Option } = Select;
-const AutoCompleteOption = AutoComplete.Option;
+{/*const { Option } = Select;
+const AutoCompleteOption = AutoComplete.Option;*/}
 
 
 class NewAccountTextField extends React.Component {
     state = {
-      confirmDirty: false,
-      autoCompleteResult: [],
+      confirmDirty: false
+      {/*autoCompleteResult: [],*/}
     };
 
     handleSubmit = (e) => {
@@ -71,6 +71,7 @@ class NewAccountTextField extends React.Component {
           span: 16,
         },
       };
+
       {/*const prefixSelector = getFieldDecorator('prefix', {
         initialValue: '86',
       })(
@@ -78,7 +79,7 @@ class NewAccountTextField extends React.Component {
           <Option value="86">+86</Option>
           <Option value="87">+87</Option>
         </Select>,
-      );*/}
+      );
 
       {/*const websiteOptions = autoCompleteResult.map(website => (
         <AutoCompleteOption key={website}>{website}</AutoCompleteOption>
