@@ -8,9 +8,8 @@ import {
   Form, Input,
 } from 'antd';
 
-{/*const { Option } = Select;
-const AutoCompleteOption = AutoComplete.Option;*/}
-
+/* const { Option } = Select;
+const AutoCompleteOption = AutoComplete.Option; */
 
 class NewAccountTextField extends React.Component {
     state = {
@@ -48,7 +47,7 @@ class NewAccountTextField extends React.Component {
       callback();
     }
 
-    handleWebsiteChange = (value) => {
+    /* handleWebsiteChange = (value) => {
       let autoCompleteResult;
       if (!value) {
         autoCompleteResult = [];
@@ -56,11 +55,10 @@ class NewAccountTextField extends React.Component {
         autoCompleteResult = ['.com', '.org', '.net'].map(domain => `${value}${domain}`);
       }
       this.setState({ autoCompleteResult });
-    }
+    } */
 
     render() {
-      const { getFieldDecorator } = this.props.form;
-      const { autoCompleteResult } = this.state;
+      const { getFieldDecorator } = this.props.form; { /* const { autoCompleteResult } = this.state; */ }
 
       const formItemLayout = {
         labelCol: {
@@ -71,18 +69,18 @@ class NewAccountTextField extends React.Component {
         },
       };
 
-      {/*const prefixSelector = getFieldDecorator('prefix', {
+      /* const prefixSelector = getFieldDecorator('prefix', {
         initialValue: '86',
-      })(
-        <Select style={{ width: 70 }}>
-          <Option value="86">+86</Option>
-          <Option value="87">+87</Option>
-        </Select>,
-      );
+        })(
+          <Select style={{ width: 70 }}>
+           <Option value="86">+86</Option>
+           <Option value="87">+87</Option>
+          </Select>,
+       );
 
-      {/*const websiteOptions = autoCompleteResult.map(website => (
+      const websiteOptions = autoCompleteResult.map(website => (
         <AutoCompleteOption key={website}>{website}</AutoCompleteOption>
-      ));*/}
+      )); */
 
       return (
         <Form onSubmit={this.handleSubmit}>
@@ -128,7 +126,7 @@ class NewAccountTextField extends React.Component {
               <Input type="password" onBlur={this.handleConfirmBlur} />,
             )}
           </Form.Item>
-          {/* <Form.Item
+          { /* <Form.Item
                     {...formItemLayout}
                     label='Captcha'
                     extra='We must make sure that your are a human.'
@@ -136,7 +134,8 @@ class NewAccountTextField extends React.Component {
                     <Row gutter={8}>
                         <Col span={12}>
                             {getFieldDecorator('captcha', {
-                                rules: [{ required: true, message: 'Please input the captcha you got!' }],
+                                rules: [{ required: true, message: 'Please input
+                                the captcha you got!' }],
                             })(
                                 <Input />
                             )}
@@ -145,17 +144,17 @@ class NewAccountTextField extends React.Component {
                             <Button>Get captcha</Button>
                         </Col>
                     </Row>
-                </Form.Item> */}
-          {/* <Form.Item {...tailFormItemLayout}>
+                </Form.Item> */ }
+          { /* <Form.Item {...tailFormItemLayout}>
                     {getFieldDecorator('agreement', {
                         valuePropName: 'checked',
                     })(
                         <Checkbox><a href=''> I have read the agreement</a></Checkbox>
                     )}
-                </Form.Item> */}
-          {/*} <Form.Item {...tailFormItemLayout}>
+                </Form.Item> */ }
+          { /* <Form.Item {...tailFormItemLayout}>
                     <Button type='primary' htmlType='submit'>Create Account</Button>
-                </Form.Item> */}
+                </Form.Item> */ }
         </Form>
       );
     }

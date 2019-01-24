@@ -65,6 +65,4 @@ class TextField extends React.Component {
 
 const WrappedNormalLoginForm = Form.create({ name: 'normal_login' })(TextField);
 
-/* ReactDOM.render(<WrappedNormalLoginForm />, mountNode); */
 export default withRouter(WrappedNormalLoginForm);
-/* export default withRouter(TextField); */
