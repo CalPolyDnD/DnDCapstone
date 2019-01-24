@@ -94,7 +94,7 @@ class Header extends React.Component {
             <h1 style={{ justifyContent: 'center', alignSelf: 'center' }} onClick={() => { this.props.history.push('/home'); }}>DataMaster</h1>
             {this.renderSearchBar()}
           </div>
-          <Button color="primary" style={{height: '50%', justifyContent: 'center', alignSelf: "center"}} position="right" onClick={() => { this.props.history.push(`/profile`); }}>User Profile</Button>
+          <Button color="primary" style={{ height: '50%', justifyContent: 'center', alignSelf: 'center' }} position="right" onClick={() => { this.props.history.push('/profile'); }}>User Profile</Button>
         </Row>
         <Row>
           <hr style={horizontalLineStyling} />

@@ -4,7 +4,7 @@ import {
   CarouselItem,
   CarouselControl,
   CarouselIndicators,
-  CarouselCaption
+  CarouselCaption,
 } from 'reactstrap';
 
 import sg1 from '../images/SampleGraph1.PNG';
@@ -15,18 +15,18 @@ const items = [
   {
     src: sg1,
     altText: 'Table 1',
-    caption: 'Table 1'
+    caption: 'Table 1',
   },
   {
     src: sg2,
     altText: 'Table 2',
-    caption: 'Table 2'
+    caption: 'Table 2',
   },
   {
     src: sg3,
     altText: 'Table 3',
-    caption: 'Table 3'
-  }
+    caption: 'Table 3',
+  },
 ];
 
 class VisualGraphDisplay extends Component {
@@ -66,29 +66,24 @@ class VisualGraphDisplay extends Component {
   }
 
   render() {
-    const { activeIndex } = this.state;
-
-    const slides = items.map((item) => {
-      return (
-        <CarouselItem
-          onExiting={this.onExiting}
-          onExited={this.onExited}
-          key={item.src}
-        >
-          <img src={item.src} alt={item.altText} />
-          <CarouselCaption captionText={item.caption} captionHeader={item.caption} />
-        </CarouselItem>
-      );
-    });
+    const slides = items.map(item => (
+      <CarouselItem
+        onExiting={this.onExiting}
+        onExited={this.onExited}
+        key={item.src}
+      >
+        <img src={item.src} alt={item.altText} />
+        <CarouselCaption captionText={item.caption} captionHeader={item.caption} />
+      </CarouselItem>
+    ));
 
     return (
       <Carousel
-        style={{position: "absolute", justifyContent: 'center'}}
-        activeIndex={activeIndex}
+        style={{ position: 'absolute', justifyContent: 'center' }}
         next={this.next}
         previous={this.previous}
       >
-        <CarouselIndicators items={items} activeIndex={activeIndex} onClickHandler={this.goToIndex} />
+        <CarouselIndicators items={items} onClickHandler={this.goToIndex} />
         {slides}
         <CarouselControl direction="prev" directionText="Previous" onClickHandler={this.previous} />
         <CarouselControl direction="next" directionText="Next" onClickHandler={this.next} />
