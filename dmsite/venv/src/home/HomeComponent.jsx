@@ -8,7 +8,7 @@ import {
 
 import DatasetsColumn from './DataColumn/DatasetsColumn';
 import DisplayColumn from './VisualColumn/DisplayColumn';
-import ClassificationColumn from './ClassificationColumn/ClassificationsColumn';
+import ClassificationColumn from './ClassificationColumn/ClassificationColumn';
 
 class Home extends React.Component {
   render() {
@@ -21,7 +21,6 @@ class Home extends React.Component {
         <Row>
           <Col md="3">
             <DatasetsColumn />
-            <ClassificationColumn />
           </Col>
           <Col md="7">
             <ClassificationColumn name="Classifications" />

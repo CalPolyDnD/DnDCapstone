@@ -1,40 +1,68 @@
-import React, { Component } from 'react';
+import React from 'react';
 import 'filepond/dist/filepond.min.css';
 import {
-  Card, CardBody, CardTitle, ListGroup, ListGroupItem,
+  Button,
+  Card,
+  CardBody,
+  CardHeader,
+  ListGroup,
+  ListGroupItem,
+  Input,
 } from 'reactstrap';
-import FilterButton from './FilterButton';
 
-class FilterColumn extends Component {
-  parseData(data) {
-    const parsedData = data.map(name => (
-      <ListGroupItem>
-        {name}
-      </ListGroupItem>
+import Upload from './UploadComponent';
 
-    ));
-    return parsedData;
+class DatasetsColumn extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      uploading: false,
+    };
   }
+
+  parseData = data => (data.map(name => (
+    <ListGroupItem action>
+      {name}
+    </ListGroupItem>
+  )));
+
+  uploadClickHandler = () => {
+    this.setState({ uploading: true });
+  };
+
+  cancelUploadClicked = () => {
+    this.setState({ uploading: false });
+  };
 
   render() {
     const Testdata = ['File1.jsv', 'File2.jsv', 'File3.jsv', 'File4.jsv'];
-
     const DynamicData = this.parseData(Testdata);
-
+    const { uploading } = this.state;
     return (
       <Card>
-        <CardTitle className="pl-4 pt-4">{this.props.name}</CardTitle>
+        <CardHeader tag="h3">Datasets</CardHeader>
         <CardBody>
           <ListGroup className="filter-list" flush>
-            <ListGroupItem>
-              {DynamicData}
-            </ListGroupItem>
+            {DynamicData}
           </ListGroup>
-          <FilterButton name={this.props.name} />
+          <Input placeholder="Search Result" className="mt-1" />
+          <Button
+            color="primary"
+            size="md"
+            className="mr-0 btn-block mt-2 mb-2"
+            onClick={this.uploadClickHandler}
+          >
+            Add File
+          </Button>
+          {uploading && <Upload /> }
+          {
+            uploading
+            && <Button close onClick={this.cancelUploadClicked} />
+          }
         </CardBody>
       </Card>
     );
   }
 }
 
-export default FilterColumn;
+export default DatasetsColumn;
