@@ -1,12 +1,13 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 
-import Home from './HomeComponent';
+import Home from './home/HomeComponent';
 import SearchResultsPage from './SearchResultsPage/SearchResultsPage';
-import DatasetDetails from './DatasetDetails/DatasetDetails';
-import Profile from './ProfileComponent';
+import DatasetDetails from './home/DatasetDetails/DatasetDetails';
+import Profile from './Profile/ProfileComponent';
 import Login from './Authentication/Login';
 import CreateAccount from './Authentication/CreateAccount';
+import Campaign from './CampaignPage/Campaign';
 
 
 const BaseRouter = () => (
@@ -17,6 +18,7 @@ const BaseRouter = () => (
     <Route exact path="/profile" component={Profile} />
     <Route path="/createaccount" component={CreateAccount} />
     <Route path="/home" component={Home} />
+    <Route path="/campaign" component={Campaign} />
   </div>
 );
 
