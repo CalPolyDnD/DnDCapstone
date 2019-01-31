@@ -5,9 +5,10 @@
   "dependencies": {
     "axios": "^0.18.0",
     "filepond": "^3.7.6",
-    "antd": "^3.12.4",
+    "antd": "^3.13.0",
     "es": "^0.6.0",
     "prop-types": "^15.6.2",
+    "python3": "0.0.1",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "react-filepond": "^5.0.0",

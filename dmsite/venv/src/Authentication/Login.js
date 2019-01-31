@@ -16,7 +16,7 @@ class Login extends Component {
   }
 
   uploadPressed() {
-    const path = '/home';
+    const path = '/campaign';
     this.props.history.push(path);
   }
 
