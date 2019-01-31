@@ -2,18 +2,18 @@ import os
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from .forms import UploadFileForm
-import dmsite.file_manager.file_manager as fm
-# import dmsite.db_manager.db_manager as dbm
+#import dmsite.file_manager.file_manager as fm
+#import dmsite.db_manager.db_manager as dbm
 import dmsite.data_classifier.data_wrangler as dw
 
 def upload_file(request):
     if request.method == 'POST':
         for k, v in request.FILES.items():
             handle_uploaded_file(v)
-        return HttpResponseRedirect('/')
+        return HttpResponseRedirect('/home')
     else:
-        form = UploadFileForm()
-    return render(request, 'index.html', {'form': form})
+        return HttpResponseRedirect('/home')
+
 
 def handle_uploaded_file(f):
     fName = "media/" + f.name
@@ -27,8 +27,6 @@ def handle_uploaded_file(f):
 
     parser = dw.Wrangler(file, ".csv")
     parser.parse_file()
-
-    #dbm.put_dataset_header("userName", f.name, parser.data)
 
     # commented out so boto doesn't scream
     #dbm.put_dataset_header("userName", f.name, parser.data)

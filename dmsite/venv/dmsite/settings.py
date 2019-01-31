@@ -37,9 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
     'dmsite.upload',
-	'dmsite.file_manager'
+	'dmsite.file_manager',
+    'dmsite.search',
 ]
 
 MIDDLEWARE_CLASSES = [

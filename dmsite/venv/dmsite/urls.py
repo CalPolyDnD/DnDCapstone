@@ -18,6 +18,7 @@ from django.contrib import admin
 # Use include() to add paths from the catalog application
 from django.urls import include
 from django.urls import path
+from django.urls import re_path
 
 # TODO: remove this once dev is done, or before releases
 # Use static() to add url mapping to serve static files during development (only)
@@ -30,15 +31,20 @@ from django.views.generic import TemplateView
 
 # Manage file uploads
 from dmsite.upload import views as upload_views
+from dmsite.search import search
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', TemplateView.as_view(template_name='index.html')),
-    path('home', TemplateView.as_view(template_name='index.html')),
-    path('search/*', TemplateView.as_view(template_name='index.html')),
-    path('home/upload', TemplateView.as_view(template_name='index.html')),
     path('home/upload/push_file', upload_views.upload_file),
-    path('details', TemplateView.as_view(template_name='index.html'))
+    path('search/push_query', search.perform_search),
+    re_path(r'^.*', TemplateView.as_view(template_name='index.html')),
+
+    # leave this just incase ^^ stops working
+    #path('', TemplateView.as_view(template_name='index.html')),
+    #path('home', TemplateView.as_view(template_name='index.html')),
+    #path('search/*', TemplateView.as_view(template_name='index.html')),
+    #path('home/upload', TemplateView.as_view(template_name='index.html')),
+    #path('details', TemplateView.as_view(template_name='index.html'))
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
