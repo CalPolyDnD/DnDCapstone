@@ -6,7 +6,6 @@ import {
 
 const parseData = (data) => {
   const finalData = data.map((obj, index) => {
-    console.log(obj);
     return (
       <ListGroupItem key={ index }>
         <p>{obj.name}</p>
@@ -21,7 +20,6 @@ const parseData = (data) => {
 class Results extends Component {
   _handleClick(e) {
     e.preventDefault();
-    console.log('Classifications button pressed');
   }
 
   render() {
