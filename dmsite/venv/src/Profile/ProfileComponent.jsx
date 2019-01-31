@@ -24,7 +24,6 @@ class Profile extends React.Component {
   }
 
   render() {
-    const { history } = this.props.history;
     return (
       <Container fluid style={{ justifyContent: 'center' }}>
         <div style={{

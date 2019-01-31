@@ -16,7 +16,6 @@ class DisplayData extends Component {
   }
 
   render() {
-    const { props } = this.props;
     return (
       <Card>
         <CardTitle className="pl-4 pt-4">
