@@ -3,7 +3,7 @@ import { Route } from 'react-router-dom';
 
 import Home from './home/HomeComponent';
 import SearchResultsPage from './SearchResultsPage/SearchResultsPage';
-import DatasetDetails from './home/DatasetDetails/DatasetDetails';
+import DatasetDetails from './DatasetDetails/DatasetDetails';
 import Login from './Authentication/Login';
 import CreateAccount from './Authentication/CreateAccount';
 import Profile from './Profile/ProfileComponent';
