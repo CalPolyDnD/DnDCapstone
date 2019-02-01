@@ -57,7 +57,8 @@ class StandardHeader extends React.Component {
     return (
       <InputGroup
         compact
-        className="align-self-center px-4">
+        className="align-self-center px-4"
+      >
         <Select
           dropdownMatchSelectWidth={false}
           defaultValue={0}
@@ -163,6 +164,7 @@ class StandardHeader extends React.Component {
 StandardHeader.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
   history: ReactRouterPropTypes.history.isRequired,
+  logout: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = dispatch => ({
