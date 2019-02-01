@@ -2,6 +2,7 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import ReactRouterPropTypes from 'react-router-prop-types';
+import { connect } from 'react-redux';
 import {
   Menu,
   Button,
@@ -12,7 +13,7 @@ import {
 
 import Logo from '../images/DnDLogo2.png';
 import './style.css';
-
+import * as actions from '../store/actions/auth';
 
 const MenuItem = Menu.Item;
 const { Search } = Input;
@@ -55,7 +56,8 @@ class StandardHeader extends React.Component {
     return (
       <InputGroup
         compact
-        className="align-self-center px-4">
+        className="align-self-center px-4"
+      >
         <Select
           dropdownMatchSelectWidth={false}
           defaultValue={0}
@@ -77,7 +79,7 @@ class StandardHeader extends React.Component {
   }
 
   renderProfileDropdown() {
-    const { isAuthenticated } = this.props;
+    const { isAuthenticated, logout } = this.props;
     return (
       <Menu>
         {
@@ -88,7 +90,7 @@ class StandardHeader extends React.Component {
               </MenuItem>,
 
               <MenuItem>
-                <a href="/" key="logout" style={{ color: 'red' }}>Logout</a>
+                <a onClick={logout} href="/" key="logout" style={{ color: 'red' }}>Logout</a>
               </MenuItem>,
             ]
             )
@@ -161,6 +163,12 @@ class StandardHeader extends React.Component {
 StandardHeader.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
   history: ReactRouterPropTypes.history.isRequired,
+  logout: PropTypes.func.isRequired,
 };
 
-export default withRouter(StandardHeader);
+const mapDispatchToProps = dispatch => ({
+  logout: () => dispatch(actions.logout),
+})
+
+
+export default connect(mapDispatchToProps)(withRouter(StandardHeader));

@@ -38,7 +38,10 @@ urlpatterns = [
     path('search/*', TemplateView.as_view(template_name='index.html')),
     path('home/upload', TemplateView.as_view(template_name='index.html')),
     path('home/upload/push_file', upload_views.upload_file),
-    path('details', TemplateView.as_view(template_name='index.html'))
-]
+    path('details', TemplateView.as_view(template_name='index.html')),
+    path('profile', TemplateView.as_view(template_name='index.html')),
+    path('createaccount', TemplateView.as_view(template_name='index.html')),
+    path('login', TemplateView.as_view(template_name='index.html'))
+    ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

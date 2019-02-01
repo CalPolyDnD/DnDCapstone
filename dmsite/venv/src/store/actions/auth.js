@@ -42,7 +42,7 @@ export const checkAuthTimeout = (expirationDate) => {
 export const authLogin = (username, password) => {
   return (dispatch) => {
     dispatch(authStart());
-    axios.post('http://127.0.0.1:8000/rest-auth/login', {
+    axios.post('http://localhost:8000/rest-auth/login', {
       username,
       password,
     })
@@ -60,11 +60,10 @@ export const authLogin = (username, password) => {
   };
 };
 
-export const authSignup = (username, email, password1, password2) => {
+export const authSignup = (email, password1, password2) => {
   return (dispatch) => {
     dispatch(authStart());
-    axios.post('http://127.0.0.1:8000/rest-auth/registration', {
-      username,
+    axios.post('http://localhost:8000/rest-auth/registration', {
       email,
       password1,
       password2,
