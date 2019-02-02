@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import 'filepond/dist/filepond.min.css';
 import {
-  Input, Card, Button, CardTitle, CardBody, ListGroup, ListGroupItem,
+    Input, Card, Button, CardTitle, CardBody, ListGroup, ListGroupItem, CardHeader,
 } from 'reactstrap';
 
 const parseData = (data) => {
@@ -29,7 +29,7 @@ class ClassificationColumn extends Component {
 
     return (
       <Card>
-        <CardTitle className="pl-4 pt-4 pb-0">{name}</CardTitle>
+        <CardHeader tag="h3">Classifications</CardHeader>
         <CardBody>
           <ListGroup flush>
             {data}

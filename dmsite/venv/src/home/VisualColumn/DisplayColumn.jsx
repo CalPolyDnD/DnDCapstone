@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import 'filepond/dist/filepond.min.css';
 import {
-  Card, CardBody, CardTitle, ListGroupItem, Button,
+  Card, CardBody, CardTitle, ListGroupItem, Button, CardHeader,
 } from 'reactstrap';
 import VisualTableModal from './VisualTableModal';
 import VisualGraphModal from './VisualGraphModal';
@@ -21,7 +21,7 @@ class DisplayColumn extends Component {
     return (
       <div>
         <Card>
-          <CardTitle className="pl-4 pt-4">{this.props.name}</CardTitle>
+          <CardHeader tag="h4">Display Actions</CardHeader>
           <CardBody>
             <Card>
               <CardBody>

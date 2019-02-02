@@ -5,7 +5,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import {
-  Container, Card, CardTitle, CardBody,
+  Container, Card, CardTitle, CardBody, CardHeader,
 } from 'reactstrap';
 
 import PropTypes from 'prop-types';
@@ -32,7 +32,7 @@ class Login extends Component {
       <div style={{ float: 'right', paddingRight: '35%' }}>
         <Container fluid>
           <Card align="center">
-            <h1 align="center"> Login </h1>
+            <CardHeader tag="h3">Login</CardHeader>
             <CardTitle className="pl-4 pt-4">{ name }</CardTitle>
             <CardBody>
               <LoginTextField />
