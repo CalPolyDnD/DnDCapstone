@@ -5,34 +5,37 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import {
-  Container, Button, Card, CardTitle, CardBody,
+  Container, Card, CardTitle, CardBody,
 } from 'reactstrap';
+
+import PropTypes from 'prop-types';
+import ReactRouterPropTypes from 'react-router-prop-types';
 import LoginTextField from './LoginTextField';
+
 
 class Login extends Component {
   constructor(props) {
     super(props);
-    this.uploadPressed = this.uploadPressed.bind(this);
+    this.loginPressed = this.loginPressed.bind(this);
   }
 
-  uploadPressed() {
-    const path = '/campaign';
-    this.props.history.push(path);
+  loginPressed() {
+    const { history } = this.props;
+    const path = '/home';
+    history.push(path);
   }
 
   render() {
+    const { name } = this.props;
+
     return (
       <div style={{ float: 'right', paddingRight: '35%' }}>
         <Container fluid>
           <Card align="center">
             <h1 align="center"> Login </h1>
-            <CardTitle className="pl-4 pt-4">{this.props.name}</CardTitle>
+            <CardTitle className="pl-4 pt-4">{ name }</CardTitle>
             <CardBody>
               <LoginTextField />
-              <Button color="primary" size="md" className="btn-block mt-0" onClick={this.uploadPressed}>
-                            Login
-                {/* TO DO */}
-              </Button>
             </CardBody>
           </Card>
         </Container>
@@ -41,6 +44,11 @@ class Login extends Component {
     );
   }
 }
+
+Login.propTypes = {
+  name: PropTypes.string.isRequired,
+  history: ReactRouterPropTypes.history.isRequired,
+};
 
 
 export default withRouter(Login);

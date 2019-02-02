@@ -5,12 +5,19 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import {
-  Form, Input,
+  Button,
+  Form,
+  Icon,
+  Input,
+  Spin,
 } from 'antd';
+import { connect } from 'react-redux';
+import * as actions from '../store/actions/auth';
 
 /* const { Option } = Select;
 const AutoCompleteOption = AutoComplete.Option; */
 
+const antSpinner = <Icon type="loading" style={{ fontSize: 24 }} spin />;
 class NewAccountTextField extends React.Component {
     state = {
       confirmDirty: false,
@@ -18,20 +25,29 @@ class NewAccountTextField extends React.Component {
 
     handleSubmit = (e) => {
       e.preventDefault();
-      this.props.form.validateFieldsAndScroll((err, values) => {
+      const { form, onAuth } = this.props;
+      const { validateFieldsAndScroll } = form;
+      validateFieldsAndScroll((err, values) => {
         if (!err) {
+          onAuth(values.email, values.password, values.confirm);
           console.log('Received values of form: ', values);
         }
       });
     }
 
     handleConfirmBlur = (e) => {
-      const value = e.target.value;
-      this.setState({ confirmDirty: this.state.confirmDirty || !!value });
+      const { value } = e.target;
+      this.setState((prevState) => {
+        const { confirmDirty } = this.state;
+        return {
+          ...prevState,
+          confirmDirty: confirmDirty || !!value,
+        };
+      });
     }
 
     compareToFirstPassword = (rule, value, callback) => {
-      const form = this.props.form;
+      const { form } = this.props;
       if (value && value !== form.getFieldValue('password')) {
         callback('Two passwords that you enter is inconsistent!');
       } else {
@@ -40,8 +56,10 @@ class NewAccountTextField extends React.Component {
     }
 
     validateToNextPassword = (rule, value, callback) => {
-      const form = this.props.form;
-      if (value && this.state.confirmDirty) {
+      const { form } = this.props;
+      const { confirmDirty } = this.state;
+
+      if (value && confirmDirty) {
         form.validateFields(['confirm'], { force: true });
       }
       callback();
@@ -58,18 +76,17 @@ class NewAccountTextField extends React.Component {
     } */
 
     render() {
-      const { getFieldDecorator } = this.props.form;
+      const { form, loading, error } = this.props;
+      const { getFieldDecorator } = form;
+
+      let errorMessage = null;
+
+      if (error) {
+        errorMessage = (
+          <p>{error.message}</p>
+        );
+      }
       /* const { autoCompleteResult } = this.state; */
-
-      const formItemLayout = {
-        labelCol: {
-          span: 8,
-        },
-        wrapperCol: {
-          span: 16,
-        },
-      };
-
       /* const prefixSelector = getFieldDecorator('prefix', {
         initialValue: '86',
         })(
@@ -85,47 +102,61 @@ class NewAccountTextField extends React.Component {
 
       return (
         <Form onSubmit={this.handleSubmit}>
-          <Form.Item
-            {...formItemLayout}
-            label="E-mail"
-          >
+          <Form.Item>
             {getFieldDecorator('email', {
-              rules: [{
-                type: 'email', message: 'The input is not valid E-mail!',
-              }, {
-                required: true, message: 'Please input your E-mail!',
-              }],
+              rules: [{ required: true, message: 'Please input your email!' }],
             })(
-              <Input />,
+              <Input
+                prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                placeholder="Email"
+              />,
             )}
           </Form.Item>
-          <Form.Item
-            {...formItemLayout}
-            label="Password"
-          >
+          <Form.Item>
             {getFieldDecorator('password', {
-              rules: [{
-                required: true, message: 'Please input your password!',
-              }, {
-                validator: this.validateToNextPassword,
-              }],
+              rules: [
+                { required: true, message: 'Please input your Password!' },
+                { validator: this.validateToNextPassword },
+              ],
             })(
-              <Input type="password" />,
+              <Input
+                prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                type="password"
+                placeholder="Password"
+              />,
             )}
           </Form.Item>
-          <Form.Item
-            {...formItemLayout}
-            label="Confirm Password"
-          >
+          <Form.Item>
             {getFieldDecorator('confirm', {
-              rules: [{
-                required: true, message: 'Please confirm your password!',
-              }, {
-                validator: this.compareToFirstPassword,
-              }],
+              rules: [
+                { required: true, message: 'Passwords do not match!'},
+                { validator: this.compareToFirstPassword },
+              ],
             })(
-              <Input type="password" onBlur={this.handleConfirmBlur} />,
+              <Input
+                prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                type="password"
+                placeholder="Confirm Password"
+                onBlur={this.handleConfirmBlur}
+              />,
             )}
+          </Form.Item>
+          { errorMessage }
+          <Form.Item>
+            {
+              loading
+                ? <Spin indicator={antSpinner} />
+
+                : (
+                  <Button
+                    type="primary"
+                    htmlType="submit"
+                    className="btn-block mt0 login-form-button"
+                  >
+                    Create Account
+                  </Button>
+                )
+            }
           </Form.Item>
           { /* <Form.Item
                     {...formItemLayout}
@@ -161,6 +192,15 @@ class NewAccountTextField extends React.Component {
     }
 }
 
+const mapStateToProps = state => ({
+  loading: state.loading,
+  error: state.error,
+});
+
+const mapDispatchToProps = dispatch => ({
+  onAuth: (email, pw1, pw2) => dispatch(actions.authSignup(email, pw1, pw2)),
+})
+
 const WrappedRegistrationForm = Form.create({ name: 'register' })(NewAccountTextField);
 
-export default withRouter(WrappedRegistrationForm);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(WrappedRegistrationForm));

@@ -5,20 +5,11 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import {
-  Container, Button, Card, CardTitle, CardBody,
+  Container, Card, CardTitle, CardBody,
 } from 'reactstrap';
 import NewAccountTF from './NewAccountTextField';
 
 class CreateAccount extends Component {
-  constructor(props) {
-    super(props);
-    this.uploadPressed = this.uploadPressed.bind(this);
-  }
-
-  uploadPressed() {
-    const path = '/login';
-    this.props.history.push(path);
-  }
 
   render() {
     return (
@@ -29,10 +20,6 @@ class CreateAccount extends Component {
             <CardTitle className="pl-4 pt-4">{this.props.name}</CardTitle>
             <CardBody>
               <NewAccountTF />
-              <Button color="primary" size="md" className="btn-block mt-0" onClick={this.uploadPressed}>
-                Create Account
-                {/* TO DO */}
-              </Button>
             </CardBody>
           </Card>
         </Container>
