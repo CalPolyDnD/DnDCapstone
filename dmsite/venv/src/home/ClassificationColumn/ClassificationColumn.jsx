@@ -17,7 +17,7 @@ const parseData = (data) => {
 };
 
 
-class Results extends Component {
+class ClassificationColumn extends Component {
   _handleClick(e) {
     e.preventDefault();
   }
@@ -43,4 +43,4 @@ class Results extends Component {
   }
 }
 
-export default Results;
+export default ClassificationColumn;
