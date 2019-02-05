@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import 'filepond/dist/filepond.min.css';
 import {
-  Input, Card, Button, CardTitle, CardBody, ListGroup, ListGroupItem,
+    Input, Card, Button, CardBody, ListGroup, ListGroupItem, CardHeader,
 } from 'reactstrap';
 
 const parseData = (data) => {
   const finalData = data.map((obj, index) => {
     return (
-      <ListGroupItem key={ index }>
+      <ListGroupItem key={ index } style={{ backgroundColor: '#3d3d3d', color: 'white' }}>
         <p>{obj.name}</p>
         <p>{obj.age}</p>
       </ListGroupItem>
@@ -23,21 +23,29 @@ class ClassificationColumn extends Component {
   }
 
   render() {
-    const { name } = this.props;
     const testData = [{ name: 'Classify1', age: 2 }, { name: 'Classify2', age: 4 }, { name: 'Classify3', age: 5 }];
     const data = parseData(testData);
 
     return (
-      <Card>
-        <CardTitle className="pl-4 pt-4 pb-0">{name}</CardTitle>
-        <CardBody>
+      <Card style={{ borderWidth: 0 }} id="classifications">
+        <CardHeader tag="h3" style={{ backgroundColor: '#303030', color: 'white' }}>Classifications</CardHeader>
+        <CardBody style={{ backgroundColor: '#3d3d3d', color: 'white' }}>
           <ListGroup flush>
             {data}
           </ListGroup>
-
+          <Input
+            placeholder="Search Classification"
+            className="mt-3"
+            style={{ backgroundColor: '#303030', borderWidth: 0 }}
+          />
+          <Button
+            onClick={this.handleClick}
+            color="primary"
+            className="mr-0 btn-block mt-2 mb-2"
+          >
+            Add Classifications
+          </Button>
         </CardBody>
-        <Input placeholder="Search Classification" />
-        <Button onClick={this.handleClick} color="primary">Add Classifications</Button>
       </Card>
     );
   }

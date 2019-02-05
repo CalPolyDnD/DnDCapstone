@@ -14,7 +14,7 @@ class Header extends React.Component {
     const { location } = this.props;
     const AntHeader = Layout.Header;
     return (
-      <AntHeader className="pl-0 pr-0" style={{ position: 'fixed', zIndex: 1, width: '100%' }}>
+      <AntHeader className="pl-0 pr-0" style={ {position: 'fixed', zIndex: 1, width: '100%', color: '#000000'} } >
         {
           location.pathname === '/login/'
             ? <LoginHeader {...this.props} />

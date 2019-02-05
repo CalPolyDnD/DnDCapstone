@@ -48,8 +48,9 @@ class TextField extends React.Component {
               rules: [{ required: true, message: 'Please input your email!' }],
             })(
               <Input
-                prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                type="email"
                 placeholder="Email"
+                style={{ backgroundColor: '#303030', borderWidth: 0 }}
               />,
             )}
           </Form.Item>
@@ -58,9 +59,9 @@ class TextField extends React.Component {
               rules: [{ required: true, message: 'Please input your Password!' }],
             })(
               <Input
-                prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
                 type="password"
                 placeholder="Password"
+                style={{ backgroundColor: '#303030', borderWidth: 0 }}
               />,
             )}
           </Form.Item>
@@ -69,10 +70,10 @@ class TextField extends React.Component {
               valuePropName: 'checked',
               initialValue: true,
             })(
-              <Checkbox> Remember me</Checkbox>,
+              <Checkbox style={{ color: 'white' }}> Remember me</Checkbox>,
             )}
           </Form.Item>
-          <Form.Item>
+          <Form.Item style={{ color: 'white' }}>
             <a className="login-form-forgot" href="/register">Forgot password </a>
 
             {/* TO DO */}

@@ -21,7 +21,7 @@ class DatasetsColumn extends React.Component {
   }
 
   parseData = data => (data.map(name => (
-    <ListGroupItem action>
+    <ListGroupItem action style={{ backgroundColor: '#3d3d3d', color: 'white' }}>
       {name}
     </ListGroupItem>
   )));
@@ -39,13 +39,17 @@ class DatasetsColumn extends React.Component {
     const DynamicData = this.parseData(Testdata);
     const { uploading } = this.state;
     return (
-      <Card>
-        <CardHeader tag="h3">Datasets</CardHeader>
-        <CardBody>
+      <Card style={{ borderWidth: 0 }}>
+        <CardHeader tag="h3" style={{ backgroundColor: '#303030', color: 'white' }}>Datasets</CardHeader>
+        <CardBody style={{ backgroundColor: '#3d3d3d', color: 'white' }}>
           <ListGroup className="filter-list" flush>
             {DynamicData}
           </ListGroup>
-          <Input placeholder="Search Result" className="mt-1" />
+          <Input
+            placeholder="Search Result"
+            className="mt-1"
+            style={{ backgroundColor: '#303030', borderWidth: 0 }}
+          />
           <Button
             color="primary"
             size="md"

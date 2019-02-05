@@ -5,7 +5,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import {
-  Container, Card, CardTitle, CardBody,
+  Container, Card, CardBody, CardHeader,
 } from 'reactstrap';
 
 import PropTypes from 'prop-types';
@@ -26,18 +26,18 @@ class Login extends Component {
   }
 
   render() {
-    const { name } = this.props;
 
     return (
-      <div style={{ float: 'right', paddingRight: '35%' }}>
+      <div>
         <Container fluid>
-          <Card align="center">
-            <h1 align="center"> Login </h1>
-            <CardTitle className="pl-4 pt-4">{ name }</CardTitle>
-            <CardBody>
-              <LoginTextField />
-            </CardBody>
-          </Card>
+          <div style={{ display: 'flex', justifyContent: 'center', paddingTop: '5%' }}>
+            <Card style={{ borderWidth: 0 }} align="center">
+              <CardHeader tag="h3" style={{ backgroundColor: '#303030', color: 'white' }}>Login</CardHeader>
+              <CardBody style={{ backgroundColor: '#3d3d3d', color: 'white' }}>
+                <LoginTextField />
+              </CardBody>
+            </Card>
+          </div>
         </Container>
       </div>
 
