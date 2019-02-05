@@ -63,16 +63,17 @@ class StandardHeader extends React.Component {
           defaultValue={0}
           onSelect={this.switchFilter}
           className="float-left"
+          style={{ backgroundColor:'#303030'}}
         >
-          <Option value={0}>{ searchFilterOrder[0] }</Option>
-          <Option value={1}>{ searchFilterOrder[1] }</Option>
-          <Option value={2}>{ searchFilterOrder[2] }</Option>
+          <Option value={0} style={{ backgroundColor:'#303030', color:'white'}}>{ searchFilterOrder[0] }</Option>
+          <Option value={1} style={{ backgroundColor:'#303030', color:'white'}}>{ searchFilterOrder[1] }</Option>
+          <Option value={2} style={{ backgroundColor:'#303030', color:'white'}}>{ searchFilterOrder[2] }</Option>
         </Select>
         <Search
           placeholder={`Search Campaign by ${searchbarFilter}`}
           onSearch={(searchbarText) => { history.push(`/search/${searchbarFilter}?=${searchbarText}`); }}
           enterButton
-          style={{ width: '40%', height: '32px' }}
+          style={{ width: '40%', height: '32px', background:'#303030' }}
         />
       </InputGroup>
     );
@@ -138,7 +139,8 @@ class StandardHeader extends React.Component {
 
   render() {
     return (
-      <div style={{ height: '64px' }} id="headerContainer">
+      <div style={{ height: '64px', background: '#000000' }} id="headerContainer">
+        <div style={{ background: '#000000' }} >
         <a className="d-inline-flex px-2" href="/home/" id="logoBanner">
           <img id="logo" alt="" width="65" height="50" src={Logo} />
           <h2
@@ -153,6 +155,7 @@ class StandardHeader extends React.Component {
             DataMaster
           </h2>
         </a>
+        </div>
         { this.renderSearchBar() }
         { this.renderNavItems() }
       </div>

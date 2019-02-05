@@ -107,7 +107,7 @@ class NewAccountTextField extends React.Component {
               rules: [{ required: true, message: 'Please input your email!' }],
             })(
               <Input
-                prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                style={{ backgroundColor: '#303030', borderWidth: 0 }}
                 placeholder="Email"
               />,
             )}
@@ -120,9 +120,9 @@ class NewAccountTextField extends React.Component {
               ],
             })(
               <Input
-                prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
                 type="password"
                 placeholder="Password"
+                style={{ backgroundColor: '#303030', borderWidth: 0 }}
               />,
             )}
           </Form.Item>
@@ -134,7 +134,7 @@ class NewAccountTextField extends React.Component {
               ],
             })(
               <Input
-                prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                style={{ backgroundColor: '#303030', borderWidth: 0 }}
                 type="password"
                 placeholder="Confirm Password"
                 onBlur={this.handleConfirmBlur}

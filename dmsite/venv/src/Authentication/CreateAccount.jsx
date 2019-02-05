@@ -5,7 +5,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import {
-  Container, Card, CardTitle, CardBody, CardHeader,
+  Container, Card, CardBody, CardHeader,
 } from 'reactstrap';
 import NewAccountTF from './NewAccountTextField';
 
@@ -13,15 +13,17 @@ class CreateAccount extends Component {
 
   render() {
     return (
-      <div style={{ float: 'right', paddingRight: '35%' }}>
+      <div>
         <Container fluid>
-          <Card align="center">
-            <CardHeader tag="h3">Create Account</CardHeader>
-            <CardTitle className="pl-4 pt-4">{this.props.name}</CardTitle>
-            <CardBody>
-              <NewAccountTF />
-            </CardBody>
-          </Card>
+          <div style={{ display: 'flex', justifyContent: 'center', paddingTop: '5%' }}>
+            <Card align="center" style={{ borderWidth: 0 }}>
+              <CardHeader tag="h3" style={{ backgroundColor: '#303030', color: 'white' }}>Create Account</CardHeader>
+              { /* <CardTitle className="pl-4 pt-4">{this.props.name}</CardTitle> */ }
+              <CardBody style={{ backgroundColor: '#3d3d3d', color: 'white' }}>
+                <NewAccountTF />
+              </CardBody>
+            </Card>
+          </div>
         </Container>
       </div>
     );
