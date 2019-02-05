@@ -24,8 +24,8 @@ class VisualTableModal extends React.Component {
 
   render() {
     return (
-      <div>
-        <Button color="primary" size="md" className="mr-1 btn-block mt-0" onClick={this.toggle}>TABLE</Button>
+      <div style={{ paddingRight: '5px' }}>
+        <Button color="primary" size="md" className="mr-1 btn-block mt-0" onClick={this.toggle}>Show Table</Button>
 
         <Modal size="lg" isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
           <ModalHeader toggle={this.toggle}>Table Visualization</ModalHeader>
