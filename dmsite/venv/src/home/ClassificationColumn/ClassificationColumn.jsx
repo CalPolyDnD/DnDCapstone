@@ -23,7 +23,6 @@ class ClassificationColumn extends Component {
   }
 
   render() {
-    const { name } = this.props;
     const testData = [{ name: 'Classify1', age: 2 }, { name: 'Classify2', age: 4 }, { name: 'Classify3', age: 5 }];
     const data = parseData(testData);
 
@@ -34,8 +33,18 @@ class ClassificationColumn extends Component {
           <ListGroup flush>
             {data}
           </ListGroup>
-          <Input placeholder="Search Classification" className="mt-3" style={{ backgroundColor: '#303030', borderWidth: 0 }} />
-          <Button onClick={this.handleClick} color="primary" className="mr-0 btn-block mt-2 mb-2">Add Classifications</Button>
+          <Input
+            placeholder="Search Classification"
+            className="mt-3"
+            style={{ backgroundColor: '#303030', borderWidth: 0 }}
+          />
+          <Button
+            onClick={this.handleClick}
+            color="primary"
+            className="mr-0 btn-block mt-2 mb-2"
+          >
+            Add Classifications
+          </Button>
         </CardBody>
       </Card>
     );

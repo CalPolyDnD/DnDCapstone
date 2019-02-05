@@ -45,7 +45,11 @@ class DatasetsColumn extends React.Component {
           <ListGroup className="filter-list" flush>
             {DynamicData}
           </ListGroup>
-          <Input placeholder="Search Result" className="mt-1" style={{ backgroundColor: '#303030', borderWidth: 0 }} />
+          <Input
+            placeholder="Search Result"
+            className="mt-1"
+            style={{ backgroundColor: '#303030', borderWidth: 0 }}
+          />
           <Button
             color="primary"
             size="md"
