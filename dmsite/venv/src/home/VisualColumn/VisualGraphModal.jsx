@@ -22,13 +22,13 @@ class VisualGraphModal extends React.Component {
 
   render() {
     return (
-      <div>
-      <Button color="primary" size="md" className="mr-1 btn-block mt-0" onClick={this.toggle}>GRAPH</Button>
+      <div style={{ paddingRight: '5px' }}>
+        <Button color="primary" size="md" className="mr-1 btn-block mt-0" onClick={this.toggle}>Show Graph</Button>
 
-        <Modal size='lg' isOpen={this.state.modal} toggle={this.toggle} className={this.props.className} >
+        <Modal size="lg" isOpen={this.state.modal} toggle={this.toggle} className={this.props.className} >
           <ModalHeader toggle={this.toggle}>Table Visualization</ModalHeader>
           <ModalBody>
-            <VisualTableDisplay/>
+            <VisualTableDisplay />
           </ModalBody>
           <ModalFooter>
             <Button color="primary" onClick={this.toggle}>Do Something</Button>{' '}

@@ -14,8 +14,9 @@ class Home extends React.Component {
   render() {
     return (
       <Container fluid>
-        <Row>
-          <h1 style={{ color: 'white' }}> Campaign: Current Campaign </h1>
+        <Row style={{ justifyContent: 'space-between' }}>
+          <h1>Campaign: Current Campaign </h1>
+          <DisplayColumn name="Display Actions" />
         </Row>
         <p style={{ color: '#afafaf' }}> This campaign organizes Data1, Data2, Data3 </p>
         <Row>
@@ -24,9 +25,6 @@ class Home extends React.Component {
           </Col>
           <Col md="7">
             <ClassificationColumn name="Classifications" />
-          </Col>
-          <Col md="2">
-            <DisplayColumn name="Display Actions" />
           </Col>
         </Row>
       </Container>
