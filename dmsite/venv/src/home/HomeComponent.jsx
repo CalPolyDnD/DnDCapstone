@@ -15,7 +15,7 @@ class Home extends React.Component {
     return (
       <Container fluid>
         <Row style={{ justifyContent: 'space-between' }}>
-          <h1>Campaign: Current Campaign </h1>
+          <h1 style={{ color: 'white' }}>Campaign: Current Campaign </h1>
           <DisplayColumn name="Display Actions" />
         </Row>
         <p style={{ color: '#afafaf' }}> This campaign organizes Data1, Data2, Data3 </p>
