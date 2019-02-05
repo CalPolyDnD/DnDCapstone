@@ -18,4 +18,3 @@ def fetch_file(self, file_name):
     # commented out so boto doesn't scream
     # s3.Bucket(BUCKET_NAME).download_file(file_name, 'testDownload.csv')
     pass
-

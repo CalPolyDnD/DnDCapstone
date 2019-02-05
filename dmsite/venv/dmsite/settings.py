@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'dmsite.upload',
 	'dmsite.file_manager',
     'dmsite.search',
+    'dmsite.login',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -80,12 +81,18 @@ WSGI_APPLICATION = 'dmsite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 
+'''
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'dmsite',
+        'USER': 'dmsite_admin',
+        'PASSWORD': 'calpolydnd12345    ',
+        'HOST': 'dmsite.cwo6zv3o91pm.us-east-1.rds.amazonaws.com',
+        'PORT': '5432',
     }
 }
+'''
 
 
 # Password validation
