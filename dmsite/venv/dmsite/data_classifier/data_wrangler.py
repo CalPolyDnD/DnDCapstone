@@ -3,7 +3,7 @@ import os
 from pandas.io.json import json_normalize
 import json
 #import xmltodict
-from .classifier_exceptions import UnsupportedFileTypeError
+from dmsite.data_classifier.classifier_exceptions import UnsupportedFileTypeError
 
 
 class Wrangler:

@@ -1,6 +1,6 @@
 import joblib as jl
 import pandas as pd
-from .data_wrangler import Wrangler
+import dmsite.data_classifier.data_wrangler as dw
 
 GROUPING_THRESHOLD = 0.75
 
@@ -91,7 +91,7 @@ class Classifier:
         return self._vectorizer.fit_transform(x)
 
     def classify(self, file_name):
-        wrangler = Wrangler(file_name)
+        wrangler = dw.Wrangler(file_name)
         wrangler.parse_file()
 
         return self._classify_data(wrangler.data)
