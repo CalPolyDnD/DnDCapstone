@@ -1,4 +1,4 @@
-import db_manager.db_manager as dbm
+import dmsite.db_manager.db_manager as dbm
 import pandas as pd
 from botocore.exceptions import ClientError
 
