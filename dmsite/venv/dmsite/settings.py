@@ -38,9 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'dmsite.upload',
-	'dmsite.file_manager',
+    'dmsite.file_manager',
     'dmsite.search',
-    'dmsite.login',
+    'dmsite.authentication',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -85,9 +85,9 @@ WSGI_APPLICATION = 'dmsite.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'dmsite',
+        'NAME': 'postgres',
         'USER': 'dmsite_admin',
-        'PASSWORD': 'calpolydnd12345    ',
+        'PASSWORD': 'calpolydnd12345',
         'HOST': 'dmsite.cwo6zv3o91pm.us-east-1.rds.amazonaws.com',
         'PORT': '5432',
     }

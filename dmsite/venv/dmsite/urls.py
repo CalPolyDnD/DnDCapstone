@@ -32,7 +32,7 @@ from django.views.generic import TemplateView
 # Manage file uploads
 from dmsite.upload import views as upload_views
 from dmsite.search import search
-from dmsite.login import login
+from dmsite.authentication import login
 
 urlpatterns = [
     path('admin/', admin.site.urls),
