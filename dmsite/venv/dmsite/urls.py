@@ -38,7 +38,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('home/upload/push_file', upload_views.upload_file),
     path('search/push_query', search.perform_search),
-    path('create_user', login.create_account),
+    path('rest-auth/registration', login.create_account),
     re_path(r'^.*', TemplateView.as_view(template_name='index.html')),
 
     # leave this just incase ^^ stops working
