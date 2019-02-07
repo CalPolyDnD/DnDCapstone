@@ -1,0 +1,1 @@
+This spring was a bit of a mess for us. We didn't actually click "Start Sprint" until halfway through the spring, hence why it looks unfinished, and all of us were extremely busy with other classes, resulting in us not being able to get much work done.
