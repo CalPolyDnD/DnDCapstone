@@ -3,3 +3,4 @@
 **/.ipynb*
 **/.scannerwork
 **/node_modules
+**/build

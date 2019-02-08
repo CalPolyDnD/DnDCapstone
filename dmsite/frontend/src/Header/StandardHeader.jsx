@@ -91,7 +91,7 @@ class StandardHeader extends React.Component {
               </MenuItem>,
 
               <MenuItem>
-                <a onClick={logout} href="/" key="logout" style={{ color: 'red' }}>Logout</a>
+                <a onClick={logout} href="/login" key="logout" style={{ color: 'red' }}>Logout</a>
               </MenuItem>,
             ]
             )
@@ -170,7 +170,7 @@ StandardHeader.propTypes = {
 };
 
 const mapDispatchToProps = dispatch => ({
-  logout: () => dispatch(actions.logout),
+  logout: () => dispatch(actions.logout()),
 })
 
 

@@ -32,6 +32,8 @@ from django.views.generic import TemplateView
 from dmsite.upload import views as upload_views
 
 urlpatterns = [
+    path('rest-auth/', include('rest_auth.urls')),
+    path('rest-auth/registration', include('rest_auth.registration.urls')),
     path('admin/', admin.site.urls),
     path('', TemplateView.as_view(template_name='index.html')),
     path('home', TemplateView.as_view(template_name='index.html')),
@@ -40,7 +42,7 @@ urlpatterns = [
     path('home/upload/push_file', upload_views.upload_file),
     path('details', TemplateView.as_view(template_name='index.html')),
     path('profile', TemplateView.as_view(template_name='index.html')),
-    path('createaccount', TemplateView.as_view(template_name='index.html')),
+    path('register', TemplateView.as_view(template_name='index.html')),
     path('login', TemplateView.as_view(template_name='index.html'))
     ]
 
