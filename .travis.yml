@@ -7,8 +7,9 @@ git:
 
 #Install dependencies
 install: 
-   - pip install -r dependencies.txt
-   - npm i --prefix dmsite/venv
+   - cd dmsite
+   - ./setup.sh
+   - cd ..
 
 addons:
    sonarcloud:
@@ -18,5 +19,6 @@ addons:
 #Run Tests
 script:
    - sonar-scanner -Dproject.settings=sonar-scanner.properties
-   - npm run build --prefix dmsite/venv
-   - python dmsite/venv/manage.py check 
+   - cd dmsite
+   - ./build.sh
+   - python backend/manage.py check 
