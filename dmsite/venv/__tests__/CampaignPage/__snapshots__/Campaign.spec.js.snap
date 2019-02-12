@@ -5,11 +5,7 @@ exports[`renders correctly 1`] = `
   id="div"
   style={
     Object {
-      "alignSelf": "center",
-      "display": "flex",
-      "justifyContent": "center",
       "paddingTop": "5%",
-      "width": "100%",
     }
   }
 >
@@ -18,11 +14,7 @@ exports[`renders correctly 1`] = `
     id="card"
     style={
       Object {
-        "alignSelf": "center",
         "borderWidth": 0,
-        "display": "flex",
-        "justifyContent": "center",
-        "width": "50%",
       }
     }
   >
@@ -54,11 +46,7 @@ exports[`renders correctly 1`] = `
         <div
           style={
             Object {
-              "alignSelf": "center",
               "backgroundColor": "#303030",
-              "display": "flex",
-              "justifyContent": "center",
-              "width": "100%",
             }
           }
         >
