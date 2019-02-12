@@ -57,7 +57,7 @@ def get_dataset_header(request):
         data = json.loads(str(request.body, encoding='utf-8'))
         header = get_file_header(data)
         return JsonResponse(header, 200);
-    return JsonResponse({"error": "not a POST request", 400})
+    return JsonResponse({"error": "not a POST request"}, 400)
 
 
 def get_file_header(data):
