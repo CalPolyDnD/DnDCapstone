@@ -6,4 +6,4 @@ def create_account(request):
       #success
       print('success')
       
-   return JsonResponse({"error": "not a POST request"}, status=400);
+   return JsonResponse({"error": "not a POST request"}, status=403);
