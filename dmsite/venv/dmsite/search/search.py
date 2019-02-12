@@ -1,6 +1,7 @@
 from django.http import JsonResponse
 import json
 
+
 def perform_search(request):
     if request.method == 'POST':
         data = json.loads(str(request.body, encoding='utf-8'))
@@ -12,6 +13,6 @@ def perform_search(request):
 
 
 def make_search(data):
+    # TODO: do actual search processing here
     return data
-
 
