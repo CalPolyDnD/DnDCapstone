@@ -29,16 +29,19 @@ from django.conf.urls.static import static
 from django.urls import path
 from django.views.generic import TemplateView
 
-# Manage file uploads
+# Local addons
 from dmsite.upload import views as upload_views
 from dmsite.search import search
 from dmsite.authentication import login
+from dmsite.file_manager import file_manager
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('home/upload/push_file', upload_views.upload_file),
     path('search/push_query', search.perform_search),
     path('rest-auth/registration', login.create_account),
+    path('details/get_file', file_manager.get_file_details),
+    path('dataset_sample', file_manager.get_dataset_header),
     re_path(r'^.*', TemplateView.as_view(template_name='index.html')),
 
     # leave this just incase ^^ stops working
