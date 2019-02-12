@@ -27,10 +27,9 @@ class NewAccountTextField extends React.Component {
       e.preventDefault();
       const { form, onAuth } = this.props;
       const { validateFieldsAndScroll } = form;
-      validateFieldsAndScroll((err, values) => {
+      validateFieldsAndScroll(async (err, values) => {
         if (!err) {
-          onAuth(values.email, values.password, values.confirm);
-          console.log('Received values of form: ', values);
+           onAuth(values.email, values.password, values.confirm);
         }
       });
     }

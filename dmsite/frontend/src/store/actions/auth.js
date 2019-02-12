@@ -39,11 +39,14 @@ export const checkAuthTimeout = (expirationDate) => {
   };
 };
 
-export const authLogin = (username, password) => {
+export const authLogin = (email, password) => {
   return (dispatch) => {
     dispatch(authStart());
-    axios.post('http://localhost:8000/rest-auth/login', {
-      username,
+    axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
+    axios.defaults.xsrfCookieName = "csrftoken";
+
+    axios.post('http://localhost:8000/rest-auth/login/', {
+      email,
       password,
     })
       .then((res) => {
@@ -63,6 +66,9 @@ export const authLogin = (username, password) => {
 export const authSignup = (email, password1, password2) => {
   return (dispatch) => {
     dispatch(authStart());
+    axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
+    axios.defaults.xsrfCookieName = "csrftoken";
+
     axios.post('http://localhost:8000/rest-auth/registration', {
       email,
       password1,
@@ -84,7 +90,8 @@ export const authSignup = (email, password1, password2) => {
 
 export const authCheckState = () => (dispatch) => {
   const token = localStorage.getItem('token');
-  if (token === undefined) {
+  console.log(token);
+  if (token === null) {
     dispatch(logout());
   } else {
     const expDate = new Date(localStorage.getItem('expDate'));
