@@ -53,6 +53,8 @@ INSTALLED_APPS = [
 
     'dmsite.upload',
     'dmsite.file_manager',
+    'dmsite.search',
+    'dmsite.authentication',
 ]
 
 SITE_ID = 1
@@ -97,6 +99,7 @@ WSGI_APPLICATION = 'dmsite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -107,6 +110,7 @@ DATABASES = {
         'PORT': '5432'
     }
 }
+
 
 
 # Password validation
