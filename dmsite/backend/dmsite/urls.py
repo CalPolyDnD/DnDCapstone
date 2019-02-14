@@ -41,7 +41,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('home/upload/push_file', upload_views.upload_file),
     path('search/push_query', search.perform_search),
-    path('rest-auth/registration', login.create_account),
     path('details/get_file', file_manager.get_file_details),
     path('dataset_sample', file_manager.get_dataset_header),
     re_path(r'^.*', TemplateView.as_view(template_name='index.html')),
