@@ -54,7 +54,6 @@ INSTALLED_APPS = [
     'dmsite.upload',
     'dmsite.file_manager',
     'dmsite.search',
-    'dmsite.authentication',
 ]
 
 SITE_ID = 1

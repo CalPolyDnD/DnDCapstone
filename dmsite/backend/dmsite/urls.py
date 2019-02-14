@@ -26,13 +26,11 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 # Used to display templates
-from django.urls import path
 from django.views.generic import TemplateView
 
 # Local addons
 from dmsite.upload import views as upload_views
 from dmsite.search import search
-from dmsite.authentication import login
 from dmsite.file_manager import file_manager
 
 urlpatterns = [
