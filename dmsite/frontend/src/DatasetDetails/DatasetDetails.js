@@ -22,7 +22,6 @@ class DatasetDetails extends Component {
               <ListGroupItem> d </ListGroupItem>
               <ListGroupItem> e </ListGroupItem>
             </ListGroup>
-            <Button className="dataset-details-col-button" color="primary"> Add Label </Button>
           </div>
           <div className="dataset-details-col-right">
             <h4> Classifications </h4>
