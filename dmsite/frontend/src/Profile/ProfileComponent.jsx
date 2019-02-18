@@ -1,8 +1,8 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import {
-  Container, Card, Button, CardTitle, CardBody, InputGroup,
-  InputGroupAddon, Input, Popover, PopoverHeader, PopoverBody,
+  Container, Card, Button, CardBody, InputGroup,
+  InputGroupAddon, Input, Popover, PopoverHeader, PopoverBody, CardHeader,
 } from 'reactstrap';
 
 class Profile extends React.Component {
@@ -31,11 +31,11 @@ class Profile extends React.Component {
         }}
         >
           <Card style={{
-            justifyContent: 'center', width: '60%', alignSelf: 'center', display: 'flex',
+            justifyContent: 'center', width: '60%', alignSelf: 'center', display: 'flex', borderWidth: 0
           }}
           >
-            <CardTitle className="pl-4 pt-4 pb-0">UserProfile</CardTitle>
-            <CardBody style={{ width: '100%', justifyContent: 'space-between' }}>
+            <CardHeader tag="h3" align="center" style={{ backgroundColor: '#303030', color: 'white' }}>User Profile and Settings</CardHeader>
+            <CardBody style={{ width: '100%', justifyContent: 'space-between', backgroundColor: '#3d3d3d', color: 'white' }} >
               <InputGroup>
                 <InputGroupAddon addonType="prepend">
                   <Button id="PopoverFocus" type="button">@Username</Button>
@@ -81,9 +81,9 @@ class Profile extends React.Component {
               </InputGroup>
               <br />
             </CardBody>
-            <div className="d-flex justify-content-center pt-2">
+            <div className="d-flex justify-content-center pt-2" style={{ backgroundColor: '#3d3d3d', color: 'white' }}>
               <Button color="primary" size="md" className="mr-1 btn-block mt-0" onClick={() => { this.props.history.push('/home'); }}>Save</Button>
-              <Button color="primary" size="md" className="btn-block mt-0" onClick={() => { this.props.history.push('/home'); }}>Back</Button>
+              <Button color="secondary" size="md" className="btn-block mt-0" onClick={() => { this.props.history.push('/home'); }}>Back</Button>
             </div>
           </Card>
         </div>
