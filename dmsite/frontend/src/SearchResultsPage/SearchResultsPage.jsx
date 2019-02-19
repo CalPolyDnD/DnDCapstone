@@ -100,9 +100,10 @@ class SearchResultsPage extends React.Component {
   }
 
   renderFilterTags() {
+    const xIcon = '\u2A09';
     return this.state.filterTags.map((tag, index) => (
       <Button id="filterTag" color="secondary" size="sm" style={{ marginLeft: '.25rem' }} onClick={(index) => { this.removeFilterTag(index); }}>
-        {`\u2A09 ${tag.type}: ${tag.value}`}
+        {`${xIcon} ${tag.type}: ${tag.value}`}
       </Button>
     ));
   }
