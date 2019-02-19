@@ -1,6 +1,7 @@
 import joblib as jl
 import pandas as pd
 import dmsite.data_classifier.data_wrangler as dw
+import json
 
 GROUPING_THRESHOLD = 0.75
 
@@ -14,15 +15,11 @@ class Classification:
         self.examples.append(example)
 
     def to_json(self):
-        return \
-            f"""\
-{{
-    "name": "{self.name}",
-    "columns": {self.columns},
-    "examples": {self.examples}
-}}
-
-            """.replace("'", '"')
+        return  {
+            "name": self.name,
+            "columns": self.columns,
+            "examples": self.examples
+        }
 
     def __eq__(self, other):
         return isinstance(other, self.__class__) and (self.name == other.name)
@@ -83,9 +80,9 @@ class Classifier:
 
     def _classify_data(self, df):
         classified_df = df
-        classified_df['guess'] = self._model.predict(self._vectorize_data(df['value']))
+        classified_df['guess'] = self._model.predict(self._vectorize_data(self, df['value']))
 
-        return self._build_classifications(classified_df)
+        return self._build_classifications(self, classified_df)
 
     def _vectorize_data(self, x):
         return self._vectorizer.fit_transform(x)
@@ -94,8 +91,8 @@ class Classifier:
         wrangler = dw.Wrangler(file_name)
         wrangler.parse_file()
 
-        return self._classify_data(wrangler.data)
+        return self._classify_data(self, wrangler.data)
 
     def __init__(self):
-        self._model = jl.load('model.joblib')
-        self._vectorizer = jl.load('vectorizer.joblib')
+        self._model = jl.load('dmsite/data_classifier/model.joblib')
+        self._vectorizer = jl.load('dmsite/data_classifier/vectorizer.joblib')

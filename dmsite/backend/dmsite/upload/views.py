@@ -25,8 +25,8 @@ def handle_uploaded_file(f):
 
     file = open(fName, 'rb')
 
-    parser = dw.Wrangler(file, ".csv")
-    parser.parse_file()
+    #parser = dw.Wrangler(file, ".csv")
+    #parser.parse_file()
 
     # commented out so boto doesn't scream
     #dbm.put_dataset_header("userName", f.name, parser.data)

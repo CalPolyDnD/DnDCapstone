@@ -32,6 +32,7 @@ from django.views.generic import TemplateView
 from dmsite.upload import views as upload_views
 from dmsite.search import search
 from dmsite.file_manager import file_manager
+from dmsite.data_classifier import connector as classifier
 
 urlpatterns = [
     path('rest-auth/', include('rest_auth.urls')),
@@ -41,6 +42,7 @@ urlpatterns = [
     path('search/push_query', search.perform_search),
     path('details/get_file', file_manager.get_file_details),
     path('dataset_sample', file_manager.get_dataset_header),
+    path('classify_files', classifier.classify_files),
     re_path(r'^.*', TemplateView.as_view(template_name='index.html')),
 
     # leave this just incase ^^ stops working

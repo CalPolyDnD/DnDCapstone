@@ -16,9 +16,10 @@ def upload_file(file, name):
     s3.Object(BUCKET_NAME, name.put(Body=file))
 
 
-def fetch_file(self, file_name):
+def fetch_file(file_name):
     # commented out so boto doesn't scream
-    # s3.Bucket(BUCKET_NAME).download_file(file_name, 'testDownload.csv')
+    filepath = "media/" + file_name
+    s3.Bucket(BUCKET_NAME).download_file(file_name, filepath)
     pass
 
 
