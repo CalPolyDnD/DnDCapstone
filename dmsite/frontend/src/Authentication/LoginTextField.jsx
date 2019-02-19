@@ -25,7 +25,6 @@ class TextField extends React.Component {
       form.validateFields((err, values) => {
         if (!err) {
           onAuth(values.email, values.password);
-          console.log('Received values of form: ', values);
         }
       });
     }
