@@ -20,7 +20,6 @@ def fetch_file(file_name):
     # commented out so boto doesn't scream
     filepath = "media/" + file_name
     s3.Bucket(BUCKET_NAME).download_file(file_name, filepath)
-    pass
 
 
 def get_file_details(request):
