@@ -5,6 +5,9 @@ import {
 import classnames from 'classnames';
 import './ClassificationInfo.css'
 
+let FETCH_URL = 'http://localhost:8000/classify_files';
+//TODO: all of this needs style changes
+
 class ClassificationPage extends Component {
   constructor(props) {
     super(props);
@@ -26,7 +29,6 @@ class ClassificationPage extends Component {
   }
 
   displayClassification(count) {
-    // TODO display more than one label per classification
     let jsonObj = [];
     let pos = 0;
     let result = this.state.results[count];
@@ -168,7 +170,8 @@ class ClassificationPage extends Component {
   }
 
   componentDidMount() {
-    fetch('http://localhost:8000/classify_files', {
+  // TODO: make this depend on passed-in files
+    fetch(FETCH_URL, {
       method: 'POST',
       body: JSON.stringify([{
         filename: 'MOCK_DATA.csv'
