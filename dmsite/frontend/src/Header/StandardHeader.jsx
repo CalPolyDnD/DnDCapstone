@@ -99,6 +99,7 @@ class StandardHeader extends React.Component {
               <MenuItem>
                 <a href="/login/" key="login">Login</a>
               </MenuItem>
+
             )
         }
       </Menu>
@@ -116,7 +117,7 @@ class StandardHeader extends React.Component {
           className="mx-1"
           htmlType="button"
         />
-        <Button
+        <Button onClick={() => { this.props.history.push('/profile/'); }}
           title="Settings"
           icon="setting"
           shape="circle-outline"
