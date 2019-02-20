@@ -5,7 +5,6 @@ import Home from './home/HomeComponent';
 import SearchResultsPage from './SearchResultsPage/SearchResultsPage';
 import DatasetDetails from './DatasetDetails/DatasetDetails';
 import Login from './Authentication/Login';
-import ClassificationPage from './ClassificationPage/ClassificationPage';
 import CreateAccount from './Authentication/CreateAccount';
 import Profile from './Profile/ProfileComponent';
 import Campaign from './CampaignPage/Campaign';
@@ -19,7 +18,6 @@ const BaseRouter = () => (
     <Route path="/register" component={CreateAccount} />
     <Route path="/home" component={Home} />
     <Route path="/campaign" component={Campaign} />
-    <Route path='/classification' component={ClassificationPage} />
   </div>
 );
 
