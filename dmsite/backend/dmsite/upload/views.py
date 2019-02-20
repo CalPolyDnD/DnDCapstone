@@ -1,7 +1,6 @@
 import os
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
-from .forms import UploadFileForm
 import dmsite.file_manager.file_manager as fm
 
 def upload_file(request):
