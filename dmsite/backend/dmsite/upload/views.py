@@ -23,16 +23,5 @@ def handle_uploaded_file(f):
         for chunk in f.chunks():
             destination.write(chunk)
 
-    file = open(fName, 'rb')
-
-    #parser = dw.Wrangler(file, ".csv")
-    #parser.parse_file()
-
-    # commented out so boto doesn't scream
-    #dbm.put_dataset_header("userName", f.name, parser.data)
-    
-    file.close()
-
-	# commented out so boto doesn't scream
-    #fm.upload_file_from_path(fName)
+    fm.upload_file_from_path(fName)
     os.remove(fName)
