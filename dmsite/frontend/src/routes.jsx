@@ -19,7 +19,7 @@ const BaseRouter = () => (
     <Route path="/register" component={CreateAccount} />
     <Route path="/home" component={Home} />
     <Route path="/campaign" component={Campaign} />
-    <Route exact path='/classification' component={ClassificationPage} />
+    <Route path='/classification' component={ClassificationPage} />
   </div>
 );
 
