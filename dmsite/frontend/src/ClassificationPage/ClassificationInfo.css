@@ -1,0 +1,26 @@
+    .classification-page {
+    color: white;
+}
+
+.classification-top-row {
+    margin-top: 10px;
+}
+
+.classification-access {
+    margin-top: 50px;
+}
+
+.classification-access-left {
+    float: left;
+    width: 60%;
+}
+
+.classification-access-right {
+    float: right;
+    width: 30%;
+}
+
+.classification-bottom-button {
+    margin-left: 45%;
+    margin-top: 30px;
+}
