@@ -9,7 +9,6 @@ import DataMaster from './Datamaster';
 import './App.css';
 import BaseRouter from './routes';
 import * as actions from './store/actions/auth';
-import { Container } from 'reactstrap/src';
 
 class App extends Component {
   componentDidMount() {

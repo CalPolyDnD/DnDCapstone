@@ -48,10 +48,6 @@ class DatasetsColumn extends React.Component {
         <CardHeader tag="h3" style={{ backgroundColor: '#303030', color: 'white' }}>Datasets</CardHeader>
         <CardBody style={{ backgroundColor: '#3d3d3d', color: 'white' }}>
           <ListGroup className="filter-list" flush>
-            <Popover placement="bottom" isOpen={this.state.popoverOpen} target="Popover1" toggle={this.toggle}>
-              <PopoverHeader>File 9 and 3/4</PopoverHeader>
-              <PopoverBody>You added this file on January 20, 2019, its this big</PopoverBody>
-            </Popover>
             {DynamicData}
           </ListGroup>
           <Input
