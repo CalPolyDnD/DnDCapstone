@@ -7,19 +7,26 @@ import {
   CardHeader,
   ListGroup,
   ListGroupItem,
-  Popover,
-  PopoverBody,
-  PopoverHeader,
   Input,
 } from 'reactstrap';
 import Upload from './UploadComponent';
 
 class DatasetsColumn extends React.Component {
+
+
   constructor(props) {
     super(props);
+    this.toggle = this.toggle.bind(this);
     this.state = {
       uploading: false,
+      popOverOpen: false,
     };
+  }
+
+  toggle() {
+    this.setState({
+      popoverOpen: !this.state.popoverOpen,
+    });
   }
 
   parseData = data => (data.map(name => (
@@ -44,7 +51,7 @@ class DatasetsColumn extends React.Component {
     const DynamicData = this.parseData(Testdata);
     const { uploading } = this.state;
     return (
-      <Card style={{ borderWidth: 0 }} >
+      <Card style={{ borderWidth: 0 }}>
         <CardHeader tag="h3" style={{ backgroundColor: '#303030', color: 'white' }}>Datasets</CardHeader>
         <CardBody style={{ backgroundColor: '#3d3d3d', color: 'white' }}>
           <ListGroup className="filter-list" flush>

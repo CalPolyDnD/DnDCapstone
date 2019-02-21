@@ -11,9 +11,7 @@ import {
   Form,
   FormGroup,
   Input,
-  Label,
   ListGroup,
-  ListGroupItem,
 } from 'reactstrap';
 import SearchResultsCell from './SearchResultsCell';
 
