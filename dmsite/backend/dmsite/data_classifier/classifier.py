@@ -80,9 +80,9 @@ class Classifier:
 
     def _classify_data(self, df):
         classified_df = df
-        classified_df['guess'] = self._model.predict(self._vectorize_data(self, df['value']))
+        classified_df['guess'] = self._model.predict(self._vectorize_data(df['value']))
 
-        return self._build_classifications(self, classified_df)
+        return self._build_classifications(classified_df)
 
     def _vectorize_data(self, x):
         return self._vectorizer.fit_transform(x)
@@ -91,7 +91,7 @@ class Classifier:
         wrangler = dw.Wrangler(file_name)
         wrangler.parse_file()
 
-        return self._classify_data(self, wrangler.data)
+        return self._classify_data(wrangler.data)
 
     def __init__(self):
         self._model = jl.load('dmsite/data_classifier/model.joblib')
