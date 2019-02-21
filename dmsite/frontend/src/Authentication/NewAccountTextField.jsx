@@ -106,7 +106,7 @@ class NewAccountTextField extends React.Component {
               rules: [{ required: true, message: 'Please input your email!' }],
             })(
               <Input
-                style={{ backgroundColor: '#303030', borderWidth: 0 }}
+                style={{ backgroundColor: '#303030', borderWidth: 0, color: 'white' }}
                 placeholder="Email"
               />,
             )}
@@ -121,7 +121,7 @@ class NewAccountTextField extends React.Component {
               <Input
                 type="password"
                 placeholder="Password"
-                style={{ backgroundColor: '#303030', borderWidth: 0 }}
+                style={{ backgroundColor: '#303030', borderWidth: 0, color: 'white' }}
               />,
             )}
           </Form.Item>
@@ -133,7 +133,7 @@ class NewAccountTextField extends React.Component {
               ],
             })(
               <Input
-                style={{ backgroundColor: '#303030', borderWidth: 0 }}
+                style={{ backgroundColor: '#303030', borderWidth: 0, color: 'white' }}
                 type="password"
                 placeholder="Confirm Password"
                 onBlur={this.handleConfirmBlur}

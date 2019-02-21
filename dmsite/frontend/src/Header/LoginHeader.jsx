@@ -3,7 +3,7 @@ import Logo from '../images/DnDLogo2.png';
 
 const LoginHeader = () => {
   return (
-    <div style={{ height: '64px' }} id="headerContainer">
+    <div style={{ height: '64px', backgroundColor: '#000000' }} id="headerContainer">
       <a className="d-inline-flex px-2 justify-self-center mx-auto" href="/" id="logoBanner">
         <img id="logo" alt="" width="90" height="70" src={Logo} />
         <h1
