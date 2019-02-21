@@ -63,17 +63,22 @@ class StandardHeader extends React.Component {
           defaultValue={0}
           onSelect={this.switchFilter}
           className="float-left"
-          style={{ backgroundColor:'#303030'}}
+          style={{ backgroundColor: '#303030' }}
         >
-          <Option value={0} style={{ backgroundColor:'#303030', color:'white'}}>{ searchFilterOrder[0] }</Option>
-          <Option value={1} style={{ backgroundColor:'#303030', color:'white'}}>{ searchFilterOrder[1] }</Option>
-          <Option value={2} style={{ backgroundColor:'#303030', color:'white'}}>{ searchFilterOrder[2] }</Option>
+          { searchFilterOrder.map((filter, index) => (
+            <Option
+              value={index}
+              style={{ backgroundColor: '#303030', color: 'white' }}
+            >
+              {filter}
+            </Option>
+          ))}
         </Select>
         <Search
           placeholder={`Search Campaign by ${searchbarFilter}`}
           onSearch={(searchbarText) => { history.push(`/search/${searchbarFilter}?=${searchbarText}`); }}
           enterButton
-          style={{ width: '40%', height: '32px', background:'#303030' }}
+          style={{ width: '40%', height: '32px', background: '#303030' }}
         />
       </InputGroup>
     );
@@ -140,21 +145,21 @@ class StandardHeader extends React.Component {
   render() {
     return (
       <div style={{ height: '64px', background: '#000000' }} id="headerContainer">
-        <div style={{ background: '#000000' }} >
-        <a className="d-inline-flex px-2" href="/home/" id="logoBanner">
-          <img id="logo" alt="" width="65" height="50" src={Logo} />
-          <h2
-            style={{
-              color: 'white',
-              textDecoration: 'none',
-              height: '50px',
-              alignSelf: 'center',
-              lineHeight: '50px',
-            }}
-          >
+        <div style={{ background: '#000000' }}>
+          <a className="d-inline-flex px-2" href="/home/" id="logoBanner">
+            <img id="logo" alt="" width="65" height="50" src={Logo} />
+            <h2
+              style={{
+                color: 'white',
+                textDecoration: 'none',
+                height: '50px',
+                alignSelf: 'center',
+                lineHeight: '50px',
+              }}
+            >
             DataMaster
-          </h2>
-        </a>
+            </h2>
+          </a>
         </div>
         { this.renderSearchBar() }
         { this.renderNavItems() }
@@ -171,7 +176,7 @@ StandardHeader.propTypes = {
 
 const mapDispatchToProps = dispatch => ({
   logout: () => dispatch(actions.logout()),
-})
+});
 
 
 export default connect(mapDispatchToProps)(withRouter(StandardHeader));

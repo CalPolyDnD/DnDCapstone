@@ -19,8 +19,7 @@ def classify_files(request):
 
 
 def make_classifications(body):
-    clsfr = c.Classifier
-    clsfr.__init__(clsfr)
+    clsfr = c.Classifier()
     results = []
     count = 0
     for obj in body:
@@ -28,7 +27,7 @@ def make_classifications(body):
         FileManager.fetch_file(filename)
         filepath = "media/" + filename
 
-        classifications = clsfr.classify(clsfr, filepath)
+        classifications = clsfr.classify(filepath)
 
         results.append({})
         results[count] = {}
@@ -38,6 +37,6 @@ def make_classifications(body):
             results[count]['classifications'].append(classification.to_json())
 
         os.remove(filepath)
-        count += 1;
+        count += 1
     status = 0
     return results, status
