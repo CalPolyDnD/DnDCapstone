@@ -7,7 +7,7 @@ import {
   Card,
   CardBody,
   Collapse,
-  Container,
+  CardHeader,
   Form,
   FormGroup,
   Input,
@@ -93,9 +93,7 @@ class SearchResultsPage extends React.Component {
       },
     ];
     return searchResults.map(result => (
-      <ListGroupItem>
         <SearchResultsCell dataset={result} history={this.props.history} />
-      </ListGroupItem>
     ));
   }
 
@@ -124,11 +122,22 @@ class SearchResultsPage extends React.Component {
     let text = '';
     return (
       <div>
-        <Label for={`${fieldName}FilterField`}>{fieldName}</Label>
-        <Form inline style={{ marginBottom: '.5rem' }}>
-          <FormGroup>
-            <Input id={`${fieldName}FilterField`} type="text" placeholder={`Dataset ${fieldName}`} onChange={(event) => { text = event.target.value; }}/>
-            <Button onClick={() => { this.addFilterTag(fieldName, text); }}>Add</Button>
+        { /* <Label for={`${fieldName}FilterField`}>{fieldName}</Label> */ }
+        <Form inline style={{ marginBottom: '.5rem' }} display="flex" paddingTop="30">
+          <FormGroup backgroundColor="#3d3d3d">
+            <Input
+              id={`${fieldName}FilterField`}
+              type="text"
+              style={{ backgroundColor: '#303030', borderWidth: 0 }}
+              placeholder={`Dataset ${fieldName}`}
+              onChange={(event) => { text = event.target.value; }}
+            />
+            <Button
+              color="primary"
+              onClick={() => { this.addFilterTag(fieldName, text); }}
+            >
+              Add
+            </Button>
           </FormGroup>
         </Form>
       </div>
@@ -139,23 +148,19 @@ class SearchResultsPage extends React.Component {
     const caretDirection = this.state.filterSectionCollapse ? 'up' : 'down';
 
     return (
-      <div style={{ marginBottom: '1rem' }}>
+      <div style={{ marginBottom: '1rem', display: 'flex', justifyContent: 'center', paddingTop: '3%' }}>
         {this.renderFilterTagSection()}
         <div onClick={this.toggleCollapse}>
           <ButtonDropdown direction={caretDirection} isOpen={this.state.filterSectionCollapse} toggle={() => {}} style={{ marginBottom: '.5rem' }}>
             <DropdownToggle caret color="link">
-              Filter
+              FILTER
             </DropdownToggle>
           </ButtonDropdown>
         </div>
         <Collapse isOpen={this.state.filterSectionCollapse}>
-          <Card>
-            <CardBody>
-              {this.renderFilterSectionForms('Name')}
-              {this.renderFilterSectionForms('Classification')}
-              {this.renderFilterSectionForms('Attribute')}
-            </CardBody>
-          </Card>
+          {this.renderFilterSectionForms('Name')}
+          {this.renderFilterSectionForms('Classification')}
+          {this.renderFilterSectionForms('Attribute')}
         </Collapse>
       </div>
     );
@@ -163,15 +168,21 @@ class SearchResultsPage extends React.Component {
 
   render() {
     return (
-      <Container>
-        <h3 id="header">
-          {'Search Results'}
-        </h3>
-        {this.renderFilterSection()}
-        <ListGroup>
-          {this.renderSearchResults()}
-        </ListGroup>
-      </Container>
+    <div style={{ display: 'flex', justifyContent: 'center' }}>
+      <Card style={{ borderWidth: 0, backgroundColor: '#3d3d3d', width: '60%' }}>
+        <CardHeader
+          tag="h3"
+          align="center"
+          style={{ backgroundColor: '#303030', color: 'white' }}
+        >
+          Search Results
+        </CardHeader>
+          {this.renderFilterSection()}
+          <ListGroup style={{ borderWidth: 0 }}>
+            {this.renderSearchResults()}
+          </ListGroup>
+      </Card>
+    </div>
     );
   }
 }

@@ -50,7 +50,7 @@ class TextField extends React.Component {
               <Input
                 type="email"
                 placeholder="Email"
-                style={{ backgroundColor: '#303030', borderWidth: 0 }}
+                style={{ backgroundColor: '#303030', borderWidth: 0, color: 'white' }}
               />,
             )}
           </Form.Item>
@@ -61,7 +61,7 @@ class TextField extends React.Component {
               <Input
                 type="password"
                 placeholder="Password"
-                style={{ backgroundColor: '#303030', borderWidth: 0 }}
+                style={{ backgroundColor: '#303030', borderWidth: 0, color: 'white' }}
               />,
             )}
           </Form.Item>
