@@ -1,4 +1,5 @@
 import React from 'react';
+import FileDataObject from '../../DataObjects/FileDataObject'
 import 'filepond/dist/filepond.min.css';
 import {
   Button,
@@ -12,17 +13,28 @@ import {
 
 import Upload from './UploadComponent';
 
+
+//this is dummy data for files
+const data =[ new FileDataObject("File1","FileDescription1","FileHeader1"),
+  new FileDataObject("File2","FileDescription2","FileHeader2"),
+  new FileDataObject("File3","FileDescription3","FileHeader3")];
+
+
 class DatasetsColumn extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       uploading: false,
     };
+
   }
 
-  parseData = data => (data.map(name => (
-    <ListGroupItem action style={{ backgroundColor: '#3d3d3d', color: 'white' }}>
-      {name}
+
+
+  parseData = data => (data.map(file => (
+    <ListGroupItem action style={{ backgroundColor: '#3d3d3d', color: 'white' }}
+                   onclick={(file) => {var selected_file = file;}}>
+      {file.getFileName()}
     </ListGroupItem>
   )));
 
@@ -35,8 +47,7 @@ class DatasetsColumn extends React.Component {
   };
 
   render() {
-    const Testdata = ['File1.jsv', 'File2.jsv', 'File3.jsv', 'File4.jsv'];
-    const DynamicData = this.parseData(Testdata);
+    const DynamicData = this.parseData(data);
     const { uploading } = this.state;
     return (
       <Card style={{ borderWidth: 0 }}>

@@ -10,6 +10,8 @@ import DatasetsColumn from './DataColumn/DatasetsColumn';
 import DisplayColumn from './VisualColumn/DisplayColumn';
 import ClassificationColumn from './ClassificationColumn/ClassificationColumn';
 
+
+
 class Home extends React.Component {
   render() {
     return (

@@ -2,7 +2,7 @@ import React from 'react';
 import { FormErrors } from './FormErrors';
 import { withRouter } from 'react-router-dom';
 import {
-  Container, Card, Button, CardBody, InputGroup,
+  Container, Card, Button, CardBody,
   Input, CardHeader,
 } from 'reactstrap';
 
@@ -50,6 +50,7 @@ class Profile extends React.Component {
       case 'username':
         usernameValid = value.length >= 0;
         fieldValidationErrors.username = usernameValid ? '': ' Create a username';
+        break;
       default:
         break;
     }
