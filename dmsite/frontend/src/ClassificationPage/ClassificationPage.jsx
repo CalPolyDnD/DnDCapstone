@@ -20,7 +20,6 @@ class ClassificationPage extends Component {
   }
 
   toggle(tab) {
-    console.log("switching to " + tab);
     if (this.state.activeTab !== tab) {
       this.setState({
         activeTab: tab,
