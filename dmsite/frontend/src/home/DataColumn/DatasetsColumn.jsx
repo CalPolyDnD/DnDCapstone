@@ -9,8 +9,9 @@ import {
   ListGroupItem,
   Input,
 } from 'reactstrap';
-
+import PropTypes from 'prop-types';
 import Upload from './UploadComponent';
+import { FileObject } from '../../Model/FileObject';
 
 class DatasetsColumn extends React.Component {
   constructor(props) {
@@ -20,11 +21,21 @@ class DatasetsColumn extends React.Component {
     };
   }
 
-  parseData = data => (data.map(name => (
-    <ListGroupItem action style={{ backgroundColor: '#3d3d3d', color: 'white' }}>
-      {name}
-    </ListGroupItem>
-  )));
+  parseData = data => {
+    const { fileListData, selectedFileIndex, cellOnClick } = this.props;
+
+    return fileListData.map((file, index) => {
+      const style = index == selectedFileIndex ? 
+        { backgroundColor: '#636363', color: 'white' } :
+        { backgroundColor: '#3d3d3d', color: 'white' };
+
+      return (
+        <ListGroupItem tag="button" action style={style} onClick={() => { cellOnClick(index) }} >
+          {file.path}
+        </ListGroupItem>
+      );
+    });
+  }
 
   uploadClickHandler = () => {
     this.setState({ uploading: true });
@@ -68,5 +79,11 @@ class DatasetsColumn extends React.Component {
     );
   }
 }
+
+DatasetsColumn.propTypes = {
+  fileListData: PropTypes.array,
+  selectedFileIndex: PropTypes.number,
+  cellOnClick: PropTypes.func,
+};
 
 export default DatasetsColumn;

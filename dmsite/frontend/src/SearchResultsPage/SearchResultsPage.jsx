@@ -28,16 +28,10 @@ class SearchResultsPage extends React.Component {
   }
 
   getFilterTagFromRoutePath() {
-    const urlPath = _.get(this.props.location.pathname.split('/'), '[2]', '');
-    let prefix = '';
-    if (urlPath.startsWith('Name')) {
-      prefix = 'Name';
-    } else if (urlPath.startsWith('Classification')) {
-      prefix = 'Classification';
-    } else {
-      prefix = 'Attribute';
-    }
-    const searchString = urlPath.replace(prefix, '');
+    const prefix = _.get(this.props.location.pathname.split('/'), '[2]', '');
+
+    const searchString = this.props.location.search.replace('?=', '');
+
     if (searchString) {
       return [{
         type: prefix,
@@ -139,7 +133,7 @@ class SearchResultsPage extends React.Component {
     const caretDirection = this.state.filterSectionCollapse ? 'up' : 'down';
 
     return (
-      <div style={{ marginBottom: '1rem' }}>
+      <div style={{ marginBottom: '1rem', backgroundColor: 'rgb(0, 0, 0, .3)' }}>
         {this.renderFilterTagSection()}
         <div onClick={this.toggleCollapse}>
           <ButtonDropdown direction={caretDirection} isOpen={this.state.filterSectionCollapse} toggle={() => {}} style={{ marginBottom: '.5rem' }}>
@@ -148,7 +142,7 @@ class SearchResultsPage extends React.Component {
             </DropdownToggle>
           </ButtonDropdown>
         </div>
-        <Collapse isOpen={this.state.filterSectionCollapse}>
+        <Collapse style={{ backgroundColor: 'rgb(0, 0, 0, .3)' }} isOpen={this.state.filterSectionCollapse}>
           <Card>
             <CardBody>
               {this.renderFilterSectionForms('Name')}
@@ -168,7 +162,7 @@ class SearchResultsPage extends React.Component {
           {'Search Results'}
         </h3>
         {this.renderFilterSection()}
-        <ListGroup>
+        <ListGroup style={{ backgroundColor: 'rgb(0, 0, 0, .3)' }}>
           {this.renderSearchResults()}
         </ListGroup>
       </Container>
