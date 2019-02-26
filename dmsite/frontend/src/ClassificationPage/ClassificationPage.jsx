@@ -1,13 +1,25 @@
 import React, { Component } from 'react';
-import {
-  TabContent, TabPane, Nav, NavItem, NavLink, Button, Row, Col, Input, Table, ListGroup, ListGroupItem
-} from 'reactstrap';
 import classnames from 'classnames';
-import './ClassificationInfo.css'
+import './ClassificationInfo.css';
 
-let FETCH_URL = 'http://localhost:8000/classify_files';
-//TODO: all of this needs style changes
+import {
+  TabContent,
+  TabPane,
+  Nav,
+  NavItem,
+  NavLink,
+  Button,
+  Row,
+  Col,
+  Input,
+  Table,
+  ListGroup,
+  ListGroupItem,
+} from 'reactstrap';
 
+const FETCH_URL = 'http://localhost:8000/classify_files';
+
+// TODO: all of this needs style changes
 class ClassificationPage extends Component {
   constructor(props) {
     super(props);
@@ -19,6 +31,21 @@ class ClassificationPage extends Component {
     };
   }
 
+  componentDidMount() {
+  // TODO: make this depend on passed-in files
+    fetch(FETCH_URL, {
+      method: 'POST',
+      body: JSON.stringify([{
+        filename: 'MOCK_DATA.csv',
+      }, {
+        filename: 'MOCK_PEOPLE.csv',
+      }])
+    }).then((data) => {
+      const results = data.json();
+      this.setState({ results: results });
+    });
+  }
+
   toggle(tab) {
     if (this.state.activeTab !== tab) {
       this.setState({
@@ -28,21 +55,26 @@ class ClassificationPage extends Component {
   }
 
   displayClassification(count) {
-    let jsonObj = [];
+    const jsonObj = [];
     let pos = 0;
-    let result = this.state.results[count];
-    let labels = "";
+    const result = this.state.results[count];
+    let labels = '';
     for (pos; pos < result.classifications.length; pos++) {
-        labels = result.classifications[pos].columns[0];
-        for (let i = 1; i < result.classifications[pos].columns.length; i++)
-            labels += ", " + result.classifications[pos].columns[i];
+      labels = result.classifications[pos].columns[0];
+      for (let i = 1; i < result.classifications[pos].columns.length; i++) {
+        labels += `, ${ result.classifications[pos].columns[i]}`;
         jsonObj.push(
           <tr>
-            <td> {result.classifications[pos].name} </td>
-            <td> {labels} </td>
+            <td>
+              {result.classifications[pos].name}
+            </td>
+            <td>
+              {labels}
+            </td>
           </tr>,
-        )
-     }
+        );
+      }
+    }
 
     return (
       <tbody>
@@ -71,7 +103,7 @@ class ClassificationPage extends Component {
   showInfo(count) {
     // TODO: fix users list, make checkmarks useful
     return (
-       <div>
+      <div>
         <Row className="classification-top-row">
           <Col xs="4">
             <h3> Classifications </h3>
@@ -90,33 +122,34 @@ class ClassificationPage extends Component {
             </div>
             <div className="classification-access">
               <h3> Access Control </h3>
-                <h4> Users </h4>
-                <div className={"classification-access-left"}>
-                  <ListGroup>
-                    <ListGroupItem> User 1 </ListGroupItem>
-                    <ListGroupItem> User 2 </ListGroupItem>
-                    <ListGroupItem> User 3 </ListGroupItem>
-                    <ListGroupItem> User 4 </ListGroupItem>
-                  </ListGroup>
-                </div>
-                <div className={"classification-access-right"}>
-                    <Row>
-                        <Input type="checkbox" />{' '}
-                        Sensitive
-                    </Row>
-                    <Row>
-                        <Input type="checkbox" />{' '}
-                        Hidden
-                    </Row>
-                    <Row>
-                        <Input type="checkbox" />{' '}
-                        Restricted
-                    </Row>
-                    <Row>
-                        <Input type="checkbox" />{' '}
-                        Option 4
-                    </Row>
-                </div>
+              <h4> Users </h4>
+              <div className={"classification-access-left"}>
+                <ListGroup>
+                  <ListGroupItem> User 1 </ListGroupItem>
+                  <ListGroupItem> User 2 </ListGroupItem>
+                  <ListGroupItem> User 3 </ListGroupItem>
+                  <ListGroupItem> User 4 </ListGroupItem>
+                </ListGroup>
+              </div>
+              <div className={"classification-access-right"}>
+                <Row>
+                  <Input type="checkbox" />
+                  {' '}
+                  Sensitive
+                </Row>
+                <Row>
+                  <Input type="checkbox" />{' '}
+                  Hidden
+                </Row>
+                <Row>
+                  <Input type="checkbox" />{' '}
+                  Restricted
+                </Row>
+                <Row>
+                  <Input type="checkbox" />{' '}
+                  Option 4
+                </Row>
+              </div>
             </div>
           </Col>
           <Col sm="3">
@@ -137,56 +170,42 @@ class ClassificationPage extends Component {
   }
 
   displayTabs() {
-    let jsonObj = [];
+    const jsonObj = [];
     for (let count = 0; count < this.state.results.length; count++) {
-        let result = this.state.results[count];
-        jsonObj.push(
-            <NavItem>
-                <NavLink
-                  className={classnames({ active: this.state.activeTab === count })}
-                  onClick={() => {this.toggle(count);}}
-                >
-                    {result.filename}
-                </NavLink>
-            </NavItem>
-        );
+      const result = this.state.results[count];
+      jsonObj.push(
+        <NavItem>
+          <NavLink
+            className={classnames({ active: this.state.activeTab === count })}
+            onClick={() => { this.toggle(count); }}
+          >
+            {result.filename}
+          </NavLink>
+        </NavItem>,
+      );
     }
     return jsonObj;
   }
 
   tabInfo() {
-    let jsonObj = [];
-    for (let count = 0; count < this.state.results.length; count++)
-        jsonObj.push(
-          <TabPane tabId={count}>
-            {this.showInfo(count)}
-          </TabPane>
-        );
+    const jsonObj = [];
+    for (let count = 0; count < this.state.results.length; count++) {
+      jsonObj.push(
+        <TabPane tabId={count}>
+          {this.showInfo(count)}
+        </TabPane>,
+      );
+    }
 
     return jsonObj;
   }
 
-  componentDidMount() {
-  // TODO: make this depend on passed-in files
-    fetch(FETCH_URL, {
-      method: 'POST',
-      body: JSON.stringify([{
-        filename: 'MOCK_DATA.csv'
-      }, {
-        filename: 'MOCK_PEOPLE.csv'
-      }])
-    }).then(data => {
-        return data.json();
-    }).then(results => {
-        this.setState({results: results})
-    });
-  }
-
   render() {
-    if (!this.state.results.length)
-        return (
-            <h2> Classifying... </h2>
-        );
+    if (!this.state.results.length) {
+      return (
+        <h2> Classifying... </h2>
+      );
+    }
 
     return (
       <div className="classification-page">
@@ -196,7 +215,7 @@ class ClassificationPage extends Component {
             {this.displayTabs()}
           </Nav>
           <TabContent activeTab={this.state.activeTab}>
-          {this.tabInfo()}
+            {this.tabInfo()}
           </TabContent>
         </div>
       </div>
