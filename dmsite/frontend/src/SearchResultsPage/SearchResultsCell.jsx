@@ -11,8 +11,11 @@ class SearchResultsCell extends React.Component {
     const dataset = this.props.dataset;
     // TODO: modify the onClick to route the the appropriate link
     return (
-      <ListGroupItem action onClick={() => { this.props.history.push('/'); }}>
-        <ListGroupItemHeading>{dataset.name}</ListGroupItemHeading>
+      <ListGroupItem
+        action onClick={() => { this.props.history.push('/'); }}
+        style={{ backgroundColor: '#3d3d3d', color: 'white' }}
+      >
+        <ListGroupItemHeading style={{ color: 'white' }}>{dataset.name}</ListGroupItemHeading>
         <ListGroupItemText>
           {`Classifications: ${dataset.classifications.toString()}`}
         </ListGroupItemText>

@@ -11,7 +11,6 @@ import {
 } from 'reactstrap';
 import PropTypes from 'prop-types';
 import Upload from './UploadComponent';
-import { FileObject } from '../../Model/FileObject';
 
 class DatasetsColumn extends React.Component {
   constructor(props) {
@@ -21,16 +20,16 @@ class DatasetsColumn extends React.Component {
     };
   }
 
-  parseData = data => {
+  renderFileCells = () => {
     const { fileListData, selectedFileIndex, cellOnClick } = this.props;
 
     return fileListData.map((file, index) => {
-      const style = index == selectedFileIndex ? 
-        { backgroundColor: '#636363', color: 'white' } :
-        { backgroundColor: '#3d3d3d', color: 'white' };
+      const style = index === selectedFileIndex
+        ? { backgroundColor: '#636363', color: 'white' }
+        : { backgroundColor: '#3d3d3d', color: 'white' };
 
       return (
-        <ListGroupItem tag="button" action style={style} onClick={() => { cellOnClick(index) }} >
+        <ListGroupItem tag="button" action style={style} onClick={() => { cellOnClick(index); }}>
           {file.path}
         </ListGroupItem>
       );
@@ -46,15 +45,13 @@ class DatasetsColumn extends React.Component {
   };
 
   render() {
-    const Testdata = ['File1.jsv', 'File2.jsv', 'File3.jsv', 'File4.jsv'];
-    const DynamicData = this.parseData(Testdata);
     const { uploading } = this.state;
     return (
       <Card style={{ borderWidth: 0 }}>
         <CardHeader tag="h3" style={{ backgroundColor: '#303030', color: 'white' }}>Datasets</CardHeader>
         <CardBody style={{ backgroundColor: '#3d3d3d', color: 'white' }}>
           <ListGroup className="filter-list" flush>
-            {DynamicData}
+            {this.renderFileCells()}
           </ListGroup>
           <Input
             placeholder="Search Result"

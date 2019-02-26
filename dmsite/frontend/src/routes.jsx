@@ -8,6 +8,7 @@ import Login from './Authentication/Login';
 import CreateAccount from './Authentication/CreateAccount';
 import Profile from './Profile/ProfileComponent';
 import Campaign from './CampaignPage/Campaign';
+import ClassificationPage from './ClassificationPage/ClassificationPage'
 
 const BaseRouter = () => (
   <div>
@@ -18,6 +19,7 @@ const BaseRouter = () => (
     <Route path="/register" component={CreateAccount} />
     <Route path="/home" component={Home} />
     <Route path="/campaign" component={Campaign} />
+    <Route path="/classification" component={ClassificationPage} />
   </div>
 );
 
