@@ -7,13 +7,11 @@ import {
   Card,
   CardBody,
   Collapse,
-  Container,
+  CardHeader,
   Form,
   FormGroup,
   Input,
-  Label,
   ListGroup,
-  ListGroupItem,
 } from 'reactstrap';
 import SearchResultsCell from './SearchResultsCell';
 
@@ -87,16 +85,15 @@ class SearchResultsPage extends React.Component {
       },
     ];
     return searchResults.map(result => (
-      <ListGroupItem>
         <SearchResultsCell dataset={result} history={this.props.history} />
-      </ListGroupItem>
     ));
   }
 
   renderFilterTags() {
+    const xIcon = '\u2A09';
     return this.state.filterTags.map((tag, index) => (
       <Button id="filterTag" color="secondary" size="sm" style={{ marginLeft: '.25rem' }} onClick={(index) => { this.removeFilterTag(index); }}>
-        {`\u2A09 ${tag.type}: ${tag.value}`}
+        {`${xIcon} ${tag.type}: ${tag.value}`}
       </Button>
     ));
   }
@@ -118,11 +115,22 @@ class SearchResultsPage extends React.Component {
     let text = '';
     return (
       <div>
-        <Label for={`${fieldName}FilterField`}>{fieldName}</Label>
-        <Form inline style={{ marginBottom: '.5rem' }}>
-          <FormGroup>
-            <Input id={`${fieldName}FilterField`} type="text" placeholder={`Dataset ${fieldName}`} onChange={(event) => { text = event.target.value; }}/>
-            <Button onClick={() => { this.addFilterTag(fieldName, text); }}>Add</Button>
+        { /* <Label for={`${fieldName}FilterField`}>{fieldName}</Label> */ }
+        <Form inline style={{ marginBottom: '.5rem' }} display="flex" paddingTop="30">
+          <FormGroup backgroundColor="#3d3d3d">
+            <Input
+              id={`${fieldName}FilterField`}
+              type="text"
+              style={{ backgroundColor: '#303030', borderWidth: 0 }}
+              placeholder={`Dataset ${fieldName}`}
+              onChange={(event) => { text = event.target.value; }}
+            />
+            <Button
+              color="primary"
+              onClick={() => { this.addFilterTag(fieldName, text); }}
+            >
+              Add
+            </Button>
           </FormGroup>
         </Form>
       </div>
@@ -133,23 +141,19 @@ class SearchResultsPage extends React.Component {
     const caretDirection = this.state.filterSectionCollapse ? 'up' : 'down';
 
     return (
-      <div style={{ marginBottom: '1rem', backgroundColor: 'rgb(0, 0, 0, .3)' }}>
+      <div style={{ marginBottom: '1rem', display: 'flex', justifyContent: 'center', paddingTop: '3%' }}>
         {this.renderFilterTagSection()}
         <div onClick={this.toggleCollapse}>
           <ButtonDropdown direction={caretDirection} isOpen={this.state.filterSectionCollapse} toggle={() => {}} style={{ marginBottom: '.5rem' }}>
             <DropdownToggle caret color="link">
-              Filter
+              FILTER
             </DropdownToggle>
           </ButtonDropdown>
         </div>
-        <Collapse style={{ backgroundColor: 'rgb(0, 0, 0, .3)' }} isOpen={this.state.filterSectionCollapse}>
-          <Card>
-            <CardBody>
-              {this.renderFilterSectionForms('Name')}
-              {this.renderFilterSectionForms('Classification')}
-              {this.renderFilterSectionForms('Attribute')}
-            </CardBody>
-          </Card>
+        <Collapse isOpen={this.state.filterSectionCollapse}>
+          {this.renderFilterSectionForms('Name')}
+          {this.renderFilterSectionForms('Classification')}
+          {this.renderFilterSectionForms('Attribute')}
         </Collapse>
       </div>
     );
@@ -157,15 +161,21 @@ class SearchResultsPage extends React.Component {
 
   render() {
     return (
-      <Container>
-        <h3 id="header">
-          {'Search Results'}
-        </h3>
-        {this.renderFilterSection()}
-        <ListGroup style={{ backgroundColor: 'rgb(0, 0, 0, .3)' }}>
-          {this.renderSearchResults()}
-        </ListGroup>
-      </Container>
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <Card style={{ borderWidth: 0, backgroundColor: '#3d3d3d', width: '60%' }}>
+          <CardHeader
+            tag="h3"
+            align="center"
+            style={{ backgroundColor: '#303030', color: 'white' }}
+          >
+            Search Results
+          </CardHeader>
+            {this.renderFilterSection()}
+            <ListGroup style={{ borderWidth: 0 }}>
+              {this.renderSearchResults()}
+            </ListGroup>
+        </Card>
+      </div>
     );
   }
 }

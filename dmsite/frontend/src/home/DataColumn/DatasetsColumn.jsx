@@ -14,10 +14,14 @@ import Upload from './UploadComponent';
 import { FileObject } from '../../Model/FileObject';
 
 class DatasetsColumn extends React.Component {
+
+
   constructor(props) {
     super(props);
+    this.toggle = this.toggle.bind(this);
     this.state = {
       uploading: false,
+      popOverOpen: false,
     };
   }
 
@@ -34,6 +38,12 @@ class DatasetsColumn extends React.Component {
           {file.path}
         </ListGroupItem>
       );
+    });
+  }
+
+  toggle() {
+    this.setState({
+      popoverOpen: !this.state.popoverOpen,
     });
   }
 
