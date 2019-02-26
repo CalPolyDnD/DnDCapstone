@@ -9,19 +9,31 @@ import {
   ListGroupItem,
   Input,
 } from 'reactstrap';
-
 import Upload from './UploadComponent';
 
 class DatasetsColumn extends React.Component {
+
+
   constructor(props) {
     super(props);
+    this.toggle = this.toggle.bind(this);
     this.state = {
       uploading: false,
+      popOverOpen: false,
     };
   }
 
+  toggle() {
+    this.setState({
+      popoverOpen: !this.state.popoverOpen,
+    });
+  }
+
   parseData = data => (data.map(name => (
-    <ListGroupItem action style={{ backgroundColor: '#3d3d3d', color: 'white' }}>
+    <ListGroupItem
+      action
+      style={{ backgroundColor: '#3d3d3d', color: 'white' }}
+    >
       {name}
     </ListGroupItem>
   )));
