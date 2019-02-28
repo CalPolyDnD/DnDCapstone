@@ -1,5 +1,5 @@
 import React from 'react';
-import FileDataObject from '../../DataObjects/FileDataObject'
+//import FileDataObject from '../../DataObjects/FileDataObject'
 import 'filepond/dist/filepond.min.css';
 import {
   Button,
@@ -10,14 +10,14 @@ import {
   ListGroupItem,
   Input,
 } from 'reactstrap';
-
+import PropTypes from 'prop-types';
 import Upload from './UploadComponent';
 
 
 //this is dummy data for files
-const data =[ new FileDataObject("File1","FileDescription1","FileHeader1"),
-  new FileDataObject("File2","FileDescription2","FileHeader2"),
-  new FileDataObject("File3","FileDescription3","FileHeader3")];
+//const data =[ new FileDataObject("File1","FileDescription1","FileHeader1"),
+//  new FileDataObject("File2","FileDescription2","FileHeader2"),
+//  new FileDataObject("File3","FileDescription3","FileHeader3")];
 
 
 class DatasetsColumn extends React.Component {
@@ -29,14 +29,21 @@ class DatasetsColumn extends React.Component {
 
   }
 
+  renderFileCells = () => {
+    const { fileListData, selectedFileIndex, cellOnClick } = this.props;
 
+    return fileListData.map((file, index) => {
+      const style = index === selectedFileIndex
+        ? { backgroundColor: '#636363', color: 'white' }
+        : { backgroundColor: '#3d3d3d', color: 'white' };
 
-  parseData = data => (data.map(file => (
-    <ListGroupItem action style={{ backgroundColor: '#3d3d3d', color: 'white' }}
-                   onclick={(file) => {var selected_file = file;}}>
-      {file.getFileName()}
-    </ListGroupItem>
-  )));
+      return (
+        <ListGroupItem tag="button" action style={style} onClick={() => { cellOnClick(index); }}>
+          {file.path}
+        </ListGroupItem>
+      );
+    });
+  }
 
   uploadClickHandler = () => {
     this.setState({ uploading: true });
@@ -47,14 +54,13 @@ class DatasetsColumn extends React.Component {
   };
 
   render() {
-    const DynamicData = this.parseData(data);
     const { uploading } = this.state;
     return (
       <Card style={{ borderWidth: 0 }}>
         <CardHeader tag="h3" style={{ backgroundColor: '#303030', color: 'white' }}>Datasets</CardHeader>
         <CardBody style={{ backgroundColor: '#3d3d3d', color: 'white' }}>
           <ListGroup className="filter-list" flush>
-            {DynamicData}
+            {this.renderFileCells()}
           </ListGroup>
           <Input
             placeholder="Search Result"
@@ -79,5 +85,11 @@ class DatasetsColumn extends React.Component {
     );
   }
 }
+
+DatasetsColumn.propTypes = {
+  fileListData: PropTypes.array,
+  selectedFileIndex: PropTypes.number,
+  cellOnClick: PropTypes.func,
+};
 
 export default DatasetsColumn;

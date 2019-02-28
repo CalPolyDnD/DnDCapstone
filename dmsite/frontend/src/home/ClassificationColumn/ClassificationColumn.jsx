@@ -3,35 +3,34 @@ import 'filepond/dist/filepond.min.css';
 import {
     Input, Card, Button, CardBody, ListGroup, ListGroupItem, CardHeader,
 } from 'reactstrap';
-
-const parseData = (data) => {
-  const finalData = data.map((obj, index) => {
-    return (
-      <ListGroupItem key={ index } style={{ backgroundColor: '#3d3d3d', color: 'white' }}>
-        <p>{obj.name}</p>
-        <p>{obj.age}</p>
-      </ListGroupItem>
-    );
-  });
-  return finalData;
-};
-
+import PropTypes from 'prop-types';
+import { FileObject } from '../../Model/FileObject';
 
 class ClassificationColumn extends Component {
   _handleClick(e) {
     e.preventDefault();
   }
 
-  render() {
-    const testData = [{ name: 'Classify1', age: 2 }, { name: 'Classify2', age: 4 }, { name: 'Classify3', age: 5 }];
-    const data = parseData(testData);
+  renderClassificationCell() {
+    const { file } = this.props;
 
+    return file.classifications.map((obj, index) => {
+      return (
+        <ListGroupItem key={ index } style={{ backgroundColor: '#3d3d3d', color: 'white' }}>
+          <p>{obj.name}</p>
+          <p>{obj.age}</p>
+        </ListGroupItem>
+      );
+    });
+  };
+
+  render() {
     return (
       <Card style={{ borderWidth: 0 }} id="classifications">
         <CardHeader tag="h3" style={{ backgroundColor: '#303030', color: 'white' }}>Classifications</CardHeader>
         <CardBody style={{ backgroundColor: '#3d3d3d', color: 'white' }}>
           <ListGroup flush>
-            {data}
+            {this.renderClassificationCell()}
           </ListGroup>
           <Input
             placeholder="Search Classification"
@@ -50,5 +49,9 @@ class ClassificationColumn extends Component {
     );
   }
 }
+
+ClassificationColumn.propTypes = {
+  file: PropTypes.instanceOf(FileObject),
+};
 
 export default ClassificationColumn;

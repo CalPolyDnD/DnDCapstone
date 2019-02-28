@@ -25,7 +25,6 @@ class TextField extends React.Component {
       form.validateFields((err, values) => {
         if (!err) {
           onAuth(values.email, values.password);
-          console.log('Received values of form: ', values);
         }
       });
     }
@@ -50,7 +49,7 @@ class TextField extends React.Component {
               <Input
                 type="email"
                 placeholder="Email"
-                style={{ backgroundColor: '#303030', borderWidth: 0 }}
+                style={{ backgroundColor: '#303030', borderWidth: 0, color: 'white' }}
               />,
             )}
           </Form.Item>
@@ -61,7 +60,7 @@ class TextField extends React.Component {
               <Input
                 type="password"
                 placeholder="Password"
-                style={{ backgroundColor: '#303030', borderWidth: 0 }}
+                style={{ backgroundColor: '#303030', borderWidth: 0, color: 'white' }}
               />,
             )}
           </Form.Item>
