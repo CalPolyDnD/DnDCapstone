@@ -18,6 +18,7 @@ class DatasetsColumn extends React.Component {
     this.state = {
       uploading: false,
     };
+
   }
 
   renderFileCells = () => {
@@ -35,6 +36,7 @@ class DatasetsColumn extends React.Component {
       );
     });
   }
+  // this is a comment
 
   uploadClickHandler = () => {
     this.setState({ uploading: true });
