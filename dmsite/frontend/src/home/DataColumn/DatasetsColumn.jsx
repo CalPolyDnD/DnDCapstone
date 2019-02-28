@@ -1,5 +1,4 @@
 import React from 'react';
-//import FileDataObject from '../../DataObjects/FileDataObject'
 import 'filepond/dist/filepond.min.css';
 import {
   Button,
@@ -12,13 +11,6 @@ import {
 } from 'reactstrap';
 import PropTypes from 'prop-types';
 import Upload from './UploadComponent';
-
-
-//this is dummy data for files
-//const data =[ new FileDataObject("File1","FileDescription1","FileHeader1"),
-//  new FileDataObject("File2","FileDescription2","FileHeader2"),
-//  new FileDataObject("File3","FileDescription3","FileHeader3")];
-
 
 class DatasetsColumn extends React.Component {
   constructor(props) {
