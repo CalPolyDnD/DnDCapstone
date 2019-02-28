@@ -19,7 +19,7 @@ class DataMaster extends Component {
             { children }
           </div>
         </Content>
-        <Footer className="footer">
+        <Footer className="footer" style={{ backgroundColor: '#000000', color: 'white' }}>
           © 2019 CalPoly DnD
         </Footer>
       </Layout>

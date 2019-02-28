@@ -1,13 +1,13 @@
 #card {
   justify-content: center;
   width: 50%;
-  alignSelf: center;
+  align-self: center;
   display: flex;
 }
 
 #div {
   justify-content: center;
   width: 100%;
-  alignSelf: center;
+  align-self: center;
   display: flex;
 }
