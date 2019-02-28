@@ -26,16 +26,10 @@ class SearchResultsPage extends React.Component {
   }
 
   getFilterTagFromRoutePath() {
-    const urlPath = _.get(this.props.location.pathname.split('/'), '[2]', '');
-    let prefix = '';
-    if (urlPath.startsWith('Name')) {
-      prefix = 'Name';
-    } else if (urlPath.startsWith('Classification')) {
-      prefix = 'Classification';
-    } else {
-      prefix = 'Attribute';
-    }
-    const searchString = urlPath.replace(prefix, '');
+    const prefix = _.get(this.props.location.pathname.split('/'), '[2]', '');
+
+    const searchString = this.props.location.search.replace('?=', '');
+
     if (searchString) {
       return [{
         type: prefix,
@@ -167,21 +161,21 @@ class SearchResultsPage extends React.Component {
 
   render() {
     return (
-    <div style={{ display: 'flex', justifyContent: 'center' }}>
-      <Card style={{ borderWidth: 0, backgroundColor: '#3d3d3d', width: '60%' }}>
-        <CardHeader
-          tag="h3"
-          align="center"
-          style={{ backgroundColor: '#303030', color: 'white' }}
-        >
-          Search Results
-        </CardHeader>
-          {this.renderFilterSection()}
-          <ListGroup style={{ borderWidth: 0 }}>
-            {this.renderSearchResults()}
-          </ListGroup>
-      </Card>
-    </div>
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <Card style={{ borderWidth: 0, backgroundColor: '#3d3d3d', width: '60%' }}>
+          <CardHeader
+            tag="h3"
+            align="center"
+            style={{ backgroundColor: '#303030', color: 'white' }}
+          >
+            Search Results
+          </CardHeader>
+            {this.renderFilterSection()}
+            <ListGroup style={{ borderWidth: 0 }}>
+              {this.renderSearchResults()}
+            </ListGroup>
+        </Card>
+      </div>
     );
   }
 }
