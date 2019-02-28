@@ -48,7 +48,7 @@ class Profile extends React.Component {
         fieldValidationErrors.password = passwordValid ? '': ' is too short';
         break;
       case 'username':
-        usernameValid = value.length >= 0;
+        usernameValid = value.length > 0;
         fieldValidationErrors.username = usernameValid ? '': ' Create a username';
         break;
       default:
