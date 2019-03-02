@@ -1,0 +1,376 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Layout-Footer should render the component without errors 1`] = `
+<withRouter(Profile)>
+  <Route>
+    <Profile
+      history={
+        Object {
+          "action": "POP",
+          "block": [Function],
+          "canGo": [Function],
+          "createHref": [Function],
+          "entries": Array [
+            Object {
+              "hash": "",
+              "key": "14o8ab",
+              "pathname": "/",
+              "search": "",
+              "state": undefined,
+            },
+          ],
+          "go": [Function],
+          "goBack": [Function],
+          "goForward": [Function],
+          "index": 0,
+          "length": 1,
+          "listen": [Function],
+          "location": Object {
+            "hash": "",
+            "key": "14o8ab",
+            "pathname": "/",
+            "search": "",
+            "state": undefined,
+          },
+          "push": [Function],
+          "replace": [Function],
+        }
+      }
+      location={
+        Object {
+          "hash": "",
+          "key": "14o8ab",
+          "pathname": "/",
+          "search": "",
+          "state": undefined,
+        }
+      }
+      match={
+        Object {
+          "isExact": true,
+          "params": Object {},
+          "path": "/",
+          "url": "/",
+        }
+      }
+    >
+      <Container
+        fluid={true}
+        style={
+          Object {
+            "justifyContent": "center",
+          }
+        }
+        tag="div"
+      >
+        <div
+          className="container-fluid"
+          style={
+            Object {
+              "justifyContent": "center",
+            }
+          }
+        >
+          <div
+            style={
+              Object {
+                "alignSelf": "center",
+                "display": "flex",
+                "justifyContent": "center",
+                "width": "100%",
+              }
+            }
+          >
+            <Card
+              style={
+                Object {
+                  "alignSelf": "center",
+                  "borderWidth": 0,
+                  "display": "flex",
+                  "justifyContent": "center",
+                  "width": "40%",
+                }
+              }
+              tag="div"
+            >
+              <div
+                className="card"
+                style={
+                  Object {
+                    "alignSelf": "center",
+                    "borderWidth": 0,
+                    "display": "flex",
+                    "justifyContent": "center",
+                    "width": "40%",
+                  }
+                }
+              >
+                <CardHeader
+                  align="center"
+                  style={
+                    Object {
+                      "backgroundColor": "#303030",
+                      "color": "white",
+                    }
+                  }
+                  tag="h3"
+                >
+                  <h3
+                    align="center"
+                    className="card-header"
+                    style={
+                      Object {
+                        "backgroundColor": "#303030",
+                        "color": "white",
+                      }
+                    }
+                  >
+                    User Profile and Settings
+                  </h3>
+                </CardHeader>
+                <CardBody
+                  style={
+                    Object {
+                      "backgroundColor": "#3d3d3d",
+                      "color": "white",
+                      "justifyContent": "space-between",
+                      "width": "100%",
+                    }
+                  }
+                  tag="div"
+                >
+                  <div
+                    className="card-body"
+                    style={
+                      Object {
+                        "backgroundColor": "#3d3d3d",
+                        "color": "white",
+                        "justifyContent": "space-between",
+                        "width": "100%",
+                      }
+                    }
+                  >
+                    <div
+                      className="panel panel-default"
+                    >
+                      <FormErrors
+                        formErrors={
+                          Object {
+                            "email": "",
+                            "password": "",
+                            "username": "",
+                          }
+                        }
+                      >
+                        <div
+                          className="formErrors"
+                        />
+                      </FormErrors>
+                    </div>
+                    <div
+                      className="form-group "
+                    >
+                      <label
+                        htmlFor="user"
+                      >
+                        Username
+                      </label>
+                      <Input
+                        className="form-control"
+                        name="username"
+                        onChange={[Function]}
+                        placeholder="User"
+                        required={true}
+                        style={
+                          Object {
+                            "backgroundColor": "#303030",
+                            "borderWidth": 0,
+                            "color": "white",
+                          }
+                        }
+                        type="username"
+                      >
+                        <input
+                          className="form-control form-control"
+                          name="username"
+                          onChange={[Function]}
+                          placeholder="User"
+                          required={true}
+                          style={
+                            Object {
+                              "backgroundColor": "#303030",
+                              "borderWidth": 0,
+                              "color": "white",
+                            }
+                          }
+                          type="username"
+                        />
+                      </Input>
+                    </div>
+                    <div
+                      className="form-group "
+                    >
+                      <label
+                        htmlFor="email"
+                      >
+                        Email
+                      </label>
+                      <Input
+                        className="form-control"
+                        name="email"
+                        onChange={[Function]}
+                        placeholder="Example@ex.com"
+                        style={
+                          Object {
+                            "backgroundColor": "#303030",
+                            "borderWidth": 0,
+                            "color": "white",
+                          }
+                        }
+                        type="email"
+                        value=""
+                      >
+                        <input
+                          className="form-control form-control"
+                          name="email"
+                          onChange={[Function]}
+                          placeholder="Example@ex.com"
+                          style={
+                            Object {
+                              "backgroundColor": "#303030",
+                              "borderWidth": 0,
+                              "color": "white",
+                            }
+                          }
+                          type="email"
+                          value=""
+                        />
+                      </Input>
+                    </div>
+                    <div
+                      className="form-group "
+                    >
+                      <label
+                        htmlFor="password"
+                      >
+                        Password
+                      </label>
+                      <Input
+                        className="form-control"
+                        name="password"
+                        onChange={[Function]}
+                        placeholder="Password123"
+                        style={
+                          Object {
+                            "backgroundColor": "#303030",
+                            "borderWidth": 0,
+                            "color": "white",
+                          }
+                        }
+                        type="password"
+                        value=""
+                      >
+                        <input
+                          className="form-control form-control"
+                          name="password"
+                          onChange={[Function]}
+                          placeholder="Password123"
+                          style={
+                            Object {
+                              "backgroundColor": "#303030",
+                              "borderWidth": 0,
+                              "color": "white",
+                            }
+                          }
+                          type="password"
+                          value=""
+                        />
+                      </Input>
+                    </div>
+                    <div>
+                      <label
+                        htmlFor="security"
+                      >
+                        Security
+                      </label>
+                      <Input
+                        placeholder="Basic User"
+                        style={
+                          Object {
+                            "backgroundColor": "#303030",
+                            "borderWidth": 0,
+                            "color": "white",
+                          }
+                        }
+                        type="text"
+                      >
+                        <input
+                          className="form-control"
+                          placeholder="Basic User"
+                          style={
+                            Object {
+                              "backgroundColor": "#303030",
+                              "borderWidth": 0,
+                              "color": "white",
+                            }
+                          }
+                          type="text"
+                        />
+                      </Input>
+                    </div>
+                    <br />
+                  </div>
+                </CardBody>
+                <div
+                  className="d-flex justify-content-center pt-2"
+                  style={
+                    Object {
+                      "backgroundColor": "#3d3d3d",
+                      "color": "white",
+                    }
+                  }
+                >
+                  <Button
+                    className="btn-block mt-0"
+                    color="primary"
+                    disabled={true}
+                    onClick={[Function]}
+                    size="md"
+                    tag="button"
+                  >
+                    <button
+                      aria-label={null}
+                      className="btn-block mt-0 btn btn-primary btn-md disabled"
+                      disabled={true}
+                      onClick={[Function]}
+                      type="button"
+                    >
+                      Save
+                    </button>
+                  </Button>
+                  <Button
+                    className="btn-block mt-0"
+                    color="secondary"
+                    onClick={[Function]}
+                    size="md"
+                    tag="button"
+                  >
+                    <button
+                      aria-label={null}
+                      className="btn-block mt-0 btn btn-secondary btn-md"
+                      onClick={[Function]}
+                      type="button"
+                    >
+                      Back
+                    </button>
+                  </Button>
+                </div>
+              </div>
+            </Card>
+          </div>
+        </div>
+      </Container>
+    </Profile>
+  </Route>
+</withRouter(Profile)>
+`;

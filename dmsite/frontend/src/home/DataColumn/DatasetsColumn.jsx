@@ -9,34 +9,34 @@ import {
   ListGroupItem,
   Input,
 } from 'reactstrap';
+import PropTypes from 'prop-types';
 import Upload from './UploadComponent';
 
 class DatasetsColumn extends React.Component {
-
-
   constructor(props) {
     super(props);
-    this.toggle = this.toggle.bind(this);
     this.state = {
       uploading: false,
-      popOverOpen: false,
     };
+
   }
 
-  toggle() {
-    this.setState({
-      popoverOpen: !this.state.popoverOpen,
+  renderFileCells = () => {
+    const { fileListData, selectedFileIndex, cellOnClick } = this.props;
+
+    return fileListData.map((file, index) => {
+      const style = index === selectedFileIndex
+        ? { backgroundColor: '#636363', color: 'white' }
+        : { backgroundColor: '#3d3d3d', color: 'white' };
+
+      return (
+        <ListGroupItem tag="button" action style={style} onClick={() => { cellOnClick(index); }}>
+          {file.path}
+        </ListGroupItem>
+      );
     });
   }
-
-  parseData = data => (data.map(name => (
-    <ListGroupItem
-      action
-      style={{ backgroundColor: '#3d3d3d', color: 'white' }}
-    >
-      {name}
-    </ListGroupItem>
-  )));
+  // this is a comment
 
   uploadClickHandler = () => {
     this.setState({ uploading: true });
@@ -47,15 +47,13 @@ class DatasetsColumn extends React.Component {
   };
 
   render() {
-    const Testdata = ['File1.jsv', 'File2.jsv', 'File3.jsv', 'File4.jsv'];
-    const DynamicData = this.parseData(Testdata);
     const { uploading } = this.state;
     return (
       <Card style={{ borderWidth: 0 }}>
         <CardHeader tag="h3" style={{ backgroundColor: '#303030', color: 'white' }}>Datasets</CardHeader>
         <CardBody style={{ backgroundColor: '#3d3d3d', color: 'white' }}>
           <ListGroup className="filter-list" flush>
-            {DynamicData}
+            {this.renderFileCells()}
           </ListGroup>
           <Input
             placeholder="Search Result"
@@ -80,5 +78,11 @@ class DatasetsColumn extends React.Component {
     );
   }
 }
+
+DatasetsColumn.propTypes = {
+  fileListData: PropTypes.array,
+  selectedFileIndex: PropTypes.number,
+  cellOnClick: PropTypes.func,
+};
 
 export default DatasetsColumn;

@@ -26,16 +26,10 @@ class SearchResultsPage extends React.Component {
   }
 
   getFilterTagFromRoutePath() {
-    const urlPath = _.get(this.props.location.pathname.split('/'), '[2]', '');
-    let prefix = '';
-    if (urlPath.startsWith('Name')) {
-      prefix = 'Name';
-    } else if (urlPath.startsWith('Classification')) {
-      prefix = 'Classification';
-    } else {
-      prefix = 'Attribute';
-    }
-    const searchString = urlPath.replace(prefix, '');
+    const prefix = _.get(this.props.location.pathname.split('/'), '[2]', '');
+
+    const searchString = this.props.location.search.replace('?=', '');
+
     if (searchString) {
       return [{
         type: prefix,
@@ -176,10 +170,17 @@ class SearchResultsPage extends React.Component {
           >
             Search Results
           </CardHeader>
+<<<<<<< HEAD
           {this.renderFilterSection()}
           <ListGroup style={{ borderWidth: 0 }}>
             {this.renderSearchResults()}
           </ListGroup>
+=======
+            {this.renderFilterSection()}
+            <ListGroup style={{ borderWidth: 0 }}>
+              {this.renderSearchResults()}
+            </ListGroup>
+>>>>>>> master
         </Card>
       </div>
     );
