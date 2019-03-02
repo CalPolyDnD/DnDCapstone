@@ -170,17 +170,10 @@ class SearchResultsPage extends React.Component {
           >
             Search Results
           </CardHeader>
-<<<<<<< HEAD
           {this.renderFilterSection()}
           <ListGroup style={{ borderWidth: 0 }}>
             {this.renderSearchResults()}
           </ListGroup>
-=======
-            {this.renderFilterSection()}
-            <ListGroup style={{ borderWidth: 0 }}>
-              {this.renderSearchResults()}
-            </ListGroup>
->>>>>>> master
         </Card>
       </div>
     );
