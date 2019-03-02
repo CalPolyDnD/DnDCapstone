@@ -91,7 +91,7 @@ class SearchResultsPage extends React.Component {
       },
     ];
     return searchResults.map(result => (
-        <SearchResultsCell dataset={result} history={this.props.history} />
+      <SearchResultsCell dataset={result} history={this.props.history} />
     ));
   }
 
@@ -167,21 +167,21 @@ class SearchResultsPage extends React.Component {
 
   render() {
     return (
-    <div style={{ display: 'flex', justifyContent: 'center' }}>
-      <Card style={{ borderWidth: 0, backgroundColor: '#3d3d3d', width: '60%' }}>
-        <CardHeader
-          tag="h3"
-          align="center"
-          style={{ backgroundColor: '#303030', color: 'white' }}
-        >
-          Search Results
-        </CardHeader>
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <Card style={{ borderWidth: 0, backgroundColor: '#3d3d3d', width: '60%' }}>
+          <CardHeader
+            tag="h3"
+            align="center"
+            style={{ backgroundColor: '#303030', color: 'white' }}
+          >
+            Search Results
+          </CardHeader>
           {this.renderFilterSection()}
           <ListGroup style={{ borderWidth: 0 }}>
             {this.renderSearchResults()}
           </ListGroup>
-      </Card>
-    </div>
+        </Card>
+      </div>
     );
   }
 }
