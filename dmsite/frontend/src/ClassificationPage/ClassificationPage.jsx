@@ -1,21 +1,17 @@
 import React, { Component } from 'react';
 import classnames from 'classnames';
-import './ClassificationInfo.css';
-
 import {
   TabContent,
   TabPane,
   Nav,
   NavItem,
   NavLink,
-  Button,
-  Row,
-  Col,
-  Input,
-  Table,
-  ListGroup,
-  ListGroupItem,
 } from 'reactstrap';
+import {
+  Spin,
+} from 'antd';
+import FileTab from './FileTab';
+import './ClassificationInfo.css';
 
 const FETCH_URL = 'http://localhost:8000/classify_files';
 
@@ -27,23 +23,26 @@ class ClassificationPage extends Component {
     this.toggle = this.toggle.bind(this);
     this.state = {
       activeTab: 0,
-      results: [],
+      files: [],
     };
   }
 
   componentDidMount() {
   // TODO: make this depend on passed-in files
-    fetch(FETCH_URL, {
-      method: 'POST',
-      body: JSON.stringify([{
-        filename: 'MOCK_DATA.csv',
-      }, {
-        filename: 'MOCK_PEOPLE.csv',
-      }])
-    }).then((data) => {
-      const results = data.json();
-      this.setState({ results: results });
-    });
+    // fetch(FETCH_URL, {
+    //   method: 'POST',
+    //   body: JSON.stringify([{
+    //     filename: 'MOCK_DATA.csv',
+    //   }, {
+    //     filename: 'MOCK_PEOPLE.csv',
+    //   }])
+    // }).then((data) => {
+    //   const files = data.json();
+    //   this.setState({ files: FAKE_RESPONSE });
+    // });
+    setTimeout(() => {
+      this.setState({ files: FAKE_RESPONSE });
+    }, 2000);
   }
 
   toggle(tab) {
@@ -57,7 +56,7 @@ class ClassificationPage extends Component {
   displayClassification(count) {
     const jsonObj = [];
     let pos = 0;
-    const result = this.state.results[count];
+    const result = this.state.files[count];
     let labels = '';
     for (pos; pos < result.classifications.length; pos++) {
       labels = result.classifications[pos].columns[0];
@@ -83,96 +82,10 @@ class ClassificationPage extends Component {
     );
   }
 
-  displayUnknown() {
-    // TODO actually have it display multiple unknowns
-    return (
-      <tbody>
-        <tr>
-          <td> Label 1 </td>
-        </tr>
-        <tr>
-          <td> Label 2 </td>
-        </tr>
-        <tr>
-          <td> Label 3 </td>
-        </tr>
-      </tbody>
-    );
-  }
-
-  showInfo(count) {
-    // TODO: fix users list, make checkmarks useful
-    return (
-      <div>
-        <Row className="classification-top-row">
-          <Col xs="4">
-            <h3> Classifications </h3>
-            <Table>
-              <thead>
-                <th> Classification </th>
-                <th> Label </th>
-              </thead>
-              {this.displayClassification(count)}
-            </Table>
-          </Col>
-          <Col>
-            <div>
-              <h3> Description </h3>
-              <Input type="textarea" placeholder="This is a placecholder." name="text" id="exampleText" />
-            </div>
-            <div className="classification-access">
-              <h3> Access Control </h3>
-              <h4> Users </h4>
-              <div className={"classification-access-left"}>
-                <ListGroup>
-                  <ListGroupItem> User 1 </ListGroupItem>
-                  <ListGroupItem> User 2 </ListGroupItem>
-                  <ListGroupItem> User 3 </ListGroupItem>
-                  <ListGroupItem> User 4 </ListGroupItem>
-                </ListGroup>
-              </div>
-              <div className={"classification-access-right"}>
-                <Row>
-                  <Input type="checkbox" />
-                  {' '}
-                  Sensitive
-                </Row>
-                <Row>
-                  <Input type="checkbox" />{' '}
-                  Hidden
-                </Row>
-                <Row>
-                  <Input type="checkbox" />{' '}
-                  Restricted
-                </Row>
-                <Row>
-                  <Input type="checkbox" />{' '}
-                  Option 4
-                </Row>
-              </div>
-            </div>
-          </Col>
-          <Col sm="3">
-            <h3> Unknown Labels </h3>
-            <Table>
-              <thead>
-                <th> Label </th>
-              </thead>
-              {this.displayUnknown(count)}
-            </Table>
-          </Col>
-        </Row>
-        <Row className="classification-bottom-button">
-          <Button color="primary" onClick={() => { this.onFinish(); }}> Finished </Button>
-        </Row>
-      </div>
-    );
-  }
-
   displayTabs() {
     const jsonObj = [];
-    for (let count = 0; count < this.state.results.length; count++) {
-      const result = this.state.results[count];
+    for (let count = 0; count < this.state.files.length; count++) {
+      const result = this.state.files[count];
       jsonObj.push(
         <NavItem>
           <NavLink
@@ -188,11 +101,12 @@ class ClassificationPage extends Component {
   }
 
   tabInfo() {
+    const { files } = this.state;
     const jsonObj = [];
-    for (let count = 0; count < this.state.results.length; count++) {
+    for (let count = 0; count < files.length; count++) {
       jsonObj.push(
         <TabPane tabId={count}>
-          {this.showInfo(count)}
+          <FileTab file={files[count]} />
         </TabPane>,
       );
     }
@@ -201,9 +115,11 @@ class ClassificationPage extends Component {
   }
 
   render() {
-    if (!this.state.results.length) {
+    if (!this.state.files.length) {
       return (
-        <h2> Classifying... </h2>
+        <div style={{ width: '100%', marginTop: '1rem', textAlign: 'center' }}>
+          <Spin size="large" tip="Classifying files..." />
+        </div>
       );
     }
 
@@ -222,5 +138,227 @@ class ClassificationPage extends Component {
     );
   }
 }
+
+const FAKE_RESPONSE = [
+  {
+      "filename": "MOCK_DATA.csv",
+      "description": "test description",
+      "classifications": [
+          {
+              "name": "lname",
+              "columns": [
+                  "first_name"
+              ],
+              "examples": [
+                  "Cornell",
+                  "Joseph",
+                  "Pegeen",
+                  "Janith",
+                  "Cissiee"
+              ]
+          },
+          {
+              "name": "email",
+              "columns": [
+                  "email"
+              ],
+              "examples": [
+                  "cnye0@sciencedirect.com",
+                  "jdeverill1@whitehouse.gov",
+                  "plerego2@amazon.co.jp",
+                  "jpanons3@berkeley.edu",
+                  "cmyhill4@newyorker.com"
+              ]
+          },
+          {
+              "name": "gender",
+              "columns": [
+                  "gender"
+              ],
+              "examples": [
+                  "Male",
+                  "Male",
+                  "Female",
+                  "Female",
+                  "Female"
+              ]
+          },
+          {
+              "name": "ip_address",
+              "columns": [
+                  "ip_address"
+              ],
+              "examples": [
+                  "171.95.103.238",
+                  "173.130.94.151",
+                  "108.48.103.4",
+                  "34.27.99.66",
+                  "28.172.195.129"
+              ]
+          },
+          {
+              "name": "phone",
+              "columns": [
+                  "phone"
+              ],
+              "examples": [
+                  "128-612-4011",
+                  "278-837-7782",
+                  "353-423-4599",
+                  "535-128-9172",
+                  "717-836-1731"
+              ]
+          },
+          {
+              "name": "address",
+              "columns": [
+                  "address"
+              ],
+              "examples": [
+                  "86 Mcbride Street",
+                  "6620 Clarendon Road",
+                  "5711 Troy Junction",
+                  "32 Manley Alley",
+                  "750 Corben Junction"
+              ]
+          },
+          {
+              "name": "ssn",
+              "columns": [
+                  "ssn"
+              ],
+              "examples": [
+                  "608-45-8721",
+                  "409-65-3396",
+                  "204-67-8040",
+                  "396-47-0769",
+                  "691-91-8581"
+              ]
+          },
+          {
+              "name": "money",
+              "columns": [
+                  "ssn"
+              ],
+              "examples": [
+                  "608-45-8721",
+                  "409-65-3396",
+                  "204-67-8040",
+                  "396-47-0769",
+                  "691-91-8581"
+              ]
+          }
+      ]
+  },
+  {
+      "filename": "MOCK_PEOPLE.csv",
+      "classifications": [
+          {
+              "name": "lname",
+              "columns": [
+                  "fname"
+              ],
+              "examples": [
+                  "Mendy",
+                  "Lonnie",
+                  "Tessie",
+                  "Bartie",
+                  "Isac"
+              ]
+          },
+          {
+              "name": "ip_address",
+              "columns": [
+                  "ip"
+              ],
+              "examples": [
+                  "210.64.51.117",
+                  "241.129.133.85",
+                  "158.124.53.221",
+                  "151.51.140.80",
+                  "197.104.87.166"
+              ]
+          },
+          {
+              "name": "email",
+              "columns": [
+                  "email"
+              ],
+              "examples": [
+                  "mpakenham0@ted.com",
+                  "lstovell1@tinyurl.com",
+                  "tmason2@jugem.jp",
+                  "btullot3@google.com.hk",
+                  "iwinkworth4@stumbleupon.com"
+              ]
+          },
+          {
+              "name": "gender",
+              "columns": [
+                  "gender"
+              ],
+              "examples": [
+                  "Male",
+                  "Male",
+                  "Female",
+                  "Male",
+                  "Male"
+              ]
+          },
+          {
+              "name": "phone",
+              "columns": [
+                  "phone_num"
+              ],
+              "examples": [
+                  "205-119-6280",
+                  "802-846-4493",
+                  "298-324-6343",
+                  "829-765-9719",
+                  "106-868-2944"
+              ]
+          },
+          {
+              "name": "address",
+              "columns": [
+                  "home_address"
+              ],
+              "examples": [
+                  "687 Continental Drive",
+                  "83745 Anthes Plaza",
+                  "10 Spohn Crossing",
+                  "72 Crowley Pass",
+                  "13264 Dorton Plaza"
+              ]
+          },
+          {
+              "name": "ssn",
+              "columns": [
+                  "ssn"
+              ],
+              "examples": [
+                  "862-67-7878",
+                  "311-82-2110",
+                  "756-80-9380",
+                  "483-42-8822",
+                  "528-32-8357"
+              ]
+          },
+          {
+              "name": "money",
+              "columns": [
+                  "ssn"
+              ],
+              "examples": [
+                  "862-67-7878",
+                  "311-82-2110",
+                  "756-80-9380",
+                  "483-42-8822",
+                  "528-32-8357"
+              ]
+          }
+      ]
+  }
+];
 
 export default ClassificationPage;
