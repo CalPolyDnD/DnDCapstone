@@ -19,7 +19,7 @@ class ClassificationTable extends React.Component {
   renderClassificationExamples(examples) {
     return examples.map(example => (
       <div style={{ height: '100%', justifyContent: 'center', alignItems: 'center'}}>
-        <p style={{ margin: '5px', paddingLeft: '10px',  color: 'white' }}>
+        <p style={{ margin: '5px', paddingLeft: '30px',  color: '#898989' }}>
           {`${example}`}
         </p>
       </div>
@@ -35,8 +35,18 @@ class ClassificationTable extends React.Component {
 
     return file.classifications.map((classification, index) => (
       <div style={{ backgroundColor: '#3d3d3d' }}>
-        <ListGroupItem tag="button" action className="justify-content-between" onClick={() => { cellOnClick(index); }}>{classification.name}</ListGroupItem>
-        <Collapse isOpen={selectedClassificationIndex === index}>
+        <ListGroupItem
+            tag="button"
+            action
+            className="justify-content-between"
+            onClick={() => { cellOnClick(index); }}
+            style={{ color: 'white', backgroundColor: '#3d3d3d', fontSize: '110%' }}
+        >
+          {classification.name}</ListGroupItem>
+        <Collapse
+            isOpen={selectedClassificationIndex === index}
+            style={{backgroundColor: '#3d3d3d' }}
+        >
           {this.renderClassificationExamples(classification.examples)}
         </Collapse>
       </div>

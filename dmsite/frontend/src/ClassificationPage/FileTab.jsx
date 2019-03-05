@@ -7,7 +7,7 @@ import {
   Input,
   Table,
   ListGroup,
-  ListGroupItem,
+  ListGroupItem, CardHeader, CardBody, Card,
 } from 'reactstrap';
 import ClassificationTable from './ClassificationTable';
 import { FileObject } from '../Model/FileObject';
@@ -47,71 +47,76 @@ class FileTab extends Component {
   }
 
   render() {
-    const { file } = this.props;
     const { selectedClassificationIndex } = this.state;
+    const { file } = this.props;
     if (file === null) {
       return (<div />);
     }
-
     return (
       <div>
-        <Row className="classification-top-row">
+        <Row className="classification-top-row" style={{ justifyContent: 'space-between' }}>
+          <Col>
+              <Card style={{ borderWidth: 0}}>
+                <CardHeader tag="h3" style={{ backgroundColor: '#303030', color: 'white', textAlign: 'center' }}>Description</CardHeader>
+                <CardBody style={{ backgroundColor: '#3d3d3d', color: 'white' }}>
+                  <Input
+                      type="textarea"
+                      placeholder="Description and notes of file and classification"
+                      name="text"
+                      id="exampleText"
+                      style={{ backgroundColor:'#3d3d3d', color: 'white', borderWidth: 0}}
+                  />
+                </CardBody>
+              </Card>
+            <div style={{ paddingTop: '5%'}}>
+              <Card style={{ borderWidth: 0, justified: 'center'}}>
+              <CardHeader tag="h3" style={{ backgroundColor: '#303030', color: 'white', textAlign: 'center' }} >Access Control</CardHeader>
+                <CardBody style={{ backgroundColor: '#3d3d3d', color: 'white' }}>
+                  <ListGroup style={{ color: "white", borderWidth: 0, borderColor: '#3d3d3d'}}>
+                    <ListGroupItem style={{ backgroundColor: '#3d3d3d', color: 'white', borderWidth: 0 }}>Your Username
+                      <Input style={{ right: '10%'}} type="checkbox" checked="checked"/>
+                    </ListGroupItem>
+                    <ListGroupItem style={{ backgroundColor: '#3d3d3d', color: 'white', borderWidth: 0 }}>Christina Daley
+                      <Input style={{ right: '10%'}} type="checkbox" />
+                    </ListGroupItem>
+                    <ListGroupItem style={{ backgroundColor: '#3d3d3d', color: 'white', borderWidth: 0 }}>Larry Hu
+                      <Input style={{ right: '10%'}} type="checkbox" />
+                    </ListGroupItem>
+                    <ListGroupItem style={{ backgroundColor: '#3d3d3d', color: 'white', borderWidth: 0 }}>Griffin Aswegan
+                      <Input style={{ right: '10%'}} type="checkbox" />
+                    </ListGroupItem>
+                  </ListGroup>
+                </CardBody>
+              </Card>
+            </div>
+          </Col>
           <Col xs="4">
             <ClassificationTable
-              file={file}
-              selectedClassificationIndex={selectedClassificationIndex}
-              cellOnClick={this.setSelectedClassification}
+                file={file}
+                selectedClassificationIndex={selectedClassificationIndex}
+                cellOnClick={this.setSelectedClassification}
             />
           </Col>
           <Col>
-            <div>
-              <h3> Description </h3>
-              <Input type="textarea" placeholder="This is a placecholder." name="text" id="exampleText" />
-            </div>
-            <div className="classification-access">
-              <h3> Access Control </h3>
-              <h4> Users </h4>
-              <div className="classification-access-left">
-                <ListGroup>
-                  <ListGroupItem> User 1 </ListGroupItem>
-                  <ListGroupItem> User 2 </ListGroupItem>
-                  <ListGroupItem> User 3 </ListGroupItem>
-                  <ListGroupItem> User 4 </ListGroupItem>
-                </ListGroup>
-              </div>
-              <div className="classification-access-right">
-                <Row>
-                  <Input type="checkbox" />
-                  {' '}
-                  Sensitive
-                </Row>
-                <Row>
-                  <Input type="checkbox" />{' '}
-                  Hidden
-                </Row>
-                <Row>
-                  <Input type="checkbox" />{' '}
-                  Restricted
-                </Row>
-                <Row>
-                  <Input type="checkbox" />{' '}
-                  Option 4
-                </Row>
-              </div>
+            <Card style={{ borderWidth: 0 }}>
+              <CardHeader
+                  tag="h3"
+                  style={{ backgroundColor: '#303030', color: 'white', textAlign: 'center' }}
+              >Unknown Labels</CardHeader>
+              <CardBody style={{ backgroundColor: '#3d3d3d', color: 'white' }}>
+                <Table style={{ borderWidth: 0 }}>
+                  {this.displayUnknown()}
+                </Table>
+              </CardBody>
+            </Card>
+            <div style={{ justifyContent: 'center', paddingTop: '4%'}}>
+            <Button
+                color="primary"
+                onClick={() => { this.onFinish(); }}
+                className="mr-0 btn-block mt-2 mb-2"
+            > Save </Button>
             </div>
           </Col>
-          <Col sm="3">
-            <h3> Unknown Labels </h3>
-            <Table>
-              <thead>
-                <th> Label </th>
-              </thead>
-              {this.displayUnknown()}
-            </Table>
-          </Col>
-        </Row>
-        <Row className="classification-bottom-button">
-          <Button color="primary" onClick={() => { this.onFinish(); }}> Finished </Button>
         </Row>
       </div>
     );
