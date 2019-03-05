@@ -1,5 +1,7 @@
 import boto3
 from boto3.dynamodb.conditions import Key
+from decimal import Decimal
+import pandas as pd
 
 
 dynamodb = boto3.resource('dynamodb', region_name='us-east-1', endpoint_url="http://dynamodb.us-east-1.amazonaws.com")
@@ -11,26 +13,27 @@ def make_query(table, index, value, compare):
     return response
 
 
-"""
-Commenting out the old stuff, in case we need it later
-import boto3
-import pprint
-from decimal import Decimal
-import pandas as pd
+def add_item(table, value):
+    files = dynamodb.Table(table)
+    response = files.put_item(Item=value)
+    return response
 
 
-dynamodb = boto3.resource('dynamodb')
-dynamodb_client = boto3.client('dynamodb')
-
-_HEADERS_TABLE_NAME = 'dataset-headers'
-
-
-def get_headers_table():
-    return dynamodb.Table(_HEADERS_TABLE_NAME)
+def update_item(table, key, update, names, values):
+    tbl = dynamodb.Table(table)
+    response = tbl.update_item(Key=key, UpdateExpression=update, ExpressionAttributeNames=names, ExpressionAttributeValues=values)
+    return response
 
 
-def get_headers_table_name():
-    return _HEADERS_TABLE_NAME
+def get_item(table, key):
+    tbl = dynamodb.Table(table)
+    response = tbl.get_item(Key=key)
+    return response
+
+
+# ----------------------------------------------------------------------------------------------------------------------
+# Adds a header frame for the uploaded files
+# TODO: add this to file upload
 
 
 def _conversion_helper(dictionary):
@@ -48,7 +51,7 @@ def _conversion_helper(dictionary):
     return dictionary
 
 
-def _convert_to_dynamodb_types(dataframe):
+def convert_to_dynamodb_types(dataframe):
     #This method is used to convert a Pandas DataFrame into a dictionary that conforms to DynamoDB types
     return _conversion_helper(dataframe.to_dict())
 
@@ -56,5 +59,3 @@ def _convert_to_dynamodb_types(dataframe):
 def dataframe_from_dynamo_map(dynamo_map):
     #This method is used to convert from a dict using DynamoDB supported types to a Pandas DataFrame
     return pd.DataFrame(dynamo_map).apply(pd.to_numeric, errors='ignore')
-
-"""

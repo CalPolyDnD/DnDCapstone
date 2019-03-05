@@ -21,3 +21,7 @@ def find_files(data):
     if 'Items' not in response:
         return {"errorMsg": "no files in campaign " + data['campaign']}, -1
     return response['Items'], 0
+
+
+#TODO: add a POST request to update a file's description
+

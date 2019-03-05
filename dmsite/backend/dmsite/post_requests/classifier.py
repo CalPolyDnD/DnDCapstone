@@ -1,9 +1,9 @@
 from django.http import JsonResponse
 import dmsite.data_classifier.classifier as c
-import dmsite.file_manager.file_manager as FileManager
+import dmsite.file_manager.file_manager as fm
+import dmsite.db_manager.db_manager as db
 import json
 import os
-import boto3
 
 # TODO: remove the csrf_exempts before launching to dev
 # adding this here for testing purposes; bypasses cookie needs to access
@@ -22,15 +22,12 @@ def classify_files(request):
 
 def make_classifications(body):
     #TODO: do some error checking here for stuff
-    print(body)
-    print("")
-    print("")
     clsfr = c.Classifier()
     results = []
     count = 0
     for obj in body:
         filename = obj['filename']
-        FileManager.fetch_file(filename)
+        fm.fetch_file(filename)
         filepath = "media/" + filename
 
         classifications = clsfr.classify(filepath)
@@ -61,55 +58,47 @@ def save_classifications(request):
 
 
 def save_data(data):
-    dynamodb = boto3.resource('dynamodb', region_name='us-east-1', endpoint_url="http://dynamodb.us-east-1.amazonaws.com")
-    classifications = dynamodb.Table("classification")
-    files = dynamodb.Table("files")
-
     try:
         for item in data:
             names = []
             labels = []
             for classification in item['classifications']:
                 key = {"name": classification['name'], "campaign": item['campaign']}
-                response = classifications.get_item(Key=key)
+                response = db.get_item("classification", key)
                 if 'Item' not in response:
-                    response = classifications.put_item(Item={"name": classification['name'], "campaign": item['campaign'], "examples": classification['examples']})
+                    response = db.add_item("classification", {"name": classification['name'], "campaign": item['campaign'], "examples": classification['examples']})
                 else:
-                    response = classifications.update_item(
-                        Key=key,
-                        UpdateExpression='set #classifications = list_append(if_not_exists(#classifications, :empty_list), :values)',
-                        ExpressionAttributeNames={'#classifications': 'examples'},
-                        ExpressionAttributeValues={
-                            ':values': classification['examples'],
-                            ':empty_list': []
-                        }
+                    response = db.update_item(
+                        "classification",
+                        key,
+                        'set #classifications = list_append(if_not_exists(#classifications, :empty_list), :values)',
+                        {'#classifications': 'examples'},
+                        {':values': classification['examples'], ':empty_list': []}
                     )
                 names.append(classification['name'])
                 labels.append(classification['columns'][0])
 
             key = {'filename': item['filename'], 'campaign': item['campaign']}
-            response = files.get_item(Key=key)
+            response = db.get_item("files", key)
             if 'Items' not in response:
                 key = {'filename': item['filename'], 'campaign': item['campaign'], 'is_classified': 1,
                        'labels': labels, 'classifications': names, 'description': item['description']}
-                response = files.put_item(Item=key)
+                response = db.add_item("files", key)
             else:
-                response = files.update_item(
-                    Key={"filename": item['filename']},
-                    UpdateExpression='set #description = :description',
-                    ExpressionAttributeNames={'#description': 'description'},
-                    ExpressionAttributeValues={':description': item['description']}
+                response = db.update_item(
+                    "files",
+                    {"filename": item['filename']},
+                    'set #description = :description',
+                    {'#description': 'description'},
+                    {':description': item['description']}
                 )
-                response = files.update_item(
-                    Key={"filename": item['classifications']},
-                    UpdateExpression='set #classifications = list_append(if_not_exists(#classifications, :empty_list), :values)',
-                    ExpressionAttributeNames={'#classifications': 'classifications'},
-                    ExpressionAttributeValues={
-                        ':values': names,
-                        ':empty list': []
-                    }
+                response = db.update_item(
+                    "files",
+                    {"filename": item['classifications']},
+                    'set #classifications = list_append(if_not_exists(#classifications, :empty_list), :values)',
+                    {'#classifications': 'classifications'},
+                    {':values': names, ':empty list': []}
                 )
-
 
     except KeyError as e:
         return {"errorMsg": "invalid json object: " + e.__str__()}, -1

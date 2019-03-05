@@ -29,14 +29,14 @@ from django.conf.urls.static import static
 from django.views.generic import TemplateView
 
 # Local addons
-from dmsite.upload import views as upload_views
+from dmsite.upload import upload
 from dmsite.post_requests import files, campaigns, classifier, search
 
 urlpatterns = [
     path('rest-auth/', include('rest_auth.urls')),
     path('rest-auth/registration', include('rest_auth.registration.urls')),
     path('admin/', admin.site.urls),
-    path('home/upload/push_file', upload_views.upload_file),
+    path('home/upload/push_file', upload.upload_file),
     path('search/push_query', search.perform_search),
     path('classify_files', classifier.classify_files),
     path('classify_files/save', classifier.save_classifications),
