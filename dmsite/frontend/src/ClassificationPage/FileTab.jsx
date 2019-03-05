@@ -47,7 +47,7 @@ class FileTab extends Component {
 
   handleChange = (event) => {
     const FETCH_URL = "localhost8000/update_file_description";
-    const file = this.state.file
+    const file = this.state.file;
     file.description = event.target.value;
     this.setState({file: file});
     fetch(FETCH_URL, {
