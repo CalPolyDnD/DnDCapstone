@@ -1,30 +1,30 @@
 import axios from 'axios';
 import * as actionTypes from './actionTypes';
 
-let LOGIN_URL = 'http://localhost:8000/rest-auth/login/';
-let REGISTRATION_URL = 'http://localhost:8000/rest-auth/registration';
-let ONE_HOUR = 3600;
+const LOGIN_URL = 'http://localhost:8000/rest-auth/login/';
+const REGISTRATION_URL = 'http://localhost:8000/rest-auth/registration';
+const ONE_HOUR = 3600;
 
 
-export const authStart = () => {
-  return {
+export const authStart = () => (
+  {
     type: actionTypes.AUTH_START,
-  };
-};
+  }
+);
 
-export const authSuccess = (token) => {
-  return {
+export const authSuccess = token => (
+  {
     type: actionTypes.AUTH_SUCCESS,
     token,
-  };
-};
+  }
+);
 
-export const authFail = (error) => {
-  return {
+export const authFail = error => (
+  {
     type: actionTypes.AUTH_FAIL,
     error,
-  };
-};
+  }
+);
 
 export const logout = () => {
   localStorage.removeItem('token');
@@ -34,21 +34,21 @@ export const logout = () => {
   };
 };
 
-export const checkAuthTimeout = (expirationDate) => {
-  return (dispatch) => {
+export const checkAuthTimeout = expirationDate => (
+  (dispatch) => {
     setTimeout(() => {
       dispatch(logout);
     }, expirationDate * 1000);
-  };
-};
+  }
+);
 
-export const authLogin = (email, password) => {
-  return (dispatch) => {
+export const authLogin = (email, password) => (
+  (dispatch) => {
     dispatch(authStart());
-    axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
-    axios.defaults.xsrfCookieName = "csrftoken";
+    axios.defaults.xsrfHeaderName = 'X-CSRFTOKEN';
+    axios.defaults.xsrfCookieName = 'csrftoken';
 
-    axios.post( LOGIN_URL, {
+    axios.post(LOGIN_URL, {
       email,
       password,
     })
@@ -63,23 +63,23 @@ export const authLogin = (email, password) => {
       .catch((err) => {
         dispatch(authFail(err));
       });
-  };
-};
+  }
+);
 
-export const authSignup = (email, password1, password2) => {
-  return (dispatch) => {
+export const authSignup = (email, password1, password2) => (
+  (dispatch) => {
     dispatch(authStart());
-    axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
-    axios.defaults.xsrfCookieName = "csrftoken";
+    axios.defaults.xsrfHeaderName = 'X-CSRFTOKEN';
+    axios.defaults.xsrfCookieName = 'csrftoken';
 
-    axios.post( REGISTRATION_URL, {
+    axios.post(REGISTRATION_URL, {
       email,
       password1,
       password2,
     })
       .then((res) => {
         const token = res.data.key;
-        //getTime gives time in ms, so adding ONE_HOUR * 1000 gives exp date of an hour
+        // getTime gives time in ms, so adding ONE_HOUR * 1000 gives exp date of an hour
         const expDate = new Date(new Date().getTime() + ONE_HOUR * 1000);
         localStorage.setItem('token', token);
         localStorage.setItem('expDate', expDate);
@@ -89,8 +89,8 @@ export const authSignup = (email, password1, password2) => {
       .catch((err) => {
         dispatch(authFail(err));
       });
-  };
-};
+  }
+);
 
 export const authCheckState = () => (dispatch) => {
   const token = localStorage.getItem('token');
