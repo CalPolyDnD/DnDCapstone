@@ -28,6 +28,7 @@ class NewAccountTextField extends React.Component {
       const { validateFieldsAndScroll } = form;
       validateFieldsAndScroll(async (err, values) => {
         if (!err) {
+          // TODO: Fix issue that's also in LoginTextField.jsx related to updating state immediately
           onAuth(values.email, values.password, values.confirm)
             .then(() => {
               if (!error) {

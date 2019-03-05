@@ -27,8 +27,10 @@ class TextField extends React.Component {
         if (!err) {
           onAuth(values.email, values.password)
             .then(() => {
+              // TODO:This needs to be fixed, right now error is not being set properly
+              // I think this is broken because state isn't updated until component is re-rendered
+              // May need to use redux-saga middleware to handle this issue
               if (!error) {
-                // TODO:This needs to be fixed, right now error is not being set properly
                 history.push('/home');
               }
             });
