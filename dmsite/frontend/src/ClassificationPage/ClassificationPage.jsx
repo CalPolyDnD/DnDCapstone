@@ -13,7 +13,7 @@ import {
 import FileTab from './FileTab';
 import './ClassificationInfo.css';
 
-const FETCH_URL = 'http://localhost:8000/classify_files';
+/*const FETCH_URL = 'http://localhost:8000/classify_files';*/
 
 // TODO: all of this needs style changes
 class ClassificationPage extends Component {
