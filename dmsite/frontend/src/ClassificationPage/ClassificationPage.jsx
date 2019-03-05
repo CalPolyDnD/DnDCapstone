@@ -136,7 +136,7 @@ class ClassificationPage extends Component {
   }
 }
 
-/* const FAKE_RESPONSE = [
+ /*const FAKE_RESPONSE = [
   {
       "filename": "MOCK_DATA.csv",
       "description": "test description",
@@ -356,6 +356,6 @@ class ClassificationPage extends Component {
           }
       ]
   }
-]; */
+];*/
 
 export default ClassificationPage;

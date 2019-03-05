@@ -18,11 +18,14 @@ class FileTab extends Component {
     file: null,
   }
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       selectedClassificationIndex: 0,
+      description: "",
+      file: props.file,
     };
+
   }
 
   displayUnknown() {
@@ -42,13 +45,24 @@ class FileTab extends Component {
     );
   }
 
+  handleChange = (event) => {
+    const FETCH_URL = "localhost8000/update_file_description";
+    this.state.file.description = event.target.value;
+    this.setState({file: this.state.file});
+    fetch(FETCH_URL, {
+      method: 'POST',
+      body: {
+        description: event.target.value,
+      }
+    });
+  }
+
   setSelectedClassification = (index) => {
     this.setState({ selectedClassificationIndex: index });
   }
 
   render() {
-    const { selectedClassificationIndex } = this.state;
-    const { file } = this.props;
+    const { selectedClassificationIndex, file } = this.state;
     if (file === null) {
       return (<div />);
     }
@@ -61,10 +75,11 @@ class FileTab extends Component {
                 <CardBody style={{ backgroundColor: '#3d3d3d', color: 'white' }}>
                   <Input
                       type="textarea"
-                      placeholder="Description and notes of file and classification"
+                      value={file.description}
                       name="text"
                       id="exampleText"
                       style={{ backgroundColor:'#3d3d3d', color: 'white', borderWidth: 0}}
+                      onChange={this.handleChange}
                   />
                 </CardBody>
               </Card>
