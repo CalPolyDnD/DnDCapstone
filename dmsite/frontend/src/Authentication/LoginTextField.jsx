@@ -74,11 +74,7 @@ class TextField extends React.Component {
           </Form.Item>
           <Form.Item style={{ color: 'white' }}>
             <a className="login-form-forgot" href="/register">Forgot password </a>
-
-            {/* TO DO */}
-
-                    or
-            {' '}
+              or{' '}
             <a href="/register">Create an account now!</a>
           </Form.Item>
           { errorMessage }
