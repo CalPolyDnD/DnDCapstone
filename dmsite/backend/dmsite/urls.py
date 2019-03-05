@@ -30,9 +30,7 @@ from django.views.generic import TemplateView
 
 # Local addons
 from dmsite.upload import views as upload_views
-from dmsite.search import search
-from dmsite.data_classifier import connector as classifier
-from dmsite.post_requests import files, campaigns
+from dmsite.post_requests import files, campaigns, classifier, search
 
 urlpatterns = [
     path('rest-auth/', include('rest_auth.urls')),

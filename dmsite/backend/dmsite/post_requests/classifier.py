@@ -67,15 +67,10 @@ def save_data(data):
 
     try:
         for item in data:
+            names = []
+            labels = []
             for classification in item['classifications']:
-                response = files.update_item(
-                    Key={"filename": item['filename']},
-                    UpdateExpression='set #description = :description',
-                    ExpressionAttributeNames={'#description': 'description'},
-                    ExpressionAttributeValues={':description': item['description']}
-                )
-
-                key = {"name": classification['name'], "campaign": classification['campaign']}
+                key = {"name": classification['name'], "campaign": item['campaign']}
                 response = classifications.get_item(Key=key)
                 if 'Item' not in response:
                     response = classifications.put_item(Item={"name": classification['name'], "campaign": item['campaign'], "examples": classification['examples']})
@@ -85,9 +80,37 @@ def save_data(data):
                         UpdateExpression='set #classifications = list_append(if_not_exists(#classifications, :empty_list), :values)',
                         ExpressionAttributeNames={'#classifications': 'examples'},
                         ExpressionAttributeValues={
-                        ':values': classification['examples'],
-                        ':empty_list': []
-                    })
+                            ':values': classification['examples'],
+                            ':empty_list': []
+                        }
+                    )
+                names.append(classification['name'])
+                labels.append(classification['columns'][0])
+
+            key = {'filename': item['filename'], 'campaign': item['campaign']}
+            response = files.get_item(Key=key)
+            if 'Items' not in response:
+                key = {'filename': item['filename'], 'campaign': item['campaign'], 'is_classified': 1,
+                       'labels': labels, 'classifications': names, 'description': item['description']}
+                response = files.put_item(Item=key)
+            else:
+                response = files.update_item(
+                    Key={"filename": item['filename']},
+                    UpdateExpression='set #description = :description',
+                    ExpressionAttributeNames={'#description': 'description'},
+                    ExpressionAttributeValues={':description': item['description']}
+                )
+                response = files.update_item(
+                    Key={"filename": item['classifications']},
+                    UpdateExpression='set #classifications = list_append(if_not_exists(#classifications, :empty_list), :values)',
+                    ExpressionAttributeNames={'#classifications': 'classifications'},
+                    ExpressionAttributeValues={
+                        ':values': names,
+                        ':empty list': []
+                    }
+                )
+
+
     except KeyError as e:
         return {"errorMsg": "invalid json object: " + e.__str__()}, -1
 

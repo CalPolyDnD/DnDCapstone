@@ -1,6 +1,5 @@
 from django.http import JsonResponse
-import boto3
-from boto3.dynamodb.conditions import Key
+import dmsite.db_manager.db_manager as db
 import json
 
 
@@ -18,10 +17,7 @@ def get_campaigns_by_owner(request):
 
 
 def find_campaigns(data):
-    dynamodb = boto3.resource('dynamodb', region_name='us-east-1', endpoint_url="http://dynamodb.us-east-1.amazonaws.com")
-    files = dynamodb.Table("campaigns")
-
-    response = files.query(IndexName="owner-index", KeyConditionExpression=Key("owner").eq(data['owner']))
+    response = db.make_query("files", "owner-index", "owner", data['owner'])
     if 'Items' not in response:
         return {"errorMsg": "no campaigns owned by " + data['owner']}, -1
     print(response['Items'])
