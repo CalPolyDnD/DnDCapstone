@@ -29,20 +29,17 @@ class ClassificationPage extends Component {
 
   componentDidMount() {
   // TODO: make this depend on passed-in files
-    // fetch(FETCH_URL, {
-    //   method: 'POST',
-    //   body: JSON.stringify([{
-    //     filename: 'MOCK_DATA.csv',
-    //   }, {
-    //     filename: 'MOCK_PEOPLE.csv',
-    //   }])
-    // }).then((data) => {
-    //   const files = data.json();
-    //   this.setState({ files: FAKE_RESPONSE });
-    // });
-    setTimeout(() => {
-      this.setState({ files: FAKE_RESPONSE });
-    }, 100);
+     fetch(FETCH_URL, {
+       method: 'POST',
+       body: JSON.stringify([{
+         filename: 'MOCK_DATA.csv',
+       }, {
+         filename: 'MOCK_PEOPLE.csv',
+       }])
+     }).then((data) => {
+       const files = data.json();
+       this.setState({ files: FAKE_RESPONSE });
+     });
   }
 
   toggle(tab) {
