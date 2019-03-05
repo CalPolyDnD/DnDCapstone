@@ -1,7 +1,7 @@
 import axios from 'axios';
 import * as actionTypes from './actionTypes';
 
-let LOGIN_URL = 'http://localhost:8000/rest-auth/login';
+let LOGIN_URL = 'http://localhost:8000/rest-auth/login/';
 let REGISTRATION_URL = 'http://localhost:8000/rest-auth/registration';
 let ONE_HOUR = 3600;
 
