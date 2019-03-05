@@ -13,21 +13,28 @@ import {
   Button,
   Spin,
 } from 'antd';
-
 import * as actions from '../store/actions/auth';
 
 const antSpinner = <Icon type="loading" style={{ fontSize: 24 }} spin />;
 
 class TextField extends React.Component {
     handleSubmit = (e) => {
-      const { form, onAuth } = this.props;
+      const {
+        history, form, onAuth, error,
+      } = this.props;
       e.preventDefault();
       form.validateFields((err, values) => {
         if (!err) {
-          onAuth(values.email, values.password);
+          onAuth(values.email, values.password)
+            .then(() => {
+              if (!error) {
+                // TODO:This needs to be fixed, right now error is not being set properly
+                history.push('/home');
+              }
+            });
         }
       });
-    }
+    };
 
     render() {
       const { form, loading, error } = this.props;
@@ -106,7 +113,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   onAuth: (email, password) => dispatch(actions.authLogin(email, password)),
-})
+});
 
 const WrappedNormalLoginForm = Form.create({ name: 'normal_login' })(TextField);
 
