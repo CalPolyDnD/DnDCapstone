@@ -13,7 +13,7 @@ import {
 import FileTab from './FileTab';
 import './ClassificationInfo.css';
 
-/*const FETCH_URL = 'http://localhost:8000/classify_files';*/
+const FETCH_URL = 'http://localhost:8000/classify_files';
 
 // TODO: all of this needs style changes
 class ClassificationPage extends Component {
@@ -38,7 +38,7 @@ class ClassificationPage extends Component {
        }])
      }).then((data) => {
        const files = data.json();
-       this.setState({ files: FAKE_RESPONSE });
+       this.setState({ files: files });
      });
   }
 
@@ -136,7 +136,7 @@ class ClassificationPage extends Component {
   }
 }
 
-const FAKE_RESPONSE = [
+/* const FAKE_RESPONSE = [
   {
       "filename": "MOCK_DATA.csv",
       "description": "test description",
@@ -356,6 +356,6 @@ const FAKE_RESPONSE = [
           }
       ]
   }
-];
+]; */
 
 export default ClassificationPage;
