@@ -1,50 +1,46 @@
 import React from 'react';
 import {
-  ListGroup, ListGroupItem, Card, CardBody, Button, CardHeader, NavLink, NavItem,
+  ListGroup, ListGroupItem, Card, CardBody, Button, CardHeader,
 } from 'reactstrap';
 import './style.css';
+import axios from 'axios';
 
-class Campaign extends React.component{
+const FETCH_CURRENT_USER_URL = 'http://localhost:8000/rest-auth/user/';
+const FETCH_CAMPAIGNS_URL = 'http://localhost:8000/get_campaigns';
 
-  constructor(props) {
-    super(props);
+class Campaign extends React.Component {
+  constructor() {
+    super();
     this.state = {
       campaigns: [],
     };
   }
 
   componentDidMount() {
-    const FETCH_URL = 'http://localhost:8000/getUser';
-    const FETCH_URL2 = 'http://localhost:8000/getCampaigns'
-    const user = data.json();
-    fetch(FETCH_URL, {
-      method: 'POST',
-      body: JSON({
-        user: "user",
-      }, )
-    }).then((data) => {
-      this.setState({ user: user });
-    });
-    fetch(FETCH_URL2, {
-      method: 'POST',
-      body: JSON.stringify([{campaigns: user + ".campaigns"}])
-    }).then((data) => {
-      const campaigns = data.json();
-      this.setState({ campaigns: campaigns });
-    });
+    axios.get(FETCH_CURRENT_USER_URL)
+      .then((userRes) => {
+        axios.post(FETCH_CAMPAIGNS_URL, {
+          user: userRes.data.email,
+        })
+          .then((campRes) => {
+            this.setState({ campaigns: campRes.data });
+          });
+      });
   }
 
-  getCampaignList(campaigns){
+  getCampaignList() {
     const jsonObj = [];
-    for (let count = 0; count < this.state.compaigns.length; count++) {
-      const result = this.state.campaigns[count];
+    const { campaigns } = this.state;
+    const { history } = this.props;
+    for (let count = 0; count < campaigns.length; count += 1) {
+      const result = campaigns[count];
       jsonObj.push(
-          <ListGroupItem
-              onClick={() => { this.props.history.push('/home' + campaigns.name); }}
-              style={{ backgroundColor: '#3d3d3d', color: 'white' }}
-          >
-            {result.name}
-          </ListGroupItem>
+        <ListGroupItem
+          onClick={() => { history.push(`/home${campaigns.name}`); }}
+          style={{ backgroundColor: '#3d3d3d', color: 'white' }}
+        >
+          {result.name}
+        </ListGroupItem>,
       );
     }
     return jsonObj;
