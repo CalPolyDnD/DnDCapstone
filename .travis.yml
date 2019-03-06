@@ -8,7 +8,7 @@ git:
 #Install dependencies
 install: 
    - cd dmsite
-   - source ./setup.sh
+   - pip3 install -r backend/requirements.txt
    - cd ..
 
 addons:
