@@ -1,28 +1,46 @@
 import boto3
-import pprint
+from boto3.dynamodb.conditions import Key
 from decimal import Decimal
 import pandas as pd
 
 
-dynamodb = boto3.resource('dynamodb')
-dynamodb_client = boto3.client('dynamodb')
-
-_HEADERS_TABLE_NAME = 'dataset-headers'
+dynamodb = boto3.resource('dynamodb', region_name='us-east-1', endpoint_url="http://dynamodb.us-east-1.amazonaws.com")
 
 
-def get_headers_table():
-    return dynamodb.Table(_HEADERS_TABLE_NAME)
+def make_query(table, index, value, compare):
+    files = dynamodb.Table(table)
+    response = files.query(IndexName=index, KeyConditionExpression=Key(value).eq(compare))
+    return response
 
 
-def get_headers_table_name():
-    return _HEADERS_TABLE_NAME
+def add_item(table, value):
+    files = dynamodb.Table(table)
+    response = files.put_item(Item=value)
+    return response
+
+
+def update_item(table, key, update, names, values):
+    tbl = dynamodb.Table(table)
+    response = tbl.update_item(Key=key, UpdateExpression=update, ExpressionAttributeNames=names, ExpressionAttributeValues=values)
+    return response
+
+
+def get_item(table, key):
+    tbl = dynamodb.Table(table)
+    response = tbl.get_item(Key=key)
+    return response
+
+
+# ----------------------------------------------------------------------------------------------------------------------
+# Adds a header frame for the uploaded files
+# TODO: add this to file upload
 
 
 def _conversion_helper(dictionary):
-    """
-    This method walks through a python dictionary recursively and
-     converts types to the appropriate DynamoDB supported type.
-    """
+
+    #This method walks through a python dictionary recursively and
+    # converts types to the appropriate DynamoDB supported type.
+
     for k, v in dictionary.items():
         if isinstance(v, dict):
             _conversion_helper(v)
@@ -33,35 +51,11 @@ def _conversion_helper(dictionary):
     return dictionary
 
 
-def _convert_to_dynamodb_types(dataframe):
-    """This method is used to convert a Pandas DataFrame into a dictionary that conforms to DynamoDB types"""
+def convert_to_dynamodb_types(dataframe):
+    #This method is used to convert a Pandas DataFrame into a dictionary that conforms to DynamoDB types
     return _conversion_helper(dataframe.to_dict())
 
 
 def dataframe_from_dynamo_map(dynamo_map):
-    """This method is used to convert from a dict using DynamoDB supported types to a Pandas DataFrame"""
+    #This method is used to convert from a dict using DynamoDB supported types to a Pandas DataFrame
     return pd.DataFrame(dynamo_map).apply(pd.to_numeric, errors='ignore')
-
-
-def put_dataset_header(user_id, dataset_id, dataframe):
-    data = _convert_to_dynamodb_types(dataframe.head(50))
-    table = dynamodb.Table(_HEADERS_TABLE_NAME)
-    table.put_item(
-        Item={
-            'UserID': user_id,
-            'DatasetID': dataset_id,
-            'Data': data
-        }
-    )
-
-
-def get_dataset_header(user_id, dataset_id):
-    table = dynamodb.Table(_HEADERS_TABLE_NAME)
-    response = table.get_item(
-        Key={
-            'UserID': user_id,
-            'DatasetID': dataset_id
-        }
-    )
-    data = response['Item']['Data']
-    return data
