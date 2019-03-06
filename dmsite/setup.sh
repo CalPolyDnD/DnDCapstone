@@ -18,7 +18,7 @@ else
       if [ -n `pip3 freeze | grep -q -e virtualenv` ]; then
          echo "virtualenv is not installed"
          echo "installing virtualenv..."
-         sudo pip3 install virtualenv
+         pip3 install virtualenv
       fi
       echo "Creating virtual environment at: ${CAPSTONE_ENV}"
       python3 -m virtualenv $CAPSTONE_ENV
