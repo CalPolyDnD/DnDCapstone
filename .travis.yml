@@ -9,6 +9,7 @@ git:
 install: 
    - cd dmsite
    - pip3 install -r backend/requirements.txt
+   - npm i --prefix frontend
    - cd ..
 
 addons:
