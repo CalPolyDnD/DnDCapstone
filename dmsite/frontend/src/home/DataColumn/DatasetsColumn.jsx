@@ -14,12 +14,17 @@ import PropTypes from 'prop-types';
 import Upload from './UploadComponent';
 
 class DatasetsColumn extends React.Component {
+  static defaultProps = {
+    fileListData: [],
+    selectedFileIndex: 0,
+    cellOnClick: () => {},
+  }
+
   constructor(props) {
     super(props);
     this.state = {
       uploading: false,
     };
-
   }
 
   renderFileCells = () => {
