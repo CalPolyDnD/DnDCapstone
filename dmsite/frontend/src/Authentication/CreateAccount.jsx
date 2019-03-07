@@ -18,7 +18,6 @@ class CreateAccount extends Component {
           <div style={{ display: 'flex', justifyContent: 'center', paddingTop: '5%' }}>
             <Card align="center" style={{ borderWidth: 0 }}>
               <CardHeader tag="h3" style={{ backgroundColor: '#303030', color: 'white' }}>Create Account</CardHeader>
-              { /* <CardTitle className="pl-4 pt-4">{this.props.name}</CardTitle> */ }
               <CardBody style={{ backgroundColor: '#3d3d3d', color: 'white' }}>
                 <NewAccountTF />
               </CardBody>
