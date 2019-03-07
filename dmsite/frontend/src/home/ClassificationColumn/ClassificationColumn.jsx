@@ -17,8 +17,7 @@ class ClassificationColumn extends Component {
     return file.classifications.map((obj, index) => {
       return (
         <ListGroupItem key={ index } style={{ backgroundColor: '#3d3d3d', color: 'white' }}>
-          <p>{obj.name}</p>
-          <p>{obj.age}</p>
+          <p>{obj}</p>
         </ListGroupItem>
       );
     });

@@ -6,6 +6,7 @@ import classnames from 'classnames';
 import './ClassificationInfo.css'
 
 let FETCH_URL = 'http://localhost:8000/classify_files';
+let SAVE_URL =  'http://localhost:8000/classify_files/save';
 //TODO: all of this needs style changes
 
 class ClassificationPage extends Component {
@@ -16,6 +17,7 @@ class ClassificationPage extends Component {
     this.state = {
       activeTab: 0,
       results: [],
+      finished: 0,
     };
   }
 
@@ -25,6 +27,23 @@ class ClassificationPage extends Component {
         activeTab: tab,
       });
     }
+  }
+
+  onFinish() {
+    this.setState({finished: 1});
+    fetch(SAVE_URL, {
+      method: 'POST',
+      body: JSON.stringify(this.state.results)
+    }).then(data => {
+        return data.json();
+    }).then(result => {
+        this.props.history.push('/home');
+    });
+  }
+
+  checkFinish() {
+    if (this.state.finished === 1)
+        return (<h3> Saving... </h3>);
   }
 
   displayClassification(count) {
@@ -131,6 +150,7 @@ class ClassificationPage extends Component {
         </Row>
         <Row className="classification-bottom-button">
           <Button color="primary" onClick={() => { this.onFinish(); }}> Finished </Button>
+          { this.checkFinish() }
         </Row>
       </div>
     );
@@ -178,6 +198,10 @@ class ClassificationPage extends Component {
     }).then(data => {
         return data.json();
     }).then(results => {
+        for (let count = 0; count < results.length; count++) {
+            results[count].campaign = "test_campaign";
+            results[count].description = "test desc";
+         }
         this.setState({results: results})
     });
   }
