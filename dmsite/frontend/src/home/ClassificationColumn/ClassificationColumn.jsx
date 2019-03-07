@@ -41,7 +41,7 @@ class ClassificationColumn extends Component {
             color="primary"
             className="mr-0 btn-block mt-2 mb-2"
           >
-            Add Classifications
+            Edit Classifications
           </Button>
         </CardBody>
       </Card>

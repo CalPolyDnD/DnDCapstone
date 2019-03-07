@@ -131,26 +131,6 @@ class ClassificationPage extends Component {
     return jsonObj;
   }
 
-  componentDidMount() {
-  // TODO: make this depend on passed-in files
-    fetch(FETCH_URL, {
-      method: 'POST',
-      body: JSON.stringify([{
-        filename: 'MOCK_DATA.csv'
-      }, {
-        filename: 'MOCK_PEOPLE.csv'
-      }])
-    }).then(data => {
-        return data.json();
-    }).then(results => {
-        for (let count = 0; count < results.length; count++) {
-            results[count].campaign = "test_campaign";
-            results[count].description = "test desc";
-         }
-        this.setState({results: results})
-    });
-  }
-
   render() {
     if (!this.state.files.length) {
       return (

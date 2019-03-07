@@ -12,17 +12,6 @@ import DisplayColumn from './VisualColumn/DisplayColumn';
 import ClassificationColumn from './ClassificationColumn/ClassificationColumn';
 import { FileObject } from '../Model/FileObject';
 
-const testClassification1 = [{ name: 'Classify1', age: 2 }, { name: 'Classify2', age: 4 }, { name: 'Classify3', age: 5 }];
-const testClassification2 = [{ name: 'Classify1', age: 3 }, { name: 'Classify2', age: 6 }, { name: 'Classify3', age: 53 }];
-const testClassification3 = [{ name: 'Classify2', age: 4 }, { name: 'Classify2', age: 42 }, { name: 'Classify3', age: 5 }];
-
-const dummyfiles = [
-  new FileObject('file1', 'file1.csv', testClassification1, 'header1'),
-  new FileObject('file2', 'file2.csv', testClassification2, 'header3'),
-  new FileObject('file3', 'file2.csv', testClassification3, 'header3'),
-];
-
-//TODO: get the actual campaign name
 const FETCH_URL = 'http://localhost:8000/get_files'
 
 class Home extends React.Component {

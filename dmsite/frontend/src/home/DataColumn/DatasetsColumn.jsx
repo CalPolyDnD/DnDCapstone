@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 import 'filepond/dist/filepond.min.css';
 import {
   Button,
@@ -78,6 +79,14 @@ class DatasetsColumn extends React.Component {
             uploading
             && <Button close onClick={this.cancelUploadClicked} />
           }
+          <Button
+              color="primary"
+              size="md"
+              className="mr-0 btn-block mt-2 mb-2"
+              onClick={() => { this.props.history.push('/classification'); }}
+          >
+            Classify
+          </Button>
         </CardBody>
       </Card>
     );
@@ -90,4 +99,4 @@ DatasetsColumn.propTypes = {
   cellOnClick: PropTypes.func,
 };
 
-export default DatasetsColumn;
+export default withRouter(DatasetsColumn);
