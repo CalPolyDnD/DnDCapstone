@@ -8,7 +8,8 @@ git:
 #Install dependencies
 install: 
    - cd dmsite
-   - ./setup.sh
+   - pip3 install -r backend/requirements.txt
+   - npm i --prefix frontend
    - cd ..
 
 addons:
