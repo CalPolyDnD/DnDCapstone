@@ -89,7 +89,7 @@ class TextField extends React.Component {
                     htmlType="submit"
                     className="btn-block mt0 login-form-button"
                   >
-                    Log in
+                    Login
                   </Button>
                 )
             }

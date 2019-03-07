@@ -21,9 +21,6 @@ const dummyfiles = [
   new FileObject('file3', 'file2.csv', testClassification3, 'header3'),
 ];
 
-
-
-
 class Home extends React.Component {
   constructor() {
     super();
