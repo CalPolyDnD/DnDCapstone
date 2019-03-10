@@ -32,12 +32,12 @@ class NewAccountTextField extends React.Component {
           onAuth(values.email, values.password, values.confirm)
             .then(() => {
               if (!error) {
-                history.push('/home');
+                history.push('/campaign');
               }
             });
         }
       });
-    }
+    };
 
     handleConfirmBlur = (e) => {
       const { value } = e.target;

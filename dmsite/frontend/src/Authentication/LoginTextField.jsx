@@ -31,7 +31,7 @@ class TextField extends React.Component {
               // I think this is broken because state isn't updated until component is re-rendered
               // May need to use redux-saga middleware to handle this issue
               if (!error) {
-                history.push('/home');
+                history.push('/campaign');
               }
             });
         }
