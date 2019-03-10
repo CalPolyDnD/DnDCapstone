@@ -39,7 +39,15 @@ class StandardHeader extends React.Component {
       searchbarFilter: 'Name',
     };
     this.switchFilter = this.switchFilter.bind(this);
+    this.handleLogout = this.handleLogout.bind(this);
   }
+
+  handleLogout = (e) => {
+    const { history, logout } = this.props;
+    e.preventDefault();
+    logout()
+      .then(() => history.push('/login'));
+  };
 
   switchFilter(index) {
     const { searchFilterOrder } = this.state;
@@ -85,7 +93,7 @@ class StandardHeader extends React.Component {
   }
 
   renderProfileDropdown() {
-    const { isAuthenticated, logout } = this.props;
+    const { isAuthenticated } = this.props;
     return (
       <Menu>
         {
@@ -96,7 +104,14 @@ class StandardHeader extends React.Component {
               </MenuItem>,
 
               <MenuItem>
-                <a onClick={logout} href="/login" key="logout" style={{ color: 'red' }}>Logout</a>
+                <a
+                  onClick={ e => this.handleLogout(e)}
+                  href="/login"
+                  key="logout"
+                  style={{ color: 'red' }}
+                >
+                  Logout
+                </a>
               </MenuItem>,
             ]
             )
@@ -122,7 +137,7 @@ class StandardHeader extends React.Component {
           className="mx-1"
           htmlType="button"
         />
-        <Button onClick={() => { this.props.history.push('/profile/'); }}
+        <Button
           title="Settings"
           icon="setting"
           shape="circle-outline"
@@ -180,4 +195,4 @@ const mapDispatchToProps = dispatch => ({
 });
 
 
-export default connect(mapDispatchToProps)(withRouter(StandardHeader));
+export default connect(null, mapDispatchToProps)(withRouter(StandardHeader));
