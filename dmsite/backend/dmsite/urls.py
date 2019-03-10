@@ -29,20 +29,19 @@ from django.conf.urls.static import static
 from django.views.generic import TemplateView
 
 # Local addons
-from dmsite.upload import views as upload_views
-from dmsite.search import search
-from dmsite.file_manager import file_manager
-from dmsite.data_classifier import connector as classifier
+from dmsite.upload import upload
+from dmsite.post_requests import files, campaigns, classifier, search
 
 urlpatterns = [
     path('rest-auth/', include('rest_auth.urls')),
     path('rest-auth/registration', include('rest_auth.registration.urls')),
     path('admin/', admin.site.urls),
-    path('home/upload/push_file', upload_views.upload_file),
+    path('home/upload/push_file', upload.upload_file),
     path('search/push_query', search.perform_search),
-    path('details/get_file', file_manager.get_file_details),
-    path('dataset_sample', file_manager.get_dataset_header),
     path('classify_files', classifier.classify_files),
+    path('classify_files/save', classifier.save_classifications),
+    path('get_files', files.get_files_by_campaign),
+    path('get_campaigns', campaigns.get_campaigns_by_owner),
     re_path(r'^.*', TemplateView.as_view(template_name='index.html')),
 
     # leave this just incase ^^ stops working

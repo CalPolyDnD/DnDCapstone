@@ -14,9 +14,6 @@ import {
 import { connect } from 'react-redux';
 import * as actions from '../store/actions/auth';
 
-/* const { Option } = Select;
-const AutoCompleteOption = AutoComplete.Option; */
-
 const antSpinner = <Icon type="loading" style={{ fontSize: 24 }} spin />;
 class NewAccountTextField extends React.Component {
     state = {
@@ -48,7 +45,7 @@ class NewAccountTextField extends React.Component {
     compareToFirstPassword = (rule, value, callback) => {
       const { form } = this.props;
       if (value && value !== form.getFieldValue('password')) {
-        callback('Two passwords that you enter is inconsistent!');
+        callback('The two passwords you entered are inconsistent');
       } else {
         callback();
       }
@@ -64,16 +61,6 @@ class NewAccountTextField extends React.Component {
       callback();
     }
 
-    /* handleWebsiteChange = (value) => {
-      let autoCompleteResult;
-      if (!value) {
-        autoCompleteResult = [];
-      } else {
-        autoCompleteResult = ['.com', '.org', '.net'].map(domain => `${value}${domain}`);
-      }
-      this.setState({ autoCompleteResult });
-    } */
-
     render() {
       const { form, loading, error } = this.props;
       const { getFieldDecorator } = form;
@@ -85,19 +72,6 @@ class NewAccountTextField extends React.Component {
           <p>{error.message}</p>
         );
       }
-      /* const { autoCompleteResult } = this.state; */
-      /* const prefixSelector = getFieldDecorator('prefix', {
-        initialValue: '86',
-        })(
-          <Select style={{ width: 70 }}>
-           <Option value="86">+86</Option>
-           <Option value="87">+87</Option>
-          </Select>,
-       );
-
-      const websiteOptions = autoCompleteResult.map(website => (
-        <AutoCompleteOption key={website}>{website}</AutoCompleteOption>
-      )); */
 
       return (
         <Form onSubmit={this.handleSubmit}>
@@ -157,35 +131,6 @@ class NewAccountTextField extends React.Component {
                 )
             }
           </Form.Item>
-          { /* <Form.Item
-                    {...formItemLayout}
-                    label='Captcha'
-                    extra='We must make sure that your are a human.'
-                >
-                    <Row gutter={8}>
-                        <Col span={12}>
-                            {getFieldDecorator('captcha', {
-                                rules: [{ required: true, message: 'Please input
-                                the captcha you got!' }],
-                            })(
-                                <Input />
-                            )}
-                        </Col>
-                        <Col span={12}>
-                            <Button>Get captcha</Button>
-                        </Col>
-                    </Row>
-                </Form.Item> */ }
-          { /* <Form.Item {...tailFormItemLayout}>
-                    {getFieldDecorator('agreement', {
-                        valuePropName: 'checked',
-                    })(
-                        <Checkbox><a href=''> I have read the agreement</a></Checkbox>
-                    )}
-                </Form.Item> */ }
-          { /* <Form.Item {...tailFormItemLayout}>
-                    <Button type='primary' htmlType='submit'>Create Account</Button>
-                </Form.Item> */ }
         </Form>
       );
     }

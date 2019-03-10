@@ -28,4 +28,5 @@ yarn-error.log*
 # Virtual Environment Files (please use your own)
 /Lib
 /Scripts
+backend/env
 pyvenv.cfg

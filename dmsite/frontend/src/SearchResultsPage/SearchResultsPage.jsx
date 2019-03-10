@@ -85,7 +85,7 @@ class SearchResultsPage extends React.Component {
       },
     ];
     return searchResults.map(result => (
-        <SearchResultsCell dataset={result} history={this.props.history} />
+      <SearchResultsCell dataset={result} history={this.props.history} />
     ));
   }
 
@@ -170,10 +170,10 @@ class SearchResultsPage extends React.Component {
           >
             Search Results
           </CardHeader>
-            {this.renderFilterSection()}
-            <ListGroup style={{ borderWidth: 0 }}>
-              {this.renderSearchResults()}
-            </ListGroup>
+          {this.renderFilterSection()}
+          <ListGroup style={{ borderWidth: 0 }}>
+            {this.renderSearchResults()}
+          </ListGroup>
         </Card>
       </div>
     );
