@@ -8,7 +8,6 @@ import {
   CardHeader,
   ListGroup,
   ListGroupItem,
-  Input,
 } from 'reactstrap';
 import PropTypes from 'prop-types';
 import Upload from './UploadComponent';
@@ -61,11 +60,13 @@ class DatasetsColumn extends React.Component {
           <ListGroup className="filter-list" flush>
             {this.renderFileCells()}
           </ListGroup>
+          { /*
           <Input
             placeholder="Search Result"
             className="mt-1"
             style={{ backgroundColor: '#303030', borderWidth: 0 }}
           />
+          */ }
           <Button
             color="primary"
             size="md"

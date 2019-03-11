@@ -32,11 +32,13 @@ class ClassificationColumn extends Component {
           <ListGroup flush>
             {this.renderClassificationCell()}
           </ListGroup>
+          { /*
           <Input
             placeholder="Search Classification"
             className="mt-3"
             style={{ backgroundColor: '#303030', borderWidth: 0 }}
           />
+          */ }
           <Button
             onClick={this.handleClick}
             color="primary"

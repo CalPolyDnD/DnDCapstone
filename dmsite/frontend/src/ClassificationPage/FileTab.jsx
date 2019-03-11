@@ -6,8 +6,7 @@ import {
   Col,
   Input,
   Table,
-  ListGroup,
-  ListGroupItem, CardHeader, CardBody, Card,
+  CardHeader, CardBody, Card,
 } from 'reactstrap';
 import ClassificationTable from './ClassificationTable';
 import { FileObject } from '../Model/FileObject';
@@ -84,27 +83,7 @@ class FileTab extends Component {
                   />
                 </CardBody>
               </Card>
-            <div style={{ paddingTop: '5%'}}>
-              <Card style={{ borderWidth: 0, justified: 'center'}}>
-              <CardHeader tag="h3" style={{ backgroundColor: '#303030', color: 'white', textAlign: 'center' }} >Access Control</CardHeader>
-                <CardBody style={{ backgroundColor: '#3d3d3d', color: 'white' }}>
-                  <ListGroup style={{ color: "white", borderWidth: 0, borderColor: '#3d3d3d'}}>
-                    <ListGroupItem style={{ backgroundColor: '#3d3d3d', color: 'white', borderWidth: 0 }}>Your Username
-                      <Input style={{ right: '10%'}} type="checkbox" checked="checked"/>
-                    </ListGroupItem>
-                    <ListGroupItem style={{ backgroundColor: '#3d3d3d', color: 'white', borderWidth: 0 }}>Christina Daley
-                      <Input style={{ right: '10%'}} type="checkbox" />
-                    </ListGroupItem>
-                    <ListGroupItem style={{ backgroundColor: '#3d3d3d', color: 'white', borderWidth: 0 }}>Larry Hu
-                      <Input style={{ right: '10%'}} type="checkbox" />
-                    </ListGroupItem>
-                    <ListGroupItem style={{ backgroundColor: '#3d3d3d', color: 'white', borderWidth: 0 }}>Griffin Aswegan
-                      <Input style={{ right: '10%'}} type="checkbox" />
-                    </ListGroupItem>
-                  </ListGroup>
-                </CardBody>
-              </Card>
-            </div>
+
           </Col>
           <Col xs="4">
             <ClassificationTable

@@ -36,7 +36,7 @@ class Campaign extends React.Component {
       const result = campaigns[count];
       jsonObj.push(
         <ListGroupItem
-          onClick={() => { history.push(`/home${campaigns.name}`); }}
+          onClick={() => { history.push(`/home/${campaigns[count].name}`); }}
           style={{ backgroundColor: '#3d3d3d', color: 'white' }}
         >
           {result.name}
