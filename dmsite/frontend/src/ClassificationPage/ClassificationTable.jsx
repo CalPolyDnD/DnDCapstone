@@ -5,6 +5,7 @@ import {
   CardBody,
   CardHeader,
   Collapse,
+  Input,
   ListGroup,
   ListGroupItem,
 } from 'reactstrap';
@@ -14,6 +15,14 @@ class ClassificationTable extends React.Component {
   static defaultProps = {
     selectedClassificationIndex: 0,
     cellOnClick: () => {},
+  }
+
+  handleChange = (event, index) => {
+    let classifications = this.props.file.classifications;
+    if (event.target.checked === true)
+      classifications[index].is_sensitive = 1;
+    else
+      classifications[index].is_sensitive = 0;
   }
 
   renderClassificationExamples(examples) {
@@ -42,7 +51,9 @@ class ClassificationTable extends React.Component {
             onClick={() => { cellOnClick(index); }}
             style={{ color: 'white', backgroundColor: '#3d3d3d', fontSize: '110%' }}
         >
-          {classification.name}</ListGroupItem>
+          {classification.name}
+          <Input style={{ right: '10%'}} type="checkbox" onChange={(event) => {this.handleChange(event, index)}} />
+        </ListGroupItem>
         <Collapse
             isOpen={selectedClassificationIndex === index}
             style={{backgroundColor: '#3d3d3d' }}

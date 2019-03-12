@@ -32,7 +32,7 @@ class Home extends React.Component {
   }
 
   componentDidMount() {
-      fetch(FETCH_URL, {
+    fetch(FETCH_URL, {
         method: 'POST',
         body: JSON.stringify({
             campaign: this.state.campaign
@@ -66,13 +66,13 @@ class Home extends React.Component {
           </Container>
         );
 
-    if (this.state.fileList.length == 0)
+    if (this.state.fileList.length === 0)
         return null;
 
     let filenames = this.state.fileList[0].get_name();
     for (let count = 1; count < this.state.fileList.length && count < 5; count++) {
         filenames += ", " + this.state.fileList[count].get_name();
-        if (count == 4)
+        if (count === 4)
             filenames += "...";
     }
 

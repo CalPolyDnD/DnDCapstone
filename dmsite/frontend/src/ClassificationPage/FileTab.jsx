@@ -50,12 +50,6 @@ class FileTab extends Component {
     const file = this.state.file;
     file.description = event.target.value;
     this.setState({file: file});
-    fetch(FETCH_URL, {
-      method: 'POST',
-      body: {
-        description: event.target.value,
-      }
-    });
   }
 
   setSelectedClassification = (index) => {
@@ -128,7 +122,7 @@ class FileTab extends Component {
             <div style={{ justifyContent: 'center', paddingTop: '4%'}}>
             <Button
                 color="primary"
-                onClick={() => { this.onFinish(); }}
+                onClick={() => { this.props.onFinish(); }}
                 className="mr-0 btn-block mt-2 mb-2"
             > Save </Button>
             </div>

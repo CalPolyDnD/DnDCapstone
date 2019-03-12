@@ -15,9 +15,7 @@ import './ClassificationInfo.css';
 
 let FETCH_URL = 'http://localhost:8000/classify_files';
 let SAVE_URL =  'http://localhost:8000/classify_files/save';
-//TODO: all of this needs style changes
 
-// TODO: all of this needs style changes
 class ClassificationPage extends Component {
   constructor(props) {
     super(props);
@@ -30,7 +28,6 @@ class ClassificationPage extends Component {
   }
 
   componentDidMount() {
-  // TODO: make this depend on passed-in files
      fetch(FETCH_URL, {
        method: 'POST',
        body: JSON.stringify([{
@@ -39,7 +36,15 @@ class ClassificationPage extends Component {
          filename: 'MOCK_PEOPLE.csv',
        }])
      }).then((data) => {
-       const files = data.json();
+        return data.json();
+     }).then((resp) => {
+       let files = resp;
+
+       // TODO: remove the hardcoding for this campaign name
+       for (let count = 0; count < files.length; count++) {
+        files[count].campaign = "test_campaign";
+       }
+
        this.setState({ files: files });
      });
   }
@@ -52,21 +57,15 @@ class ClassificationPage extends Component {
     }
   }
 
-  onFinish() {
-    this.setState({finished: 1});
+  onFinish = () => {
     fetch(SAVE_URL, {
       method: 'POST',
-      body: JSON.stringify(this.state.results)
+      body: JSON.stringify(this.state.files)
     }).then(data => {
         return data.json();
     }).then(result => {
         this.props.history.push('/home');
     });
-  }
-
-  checkFinish() {
-    if (this.state.finished === 1)
-        return (<h3> Saving... </h3>);
   }
 
   displayClassification(count) {
@@ -123,7 +122,7 @@ class ClassificationPage extends Component {
     for (let count = 0; count < files.length; count++) {
       jsonObj.push(
         <TabPane tabId={count} >
-          <FileTab file={files[count]} />
+          <FileTab file={files[count]} onFinish={this.onFinish} />
         </TabPane>,
       );
     }
@@ -155,7 +154,8 @@ class ClassificationPage extends Component {
   }
 }
 
- /*const FAKE_RESPONSE = [
+/*
+const FAKE_RESPONSE = [
   {
       "filename": "MOCK_DATA.csv",
       "description": "test description",
@@ -375,6 +375,7 @@ class ClassificationPage extends Component {
           }
       ]
   }
-];*/
+];
+*/
 
 export default ClassificationPage;

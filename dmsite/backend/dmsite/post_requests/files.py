@@ -20,6 +20,7 @@ def find_files(data):
     response = db.make_query("files", "campaign-index", "campaign", data['campaign'])
     if 'Items' not in response:
         return {"errorMsg": "no files in campaign " + data['campaign']}, -1
+
     return response['Items'], 0
 
 
