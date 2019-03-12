@@ -28,25 +28,16 @@ class ClassificationPage extends Component {
   }
 
   componentDidMount() {
-     fetch(FETCH_URL, {
-       method: 'POST',
-       body: JSON.stringify([{
-         filename: 'MOCK_DATA.csv',
-       }, {
-         filename: 'MOCK_PEOPLE.csv',
-       }])
-     }).then((data) => {
-        return data.json();
-     }).then((resp) => {
-       let files = resp;
+    const { location } = this.props;
+    const fileNames = location.search.replace('?=', '').split(',');
+    const formattedBody = fileNames.map(fileName => ({ filename: fileName }));
 
-       // TODO: remove the hardcoding for this campaign name
-       for (let count = 0; count < files.length; count++) {
-        files[count].campaign = "test_campaign";
-       }
-
-       this.setState({ files: files });
-     });
+    fetch(FETCH_URL, {
+      method: 'POST',
+      body: JSON.stringify(formattedBody)
+    }).then(data => data.json()).then((result) => {
+      this.setState({ files: result });
+    });
   }
 
   toggle(tab) {
@@ -142,7 +133,7 @@ class ClassificationPage extends Component {
     return (
       <div className="classification-page">
         <div>
-          <Nav tabs style={{ backgroundColor: 'primary'}}>
+          <Nav tabs style={{ backgroundColor: 'primary' }}>
             {this.displayTabs()}
           </Nav>
           <TabContent activeTab={this.state.activeTab} >
@@ -154,6 +145,7 @@ class ClassificationPage extends Component {
   }
 }
 
+<<<<<<< HEAD
 /*
 const FAKE_RESPONSE = [
   {
@@ -375,7 +367,5 @@ const FAKE_RESPONSE = [
           }
       ]
   }
-];
-*/
-
+]; */
 export default ClassificationPage;

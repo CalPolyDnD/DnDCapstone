@@ -8,7 +8,7 @@ import Login from './Authentication/Login';
 import CreateAccount from './Authentication/CreateAccount';
 import Profile from './Profile/ProfileComponent';
 import Campaign from './CampaignPage/Campaign';
-import ClassificationPage from './ClassificationPage/ClassificationPage'
+import ClassificationPage from './ClassificationPage/ClassificationPage';
 
 const BaseRouter = () => (
   <div>

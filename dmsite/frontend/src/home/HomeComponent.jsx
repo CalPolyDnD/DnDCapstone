@@ -12,7 +12,13 @@ import DisplayColumn from './VisualColumn/DisplayColumn';
 import ClassificationColumn from './ClassificationColumn/ClassificationColumn';
 import { FileObject } from '../Model/FileObject';
 
-const FETCH_URL = 'http://localhost:8000/get_files'
+const testClassification1 = [{ name: 'Classify1', age: 2 }, { name: 'Classify2', age: 4 }, { name: 'Classify3', age: 5 }];
+const testClassification2 = [{ name: 'Classify1', age: 3 }, { name: 'Classify2', age: 6 }, { name: 'Classify3', age: 53 }];
+
+const dummyfiles = [
+  new FileObject('file1', 'MOCK_DATA.csv', testClassification1, 'header1'),
+  new FileObject('file2', 'MOCK_PEOPLE.csv', testClassification2, 'header3'),
+];
 
 class Home extends React.Component {
   constructor() {
@@ -85,7 +91,11 @@ class Home extends React.Component {
         <p style={{ color: '#afafaf' }}> This campaign organizes {filenames}  </p>
         <Row>
           <Col md="3">
-            <DatasetsColumn fileListData={fileList} selectedFileIndex={selectedFileIndex} cellOnClick={this._handleFileChange} />
+            <DatasetsColumn
+              fileListData={fileList}
+              selectedFileIndex={selectedFileIndex}
+              cellOnClick={this._handleFileChange}
+            />
           </Col>
           <Col md="7">
             <ClassificationColumn name="Classifications" file={fileList[selectedFileIndex]} />
