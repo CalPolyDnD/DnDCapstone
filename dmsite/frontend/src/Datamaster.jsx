@@ -29,6 +29,6 @@ class DataMaster extends Component {
 
 DataMaster.propTypes = {
   children: PropTypes.oneOfType(PropTypes.node).isRequired,
-}
+};
 
 export default withRouter(DataMaster);
