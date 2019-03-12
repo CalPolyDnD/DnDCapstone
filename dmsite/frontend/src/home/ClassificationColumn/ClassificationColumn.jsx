@@ -15,9 +15,11 @@ class ClassificationColumn extends Component {
     const { file } = this.props;
 
     return file.classifications.map((obj, index) => {
+      console.log(obj);
       return (
         <ListGroupItem key={ index } style={{ backgroundColor: '#3d3d3d', color: 'white' }}>
           <p>{obj}</p>
+          <p style={{ right: "10%"}}>{this.isSensitive(obj)}</p>
         </ListGroupItem>
       );
     });

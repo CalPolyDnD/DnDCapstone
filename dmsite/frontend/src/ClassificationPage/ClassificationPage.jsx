@@ -145,7 +145,6 @@ class ClassificationPage extends Component {
   }
 }
 
-<<<<<<< HEAD
 /*
 const FAKE_RESPONSE = [
   {

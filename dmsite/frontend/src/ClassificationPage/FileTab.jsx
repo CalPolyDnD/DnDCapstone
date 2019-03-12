@@ -46,12 +46,6 @@ class FileTab extends Component {
   }
 
   handleChange = (event) => {
-<<<<<<< HEAD
-    const FETCH_URL = "localhost8000/update_file_description";
-    const file = this.state.file;
-    file.description = event.target.value;
-    this.setState({file: file});
-=======
     this.setState({ description: event.target.value });
   }
 
@@ -69,7 +63,6 @@ class FileTab extends Component {
         },
       }).then(() => { this.setState({ isSaving: false }); });
     });
->>>>>>> d6085e93275c542f7e030b5983377fa7ee4567f6
   }
 
   setSelectedClassification = (index) => {
@@ -164,17 +157,7 @@ class FileTab extends Component {
                 </Table>
               </CardBody>
             </Card>
-<<<<<<< HEAD
-            <div style={{ justifyContent: 'center', paddingTop: '4%'}}>
-            <Button
-                color="primary"
-                onClick={() => { this.props.onFinish(); }}
-                className="mr-0 btn-block mt-2 mb-2"
-            > Save </Button>
-            </div>
-=======
             {this.renderSaveButton()}
->>>>>>> d6085e93275c542f7e030b5983377fa7ee4567f6
           </Col>
         </Row>
       </div>
