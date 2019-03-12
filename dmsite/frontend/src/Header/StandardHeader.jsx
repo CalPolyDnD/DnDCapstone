@@ -3,12 +3,15 @@ import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import ReactRouterPropTypes from 'react-router-prop-types';
 import { connect } from 'react-redux';
+import { Modal, ModalBody } from 'reactstrap';
 import {
   Menu,
   Button,
   Dropdown,
+  Icon,
   Input,
   Select,
+  Spin,
 } from 'antd';
 
 import Logo from '../images/DnDLogo2.png';
@@ -36,6 +39,7 @@ class StandardHeader extends React.Component {
         SEARCH_FIELDS.classification,
         SEARCH_FIELDS.attribute,
       ],
+      modalIsVisible: false,
       searchbarFilter: 'Name',
     };
     this.switchFilter = this.switchFilter.bind(this);
@@ -45,8 +49,12 @@ class StandardHeader extends React.Component {
   handleLogout = (e) => {
     const { history, logout } = this.props;
     e.preventDefault();
-    logout()
-      .then(() => history.push('/login'));
+    this.setState({ modalIsVisible: true },
+      () => {
+        logout()
+          .then(() => history.push('/login'));
+        this.setState({ modalIsVisible: false });
+      });
   };
 
   switchFilter(index) {
@@ -94,6 +102,9 @@ class StandardHeader extends React.Component {
 
   renderProfileDropdown() {
     const { isAuthenticated } = this.props;
+    const { modalIsVisible } = this.state;
+
+    const antIcon = <Icon type="loading" style={{ fontSize: 24 }} spin />;
     return (
       <Menu>
         {
@@ -105,13 +116,18 @@ class StandardHeader extends React.Component {
 
               <MenuItem>
                 <a
-                  onClick={ e => this.handleLogout(e)}
+                  onClick={e => this.handleLogout(e)}
                   href="/login"
                   key="logout"
                   style={{ color: 'red' }}
                 >
                   Logout
                 </a>
+                <Modal isOpen={modalIsVisible}>
+                  <ModalBody style={{ textAlign: 'center' }}>
+                    <Spin style={{ backgroundColor: 'transparent' }} indicator={antIcon} tip='Logging out...' backdrop='static'/>
+                  </ModalBody>
+                </Modal>
               </MenuItem>,
             ]
             )
