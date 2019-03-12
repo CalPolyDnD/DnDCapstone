@@ -54,7 +54,6 @@ def save_classifications(request):
         data = json.loads(str(request.body, encoding='utf8'))
         result, status = save_data(data)
         if status == -1:
-            print(result['errorMsg'])
             return JsonResponse({"error": result['errorMsg']}, status=400)
         return JsonResponse({"success": 1}, status=203)
 

@@ -11,8 +11,9 @@ class ClassificationColumn extends Component {
     e.preventDefault();
   }
 
+  // TODO: at some point, base this off of the classification lookup, not on the file's classifications
   isSensitive(val) {
-    if (val == 1) { // == is required; === does not work properly for some reason
+    if (val === true) { // == works, but === doesn't, for bools or numbers - need to fix
         return "Sensitive!";
      }
     return "";
@@ -22,7 +23,6 @@ class ClassificationColumn extends Component {
     const { file } = this.props;
 
     return file.classifications.map((obj, index) => {
-      console.log(obj.is_sensitive);
       return (
         <ListGroupItem key={ index } style={{ backgroundColor: '#3d3d3d', color: 'white' }}>
             <div>

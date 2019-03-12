@@ -40,6 +40,7 @@ class ClassificationPage extends Component {
       let files = result;
       files.map(file => { file.campaign = this.campaignName; });
       this.setState({ files: files });
+      return ""; // needed for compiler
     });
   }
 
