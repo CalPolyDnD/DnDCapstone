@@ -25,6 +25,7 @@ class ClassificationPage extends Component {
       activeTab: 0,
       files: [],
     };
+    this.campaignName = this.props.location.pathname.replace("/classification/", "");
   }
 
   componentDidMount() {
@@ -36,7 +37,9 @@ class ClassificationPage extends Component {
       method: 'POST',
       body: JSON.stringify(formattedBody)
     }).then(data => data.json()).then((result) => {
-      this.setState({ files: result });
+      let files = result;
+      files.map(file => { file.campaign = this.campaignName; });
+      this.setState({ files: files });
     });
   }
 
@@ -48,14 +51,13 @@ class ClassificationPage extends Component {
     }
   }
 
-  onFinish = () => {
+  onFinish = (completion) => {
     fetch(SAVE_URL, {
       method: 'POST',
       body: JSON.stringify(this.state.files)
     }).then(data => {
-        return data.json();
-    }).then(result => {
-        this.props.history.push('/home');
+        completion();
+        this.props.history.push('/home/' + this.campaignName);
     });
   }
 

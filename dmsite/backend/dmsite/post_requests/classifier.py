@@ -51,7 +51,6 @@ def make_classifications(body):
 @csrf_exempt
 def save_classifications(request):
     if request.method == 'POST':
-        print(request.body)
         data = json.loads(str(request.body, encoding='utf8'))
         result, status = save_data(data)
         if status == -1:
@@ -85,7 +84,7 @@ def save_data(data):
                         {'#classifications': 'examples'},
                         {':values': classification['examples'], ':empty_list': []}
                     )
-                names.append(classification['name'])
+                names.append({"name": classification['name'], "is_sensitive": classification["is_sensitive"]})
 
             response = db.update_item(
                 "files",

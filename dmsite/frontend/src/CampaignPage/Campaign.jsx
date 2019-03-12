@@ -20,7 +20,7 @@ class Campaign extends React.Component {
     axios.get(FETCH_CURRENT_USER_URL)
       .then((userRes) => {
         axios.post(FETCH_CAMPAIGNS_URL, {
-          user: userRes.data.email,
+          owner: userRes.data.email,
         })
           .then((campRes) => {
             this.setState({ campaigns: campRes.data });
@@ -36,7 +36,7 @@ class Campaign extends React.Component {
       const result = campaigns[count];
       jsonObj.push(
         <ListGroupItem
-          onClick={() => { history.push(`/home${campaigns.name}`); }}
+          onClick={() => { history.push(`/home/${result.name}`); }}
           style={{ backgroundColor: '#3d3d3d', color: 'white' }}
         >
           {result.name}

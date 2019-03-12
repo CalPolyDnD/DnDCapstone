@@ -23,8 +23,8 @@ const dummyfiles = [
 ];
 
 class Home extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       campaign: "test_campaign",
       fileList: [],
@@ -32,6 +32,7 @@ class Home extends React.Component {
       filesPresent: 1,
     };
     this._handleFileChange = this.handleFileChange.bind(this);
+    this.campaignName = props.location.pathname.replace("/home/", "");
   }
 
   handleFileChange = (index) => {
@@ -96,6 +97,7 @@ class Home extends React.Component {
               fileListData={fileList}
               selectedFileIndex={selectedFileIndex}
               cellOnClick={this._handleFileChange}
+              campaign={this.campaignName}
             />
           </Col>
           <Col md="7">

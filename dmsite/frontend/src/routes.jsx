@@ -20,7 +20,6 @@ const BaseRouter = () => (
     <Route path="/home" component={Home} />
     <Route path="/campaign" component={Campaign} />
     <Route path="/classification" component={ClassificationPage} />
-    <Route path="/" component={Login}>
   </div>
 );
 
