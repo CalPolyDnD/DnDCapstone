@@ -22,11 +22,19 @@ class NewAccountTextField extends React.Component {
 
     handleSubmit = (e) => {
       e.preventDefault();
-      const { form, onAuth } = this.props;
+      const {
+        form, onAuth, history, error,
+      } = this.props;
       const { validateFieldsAndScroll } = form;
       validateFieldsAndScroll(async (err, values) => {
         if (!err) {
-           onAuth(values.email, values.password, values.confirm);
+          // TODO: Fix issue that's also in LoginTextField.jsx related to updating state immediately
+          onAuth(values.email, values.password, values.confirm)
+            .then(() => {
+              if (!error) {
+                history.push('/home');
+              }
+            });
         }
       });
     }
@@ -102,7 +110,7 @@ class NewAccountTextField extends React.Component {
           <Form.Item>
             {getFieldDecorator('confirm', {
               rules: [
-                { required: true, message: 'Passwords do not match!'},
+                { required: true, message: 'Passwords do not match!' },
                 { validator: this.compareToFirstPassword },
               ],
             })(
@@ -143,7 +151,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   onAuth: (email, pw1, pw2) => dispatch(actions.authSignup(email, pw1, pw2)),
-})
+});
 
 const WrappedRegistrationForm = Form.create({ name: 'register' })(NewAccountTextField);
 
