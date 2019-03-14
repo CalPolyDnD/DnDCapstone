@@ -1,9 +1,9 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import {
-  Container,
-  Row,
-  Col,
+    Container,
+    Row,
+    Col, Button,
 } from 'reactstrap';
 import './style.css';
 import DatasetsColumn from './DataColumn/DatasetsColumn';
@@ -35,6 +35,11 @@ class Home extends React.Component {
     };
     this._handleFileChange = this.handleFileChange.bind(this);
     this.campaignName = props.location.pathname.replace("/home/", "");
+  }
+
+  onClick() {
+        this.props.history.push(`/a/${this.props.a}`);
+        window.location.reload();
   }
 
   handleFileChange = (index) => {
@@ -73,6 +78,9 @@ class Home extends React.Component {
                 <h1 style={{ color: 'white' }}>Campaign: {campaign} </h1>
             <p style={{ color: '#afafaf' }}> This campaign has no files! Add some files to classify.  </p>
             <Upload />
+              <Button color="secondary" size="md" className="btn-block mt-3"
+                      disabled={this.state.campaigns.length === 0}
+                      onClick={this.onClick}>Save & Continue </Button>
           </Container>
         );
 
