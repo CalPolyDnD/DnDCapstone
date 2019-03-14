@@ -20,9 +20,9 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">29.17% </span>
+        <span class="strong">28% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>7/24</span>
+        <span class='fraction'>7/25</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
@@ -32,12 +32,12 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>0/11</span>
+        <span class='fraction'>0/12</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">30.43% </span>
+        <span class="strong">29.17% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>7/23</span>
+        <span class='fraction'>7/24</span>
       </div>
     </div>
   </div>
@@ -221,7 +221,12 @@
 176
 177
 178
-179</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+179
+180
+181
+182
+183
+184</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -285,6 +290,11 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -464,17 +474,22 @@ class StandardHeader extends React.Component {
           defaultValue={0}
           onSelect={this.switchFilter}
           className="float-left"
-          style={{ backgroundColor:'#303030'}}
+          style={{ backgroundColor: '#303030' }}
         &gt;
-          &lt;Option value={0} style={{ backgroundColor:'#303030', color:'white'}}&gt;{ searchFilterOrder[0] }&lt;/Option&gt;
-          &lt;Option value={1} style={{ backgroundColor:'#303030', color:'white'}}&gt;{ searchFilterOrder[1] }&lt;/Option&gt;
-          &lt;Option value={2} style={{ backgroundColor:'#303030', color:'white'}}&gt;{ searchFilterOrder[2] }&lt;/Option&gt;
+          { searchFilterOrder.map(<span class="fstat-no" title="function not covered" >(f</span>ilter, index) =&gt; (
+<span class="cstat-no" title="statement not covered" >            &lt;Option</span>
+              value={index}
+              style={{ backgroundColor: '#303030', color: 'white' }}
+            &gt;
+              {filter}
+            &lt;/Option&gt;
+          ))}
         &lt;/Select&gt;
         &lt;Search
           placeholder={`Search Campaign by ${searchbarFilter}`}
           onSearch={<span class="fstat-no" title="function not covered" >(s</span>earchbarText) =&gt; { <span class="cstat-no" title="statement not covered" >history.push(`/search/${searchbarFilter}?=${searchbarText}`); </span>}}
           enterButton
-          style={{ width: '40%', height: '32px', background:'#303030' }}
+          style={{ width: '40%', height: '32px', background: '#303030' }}
         /&gt;
       &lt;/InputGroup&gt;
     );
@@ -542,21 +557,21 @@ class StandardHeader extends React.Component {
 <span class="fstat-no" title="function not covered" >  re</span>nder() {
 <span class="cstat-no" title="statement not covered" >    return (</span>
       &lt;div style={{ height: '64px', background: '#000000' }} id="headerContainer"&gt;
-        &lt;div style={{ background: '#000000' }} &gt;
-        &lt;a className="d-inline-flex px-2" href="/home/" id="logoBanner"&gt;
-          &lt;img id="logo" alt="" width="65" height="50" src={Logo} /&gt;
-          &lt;h2
-            style={{
-              color: 'white',
-              textDecoration: 'none',
-              height: '50px',
-              alignSelf: 'center',
-              lineHeight: '50px',
-            }}
-          &gt;
+        &lt;div style={{ background: '#000000' }}&gt;
+          &lt;a className="d-inline-flex px-2" href="/home/" id="logoBanner"&gt;
+            &lt;img id="logo" alt="" width="65" height="50" src={Logo} /&gt;
+            &lt;h2
+              style={{
+                color: 'white',
+                textDecoration: 'none',
+                height: '50px',
+                alignSelf: 'center',
+                lineHeight: '50px',
+              }}
+            &gt;
             DataMaster
-          &lt;/h2&gt;
-        &lt;/a&gt;
+            &lt;/h2&gt;
+          &lt;/a&gt;
         &lt;/div&gt;
         { this.renderSearchBar() }
         { this.renderNavItems() }
@@ -573,7 +588,7 @@ StandardHeader.propTypes = {
 &nbsp;
 const mapDispatchToProps = <span class="fstat-no" title="function not covered" >di</span>spatch =&gt; (<span class="cstat-no" title="statement not covered" >{</span>
   logout: <span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >dispatch(actions.logout()),</span>
-})
+});
 &nbsp;
 &nbsp;
 export default connect(mapDispatchToProps)(withRouter(StandardHeader));
@@ -583,7 +598,7 @@ export default connect(mapDispatchToProps)(withRouter(StandardHeader));
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Feb 21 2019 10:47:18 GMT-0800 (Pacific Standard Time)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Mar 05 2019 11:02:06 GMT-0800 (Pacific Standard Time)
 </div>
 </div>
 <script src="..\prettify.js"></script>
