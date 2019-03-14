@@ -38,7 +38,6 @@ class Home extends React.Component {
   }
 
   onClick() {
-        this.props.history.push(`/a/${this.props.a}`);
         window.location.reload();
   }
 
@@ -63,7 +62,7 @@ class Home extends React.Component {
 
         for (let count = 0; count < response.length; count++) {
             files.push(new FileObject(response[count].filename,
-                       response[count].filename, response[count].classifications, 'header'));
+                       response[count].filename, response[count].classifications, response[count].is_classified));
         }
         this.setState({ fileList: files });
     });
@@ -79,7 +78,6 @@ class Home extends React.Component {
             <p style={{ color: '#afafaf' }}> This campaign has no files! Add some files to classify.  </p>
             <Upload />
               <Button color="secondary" size="md" className="btn-block mt-3"
-                      disabled={this.state.campaigns.length === 0}
                       onClick={this.onClick}>Save & Continue </Button>
           </Container>
         );
@@ -94,11 +92,11 @@ class Home extends React.Component {
             filenames += "...";
     }
 
+    //           <DisplayColumn name="Display Actions" /> - add in the first row after h1
     return (
       <Container fluid>
         <Row style={{ justifyContent: 'space-between' }}>
           <h1 style={{ color: 'white' }}>Campaign: {campaign} </h1>
-          <DisplayColumn name="Display Actions" />
         </Row>
         <p style={{ color: '#afafaf' }}> This campaign organizes {filenames}  </p>
         <Row>
