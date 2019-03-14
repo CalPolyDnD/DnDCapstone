@@ -100,7 +100,7 @@ class ClassificationPage extends Component {
           <NavLink
             className={classnames({ active: this.state.activeTab === count })}
             onClick={() => { this.toggle(count); }}
-            style={{ backgroundColor: 'primary'}}
+            style={{ backgroundColor: 'primary', color: 'white' }}
           >
             {result.filename}
           </NavLink>
