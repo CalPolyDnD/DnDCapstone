@@ -99,6 +99,13 @@ def save_data(data):
                 {'#classifications': 'classifications'},
                 {':values': names, ':empty_list': []}
             )
+            response = db.update_item(
+                "files",
+                {"filename": item['filename'], 'campaign': item['campaign']},
+                'set #is_classified = :value',
+                {'#is_classified': 'is_classified'},
+                {':value': 1}
+            )
 
     except KeyError as e:
         return {"errorMsg": "invalid json object: " + e.__str__()}, -1
