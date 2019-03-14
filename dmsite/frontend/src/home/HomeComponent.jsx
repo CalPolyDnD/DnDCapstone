@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import {
   Container,
   Row,
-  Col,
+  Col, ListGroupItem,
 } from 'reactstrap';
 import './style.css';
 import DatasetsColumn from './DataColumn/DatasetsColumn';
@@ -24,6 +24,8 @@ const dummyfiles = [
 ];
 */
 
+const dummyAccessList = ['Christina Daley', 'Larry Hu', 'Steven Bradley']
+
 class Home extends React.Component {
   constructor(props) {
     super(props);
@@ -39,6 +41,30 @@ class Home extends React.Component {
 
   handleFileChange = (index) => {
     this.setState({ selectedFileIndex: index });
+  }
+
+  getNameAccess() {
+    const jsonObj = [];
+    const { firstName, lastName } = this.state;
+    const admin = `${firstName + lastName}\t\tADMIN`;
+    jsonObj.push(
+      <ListGroupItem
+        style={{ backgroundColor: '#3d3d3d', color: 'white', borderWidth: 0 }}
+      >
+        {admin}
+      </ListGroupItem>,
+    );
+    for (let count = 0; count < dummyAccessList.length; count += 1) {
+      const result = dummyAccessList[count];
+      jsonObj.push(
+        <ListGroupItem
+          style={{ backgroundColor: '#3d3d3d', color: 'white', borderWidth: 0 }}
+        >
+          {result}
+        </ListGroupItem>,
+      );
+    }
+    return jsonObj;
   }
 
   componentDidMount() {
@@ -116,6 +142,7 @@ This campaign organizes
               cellOnClick={this._handleFileChange}
               campaign={this.campaignName}
             />
+            {this.getNameAccess()}
           </Col>
           <Col md="7">
             <ClassificationColumn name="Classifications" file={fileList[selectedFileIndex]} />
