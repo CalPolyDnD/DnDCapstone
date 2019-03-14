@@ -3,7 +3,11 @@ import { withRouter } from 'react-router-dom';
 import {
   Container,
   Row,
-  Col, ListGroupItem,
+  Col,
+  ListGroupItem,
+  Card,
+  CardHeader,
+  CardBody, Input, ListGroup,
 } from 'reactstrap';
 import './style.css';
 import DatasetsColumn from './DataColumn/DatasetsColumn';
@@ -24,7 +28,7 @@ const dummyfiles = [
 ];
 */
 
-const dummyAccessList = ['Christina Daley', 'Larry Hu', 'Steven Bradley']
+const dummyAccessList = ['Griffin Aswegar ADMIN', 'Christina Daley', 'Larry Hu', 'Steven Bradley'];
 
 class Home extends React.Component {
   constructor(props) {
@@ -44,27 +48,39 @@ class Home extends React.Component {
   }
 
   getNameAccess() {
-    const jsonObj = [];
-    const { firstName, lastName } = this.state;
-    const admin = `${firstName + lastName}\t\tADMIN`;
-    jsonObj.push(
-      <ListGroupItem
-        style={{ backgroundColor: '#3d3d3d', color: 'white', borderWidth: 0 }}
-      >
-        {admin}
-      </ListGroupItem>,
+    // const jsonObj = [];
+    // const { firstName, lastName } = this.state;
+    // const admin = `${firstName + lastName}\t\tADMIN`;
+    // jsonObj.push(
+    //   <ListGroupItem
+    //     style={{ backgroundColor: '#3d3d3d', color: 'white', borderWidth: 0 }}
+    //   >
+    //     {admin}
+    //   </ListGroupItem>,
+    // );
+    return (
+      <Card>
+        <CardHeader>Access Control</CardHeader>
+        <CardBody>
+          <ListGroupItem style={{ backgroundColor: '#3d3d3d', color: 'white', borderWidth: 0 }}>
+                Griffin Aswegan ADMIN
+            <Input style={{ right: '10%' }} type="checkbox" checked="checked" />
+          </ListGroupItem>
+          <ListGroupItem style={{ backgroundColor: '#3d3d3d', color: 'white', borderWidth: 0 }}>
+                Christina Daley
+            <Input style={{ right: '10%' }} type="checkbox" />
+          </ListGroupItem>
+          <ListGroupItem style={{ backgroundColor: '#3d3d3d', color: 'white', borderWidth: 0 }}>
+                Larry Hu
+            <Input style={{ right: '10%' }} type="checkbox" />
+          </ListGroupItem>
+          <ListGroupItem style={{ backgroundColor: '#3d3d3d', color: 'white', borderWidth: 0 }}>
+                Steven Bradley
+            <Input style={{ right: '10%' }} type="checkbox" />
+          </ListGroupItem>
+        </CardBody>
+      </Card>
     );
-    for (let count = 0; count < dummyAccessList.length; count += 1) {
-      const result = dummyAccessList[count];
-      jsonObj.push(
-        <ListGroupItem
-          style={{ backgroundColor: '#3d3d3d', color: 'white', borderWidth: 0 }}
-        >
-          {result}
-        </ListGroupItem>,
-      );
-    }
-    return jsonObj;
   }
 
   componentDidMount() {
