@@ -58,6 +58,7 @@ class Home extends React.Component {
             <ClassificationColumn name="Classifications" file={fileList[selectedFileIndex]} />
           </Col>
         </Row>
+
       </Container>
     );
   }
