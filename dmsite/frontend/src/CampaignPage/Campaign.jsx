@@ -16,12 +16,6 @@ class Campaign extends React.Component {
     };
   }
 
-  onClick() {
-    this.props.history.push(`/a/${this.props.a}`);
-    window.location.reload();
-
-
-  }
 
   componentDidMount() {
     axios.get(FETCH_CURRENT_USER_URL)
@@ -63,9 +57,6 @@ class Campaign extends React.Component {
               {this.getCampaignList()}
             </ListGroup>
             <Button color="primary" size="md" className="btn-block mt-3">Create New Campaign</Button>
-            <Button color="secondary" size="md" className="btn-block mt-3"
-                    disabled={this.state.campaigns.length === 0}
-                    onClick={this.onClick}>Save & Continue </Button>
           </CardBody>
         </Card>
       </div>
