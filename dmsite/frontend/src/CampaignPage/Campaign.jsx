@@ -64,7 +64,7 @@ class Campaign extends React.Component {
             </ListGroup>
             <Button color="primary" size="md" className="btn-block mt-3">Create New Campaign</Button>
             <Button color="secondary" size="md" className="btn-block mt-3"
-                    disabled={this.state.campaigns.length == 0}
+                    disabled={this.state.campaigns.length === 0}
                     onClick={this.onClick}>Save & Continue </Button>
           </CardBody>
         </Card>
