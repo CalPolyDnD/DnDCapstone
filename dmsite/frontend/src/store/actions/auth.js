@@ -2,6 +2,7 @@ import axios from 'axios';
 import * as actionTypes from './actionTypes';
 
 const LOGIN_URL = 'http://localhost:8000/rest-auth/login/';
+const LOGOUT_URL = 'http://localhost:8000/rest-auth/logout/';
 const REGISTRATION_URL = 'http://localhost:8000/rest-auth/registration';
 const ONE_HOUR = 3600;
 
@@ -26,18 +27,31 @@ export const authFail = error => (
   }
 );
 
-export const logout = () => {
-  localStorage.removeItem('token');
-  localStorage.removeItem('expirationDate');
-  return {
+export const authLogout = () => (
+  {
     type: actionTypes.AUTH_LOGOUT,
-  };
-};
+    // TODO: Set 'logging out property' here
+  }
+);
+
+export const logout = () => (
+  (dispatch) => {
+    axios.defaults.xsrfHeaderName = 'X-CSRFTOKEN';
+    axios.defaults.xsrfCookieName = 'csrftoken';
+
+    return axios.post(LOGOUT_URL, {})
+      .then(() => {
+        localStorage.removeItem('token');
+        localStorage.removeItem('expirationDate');
+        dispatch(authLogout());
+      });
+  }
+);
 
 export const checkAuthTimeout = expirationDate => (
   (dispatch) => {
     setTimeout(() => {
-      dispatch(logout);
+      dispatch(logout());
     }, expirationDate * 1000);
   }
 );
@@ -48,7 +62,7 @@ export const authLogin = (email, password) => (
     axios.defaults.xsrfHeaderName = 'X-CSRFTOKEN';
     axios.defaults.xsrfCookieName = 'csrftoken';
 
-    axios.post(LOGIN_URL, {
+    return axios.post(LOGIN_URL, {
       email,
       password,
     })
@@ -72,7 +86,7 @@ export const authSignup = (email, password1, password2) => (
     axios.defaults.xsrfHeaderName = 'X-CSRFTOKEN';
     axios.defaults.xsrfCookieName = 'csrftoken';
 
-    axios.post(REGISTRATION_URL, {
+    return axios.post(REGISTRATION_URL, {
       email,
       password1,
       password2,

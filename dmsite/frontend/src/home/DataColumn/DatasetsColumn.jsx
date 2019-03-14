@@ -52,6 +52,18 @@ class DatasetsColumn extends React.Component {
     this.setState({ uploading: false });
   };
 
+  classifyFilesClicked = () => {
+    const { fileListData } = this.props;
+    let route = '/classification?=';
+    for (let i = 0; i < fileListData.length; i++) {
+      route += fileListData[i].path;
+      if (i !== fileListData.length - 1) {
+        route += ',';
+      }
+    }
+    this.props.history.push(route);
+  };
+
   render() {
     const { uploading } = this.state;
     return (
@@ -83,7 +95,7 @@ class DatasetsColumn extends React.Component {
               color="primary"
               size="md"
               className="mr-0 btn-block mt-2 mb-2"
-              onClick={() => { this.props.history.push('/classification'); }}
+              onClick={this.classifyFilesClicked}
           >
             Classify
           </Button>

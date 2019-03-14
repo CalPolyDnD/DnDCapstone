@@ -13,12 +13,10 @@ import { FileObject } from '../Model/FileObject';
 
 const testClassification1 = [{ name: 'Classify1', age: 2 }, { name: 'Classify2', age: 4 }, { name: 'Classify3', age: 5 }];
 const testClassification2 = [{ name: 'Classify1', age: 3 }, { name: 'Classify2', age: 6 }, { name: 'Classify3', age: 53 }];
-const testClassification3 = [{ name: 'Classify2', age: 4 }, { name: 'Classify2', age: 42 }, { name: 'Classify3', age: 5 }];
 
 const dummyfiles = [
-  new FileObject('file1', 'file1.csv', testClassification1, 'header1'),
-  new FileObject('file2', 'file2.csv', testClassification2, 'header3'),
-  new FileObject('file3', 'file2.csv', testClassification3, 'header3'),
+  new FileObject('file1', 'MOCK_DATA.csv', testClassification1, 'header1'),
+  new FileObject('file2', 'MOCK_PEOPLE.csv', testClassification2, 'header3'),
 ];
 
 class Home extends React.Component {
@@ -52,7 +50,11 @@ class Home extends React.Component {
         <p style={{ color: '#afafaf' }}> This campaign organizes Data1, Data2, Data3 </p>
         <Row>
           <Col md="3">
-            <DatasetsColumn fileListData={fileList} selectedFileIndex={selectedFileIndex} cellOnClick={this._handleFileChange} />
+            <DatasetsColumn
+              fileListData={fileList}
+              selectedFileIndex={selectedFileIndex}
+              cellOnClick={this._handleFileChange}
+            />
           </Col>
           <Col md="7">
             <ClassificationColumn name="Classifications" file={fileList[selectedFileIndex]} />

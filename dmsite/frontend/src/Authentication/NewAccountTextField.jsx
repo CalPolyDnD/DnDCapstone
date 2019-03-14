@@ -22,14 +22,22 @@ class NewAccountTextField extends React.Component {
 
     handleSubmit = (e) => {
       e.preventDefault();
-      const { form, onAuth } = this.props;
+      const {
+        form, onAuth, history, error,
+      } = this.props;
       const { validateFieldsAndScroll } = form;
       validateFieldsAndScroll(async (err, values) => {
         if (!err) {
-           onAuth(values.email, values.password, values.confirm);
+          // TODO: Fix issue that's also in LoginTextField.jsx related to updating state immediately
+          onAuth(values.email, values.password, values.confirm)
+            .then(() => {
+              if (!error) {
+                history.push('/campaign');
+              }
+            });
         }
       });
-    }
+    };
 
     handleConfirmBlur = (e) => {
       const { value } = e.target;
@@ -76,12 +84,40 @@ class NewAccountTextField extends React.Component {
       return (
         <Form onSubmit={this.handleSubmit}>
           <Form.Item>
+            {getFieldDecorator('firstname', {
+              rules: [{ required: true, message: 'Please input your first name!' }],
+            })(
+              <Input
+                style={{ backgroundColor: '#303030', borderWidth: 0, color: 'white' }}
+                placeholder="*First Name"
+              />,
+            )}
+          </Form.Item>
+          <Form.Item>
+            {getFieldDecorator('lastname', {
+              rules: [{ required: true, message: 'Please input your last name!' }],
+            })(
+              <Input
+                style={{ backgroundColor: '#303030', borderWidth: 0, color: 'white' }}
+                placeholder="*Last Name"
+              />,
+            )}
+          </Form.Item>
+          <Form.Item>
             {getFieldDecorator('email', {
               rules: [{ required: true, message: 'Please input your email!' }],
             })(
               <Input
                 style={{ backgroundColor: '#303030', borderWidth: 0, color: 'white' }}
-                placeholder="Email"
+                placeholder="*Email"
+              />,
+            )}
+          </Form.Item>
+          <Form.Item>
+            {getFieldDecorator('organization')(
+              <Input
+                style={{ backgroundColor: '#303030', borderWidth: 0, color: 'white' }}
+                placeholder="Organization"
               />,
             )}
           </Form.Item>
@@ -94,7 +130,7 @@ class NewAccountTextField extends React.Component {
             })(
               <Input
                 type="password"
-                placeholder="Password"
+                placeholder="*Password"
                 style={{ backgroundColor: '#303030', borderWidth: 0, color: 'white' }}
               />,
             )}
@@ -102,14 +138,14 @@ class NewAccountTextField extends React.Component {
           <Form.Item>
             {getFieldDecorator('confirm', {
               rules: [
-                { required: true, message: 'Passwords do not match!'},
+                { required: true, message: 'Passwords do not match!' },
                 { validator: this.compareToFirstPassword },
               ],
             })(
               <Input
                 style={{ backgroundColor: '#303030', borderWidth: 0, color: 'white' }}
                 type="password"
-                placeholder="Confirm Password"
+                placeholder="*Confirm Password"
                 onBlur={this.handleConfirmBlur}
               />,
             )}
@@ -143,7 +179,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   onAuth: (email, pw1, pw2) => dispatch(actions.authSignup(email, pw1, pw2)),
-})
+});
 
 const WrappedRegistrationForm = Form.create({ name: 'register' })(NewAccountTextField);
 

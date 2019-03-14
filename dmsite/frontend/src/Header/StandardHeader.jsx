@@ -3,12 +3,15 @@ import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import ReactRouterPropTypes from 'react-router-prop-types';
 import { connect } from 'react-redux';
+import { Modal, ModalBody } from 'reactstrap';
 import {
   Menu,
   Button,
   Dropdown,
+  Icon,
   Input,
   Select,
+  Spin,
 } from 'antd';
 
 import Logo from '../images/DnDLogo2.png';
@@ -36,10 +39,23 @@ class StandardHeader extends React.Component {
         SEARCH_FIELDS.classification,
         SEARCH_FIELDS.attribute,
       ],
+      modalIsVisible: false,
       searchbarFilter: 'Name',
     };
     this.switchFilter = this.switchFilter.bind(this);
+    this.handleLogout = this.handleLogout.bind(this);
   }
+
+  handleLogout = (e) => {
+    const { history, logout } = this.props;
+    e.preventDefault();
+    this.setState({ modalIsVisible: true },
+      () => {
+        logout()
+          .then(() => history.push('/login'));
+        this.setState({ modalIsVisible: false });
+      });
+  };
 
   switchFilter(index) {
     const { searchFilterOrder } = this.state;
@@ -85,7 +101,10 @@ class StandardHeader extends React.Component {
   }
 
   renderProfileDropdown() {
-    const { isAuthenticated, logout } = this.props;
+    const { isAuthenticated } = this.props;
+    const { modalIsVisible } = this.state;
+
+    const antIcon = <Icon type="loading" style={{ fontSize: 24 }} spin />;
     return (
       <Menu>
         {
@@ -96,7 +115,19 @@ class StandardHeader extends React.Component {
               </MenuItem>,
 
               <MenuItem>
-                <a onClick={logout} href="/login" key="logout" style={{ color: 'red' }}>Logout</a>
+                <a
+                  onClick={e => this.handleLogout(e)}
+                  href="/login"
+                  key="logout"
+                  style={{ color: 'red' }}
+                >
+                  Logout
+                </a>
+                <Modal isOpen={modalIsVisible}>
+                  <ModalBody style={{ textAlign: 'center' }}>
+                    <Spin style={{ backgroundColor: 'transparent' }} indicator={antIcon} tip='Logging out...' backdrop='static'/>
+                  </ModalBody>
+                </Modal>
               </MenuItem>,
             ]
             )
@@ -122,7 +153,7 @@ class StandardHeader extends React.Component {
           className="mx-1"
           htmlType="button"
         />
-        <Button onClick={() => { this.props.history.push('/profile/'); }}
+        <Button
           title="Settings"
           icon="setting"
           shape="circle-outline"
@@ -180,4 +211,4 @@ const mapDispatchToProps = dispatch => ({
 });
 
 
-export default connect(mapDispatchToProps)(withRouter(StandardHeader));
+export default connect(null, mapDispatchToProps)(withRouter(StandardHeader));

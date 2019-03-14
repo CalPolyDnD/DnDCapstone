@@ -6,6 +6,7 @@ const initialState = {
   token: null,
   error: null,
   loading: false,
+  // TODO: Add field for 'logging out'
 };
 
 const authStart = (state, action) => updateObject(state,
@@ -30,6 +31,7 @@ const authFail = (state, action) => updateObject(state,
 const authLogout = (state, action) => updateObject(state,
   {
     token: null,
+    // TODO: Set 'logging out' here
   });
 
 const reducer = (state = initialState, action) => {
