@@ -6,7 +6,7 @@ export class FileObject {
     this._header = header;
   }
 
-  get name() {
+  get_name() {
     return this._name;
   }
 

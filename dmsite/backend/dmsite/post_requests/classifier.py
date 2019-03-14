@@ -25,23 +25,26 @@ def make_classifications(body):
     clsfr = c.Classifier()
     results = []
     count = 0
-    for obj in body:
-        filename = obj['filename']
-        fm.fetch_file(filename)
-        filepath = "media/" + filename
+    try:
+        for obj in body:
+            filename = obj['filename']
+            fm.fetch_file(filename)
+            filepath = "media/" + filename
 
-        classifications = clsfr.classify(filepath)
+            classifications = clsfr.classify(filepath)
 
-        results.append({})
-        results[count] = {}
-        results[count]['filename'] = filename
-        results[count]['classifications'] = []
-        for classification in classifications:
-            results[count]['classifications'].append(classification.to_json())
+            results.append({})
+            results[count] = {}
+            results[count]['filename'] = filename
+            results[count]['classifications'] = []
+            for classification in classifications:
+                results[count]['classifications'].append(classification.to_json())
 
-        os.remove(filepath)
-        count += 1
-    status = 0
+            os.remove(filepath)
+            count += 1
+        status = 0
+    except KeyError as e:
+        return {"errorMsg": "invalid json object - " + e.__str__()}, -1
     return results, status
 
 
@@ -61,12 +64,17 @@ def save_data(data):
     try:
         for item in data:
             names = []
-            labels = []
+            if 'description' not in item:
+                item['description'] = "Placeholder Description"
+
             for classification in item['classifications']:
+                if 'is_sensitive' not in classification:
+                    classification['is_sensitive'] = 0
                 key = {"name": classification['name'], "campaign": item['campaign']}
                 response = db.get_item("classification", key)
                 if 'Item' not in response:
-                    response = db.add_item("classification", {"name": classification['name'], "campaign": item['campaign'], "examples": classification['examples']})
+                    response = db.add_item("classification", {"name": classification['name'], "campaign": item['campaign'],
+                                                              "examples": classification['examples'], "is_sensitive": classification['is_sensitive']})
                 else:
                     response = db.update_item(
                         "classification",
@@ -75,30 +83,22 @@ def save_data(data):
                         {'#classifications': 'examples'},
                         {':values': classification['examples'], ':empty_list': []}
                     )
-                names.append(classification['name'])
-                labels.append(classification['columns'][0])
+                names.append({"name": classification['name'], "is_sensitive": classification["is_sensitive"]})
 
-            key = {'filename': item['filename'], 'campaign': item['campaign']}
-            response = db.get_item("files", key)
-            if 'Items' not in response:
-                key = {'filename': item['filename'], 'campaign': item['campaign'], 'is_classified': 1,
-                       'labels': labels, 'classifications': names, 'description': item['description']}
-                response = db.add_item("files", key)
-            else:
-                response = db.update_item(
-                    "files",
-                    {"filename": item['filename']},
-                    'set #description = :description',
-                    {'#description': 'description'},
-                    {':description': item['description']}
-                )
-                response = db.update_item(
-                    "files",
-                    {"filename": item['classifications']},
-                    'set #classifications = list_append(if_not_exists(#classifications, :empty_list), :values)',
-                    {'#classifications': 'classifications'},
-                    {':values': names, ':empty list': []}
-                )
+            response = db.update_item(
+                "files",
+                {"filename": item['filename'], 'campaign': item['campaign']},
+                'set #description = :description',
+                {'#description': 'description'},
+                {':description': item['description']}
+            )
+            response = db.update_item(
+                "files",
+                {"filename": item['filename'], 'campaign': item['campaign']},
+                'set #classifications = list_append(if_not_exists(#classifications, :empty_list), :values)',
+                {'#classifications': 'classifications'},
+                {':values': names, ':empty_list': []}
+            )
 
     except KeyError as e:
         return {"errorMsg": "invalid json object: " + e.__str__()}, -1
