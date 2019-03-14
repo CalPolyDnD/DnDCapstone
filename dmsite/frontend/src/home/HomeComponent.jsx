@@ -64,11 +64,12 @@ class Home extends React.Component {
     //   </ListGroupItem>,
     // );
     return (
-      <Card>
-        <CardHeader>Access Control</CardHeader>
-        <CardBody>
+    <div style={{ paddingTop: '5%' }}>
+      <Card style={{ borderWidth: 0 }}>
+        <CardHeader tag="hs" style={{ backgroundColor: '#303030', color: 'white', borderWidth: 0 }}>Access Control</CardHeader>
+        <CardBody style={{ backgroundColor: '#3d3d3d', color: 'white'}}>
           <ListGroupItem style={{ backgroundColor: '#3d3d3d', color: 'white', borderWidth: 0 }}>
-                Griffin Aswegan ADMIN
+                Griffin Aswegan               ADMIN
             <Input style={{ right: '10%' }} type="checkbox" checked="checked" />
           </ListGroupItem>
           <ListGroupItem style={{ backgroundColor: '#3d3d3d', color: 'white', borderWidth: 0 }}>
@@ -85,6 +86,7 @@ class Home extends React.Component {
           </ListGroupItem>
         </CardBody>
       </Card>
+     </div>
     );
   }
 
@@ -116,21 +118,13 @@ class Home extends React.Component {
       campaign, fileList, selectedFileIndex,
     } = this.state;
 
-    if (this.state.filesPresent !== 1) {
-      return (
-        <Container fluid>
-          <h1 style={{ color: 'white' }}>
-Campaign:
-            {campaign}
-            {' '}
-
     if (this.state.filesPresent !== 1)
         return (
           <Container fluid>
-                <h1 style={{ color: 'white' }}>Campaign: {campaign} </h1>
+            <h1 style={{ color: 'white' }}>Campaign: {campaign} </h1>
             <p style={{ color: '#afafaf' }}> This campaign has no files! Add some files to classify.  </p>
             <Upload />
-              <Button color="secondary" size="md" className="btn-block mt-3"
+              <Button color="primary" size="md" className="btn-block mt-3"
                       onClick={this.onClick}>Save & Continue </Button>
           </Container>
         );
@@ -148,12 +142,6 @@ Campaign:
       <Container fluid>
         <Row style={{ justifyContent: 'space-between' }}>
           <h1 style={{ color: 'white' }}>Campaign: {campaign} </h1>
-          <h1 style={{ color: 'white' }}>
-Campaign:
-            {campaign}
-            {' '}
-
-          </h1>
           <DisplayColumn name="Display Actions" />
         </Row>
         <p style={{ color: '#afafaf' }}>
