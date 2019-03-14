@@ -96,11 +96,11 @@ class ClassificationPage extends Component {
     for (let count = 0; count < this.state.files.length; count++) {
       const result = this.state.files[count];
       jsonObj.push(
-        <NavItem style={{ color: 'primary', backgroundColor: 'primary'}}>
+        <NavItem style={{ backgroundColor: 'blue'}}>
           <NavLink
             className={classnames({ active: this.state.activeTab === count })}
             onClick={() => { this.toggle(count); }}
-            style={{ backgroundColor: 'primary', color: 'white' }}
+            style={{ backgroundColor: 'blue', color: 'white' }}
           >
             {result.filename}
           </NavLink>
