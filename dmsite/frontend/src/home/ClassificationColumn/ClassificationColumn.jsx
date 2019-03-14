@@ -11,9 +11,9 @@ class ClassificationColumn extends Component {
     e.preventDefault();
   }
 
-  // TODO: at some point, base this off of the classification lookup, not on the file's classifications
+  // TODO: fix this
   isSensitive(val) {
-    if (val === true) { // == works, but === doesn't, for bools or numbers - need to fix
+    if (val == true) { // == works, but === doesn't, for bools or numbers - need to fix
         return "Sensitive!";
      }
     return "";
