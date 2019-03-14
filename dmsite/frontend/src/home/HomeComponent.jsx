@@ -53,16 +53,6 @@ class Home extends React.Component {
   }
 
   getNameAccess() {
-    // const jsonObj = [];
-    // const { firstName, lastName } = this.state;
-    // const admin = `${firstName + lastName}\t\tADMIN`;
-    // jsonObj.push(
-    //   <ListGroupItem
-    //     style={{ backgroundColor: '#3d3d3d', color: 'white', borderWidth: 0 }}
-    //   >
-    //     {admin}
-    //   </ListGroupItem>,
-    // );
     return (
     <div style={{ paddingTop: '5%' }}>
       <Card style={{ borderWidth: 0 }}>
