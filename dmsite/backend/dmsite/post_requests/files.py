@@ -15,11 +15,11 @@ def get_files_by_campaign(request):
         return JsonResponse({"error": results['errorMsg']}, status=400)
     return JsonResponse({"error": "not a POST request"}, status=400)
 
-
 def find_files(data):
     response = db.make_query("files", "campaign-index", "campaign", data['campaign'])
     if 'Items' not in response:
         return {"errorMsg": "no files in campaign " + data['campaign']}, -1
+
     return response['Items'], 0
 
 

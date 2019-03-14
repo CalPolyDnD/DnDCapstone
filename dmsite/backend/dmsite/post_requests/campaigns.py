@@ -17,8 +17,7 @@ def get_campaigns_by_owner(request):
 
 
 def find_campaigns(data):
-    response = db.make_query("files", "owner-index", "owner", data['owner'])
+    response = db.make_query("campaigns", "owner-index", "owner", data['owner'])
     if 'Items' not in response:
         return {"errorMsg": "no campaigns owned by " + data['owner']}, -1
-    print(response['Items'])
     return response['Items'], 0

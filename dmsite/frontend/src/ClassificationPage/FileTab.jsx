@@ -49,20 +49,15 @@ class FileTab extends Component {
     this.setState({ description: event.target.value });
   }
 
-  onSave = () => {
-    const FETCH_URL = 'localhost8000/update_file_description';
-    const { description } = this.state;
+  stateChange = () => {
+    this.setState({ isSaving: false });
+  }
 
+  onSave = () => {
+    this.props.file.description = this.state.description;
     this.setState({
       isSaving: true,
-    }, () => {
-      fetch(FETCH_URL, {
-        method: 'POST',
-        body: {
-          description,
-        },
-      }).then(() => { this.setState({ isSaving: false }); });
-    });
+    }, () => { this.props.onFinish(this.stateChange);  });
   }
 
   setSelectedClassification = (index) => {

@@ -13,9 +13,9 @@ import {
 import FileTab from './FileTab';
 import './ClassificationInfo.css';
 
-const FETCH_URL = 'http://localhost:8000/classify_files';
+let FETCH_URL = 'http://localhost:8000/classify_files';
+let SAVE_URL =  'http://localhost:8000/classify_files/save';
 
-// TODO: all of this needs style changes
 class ClassificationPage extends Component {
   constructor(props) {
     super(props);
@@ -25,10 +25,10 @@ class ClassificationPage extends Component {
       activeTab: 0,
       files: [],
     };
+    this.campaignName = this.props.location.pathname.replace("/classification/", "");
   }
 
   componentDidMount() {
-  // TODO: make this depend on passed-in files
     const { location } = this.props;
     const fileNames = location.search.replace('?=', '').split(',');
     const formattedBody = fileNames.map(fileName => ({ filename: fileName }));
@@ -37,7 +37,10 @@ class ClassificationPage extends Component {
       method: 'POST',
       body: JSON.stringify(formattedBody)
     }).then(data => data.json()).then((result) => {
-      this.setState({ files: result });
+      let files = result;
+      files.map(file => { file.campaign = this.campaignName; });
+      this.setState({ files: files });
+      return ""; // needed for compiler
     });
   }
 
@@ -47,6 +50,16 @@ class ClassificationPage extends Component {
         activeTab: tab,
       });
     }
+  }
+
+  onFinish = (completion) => {
+    fetch(SAVE_URL, {
+      method: 'POST',
+      body: JSON.stringify(this.state.files)
+    }).then(data => {
+        completion();
+        this.props.history.push('/home/' + this.campaignName);
+    });
   }
 
   displayClassification(count) {
@@ -103,7 +116,7 @@ class ClassificationPage extends Component {
     for (let count = 0; count < files.length; count++) {
       jsonObj.push(
         <TabPane tabId={count} >
-          <FileTab file={files[count]} />
+          <FileTab file={files[count]} onFinish={this.onFinish} />
         </TabPane>,
       );
     }
@@ -135,7 +148,8 @@ class ClassificationPage extends Component {
   }
 }
 
-/* const FAKE_RESPONSE = [
+/*
+const FAKE_RESPONSE = [
   {
       "filename": "MOCK_DATA.csv",
       "description": "test description",
@@ -356,5 +370,4 @@ class ClassificationPage extends Component {
       ]
   }
 ]; */
-
 export default ClassificationPage;
