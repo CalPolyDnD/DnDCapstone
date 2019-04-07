@@ -29,19 +29,18 @@ const dummyfiles = [
 ];
 */
 
-const dummyAccessList = ['Griffin Aswegar ADMIN', 'Christina Daley', 'Larry Hu', 'Steven Bradley'];
+const dummyAccessList = ['Griffin Aswegan ADMIN', 'Christina Daley', 'Larry Hu', 'Steven Bradley'];
 
 class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      campaign: 'test_campaign',
+      campaign: props.location.pathname.replace('/home/', ''),
       fileList: [],
       selectedFileIndex: 0,
       filesPresent: 1,
     };
     this._handleFileChange = this.handleFileChange.bind(this);
-    this.campaignName = props.location.pathname.replace('/home/', '');
   }
 
   onClick() {
@@ -113,7 +112,7 @@ class Home extends React.Component {
           <Container fluid>
             <h1 style={{ color: 'white' }}>Campaign: {campaign} </h1>
             <p style={{ color: '#afafaf' }}> This campaign has no files! Add some files to classify.  </p>
-            <Upload />
+            <Upload campaignName={campaign} />
               <Button color="primary" size="md" className="btn-block mt-3"
                       onClick={this.onClick}>Save & Continue </Button>
           </Container>
@@ -135,11 +134,7 @@ class Home extends React.Component {
           <DisplayColumn name="Display Actions" />
         </Row>
         <p style={{ color: '#afafaf' }}>
-          {' '}
-This campaign organizes
-          {filenames}
-          {' '}
-
+          This campaign organizes {filenames}
         </p>
         <Row>
           <Col md="3">
@@ -147,7 +142,7 @@ This campaign organizes
               fileListData={fileList}
               selectedFileIndex={selectedFileIndex}
               cellOnClick={this._handleFileChange}
-              campaign={this.campaignName}
+              campaign={campaign}
             />
             {this.getNameAccess()}
           </Col>
