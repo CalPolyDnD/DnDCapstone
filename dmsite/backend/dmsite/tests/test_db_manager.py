@@ -141,3 +141,10 @@ def test_update():
     files.delete_item(Key=test_file_2_key)
     files.delete_item(Key=test_file_3_key)
 
+
+def test_out_of_date_credentials():
+    # NOTE: this test is here to ensure that the program doesn't crash if credentials are out of date, so if this test
+    # fails, then there's an error with how exceptions are handled within the server
+
+    response = db.get_item("files", {"filename": "non-exist", "campaign": "bad_campaign"})
+    assert True

@@ -26,6 +26,7 @@ plumber==1.5
 psycopg2==2.7.7
 py==1.7.0
 pytest==4.0.1
+pytest-django==
 python-dateutil==2.7.5
 python3-openid==3.1.0
 pytz==2018.9

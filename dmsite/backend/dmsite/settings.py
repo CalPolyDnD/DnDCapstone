@@ -98,13 +98,20 @@ WSGI_APPLICATION = 'dmsite.wsgi.application'
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 
 
+creds = open("credentials", "r")
+PGUSER = creds.readline()
+PGUSER = PGUSER[: len(PGUSER) - 1]
+PGPW = creds.readline()
+PGPW = PGPW[: len(PGPW) - 1]
+PGURL = creds.readline()
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'postgres',
-        'USER': 'dmsiteadmin',
-        'PASSWORD': 'password',
-        'HOST': 'dndcapstone.cadqjvxganq4.us-east-1.rds.amazonaws.com',
+        'USER': PGUSER,
+        'PASSWORD': PGPW,
+        'HOST': PGURL,
         'PORT': '5432'
     }
 }

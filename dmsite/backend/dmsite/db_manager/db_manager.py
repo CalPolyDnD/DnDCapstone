@@ -1,4 +1,5 @@
 import boto3
+from botocore.exceptions import ClientError
 from boto3.dynamodb.conditions import Key
 from decimal import Decimal
 import pandas as pd
@@ -8,27 +9,43 @@ dynamodb = boto3.resource('dynamodb', region_name='us-east-1', endpoint_url="htt
 
 
 def make_query(table, index, value, compare):
-    files = dynamodb.Table(table)
-    response = files.query(IndexName=index, KeyConditionExpression=Key(value).eq(compare))
-    return response
+    try:
+        files = dynamodb.Table(table)
+        response = files.query(IndexName=index, KeyConditionExpression=Key(value).eq(compare))
+        return response
+    except ClientError as e:
+        return {"error": "AWS session information is out of date; please contact your system admin to update this info."}
 
 
 def add_item(table, value):
-    files = dynamodb.Table(table)
-    response = files.put_item(Item=value)
-    return response
+    try:
+        files = dynamodb.Table(table)
+        response = files.put_item(Item=value)
+        return response
+    except ClientError as e:
+        return {"error": "AWS session information is out of date; please contact your system admin to update this info."}
 
 
 def update_item(table, key, update, names, values):
-    tbl = dynamodb.Table(table)
-    response = tbl.update_item(Key=key, UpdateExpression=update, ExpressionAttributeNames=names, ExpressionAttributeValues=values)
-    return response
+    try:
+        tbl = dynamodb.Table(table)
+        response = tbl.update_item(Key=key,
+                                   UpdateExpression=update,
+                                   ExpressionAttributeNames=names,
+                                   ExpressionAttributeValues=values
+        )
+        return response
+    except ClientError as e:
+        return {"error": "AWS session information is out of date; please contact your system admin to update this info."}
 
 
 def get_item(table, key):
-    tbl = dynamodb.Table(table)
-    response = tbl.get_item(Key=key)
-    return response
+    try:
+        tbl = dynamodb.Table(table)
+        response = tbl.get_item(Key=key)
+        return response
+    except ClientError as e:
+        return {"error": "AWS session information is out of date; please contact your system admin to update this info."}
 
 
 # ----------------------------------------------------------------------------------------------------------------------
