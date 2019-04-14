@@ -13,7 +13,7 @@ class ClassificationColumn extends Component {
 
   // TODO: fix this
   isSensitive(val) {
-    if (val == true) { // == works, but === doesn't, for bools or numbers - need to fix
+    if (val === true) { // == works, but === doesn't, for bools or numbers - need to fix
         return "Sensitive!";
      }
     return "";
