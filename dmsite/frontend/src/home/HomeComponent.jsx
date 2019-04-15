@@ -8,7 +8,7 @@ import {
   ListGroupItem,
   Card,
   CardHeader,
-  CardBody, Input, ListGroup,
+  CardBody, Input,
 } from 'reactstrap';
 import './style.css';
 import DatasetsColumn from './DataColumn/DatasetsColumn';
@@ -27,10 +27,10 @@ const dummyfiles = [
   new FileObject('file1', 'MOCK_DATA.csv', testClassification1, 'header1'),
   new FileObject('file2', 'MOCK_PEOPLE.csv', testClassification2, 'header3'),
 ];
-*/
+
 
 const dummyAccessList = ['Griffin Aswegar ADMIN', 'Christina Daley', 'Larry Hu', 'Steven Bradley'];
-
+*/
 class Home extends React.Component {
   constructor(props) {
     super(props);
