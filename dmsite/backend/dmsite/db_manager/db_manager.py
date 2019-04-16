@@ -45,7 +45,8 @@ def get_item(table, key):
         response = tbl.get_item(Key=key)
         return response
     except ClientError as e:
-        return {"error": "AWS session information is out of date; please contact your system admin to update this info."}
+        return {"error": "AWS session information is out of date; please contact your system admin to update this info.",
+                "errorStr": e.__str__()}
 
 
 # ----------------------------------------------------------------------------------------------------------------------
