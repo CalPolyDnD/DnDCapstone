@@ -38,7 +38,7 @@ class ClassificationPage extends Component {
       body: JSON.stringify(formattedBody)
     }).then(data => data.json()).then((result) => {
       let files = result;
-      files.map(file => { file.campaign = this.campaignName; });
+      files.forEach((file) => { file.campaign = this.campaignName; });
       this.setState({ files: files });
       return ""; // needed for compiler
     });
@@ -94,7 +94,7 @@ class ClassificationPage extends Component {
   displayTabs() {
     const jsonObj = [];
     for (let count = 0; count < this.state.files.length; count++) {
-      const color = this.state.activeTab == count ? '#007bff': 'rgb(0,0,0,0)'
+      const color = this.state.activeTab === count ? '#007bff': 'rgb(0,0,0,0)'
       const result = this.state.files[count];
       jsonObj.push(
         <NavItem>

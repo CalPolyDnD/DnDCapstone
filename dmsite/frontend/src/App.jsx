@@ -21,7 +21,7 @@ class App extends Component {
       <Router>
         <div className="App">
           <DataMaster {...this.props}>
-            <BaseRouter />
+            <BaseRouter {...this.props} />
           </DataMaster>
         </div>
       </Router>
