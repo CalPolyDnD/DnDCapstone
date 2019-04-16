@@ -6,7 +6,7 @@ import pandas as pd
 
 
 dynamodb = boto3.resource('dynamodb', region_name='us-east-1', endpoint_url="http://dynamodb.us-east-1.amazonaws.com")
-
+ERR_STR = "There was an error trying to access the AWS database."
 
 def make_query(table, index, value, compare):
     try:
@@ -14,7 +14,7 @@ def make_query(table, index, value, compare):
         response = files.query(IndexName=index, KeyConditionExpression=Key(value).eq(compare))
         return response
     except ClientError as e:
-        return {"error": "AWS session information is out of date; please contact your system admin to update this info."}
+        return {"error": ERR_STR, "errorStr": e.__str__()}
 
 
 def add_item(table, value):
@@ -23,7 +23,7 @@ def add_item(table, value):
         response = files.put_item(Item=value)
         return response
     except ClientError as e:
-        return {"error": "AWS session information is out of date; please contact your system admin to update this info."}
+        return {"error": ERR_STR, "errorStr": e.__str__()}
 
 
 def update_item(table, key, update, names, values):
@@ -36,7 +36,7 @@ def update_item(table, key, update, names, values):
         )
         return response
     except ClientError as e:
-        return {"error": "AWS session information is out of date; please contact your system admin to update this info."}
+        return {"error": ERR_STR, "errorStr": e.__str__()}
 
 
 def get_item(table, key):
@@ -45,8 +45,7 @@ def get_item(table, key):
         response = tbl.get_item(Key=key)
         return response
     except ClientError as e:
-        return {"error": "AWS session information is out of date; please contact your system admin to update this info.",
-                "errorStr": e.__str__()}
+        return {"error": ERR_STR, "errorStr": e.__str__()}
 
 
 # ----------------------------------------------------------------------------------------------------------------------
