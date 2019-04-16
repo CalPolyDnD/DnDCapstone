@@ -1,12 +1,14 @@
 @echo off
 IF EXIST "backend\env" (
    echo "Virtual Environment Found. Activating virtual environment..."
-   backend\env\scripts\activate.bat
+   REM backend\env\scripts\activate.bat
    echo "Installing dependencies..."
-   pip3 install -r backend\requirements.txt
+   REM pip3 install -r backend\requirements.txt
    echo "Finished installing python dependencies"
    echo "Installing npm packages..."
-   npm install --prefix ./frontend
+   cd frontend
+   npm install
+   cd ..
    echo "Finihsed installing npm packages"
 ) ELSE (
    echo "Could not find existing virtual environment"
