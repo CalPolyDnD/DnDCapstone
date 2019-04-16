@@ -2,11 +2,24 @@ language: python
 python:
    - "3.6"
 
+git:
+   depth: false
+
 #Install dependencies
 install: 
-   - pip install -r dependencies.txt
-   - npm i --prefix dmsite/venv
+   - cd dmsite
+   - pip3 install -r backend/requirements.txt
+   - npm i --prefix frontend
+   - cd ..
+
+addons:
+   sonarcloud:
+      organization: "calpolydnd-1"
+      token:
+         secure: "MjhXPK96UnamS8pNJd1Qa6hqHBRyY2Pfs/OqWL1x9D77dIWSlGxXloeOZhgqRWN8dY0AULWSeGHF+mrjTPpUtoQpratJGcwSnAUBrrnaCkM9mdz9c6S2vlpt1ryMAp2/UCIAelK9gkeqg9Dr0Ug3O21KNYVgLAO/GCin5iK+t18wufPg6hKfXpW71irUxR0XVJSI6XnLVrZ2LL/MydiGp7UQodybDZRGWJ3PcHzbffu63Aa8CiWJxNJSb+v8gC/rVeywmsFDV1Twr+e6HI1tN9hS9OBod9pBAbmdk++5gnZCRo8SntzT1+BLyXi9LJanvWsmaxeIEcwBromrbxAq3H+SBiNwSf/gaH5+ZGRvUgHS07GuBg0NOWhA1IJjl0tH7Dt+x5dGQjDXQ79/MnTZL9vMO7995lqitv200GJ4PnwKaSVE5EO/2RCc2xCZ1Idhjs6SJ+dzTtgOzf2nFMrh/t1W8qXCCQy7BjGAeAPnjmqFRc06rY4WcTQcbpBrjwX6UBF8u7zOCAXNUoIRZE+1eZTgJz/oADohW9EtKFGgnqhtIS2i+AQcDT0IUa/lxSswEkki7Jz4CgLs60DTgpHjr9dr9qGDLr73YmwXvIChCCINCjVgIHBE6KAklhRxbkEN4em+bTO6yDjhHJSPM4wGeud4Z1tqNCOaA0GRHHIHhFs="
 #Run Tests
 script:
-   - npm run build --prefix dmsite/venv
-   - python dmsite/venv/manage.py check 
+   - sonar-scanner -Dproject.settings=sonar-scanner.properties
+   - cd dmsite
+   - ./build.sh
+   - python backend/manage.py check 

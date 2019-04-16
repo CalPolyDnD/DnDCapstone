@@ -1,0 +1,11 @@
+To start the server you must do the following:
+
+1. Run the setup script with one of the following commands:
+   . ./setup.sh
+   source ./setup.sh
+
+2. Run the build script with:
+   ./build.sh
+
+3. Run the run script:
+   ./run.sh

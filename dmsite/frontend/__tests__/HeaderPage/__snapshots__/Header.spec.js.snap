@@ -1,0 +1,142 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Layout-Footer should render the component without errors 1`] = `
+<LoginHeader>
+  <div
+    id="headerContainer"
+    style={
+      Object {
+        "height": "64px",
+      }
+    }
+  >
+    <a
+      className="d-inline-flex px-2 justify-self-center mx-auto"
+      href="/"
+      id="logoBanner"
+    >
+      <img
+        alt=""
+        height="70"
+        id="logo"
+        src="test-file-stub"
+        width="90"
+      />
+      <h1
+        className="m-0"
+        style={
+          Object {
+            "alignSelf": "center",
+            "color": "white",
+            "height": "50px",
+            "lineHeight": "50px",
+            "textDecoration": "none",
+          }
+        }
+      >
+        DataMaster
+      </h1>
+    </a>
+  </div>
+</LoginHeader>
+`;
+
+exports[`renders correctly 1`] = `
+<div
+  id="div"
+  style={
+    Object {
+      "paddingTop": "5%",
+    }
+  }
+>
+  <div
+    className="card"
+    id="card"
+    style={
+      Object {
+        "borderWidth": 0,
+      }
+    }
+  >
+    <h3
+      align="center"
+      className="card-header"
+      style={
+        Object {
+          "backgroundColor": "#303030",
+          "color": "white",
+        }
+      }
+    >
+      Campaigns
+    </h3>
+    <div
+      className="card-body"
+      style={
+        Object {
+          "backgroundColor": "#3d3d3d",
+          "borderWidth": 0,
+        }
+      }
+    >
+      <ul
+        align="center"
+        className="campaign-list list-group list-group-flush"
+      >
+        <div
+          style={
+            Object {
+              "backgroundColor": "#303030",
+            }
+          }
+        >
+          <li
+            className="list-group-item"
+            onClick={[Function]}
+            style={
+              Object {
+                "backgroundColor": "#3d3d3d",
+                "color": "white",
+              }
+            }
+          >
+            Campaign 1
+          </li>
+          <li
+            className="list-group-item"
+            onClick={[Function]}
+            style={
+              Object {
+                "backgroundColor": "#3d3d3d",
+                "color": "white",
+              }
+            }
+          >
+            Campaign 2
+          </li>
+          <li
+            className="list-group-item"
+            onClick={[Function]}
+            style={
+              Object {
+                "backgroundColor": "#3d3d3d",
+                "color": "white",
+              }
+            }
+          >
+            Campaign 3
+          </li>
+        </div>
+      </ul>
+      <button
+        aria-label={null}
+        className="btn-block mt-3 btn btn-primary btn-md"
+        onClick={[Function]}
+      >
+        Create New Campaign
+      </button>
+    </div>
+  </div>
+</div>
+`;

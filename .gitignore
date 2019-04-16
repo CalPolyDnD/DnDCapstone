@@ -1,4 +1,7 @@
+.CapstoneInfo.txt
 **/.idea
 **/__pycache__
 **/.ipynb*
 **/.scannerwork
+**/node_modules
+**/build
