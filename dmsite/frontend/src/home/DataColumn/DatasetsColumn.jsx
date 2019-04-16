@@ -90,7 +90,7 @@ class DatasetsColumn extends React.Component {
           >
             Add File
           </Button>
-          {uploading && <Upload /> }
+          {uploading && <Upload campaignName={this.props.campaign} /> }
           {
             uploading
             && <Button close onClick={this.cancelUploadClicked} />
