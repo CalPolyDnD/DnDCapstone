@@ -46,6 +46,7 @@ class SearchResultsPage extends React.Component {
   }
 
   addFilterTag(type, value) {
+    console.log(value);
     if (!value) {
       return;
     }
@@ -112,7 +113,6 @@ class SearchResultsPage extends React.Component {
   }
 
   renderFilterSectionForms(fieldName) {
-    let text = '';
     return (
       <div>
         { /* <Label for={`${fieldName}FilterField`}>{fieldName}</Label> */ }
@@ -123,11 +123,11 @@ class SearchResultsPage extends React.Component {
               type="text"
               style={{ backgroundColor: '#303030', borderWidth: 0 }}
               placeholder={`Dataset ${fieldName}`}
-              onChange={(event) => { text = event.target.value; }}
+              onChange={(event) => { this.state.text = event.target.value; }}
             />
             <Button
               color="primary"
-              onClick={() => { this.addFilterTag(fieldName, text); }}
+              onClick={() => { this.addFilterTag(fieldName, this.state.text); }}
             >
               Add
             </Button>

@@ -19,7 +19,6 @@ import { FileObject } from '../Model/FileObject';
 
 const FETCH_URL = 'http://localhost:8000/get_files';
 
-/*
 const testClassification1 = [{ name: 'Classify1', age: 2 }, { name: 'Classify2', age: 4 }, { name: 'Classify3', age: 5 }];
 const testClassification2 = [{ name: 'Classify1', age: 3 }, { name: 'Classify2', age: 6 }, { name: 'Classify3', age: 53 }];
 
