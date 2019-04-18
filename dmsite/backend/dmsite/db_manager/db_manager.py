@@ -9,7 +9,6 @@ dynamo_client = boto3.client('dynamodb', region_name='us-east-1', endpoint_url="
 dynamodb = boto3.resource('dynamodb', region_name='us-east-1', endpoint_url="http://dynamodb.us-east-1.amazonaws.com")
 ERR_STR = "There was an error trying to access the AWS database. See 'errorStr' for details."
 
-
 THROUGHPUT = {
    "ReadCapacityUnits": 5,
    "WriteCapacityUnits": 5,
@@ -236,7 +235,6 @@ def get_item(table, key):
     except ClientError as e:
         print("AWS Error (get_item): " + e.__str__())
         return {"error": ERR_STR, "errorStr": e.__str__()}
-
 
 # ----------------------------------------------------------------------------------------------------------------------
 # Adds a header frame for the uploaded files
