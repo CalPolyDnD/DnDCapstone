@@ -29,6 +29,7 @@ const dummyfiles = [
 ];
 
 const dummyAccessList = ['Griffin Aswegan ADMIN', 'Christina Daley', 'Larry Hu', 'Steven Bradley'];
+*/
 
 class Home extends React.Component {
   constructor(props) {
