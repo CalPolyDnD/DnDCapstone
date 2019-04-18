@@ -5,7 +5,7 @@ import {
   Input, CardHeader,
 } from 'reactstrap';
 import axios from 'axios';
-import { FileObject } from '../Model/FileObject';
+// import { FileObject } from '../Model/FileObject';
 import { FormErrors } from './FormErrors';
 
 const FETCH_CURRENT_USER_URL = 'http://localhost:8000/rest-auth/user/';
@@ -15,6 +15,8 @@ class Profile extends React.Component {
   constructor(props) {
     super(props);
     this.toggle = this.toggle.bind(this);
+    this.handlePasswordOneInput = this.handlePasswordOneInput.bind(this);
+    this.handlePasswordTwoInput = this.handlePasswordTwoInput.bind(this);
     this.state = {
       popoverOpen: false,
       username: '',
@@ -22,51 +24,41 @@ class Profile extends React.Component {
       password1: '',
       password2: '',
       oldPassword: '',
-      formErrors: { email: '', password: '', username: '' },
-      usernameValid: false,
-      emailValid: false,
-      passwordValid: false,
-      formValid: false,
+      formErrors: { password: '' },
+      passwordValid: true,
+      formValid: true,
     };
   }
 
-  handleUserInput = (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
-    const passwordChange = { password1: e.target.password1, password2: e.target.password2 };
-    this.setState({ [name]: value },
-      () => { this.validateField(name, value); });
-    axios.post(CHANGE_PASSWORD_URL, passwordChange);
-  }
+  handleUserInput = () => {
+    const formErrors = this.state.formErrors;
+    const password1 = this.state.password1;
+    const password2 = this.state.password2;
+    const passwordChange = { password1, password2 };
+
+    // this.validateField('password', password1);
+    // this.validateField('password', password2);
+    axios.defaults.xsrfHeaderName = 'X-CSRFTOKEN';
+    axios.defaults.xsrfCookieName = 'crsftoken';
+    axios.post(CHANGE_PASSWORD_URL, passwordChange)
+      .then(() => this.props.history.push('/home'))
+      .catch((error) => { console.log(error); });
+  };
 
   validateField(fieldName, value) {
     const fieldValidationErrors = this.state.formErrors;
-    let emailValid = this.state.emailValid;
     let passwordValid = this.state.passwordValid;
-    let usernameValid = this.state.usernameValid;
-
 
     switch (fieldName) {
-      case 'email':
-        emailValid = value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
-        fieldValidationErrors.email = emailValid ? '' : ' is invalid';
-        break;
       case 'password':
         passwordValid = value.length >= 6;
         fieldValidationErrors.password = passwordValid ? '' : ' is too short';
-        break;
-      case 'username':
-        usernameValid = value.length > 0;
-        fieldValidationErrors.username = usernameValid ? '' : ' Create a username';
         break;
       default:
         break;
     }
     this.setState({
       formErrors: fieldValidationErrors,
-      emailValid,
-      passwordValid,
-      usernameValid,
     }, this.validateForm);
   }
 
@@ -89,8 +81,20 @@ class Profile extends React.Component {
       });
   }
 
+  handlePasswordOneInput(e) {
+    this.setState({
+      password1: e.target.value,
+    });
+  }
+
+  handlePasswordTwoInput(e) {
+    this.setState({
+      password2: e.target.value,
+    });
+  }
+
   validateForm() {
-    this.setState({ formValid: this.state.emailValid && this.state.passwordValid && this.state.usernameValid });
+    this.setState({ passwordValid: this.state.passwordValid });
   }
 
   errorClass(error) {
@@ -116,55 +120,73 @@ class Profile extends React.Component {
               <div className="panel panel-default">
                 <FormErrors formErrors={this.state.formErrors} />
               </div>
-              {/*<div className={`form-group ${this.errorClass(this.state.formErrors.username)}`}>*/}
-                {/*<label htmlFor="user">Username</label>*/}
-                {/*<Input*/}
-                  {/*type="username"*/}
-                  {/*required*/}
-                  {/*className="form-control"*/}
-                  {/*name="username"*/}
-                  {/*style={{ color: 'white', backgroundColor: '#303030', borderWidth: 0 }}*/}
-                  {/*placeholder="User"*/}
-                  {/*value={this.state.user}*/}
-                  {/*onChange={this.handleUserInput}*/}
-                {/*/>*/}
-              {/*</div>*/}
-              {/*<div className={`form-group ${this.errorClass(this.state.formErrors.email)}`}>*/}
-                {/*<label htmlFor="email">Email</label>*/}
-                {/*<Input*/}
-                  {/*type="email"*/}
-                  {/*className="form-control"*/}
-                  {/*name="email"*/}
-                  {/*style={{ color: 'white', backgroundColor: '#303030', borderWidth: 0 }}*/}
-                  {/*placeholder="Example@ex.com"*/}
-                  {/*value={this.state.email}*/}
-                  {/*onChange={this.handleUserInput}*/}
-                {/*/>*/}
-              {/*</div>*/}
-              <label>Username: {this.state.username}</label>
-              <label>Email: {this.state.email}</label>
+              {/* <div className={`form-group ${this.errorClass(this.state.formErrors.username)}`}> */}
+              {/* <label htmlFor="user">Username</label> */}
+              {/* <Input */}
+              {/* type="username" */}
+              {/* required */}
+              {/* className="form-control" */}
+              {/* name="username" */}
+              {/* style={{ color: 'white', backgroundColor: '#303030', borderWidth: 0 }} */}
+              {/* placeholder="User" */}
+              {/* value={this.state.user} */}
+              {/* onChange={this.handleUserInput} */}
+              {/* /> */}
+              {/* </div> */}
+              {/* <div className={`form-group ${this.errorClass(this.state.formErrors.email)}`}> */}
+              {/* <label htmlFor="email">Email</label> */}
+              {/* <Input */}
+              {/* type="email" */}
+              {/* className="form-control" */}
+              {/* name="email" */}
+              {/* style={{ color: 'white', backgroundColor: '#303030', borderWidth: 0 }} */}
+              {/* placeholder="Example@ex.com" */}
+              {/* value={this.state.email} */}
+              {/* onChange={this.handleUserInput} */}
+              {/* /> */}
+              {/* </div> */}
+              <div style={{ paddingBottom: '10%' }}>
+                <label>
+Username
+                    <br/>
+                    <br/>
+                    ..................................{this.state.username}
+                </label>
+              </div>
+              <div style={{ paddingBottom: '10%' }}>
+                <label>
+Email
+                    <br/>
+                    <br/>
+                    ..................................{this.state.email}
+                </label>
+              </div>
+              <div style={{
+                paddingLeft: '33%', paddingBottome: '5%', fontSize: '125%',
+              }}
+              >
+                <label>Change Password</label>
+              </div>
               <div className={`form-group ${this.errorClass(this.state.formErrors.password)}`}>
-                <label htmlFor="password">Password</label>
+                <label htmlFor="password1">New Password</label>
                 <Input
                   type="password"
                   className="form-control"
                   name="password"
                   style={{ color: 'white', backgroundColor: '#303030', borderWidth: 0 }}
-                  placeholder="Password123"
-                  value={this.state.password1}
-                  onChange={this.handleUserInput}
+                  placeholder=""
+                  onChange={this.handlePasswordTwoInput}
                 />
               </div>
               <div className={`form-group ${this.errorClass(this.state.formErrors.password)}`}>
-                <label htmlFor="password">Password</label>
+                <label htmlFor="password2">Confirm New Password</label>
                 <Input
-                    type="password"
-                    className="form-control"
-                    name="password"
-                    style={{ color: 'white', backgroundColor: '#303030', borderWidth: 0 }}
-                    placeholder="Password123"
-                    value={this.state.password2}
-                    onChange={this.handleUserInput}
+                  type="password"
+                  className="form-control"
+                  name="password"
+                  style={{ color: 'white', backgroundColor: '#303030', borderWidth: 0 }}
+                  placeholder=""
+                  onChange={this.handlePasswordOneInput}
                 />
               </div>
 
@@ -172,15 +194,16 @@ class Profile extends React.Component {
               {/* <label htmlFor="security">Security</label> */}
               {/* <Input style={{ color: 'white', backgroundColor: '#303030', borderWidth: 0 }} placeholder="Basic User" /> */}
               {/* </div> */}
-              <br />
+
+              <div style={{
+                backgroundColor: '#3d3d3d', paddingLeft: '15%', paddingRight: '15%',
+              }}
+              >
+                {/* disabled={!this.state.formValid} this was in button */}
+                <Button color="primary" className="btn-block mt0 login-form-button" onClick={this.handleUserInput}>Save and Return</Button>
+                {' '}
+              </div>
             </CardBody>
-            <div style={{
-              backgroundColor: '#3d3d3d', paddingLeft: '15%', paddingRight: '15%', paddingBottom: '5%',
-            }}
-            >
-              <Button color="primary" className="btn-block mt0 login-form-button" disabled={!this.state.formValid} onClick={() => { this.props.history.push('/home'); }}>Save and Return</Button>
-              {/* TO DO : handleUserInput */}
-            </div>
           </Card>
         </div>
       </Container>
