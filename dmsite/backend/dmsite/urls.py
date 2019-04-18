@@ -29,8 +29,7 @@ from django.conf.urls.static import static
 from django.views.generic import TemplateView
 
 # Local addons
-from dmsite.upload import upload
-from dmsite.post_requests import files, campaigns, classifier, search
+from dmsite.post_requests import files, campaigns, classifier, search, upload
 
 urlpatterns = [
     path('rest-auth/', include('rest_auth.urls')),

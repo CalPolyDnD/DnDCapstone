@@ -30,3 +30,6 @@ yarn-error.log*
 /Scripts
 backend/env
 pyvenv.cfg
+
+# Security
+**credentials

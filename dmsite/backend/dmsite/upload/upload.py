@@ -1,23 +1,9 @@
 import os
 import pandas as pd
-from django.http import HttpResponseRedirect
 import dmsite.file_manager.file_manager as fm
 import dmsite.db_manager.db_manager as db
 
 ROWS = 15
-
-# TODO: remove the csrf_exempts before launching to dev
-# adding this here for testing purposes; bypasses cookie needs to access
-from django.views.decorators.csrf import csrf_exempt
-@csrf_exempt
-def upload_file(request):
-    if request.method == 'POST':
-        for k, v in request.FILES.items():
-            handle_uploaded_file(v, request.META)
-        return HttpResponseRedirect('/home')
-    else:
-        return HttpResponseRedirect('/home')
-
 
 def handle_uploaded_file(f, h):
     f_name = "media/" + f.name
