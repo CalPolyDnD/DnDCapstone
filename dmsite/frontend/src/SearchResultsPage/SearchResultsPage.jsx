@@ -22,6 +22,7 @@ class SearchResultsPage extends React.Component {
       filterSectionCollapse: false,
       filterTags: this.getFilterTagFromRoutePath(),
     };
+    this.filterList = []
     this.toggleCollapse = this.toggleCollapse.bind(this);
   }
 
@@ -46,10 +47,11 @@ class SearchResultsPage extends React.Component {
   }
 
   addFilterTag(type, value) {
-    console.log(value);
-    if (!value) {
+    if(!value || this.filterList.includes(type + value)) {
       return;
     }
+
+    this.filterList.push(type + value);
 
     const newTag = {
       type,
@@ -61,6 +63,7 @@ class SearchResultsPage extends React.Component {
   }
 
   removeFilterTag(index) {
+    this.filterList.pop(index.type + index.value);
     const filterTagsCopy = [...this.state.filterTags];
     filterTagsCopy.splice(index, 1);
     this.setState({ filterTags: filterTagsCopy });
