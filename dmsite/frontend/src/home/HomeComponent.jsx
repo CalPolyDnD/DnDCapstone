@@ -19,18 +19,6 @@ import { FileObject } from '../Model/FileObject';
 
 const FETCH_URL = 'http://localhost:8000/get_files';
 
-/*
-const testClassification1 = [{ name: 'Classify1', age: 2 }, { name: 'Classify2', age: 4 }, { name: 'Classify3', age: 5 }];
-const testClassification2 = [{ name: 'Classify1', age: 3 }, { name: 'Classify2', age: 6 }, { name: 'Classify3', age: 53 }];
-
-const dummyfiles = [
-  new FileObject('file1', 'MOCK_DATA.csv', testClassification1, 'header1'),
-  new FileObject('file2', 'MOCK_PEOPLE.csv', testClassification2, 'header3'),
-];
-
-
-const dummyAccessList = ['Griffin Aswegar ADMIN', 'Christina Daley', 'Larry Hu', 'Steven Bradley'];
-*/
 class Home extends React.Component {
   constructor(props) {
     super(props);
@@ -45,7 +33,7 @@ class Home extends React.Component {
   }
 
   onClick() {
-        window.location.reload();
+    window.location.reload();
   }
 
   handleFileChange = (index) => {
@@ -54,52 +42,50 @@ class Home extends React.Component {
 
   getNameAccess() {
     return (
-    <div style={{ paddingTop: '5%' }}>
-      <Card style={{ borderWidth: 0 }}>
-        <CardHeader tag="hs" style={{ backgroundColor: '#303030', color: 'white', borderWidth: 0 }}>Access Control</CardHeader>
-        <CardBody style={{ backgroundColor: '#3d3d3d', color: 'white'}}>
-          <ListGroupItem style={{ backgroundColor: '#3d3d3d', color: 'white', borderWidth: 0 }}>
+      <div style={{ paddingTop: '5%' }}>
+        <Card style={{ borderWidth: 0 }}>
+          <CardHeader tag="hs" style={{ backgroundColor: '#303030', color: 'white', borderWidth: 0 }}>Access Control</CardHeader>
+          <CardBody style={{ backgroundColor: '#3d3d3d', color: 'white' }}>
+            <ListGroupItem style={{ backgroundColor: '#3d3d3d', color: 'white', borderWidth: 0 }}>
                 Griffin Aswegan               ADMIN
-            <Input style={{ right: '10%' }} type="checkbox" checked="checked" />
-          </ListGroupItem>
-          <ListGroupItem style={{ backgroundColor: '#3d3d3d', color: 'white', borderWidth: 0 }}>
+              <Input style={{ right: '10%' }} type="checkbox" checked="checked" />
+            </ListGroupItem>
+            <ListGroupItem style={{ backgroundColor: '#3d3d3d', color: 'white', borderWidth: 0 }}>
                 Christina Daley
-            <Input style={{ right: '10%' }} type="checkbox" />
-          </ListGroupItem>
-          <ListGroupItem style={{ backgroundColor: '#3d3d3d', color: 'white', borderWidth: 0 }}>
+              <Input style={{ right: '10%' }} type="checkbox" />
+            </ListGroupItem>
+            <ListGroupItem style={{ backgroundColor: '#3d3d3d', color: 'white', borderWidth: 0 }}>
                 Larry Hu
-            <Input style={{ right: '10%' }} type="checkbox" />
-          </ListGroupItem>
-          <ListGroupItem style={{ backgroundColor: '#3d3d3d', color: 'white', borderWidth: 0 }}>
+              <Input style={{ right: '10%' }} type="checkbox" />
+            </ListGroupItem>
+            <ListGroupItem style={{ backgroundColor: '#3d3d3d', color: 'white', borderWidth: 0 }}>
                 Steven Bradley
-            <Input style={{ right: '10%' }} type="checkbox" />
-          </ListGroupItem>
-        </CardBody>
-      </Card>
-     </div>
+              <Input style={{ right: '10%' }} type="checkbox" />
+            </ListGroupItem>
+          </CardBody>
+        </Card>
+      </div>
     );
   }
 
   componentDidMount() {
     fetch(FETCH_URL, {
-        method: 'POST',
-        body: JSON.stringify({
-            campaign: this.state.campaign
-        })
-    }).then(data => {
-        return data.json();
-    }).then(response => {
-        let files = [];
-        if (response.length === 0) {
-            this.setState({filesPresent: 0});
-            return;
-        }
+      method: 'POST',
+      body: JSON.stringify({
+        campaign: this.state.campaign,
+      }),
+    }).then(data => data.json()).then((response) => {
+      const files = [];
+      if (response.length === 0) {
+        this.setState({ filesPresent: 0 });
+        return;
+      }
 
-        for (let count = 0; count < response.length; count++) {
-            files.push(new FileObject(response[count].filename,
-                       response[count].filename, response[count].classifications, response[count].is_classified));
-        }
-        this.setState({ fileList: files });
+      for (let count = 0; count < response.length; count++) {
+        files.push(new FileObject(response[count].filename,
+          response[count].filename, response[count].classifications, response[count].is_classified));
+      }
+      this.setState({ fileList: files });
     });
   }
 
@@ -108,16 +94,28 @@ class Home extends React.Component {
       campaign, fileList, selectedFileIndex,
     } = this.state;
 
-    if (this.state.filesPresent !== 1)
-        return (
-          <Container fluid>
-            <h1 style={{ color: 'white' }}>Campaign: {campaign} </h1>
-            <p style={{ color: '#afafaf' }}> This campaign has no files! Add some files to classify.  </p>
-            <Upload />
-              <Button color="primary" size="md" className="btn-block mt-3"
-                      onClick={this.onClick}>Save & Continue </Button>
-          </Container>
-        );
+    if (this.state.filesPresent !== 1) {
+      return (
+        <Container fluid>
+          <h1 style={{ color: 'white' }}>
+Campaign:
+            {campaign}
+            {' '}
+
+          </h1>
+          <p style={{ color: '#afafaf' }}> This campaign has no files! Add some files to classify.  </p>
+          <Upload />
+          <Button
+            color="primary"
+            size="md"
+            className="btn-block mt-3"
+            onClick={this.onClick}
+          >
+Save & Continue
+          </Button>
+        </Container>
+      );
+    }
 
     if (this.state.fileList.length === 0) return null;
 
@@ -131,7 +129,12 @@ class Home extends React.Component {
     return (
       <Container fluid>
         <Row style={{ justifyContent: 'space-between' }}>
-          <h1 style={{ color: 'white' }}>Campaign: {campaign} </h1>
+          <h1 style={{ color: 'white' }}>
+Campaign:
+            {campaign}
+            {' '}
+
+          </h1>
           <DisplayColumn name="Display Actions" />
         </Row>
         <p style={{ color: '#afafaf' }}>
