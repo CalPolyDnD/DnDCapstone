@@ -1,9 +1,9 @@
 @echo off
 IF EXIST "backend\env" (
    echo "Virtual Environment Found. Activating virtual environment..."
-   REM backend\env\scripts\activate.bat
+   backend\env\scripts\activate.bat
    echo "Installing dependencies..."
-   REM pip3 install -r backend\requirements.txt
+   pip3 install -r backend\requirements.txt
    echo "Finished installing python dependencies"
    echo "Installing npm packages..."
    cd frontend
