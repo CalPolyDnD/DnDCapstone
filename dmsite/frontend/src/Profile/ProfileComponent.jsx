@@ -31,7 +31,6 @@ class Profile extends React.Component {
   }
 
   handleUserInput = () => {
-    const formErrors = this.state.formErrors;
     const password1 = this.state.password1;
     const password2 = this.state.password2;
     const passwordChange = { password1, password2 };
@@ -120,7 +119,8 @@ class Profile extends React.Component {
               <div className="panel panel-default">
                 <FormErrors formErrors={this.state.formErrors} />
               </div>
-              {/* <div className={`form-group ${this.errorClass(this.state.formErrors.username)}`}> */}
+              {/* <div className={`form-group */}
+              {/* ${this.errorClass(this.state.formErrors.username)}`}> */}
               {/* <label htmlFor="user">Username</label> */}
               {/* <Input */}
               {/* type="username" */}
@@ -148,17 +148,19 @@ class Profile extends React.Component {
               <div style={{ paddingBottom: '10%' }}>
                 <label>
 Username
-                    <br/>
-                    <br/>
-                    ..................................{this.state.username}
+                  <br />
+                  <br />
+                    ..................................
+                  {this.state.username}
                 </label>
               </div>
               <div style={{ paddingBottom: '10%' }}>
                 <label>
 Email
-                    <br/>
-                    <br/>
-                    ..................................{this.state.email}
+                  <br />
+                  <br />
+                    ..................................
+                  {this.state.email}
                 </label>
               </div>
               <div style={{
@@ -192,7 +194,8 @@ Email
 
               {/* <div> */}
               {/* <label htmlFor="security">Security</label> */}
-              {/* <Input style={{ color: 'white', backgroundColor: '#303030', borderWidth: 0 }} placeholder="Basic User" /> */}
+              {/* <Input style={{ color: 'white', backgroundColor: '#303030', borderWidth: 0 }} */}
+              {/* placeholder="Basic User" /> */}
               {/* </div> */}
 
               <div style={{
