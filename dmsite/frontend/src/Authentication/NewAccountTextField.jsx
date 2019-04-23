@@ -20,6 +20,14 @@ class NewAccountTextField extends React.Component {
       confirmDirty: false,
     };
 
+    componentDidUpdate() {
+      const { history, isAuthenticated } = this.props;
+
+      if (isAuthenticated) {
+        history.push('/campaign');
+      }
+    }
+
     handleSubmit = (e) => {
       e.preventDefault();
       const {
@@ -28,13 +36,8 @@ class NewAccountTextField extends React.Component {
       const { validateFieldsAndScroll } = form;
       validateFieldsAndScroll(async (err, values) => {
         if (!err) {
-          // TODO: Fix issue that's also in LoginTextField.jsx related to updating state immediately
-          onAuth(values.username, values.email, values.password, values.confirm)
-            .then(() => {
-              if (!error) {
-                history.push('/campaign');
-              }
-            });
+          onAuth(values.email, values.password, values.confirm)
+            .then(newState => this.setState({ ...newState }));
         }
       });
     };
@@ -48,7 +51,7 @@ class NewAccountTextField extends React.Component {
           confirmDirty: confirmDirty || !!value,
         };
       });
-    }
+    };
 
     compareToFirstPassword = (rule, value, callback) => {
       const { form } = this.props;
@@ -57,7 +60,7 @@ class NewAccountTextField extends React.Component {
       } else {
         callback();
       }
-    }
+    };
 
     validateToNextPassword = (rule, value, callback) => {
       const { form } = this.props;
@@ -67,7 +70,7 @@ class NewAccountTextField extends React.Component {
         form.validateFields(['confirm'], { force: true });
       }
       callback();
-    }
+    };
 
     render() {
       const { form, loading, error } = this.props;
@@ -165,6 +168,7 @@ class NewAccountTextField extends React.Component {
 const mapStateToProps = state => ({
   loading: state.loading,
   error: state.error,
+  isAuthenticated: state.token !== null,
 });
 
 const mapDispatchToProps = dispatch => ({
