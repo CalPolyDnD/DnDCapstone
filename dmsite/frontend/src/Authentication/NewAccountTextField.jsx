@@ -31,7 +31,7 @@ class NewAccountTextField extends React.Component {
     handleSubmit = (e) => {
       e.preventDefault();
       const {
-        onAuth, history,
+        form, onAuth,
       } = this.props;
       const { validateFieldsAndScroll } = form;
       validateFieldsAndScroll(async (err, values) => {
