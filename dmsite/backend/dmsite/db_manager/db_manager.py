@@ -6,7 +6,7 @@ import pandas as pd
 
 
 dynamodb = boto3.resource('dynamodb', region_name='us-east-1', endpoint_url="http://dynamodb.us-east-1.amazonaws.com")
-ERR_STR = "There was an error trying to access the AWS database."
+ERR_STR = "There was an error trying to access the AWS database. See 'errorStr' for details."
 
 def make_query(table, index, value, compare):
     try:
