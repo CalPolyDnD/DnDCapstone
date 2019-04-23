@@ -30,7 +30,7 @@ class TextField extends React.Component {
 
   handleSubmit = (e) => {
     const {
-      history, form, onAuth, error,
+      form, onAuth,
     } = this.props;
     e.preventDefault();
     form.validateFields((err, values) => {
