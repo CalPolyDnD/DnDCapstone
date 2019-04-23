@@ -14,6 +14,7 @@ def make_query(table, index, value, compare):
         response = files.query(IndexName=index, KeyConditionExpression=Key(value).eq(compare))
         return response
     except ClientError as e:
+        print("AWS Error: " + e.__str__())
         return {"error": ERR_STR, "errorStr": e.__str__()}
 
 
@@ -23,6 +24,7 @@ def add_item(table, value):
         response = files.put_item(Item=value)
         return response
     except ClientError as e:
+        print("AWS Error: " + e.__str__())
         return {"error": ERR_STR, "errorStr": e.__str__()}
 
 
@@ -36,6 +38,7 @@ def update_item(table, key, update, names, values):
         )
         return response
     except ClientError as e:
+        print("AWS Error: " + e.__str__())
         return {"error": ERR_STR, "errorStr": e.__str__()}
 
 
@@ -45,6 +48,7 @@ def get_item(table, key):
         response = tbl.get_item(Key=key)
         return response
     except ClientError as e:
+        print("AWS Error: " + e.__str__())
         return {"error": ERR_STR, "errorStr": e.__str__()}
 
 
