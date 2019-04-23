@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import 'filepond/dist/filepond.min.css';
 import {
-    Input, Card, Button, CardBody, ListGroup, ListGroupItem, CardHeader
+  Input, Card, Button, CardBody, ListGroup, ListGroupItem, CardHeader,
 } from 'reactstrap';
 import PropTypes from 'prop-types';
 import { FileObject } from '../../Model/FileObject';

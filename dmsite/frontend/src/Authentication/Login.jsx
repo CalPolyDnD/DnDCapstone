@@ -30,7 +30,7 @@ class Login extends Component {
     return (
       <div>
         <Container fluid>
-          <div style={{ display: 'flex', justifyContent: 'center', paddingTop: '5%' }}>
+          <div style={{ display: 'flex', justifyContent: 'center', paddingTop: '3%' }}>
             <Card style={{ borderWidth: 0 }} align="center">
               <CardHeader tag="h3" style={{ backgroundColor: '#303030', color: 'white' }}>Login</CardHeader>
               <CardBody style={{ backgroundColor: '#3d3d3d', color: 'white' }}>
