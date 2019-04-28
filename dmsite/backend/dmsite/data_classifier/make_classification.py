@@ -43,13 +43,13 @@ def save_data(data):
                 if 'is_sensitive' not in classification:
                     classification['is_sensitive'] = 0
                 key = {"name": classification['name'], "campaign": item['campaign']}
-                response = db.get_item("classification", key)
+                response = db.get_item("classifications", key)
                 if 'Item' not in response:
-                    response = db.add_item("classification", {"name": classification['name'], "campaign": item['campaign'],
+                    response = db.add_item("classifications", {"name": classification['name'], "campaign": item['campaign'],
                                                               "examples": classification['examples'], "is_sensitive": classification['is_sensitive']})
                 else:
                     response = db.update_item(
-                        "classification",
+                        "classifications",
                         key,
                         'set #classifications = list_append(if_not_exists(#classifications, :empty_list), :values)',
                         {'#classifications': 'examples'},
