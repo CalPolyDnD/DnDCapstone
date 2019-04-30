@@ -59,18 +59,17 @@ class DatasetsColumn extends React.Component {
     route += `${this.props.campaign}?=`;
 
     for (let i = 0; i < fileListData.length; i++) {
-      if (fileListData[i].header !== "1") {
+      if (fileListData[i].header !== '1') {
         route += fileListData[i].path;
         if (i !== fileListData.length - 1) {
           route += ',';
         }
+        availableFile += 1;
       }
-      availableFile = 1;
     }
-    if (availableFile === 1)
-        this.props.history.push(route);
-    else
-        return
+    if (availableFile > 0) {
+      this.props.history.push(route);
+    }
   };
 
   render() {

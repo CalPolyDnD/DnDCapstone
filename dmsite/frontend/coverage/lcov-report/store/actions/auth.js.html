@@ -3,12 +3,12 @@
 <head>
     <title>Code coverage report for store/actions/auth.js</title>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="..\..\prettify.css" />
-    <link rel="stylesheet" href="..\..\base.css" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style type='text/css'>
         .coverage-summary .sorter {
-            background-image: url(..\..\sort-arrow-sprite.png);
+            background-image: url(../../sort-arrow-sprite.png);
         }
     </style>
 </head>
@@ -16,13 +16,13 @@
 <div class='wrapper'>
   <div class='pad1'>
     <h1>
-      <a href="..\..\index.html">All files</a> / <a href="index.html">store/actions</a> auth.js
+      <a href="../../index.html">All files</a> / <a href="index.html">store/actions</a> auth.js
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">20.37% </span>
+        <span class="strong">21.31% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>11/54</span>
+        <span class='fraction'>13/61</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
@@ -32,12 +32,12 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>0/17</span>
+        <span class='fraction'>0/20</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">20.75% </span>
+        <span class="strong">21.67% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>11/53</span>
+        <span class='fraction'>13/60</span>
       </div>
     </div>
   </div>
@@ -152,9 +152,24 @@
 107
 108
 109
-110</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -181,6 +196,19 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -265,6 +293,7 @@
 import * as actionTypes from './actionTypes';
 &nbsp;
 const LOGIN_URL = 'http://localhost:8000/rest-auth/login/';
+const LOGOUT_URL = 'http://localhost:8000/rest-auth/logout/';
 const REGISTRATION_URL = 'http://localhost:8000/rest-auth/registration';
 const ONE_HOUR = 3600;
 &nbsp;
@@ -289,18 +318,31 @@ export const authFail = <span class="fstat-no" title="function not covered" >er<
   }
 );
 &nbsp;
-export const logout = <span class="fstat-no" title="function not covered" >()</span> =&gt; {
-<span class="cstat-no" title="statement not covered" >  localStorage.removeItem('token');</span>
-<span class="cstat-no" title="statement not covered" >  localStorage.removeItem('expirationDate');</span>
-<span class="cstat-no" title="statement not covered" >  return {</span>
+export const authLogout = <span class="fstat-no" title="function not covered" >()</span> =&gt; (
+<span class="cstat-no" title="statement not covered" >  {</span>
     type: actionTypes.AUTH_LOGOUT,
-  };
-};
+    // TODO: Set 'logging out property' here
+  }
+);
+&nbsp;
+export const logout = <span class="fstat-no" title="function not covered" >()</span> =&gt; (
+<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >  (d</span>ispatch) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    axios.defaults.xsrfHeaderName = 'X-CSRFTOKEN';</span>
+<span class="cstat-no" title="statement not covered" >    axios.defaults.xsrfCookieName = 'csrftoken';</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    return axios.post(LOGOUT_URL, {})</span>
+      .then(<span class="fstat-no" title="function not covered" >()</span> =&gt; {
+<span class="cstat-no" title="statement not covered" >        localStorage.removeItem('token');</span>
+<span class="cstat-no" title="statement not covered" >        localStorage.removeItem('expirationDate');</span>
+<span class="cstat-no" title="statement not covered" >        dispatch(authLogout());</span>
+      });
+  }
+);
 &nbsp;
 export const checkAuthTimeout = <span class="fstat-no" title="function not covered" >ex</span>pirationDate =&gt; (
 <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >  (d</span>ispatch) =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >    setTimeout(<span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >      dispatch(logout);</span>
+<span class="cstat-no" title="statement not covered" >      dispatch(logout());</span>
     }, expirationDate * 1000);
   }
 );
@@ -311,7 +353,7 @@ export const authLogin = <span class="fstat-no" title="function not covered" >(e
 <span class="cstat-no" title="statement not covered" >    axios.defaults.xsrfHeaderName = 'X-CSRFTOKEN';</span>
 <span class="cstat-no" title="statement not covered" >    axios.defaults.xsrfCookieName = 'csrftoken';</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    axios.post(LOGIN_URL, {</span>
+<span class="cstat-no" title="statement not covered" >    return axios.post(LOGIN_URL, {</span>
       email,
       password,
     })
@@ -335,7 +377,7 @@ export const authSignup = <span class="fstat-no" title="function not covered" >(
 <span class="cstat-no" title="statement not covered" >    axios.defaults.xsrfHeaderName = 'X-CSRFTOKEN';</span>
 <span class="cstat-no" title="statement not covered" >    axios.defaults.xsrfCookieName = 'csrftoken';</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    axios.post(REGISTRATION_URL, {</span>
+<span class="cstat-no" title="statement not covered" >    return axios.post(REGISTRATION_URL, {</span>
       email,
       password1,
       password2,
@@ -376,10 +418,10 @@ export const authCheckState = <span class="fstat-no" title="function not covered
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Mar 05 2019 11:02:06 GMT-0800 (Pacific Standard Time)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Apr 30 2019 00:01:20 GMT-0700 (PDT)
 </div>
 </div>
-<script src="..\..\prettify.js"></script>
+<script src="../../prettify.js"></script>
 <script>
 window.onload = function () {
         if (typeof prettyPrint === 'function') {
@@ -387,6 +429,6 @@ window.onload = function () {
         }
 };
 </script>
-<script src="..\..\sorter.js"></script>
+<script src="../../sorter.js"></script>
 </body>
 </html>
