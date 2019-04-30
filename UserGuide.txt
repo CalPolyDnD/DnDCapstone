@@ -52,7 +52,7 @@ Once you've uploaded all of your files, and are ready to classify them, you can 
 Once classification has finished, you will be prompted with this page (image 8)
    At the top, the tabs allow you to switch between different files that were classified.
    The "Description" box on the left lets you add a custom description of the file.
-   The "Classifications" box contains all of the classifications made by the system. What that means is that a label within the file was found to match, or be similar to, one of the collected data points. You can click on each name to see some examples of what that classification is. The checkbox on the right lets you mark data as sensitive, allowing you to hide potentially sensitive information, such as social security numbers.
+   The "Classifications" box contains all of the classifications made by the system. What that means is that a label within the file was found to match, or be similar to, one of the collected data points. You can click on each name to see some examples of what that classification is. The checkbox on the right lets you mark data as sensitive, allowing you to hide potentially sensitive information, such as social security numbers. Finally, you can change the name of the classification by typing in the box containing the classification's name.
    On the right is a placeholder box for unknown, or confusing, labels.
 Once you're done editing the data, click the "Save" button and you will be sent back to the homepage, and the information will be stored in the database.
 The classifications table, mentioned previously, should now list the classifications that the classifier found. (image 9)
