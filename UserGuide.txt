@@ -1,6 +1,6 @@
 Install:
 Required Software:
-   Python
+   Python 3.6 or 3.7
    NPM
    Postgres SQL (or a Postgres SQL database hosted remotely)
    A Web Browser
@@ -9,8 +9,9 @@ If using Windows, use the files that end in .bat
 If using MacOS or Linux, use the files that end in .sh
 
 Download/Clone our git repo: https://github.com/CalPolyDnD/DnDCapstone
-Navigate to 'dmsite'
-Run the 'setup' script
+Open up a command line interface.
+Navigate to 'dmsite' using the 'cd' command.
+If using Linux/MacOS, run 'source setup.sh'. If using Windows, run 'setup.bat'
 Run the 'build' script
 Navigate to 'backend'
 Add a file called "credentials" (note: there is no file suffix to that, just
@@ -19,11 +20,14 @@ have it named "credentials") to the folder containing these three elements, in o
    Your PostgresSQL password associated with the above username
    The URL to your PostgresSQL database (if it's running on the same system as the server is, use 'localhost')
 If you do not have your own PostgresSQL database to use, please contact us and we can provide our own database for you to utilize.
-If you are using your own AWS account, please make sure your "credentials" file is up to date with the correct token information!
+
+
+If you are using your own AWS account, please make sure your AWS "credentials" file is up to date with the correct token information! 
+(file is located in "C:\Users\<UserName>\.aws" for Windows, and "<home directory>\.aws" for MacOS/Linux).
 
 
 Running the Server:
-Run the 'run' script.
+Navigate to the program's main directoy. Navigate to the 'dmsite' directory, then run the 'run' script.
 To close the server, click on the terminal, hold down Control and press C.
 
 
