@@ -25,43 +25,60 @@ class ClassificationTable extends React.Component {
       classifications[index].is_sensitive = 0;
   }
 
+  handleTextChange = (event, index) => {
+    let classifications = this.props.file.classifications;
+    classifications[index].name = event.target.value;
+    this.forceUpdate(); //TODO: maybe move the file object to the state instead of the props
+  }
+
   renderClassificationExamples(examples) {
     return examples.map(example => (
       <div style={{ height: '100%', justifyContent: 'center', alignItems: 'center'}}>
         <p style={{ margin: '5px', paddingLeft: '30px',  color: '#898989' }}>
-          {`${example}`}
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{`${example}`}
         </p>
       </div>
     ));
   }
 
   renderFileCell() {
-    const { file, selectedClassificationIndex, cellOnClick } = this.props;
+    const { file, selectedClassificationIndex, cellOnClick} = this.props;
 
     if (file.classifications === null) {
       return (<div />);
     }
+    return file.classifications.map((classification, index) => {
 
-    return file.classifications.map((classification, index) => (
-      <div style={{ backgroundColor: '#3d3d3d' }}>
-        <ListGroupItem
-            tag="button"
-            action
-            className="justify-content-between"
-            onClick={() => { cellOnClick(index); }}
-            style={{ color: 'white', backgroundColor: '#3d3d3d', fontSize: '110%' }}
-        >
-          {classification.name}
-          <Input style={{ right: '10%'}} type="checkbox" onChange={(event) => {this.handleChange(event, index)}} />
-        </ListGroupItem>
-        <Collapse
-            isOpen={selectedClassificationIndex === index}
-            style={{backgroundColor: '#3d3d3d' }}
-        >
-          {this.renderClassificationExamples(classification.examples)}
-        </Collapse>
-      </div>
-    ));
+      return (
+          <div style={{ backgroundColor: '#3d3d3d' }}>
+            <ListGroupItem
+                tag="button"
+                action
+                className="justify-content-between"
+                onClick={() => { cellOnClick(index); }}
+                style={{ color: 'white', backgroundColor: '#3d3d3d', fontSize: '110%' }}
+            >
+              <div>
+                <Input style={{ width: '80%', float:'left' }} type="text" value={classification.name} onChange={(event) => {this.handleTextChange(event, index)}} />
+                <div style={{ float:'right' }} >
+                  <p style={{ margin: '0px' }}>Sensitive</p>
+                  {/*TODO: need to adjust this so it doesn't look terrible */}
+                  <Input style={{ float:'right' }} type="checkbox" onChange={(event) => {this.handleChange(event, index)}} />
+                </div>
+              </div>
+            </ListGroupItem>
+            <Collapse
+                isOpen={selectedClassificationIndex === index}
+                style={{backgroundColor: '#3d3d3d' }}
+            >
+              <p style={{ margin: '5px', paddingLeft: '30px',  color: '#898989' }}>
+                Column: {classification.columns[0]}
+              </p>
+              {this.renderClassificationExamples(classification.examples)}
+            </Collapse>
+          </div>
+      );
+    });
   }
 
   render() {

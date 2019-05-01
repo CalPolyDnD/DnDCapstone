@@ -12,9 +12,11 @@ import {
 } from 'antd';
 import FileTab from './FileTab';
 import './ClassificationInfo.css';
+import axios from 'axios';
 
-let FETCH_URL = 'http://localhost:8000/classify_files';
-let SAVE_URL =  'http://localhost:8000/classify_files/save';
+const FETCH_URL = 'http://localhost:8000/classify_files';
+const SAVE_URL =  'http://localhost:8000/classify_files/save';
+const FETCH_CURRENT_USER_URL = 'http://localhost:8000/rest-auth/user/';
 
 class ClassificationPage extends Component {
   constructor(props) {
@@ -33,15 +35,20 @@ class ClassificationPage extends Component {
     const fileNames = location.search.replace('?=', '').split(',');
     const formattedBody = fileNames.map(fileName => ({ filename: fileName }));
 
-    fetch(FETCH_URL, {
-      method: 'POST',
-      body: JSON.stringify(formattedBody)
-    }).then(data => data.json()).then((result) => {
-      let files = result;
-      files.forEach((file) => { file.campaign = this.campaignName; });
-      this.setState({ files: files });
-      return ""; // needed for compiler
-    });
+    axios.get(FETCH_CURRENT_USER_URL)
+      .then((userRes) => {
+        fetch(FETCH_URL, {
+          method: 'POST',
+          body: JSON.stringify(formattedBody)
+        }).then(data => data.json()).then((result) => {
+          let files = result;
+          files.forEach((file) => { file.campaign = this.campaignName; file.owner = userRes.data.email;  });
+          this.setState({ files: files });
+          return ""; // needed for compiler
+        });
+      });
+
+
   }
 
   toggle(tab) {
@@ -133,7 +140,6 @@ class ClassificationPage extends Component {
         </div>
       );
     }
-
     return (
       <div className="classification-page">
         <div>
