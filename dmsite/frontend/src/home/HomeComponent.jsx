@@ -111,7 +111,6 @@ class Home extends React.Component {
       filenames += `, ${this.state.fileList[count].get_name()}`;
       if (count === 4) filenames += '...';
     }
-
     //           <DisplayColumn name="Display Actions" /> - add in the first row after h1
     return (
       <Container fluid>

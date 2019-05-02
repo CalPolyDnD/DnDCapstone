@@ -11,7 +11,6 @@ class ClassificationColumn extends Component {
     e.preventDefault();
   }
 
-  // TODO: fix this
   isSensitive(val) {
     if (val === "1") {
         return "Sensitive!";
@@ -19,19 +18,26 @@ class ClassificationColumn extends Component {
     return "";
   }
 
+  exitClick() {
+    let route = '/edit_classificatons?=' + this.props.file.name;
+    this.props.history.push(route);
+  }
+
   renderClassificationCell() {
     const { file } = this.props;
 
-    return file.classifications.map((obj, index) => {
-      return (
-        <ListGroupItem key={ index } style={{ backgroundColor: '#3d3d3d', color: 'white' }}>
-            <div>
-              <p>{obj.name}</p>
-              <p style={{ color: 'red', right: "10%"}}>{this.isSensitive(obj.is_sensitive)}</p>
-            </div>
-        </ListGroupItem>
-      );
-    });
+    if (typeof file.classifications !== 'undefined')
+        return file.classifications.map((obj, index) => {
+          return (
+            <ListGroupItem key={ index } style={{ backgroundColor: '#3d3d3d', color: 'white' }}>
+                <div>
+                  <p>{obj.name}</p>
+                  <p style={{ color: 'red', right: "10%"}}>{this.isSensitive(obj.is_sensitive)}</p>
+                </div>
+            </ListGroupItem>
+          );
+        });
+    return null;
   };
 
   render() {
@@ -48,7 +54,7 @@ class ClassificationColumn extends Component {
             style={{ backgroundColor: '#303030', borderWidth: 0 }}
           />
           <Button
-            onClick={this.handleClick}
+            onClick={this.editClick}
             color="primary"
             className="mr-0 btn-block mt-2 mb-2"
           >
