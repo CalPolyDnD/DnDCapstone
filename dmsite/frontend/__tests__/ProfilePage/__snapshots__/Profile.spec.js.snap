@@ -13,7 +13,7 @@ exports[`Layout-Footer should render the component without errors 1`] = `
           "entries": Array [
             Object {
               "hash": "",
-              "key": "14o8ab",
+              "key": "ztj4p6",
               "pathname": "/",
               "search": "",
               "state": undefined,
@@ -27,7 +27,7 @@ exports[`Layout-Footer should render the component without errors 1`] = `
           "listen": [Function],
           "location": Object {
             "hash": "",
-            "key": "14o8ab",
+            "key": "ztj4p6",
             "pathname": "/",
             "search": "",
             "state": undefined,
@@ -39,7 +39,7 @@ exports[`Layout-Footer should render the component without errors 1`] = `
       location={
         Object {
           "hash": "",
-          "key": "14o8ab",
+          "key": "ztj4p6",
           "pathname": "/",
           "search": "",
           "state": undefined,
@@ -77,6 +77,7 @@ exports[`Layout-Footer should render the component without errors 1`] = `
                 "alignSelf": "center",
                 "display": "flex",
                 "justifyContent": "center",
+                "paddingTop": "3%",
                 "width": "100%",
               }
             }
@@ -125,7 +126,7 @@ exports[`Layout-Footer should render the component without errors 1`] = `
                       }
                     }
                   >
-                    User Profile and Settings
+                    Profile Settings
                   </h3>
                 </CardHeader>
                 <CardBody
@@ -156,9 +157,7 @@ exports[`Layout-Footer should render the component without errors 1`] = `
                       <FormErrors
                         formErrors={
                           Object {
-                            "email": "",
                             "password": "",
-                            "username": "",
                           }
                         }
                       >
@@ -168,98 +167,59 @@ exports[`Layout-Footer should render the component without errors 1`] = `
                       </FormErrors>
                     </div>
                     <div
-                      className="form-group "
+                      style={
+                        Object {
+                          "paddingBottom": "10%",
+                        }
+                      }
                     >
-                      <label
-                        htmlFor="user"
-                      >
+                      <label>
                         Username
+                        <br />
+                        <br />
+                        ..................................
                       </label>
-                      <Input
-                        className="form-control"
-                        name="username"
-                        onChange={[Function]}
-                        placeholder="User"
-                        required={true}
-                        style={
-                          Object {
-                            "backgroundColor": "#303030",
-                            "borderWidth": 0,
-                            "color": "white",
-                          }
-                        }
-                        type="username"
-                      >
-                        <input
-                          className="form-control form-control"
-                          name="username"
-                          onChange={[Function]}
-                          placeholder="User"
-                          required={true}
-                          style={
-                            Object {
-                              "backgroundColor": "#303030",
-                              "borderWidth": 0,
-                              "color": "white",
-                            }
-                          }
-                          type="username"
-                        />
-                      </Input>
                     </div>
                     <div
-                      className="form-group "
+                      style={
+                        Object {
+                          "paddingBottom": "10%",
+                        }
+                      }
                     >
-                      <label
-                        htmlFor="email"
-                      >
+                      <label>
                         Email
+                        <br />
+                        <br />
+                        ..................................
                       </label>
-                      <Input
-                        className="form-control"
-                        name="email"
-                        onChange={[Function]}
-                        placeholder="Example@ex.com"
-                        style={
-                          Object {
-                            "backgroundColor": "#303030",
-                            "borderWidth": 0,
-                            "color": "white",
-                          }
+                    </div>
+                    <div
+                      style={
+                        Object {
+                          "fontSize": "125%",
+                          "paddingBottome": "5%",
+                          "paddingLeft": "33%",
                         }
-                        type="email"
-                        value=""
-                      >
-                        <input
-                          className="form-control form-control"
-                          name="email"
-                          onChange={[Function]}
-                          placeholder="Example@ex.com"
-                          style={
-                            Object {
-                              "backgroundColor": "#303030",
-                              "borderWidth": 0,
-                              "color": "white",
-                            }
-                          }
-                          type="email"
-                          value=""
-                        />
-                      </Input>
+                      }
+                    >
+                      <label>
+                        Change Password
+                      </label>
                     </div>
                     <div
                       className="form-group "
                     >
                       <label
-                        htmlFor="password"
+                        htmlFor="password1"
                       >
-                        Password
+                        New Password
                       </label>
                       <Input
                         className="form-control"
                         name="password"
                         onChange={[Function]}
-                        placeholder="Password123"
+                        placeholder=""
                         style={
                           Object {
                             "backgroundColor": "#303030",
@@ -268,13 +228,12 @@ exports[`Layout-Footer should render the component without errors 1`] = `
                           }
                         }
                         type="password"
-                        value=""
                       >
                         <input
                           className="form-control form-control"
                           name="password"
                           onChange={[Function]}
-                          placeholder="Password123"
+                          placeholder=""
                           style={
                             Object {
                               "backgroundColor": "#303030",
@@ -283,18 +242,22 @@ exports[`Layout-Footer should render the component without errors 1`] = `
                             }
                           }
                           type="password"
-                          value=""
                         />
                       </Input>
                     </div>
-                    <div>
+                    <div
+                      className="form-group "
+                    >
                       <label
-                        htmlFor="security"
+                        htmlFor="password2"
                       >
-                        Security
+                        Confirm New Password
                       </label>
                       <Input
-                        placeholder="Basic User"
+                        className="form-control"
+                        name="password"
+                        onChange={[Function]}
+                        placeholder=""
                         style={
                           Object {
                             "backgroundColor": "#303030",
@@ -302,11 +265,13 @@ exports[`Layout-Footer should render the component without errors 1`] = `
                             "color": "white",
                           }
                         }
-                        type="text"
+                        type="password"
                       >
                         <input
-                          className="form-control"
-                          placeholder="Basic User"
+                          className="form-control form-control"
+                          name="password"
+                          onChange={[Function]}
+                          placeholder=""
                           style={
                             Object {
                               "backgroundColor": "#303030",
@@ -314,57 +279,38 @@ exports[`Layout-Footer should render the component without errors 1`] = `
                               "color": "white",
                             }
                           }
-                          type="text"
+                          type="password"
                         />
                       </Input>
                     </div>
-                    <br />
+                    <div
+                      style={
+                        Object {
+                          "backgroundColor": "#3d3d3d",
+                          "paddingLeft": "15%",
+                          "paddingRight": "15%",
+                        }
+                      }
+                    >
+                      <Button
+                        className="btn-block mt0 login-form-button"
+                        color="primary"
+                        onClick={[Function]}
+                        tag="button"
+                      >
+                        <button
+                          aria-label={null}
+                          className="btn-block mt0 login-form-button btn btn-primary"
+                          onClick={[Function]}
+                          type="button"
+                        >
+                          Save and Return
+                        </button>
+                      </Button>
+                       
+                    </div>
                   </div>
                 </CardBody>
-                <div
-                  className="d-flex justify-content-center pt-2"
-                  style={
-                    Object {
-                      "backgroundColor": "#3d3d3d",
-                      "color": "white",
-                    }
-                  }
-                >
-                  <Button
-                    className="btn-block mt-0"
-                    color="primary"
-                    disabled={true}
-                    onClick={[Function]}
-                    size="md"
-                    tag="button"
-                  >
-                    <button
-                      aria-label={null}
-                      className="btn-block mt-0 btn btn-primary btn-md disabled"
-                      disabled={true}
-                      onClick={[Function]}
-                      type="button"
-                    >
-                      Save
-                    </button>
-                  </Button>
-                  <Button
-                    className="btn-block mt-0"
-                    color="secondary"
-                    onClick={[Function]}
-                    size="md"
-                    tag="button"
-                  >
-                    <button
-                      aria-label={null}
-                      className="btn-block mt-0 btn btn-secondary btn-md"
-                      onClick={[Function]}
-                      type="button"
-                    >
-                      Back
-                    </button>
-                  </Button>
-                </div>
               </div>
             </Card>
           </div>
