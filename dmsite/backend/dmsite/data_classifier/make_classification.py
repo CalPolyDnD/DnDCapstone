@@ -45,7 +45,7 @@ def save_data(data):
                 key = {"name": classification['name'], "campaign": item['campaign']}
                 response = db.get_item("classifications", key)
                 if 'Item' not in response:
-                    response = db.add_item("classifications", {"name": classification['name'], "campaign": item['campaign'],
+                    response = db.add_item("classifications", {"name": classification['name'], "campaign": item['campaign'], "owner": item['owner'],
                                                               "examples": classification['examples'], "is_sensitive": classification['is_sensitive']})
                 else:
                     response = db.update_item(

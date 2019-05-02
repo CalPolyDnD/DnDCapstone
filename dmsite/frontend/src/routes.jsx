@@ -12,7 +12,7 @@ import ClassificationPage from './ClassificationPage/ClassificationPage';
 
 const BaseRouter = props => (
   <div>
-    <Route exact path="/" component={props.isAuthenticated ? Home : Login} />
+    <Route exact path="/" component={props.isAuthenticated ? Campaign : Login} />
     <Route exact path="/login" component={Login} />
     <Route path="/search" component={SearchResultsPage} />
     <Route exact path="/details" component={DatasetDetails} />
