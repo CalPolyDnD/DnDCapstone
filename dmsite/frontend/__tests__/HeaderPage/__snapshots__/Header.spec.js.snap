@@ -83,56 +83,12 @@ exports[`renders correctly 1`] = `
       <ul
         align="center"
         className="campaign-list list-group list-group-flush"
-      >
-        <div
-          style={
-            Object {
-              "backgroundColor": "#303030",
-            }
-          }
-        >
-          <li
-            className="list-group-item"
-            onClick={[Function]}
-            style={
-              Object {
-                "backgroundColor": "#3d3d3d",
-                "color": "white",
-              }
-            }
-          >
-            Campaign 1
-          </li>
-          <li
-            className="list-group-item"
-            onClick={[Function]}
-            style={
-              Object {
-                "backgroundColor": "#3d3d3d",
-                "color": "white",
-              }
-            }
-          >
-            Campaign 2
-          </li>
-          <li
-            className="list-group-item"
-            onClick={[Function]}
-            style={
-              Object {
-                "backgroundColor": "#3d3d3d",
-                "color": "white",
-              }
-            }
-          >
-            Campaign 3
-          </li>
-        </div>
-      </ul>
+      />
       <button
         aria-label={null}
         className="btn-block mt-3 btn btn-primary btn-md"
         onClick={[Function]}
+        type="button"
       >
         Create New Campaign
       </button>

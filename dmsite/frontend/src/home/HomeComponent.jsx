@@ -134,7 +134,7 @@ Campaign:
               cellOnClick={this._handleFileChange}
               campaign={campaign}
             />
-            {this.getNameAccess()}
+            {/*{this.getNameAccess()}*/}
           </Col>
           <Col md="7">
             <ClassificationColumn name="Classifications" file={fileList[selectedFileIndex]} />
