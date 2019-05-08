@@ -1,5 +1,6 @@
 import joblib as jl
 import pandas as pd
+import numpy as np
 import dmsite.data_classifier.data_wrangler as dw
 import json
 
@@ -62,9 +63,13 @@ class Classifier:
         classification_map = {}
         for k, v in freq.items():
             if v >= GROUPING_THRESHOLD:
-                classification_map[k] = [results[k].idxmax()]
-            else:
-                classification_map[k] = [results[k].idxmax(), results[k].drop(results[k].idxmax()).idxmax()]
+                guess = results[k].idxmax()
+                second_best_guess = results[k].drop(results[k].idxmax()).idxmax()
+
+                if guess == 'Unknown':
+                    classification_map[k] = [guess, second_best_guess]
+                else:
+                    classification_map[k] = [guess]
 
         classifications = []
         for k, v in classification_map.items():
@@ -80,7 +85,13 @@ class Classifier:
 
     def _classify_data(self, df):
         classified_df = df
-        classified_df['guess'] = self._model.predict(self._vectorize_data(df['value']))
+        model_input = self._vectorize_data(df['value'])
+
+        model_output = self._model.decision_function(model_input)
+
+        guess = [self._model.classes_[np.argmax(value)] if np.max(value) > 0 else 'Unknown' for value in model_output]
+
+        classified_df['guess'] = guess
 
         return self._build_classifications(classified_df)
 
