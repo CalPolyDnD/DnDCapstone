@@ -3,8 +3,9 @@ import dmsite.file_manager.file_manager as fm
 import dmsite.db_manager.db_manager as db
 import os
 
+
 def make_classifications(body):
-    #TODO: do some error checking here for stuff
+    # TODO: do some error checking here for stuff
     clsfr = c.Classifier()
     results = []
     count = 0
