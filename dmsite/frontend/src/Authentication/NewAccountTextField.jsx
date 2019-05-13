@@ -80,7 +80,7 @@ class NewAccountTextField extends React.Component {
 
       if (error) {
         errorMessage = (
-          <p>{error}</p>
+          <p>{error.message}</p>
         );
       }
 

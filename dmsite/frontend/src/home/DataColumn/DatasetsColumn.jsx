@@ -63,9 +63,8 @@ class DatasetsColumn extends React.Component {
         route += fileListData[i].path;
         if (i !== fileListData.length - 1) {
           route += ',';
-        } else {
+        } else
           noComma = 1;
-        }
         totalFiles += 1;
       }
     }

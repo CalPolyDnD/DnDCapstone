@@ -2,7 +2,7 @@ import pandas as pd
 import os
 from pandas.io.json import json_normalize
 import json
-# import xmltodict
+#import xmltodict
 from dmsite.data_classifier.classifier_exceptions import UnsupportedFileTypeError
 
 
