@@ -93,8 +93,7 @@ class Home extends React.Component {
       campaign, fileList, selectedFileIndex,
     } = this.state;
 
-    if (this.state.filesPresent !== 1)
-        return (
+    if (this.state.filesPresent !== 1) return (
           <Container fluid>
             <h1 style={{ color: 'white' }}>Campaign: {campaign} </h1>
             <p style={{ color: '#afafaf' }}> This campaign has no files! Add some files to classify.  </p>
@@ -122,7 +121,7 @@ Campaign:
             {' '}
 
           </h1>
-          <DisplayColumn name="Display Actions" />
+          <DisplayColumn campaignName={this.state.campaign} />
         </Row>
         <p style={{ color: '#afafaf' }}>
           This campaign organizes {filenames}
