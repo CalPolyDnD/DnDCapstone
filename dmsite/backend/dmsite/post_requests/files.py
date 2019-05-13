@@ -23,5 +23,14 @@ def find_files(data):
     return response['Items'], 0
 
 
+def download_file(request):
+    if request.method == 'GET':
+        try:
+            response = JsonResponse({"test": "test"}, content_type='application/json')
+            response['Content-Disposition'] = 'attachment; filename=myfile.json'
+            return response
+        except Exception as e:
+            print(e)
+            return None
+    return JsonResponse({"error": "not a POST request"}, status=400)
 #TODO: add a POST request to update a file's description
-
