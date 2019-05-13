@@ -178,7 +178,7 @@ class StandardHeader extends React.Component {
     return (
       <div style={{ height: '64px', background: '#000000' }} id="headerContainer">
         <div style={{ background: '#000000' }}>
-          <a className="d-inline-flex px-2" href="/home/" id="logoBanner">
+          <a className="d-inline-flex px-2" href="/" id="logoBanner">
             <img id="logo" alt="" width="65" height="50" src={Logo} />
             <h2
               style={{
