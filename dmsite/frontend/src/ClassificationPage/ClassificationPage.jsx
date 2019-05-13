@@ -149,7 +149,7 @@ class ClassificationPage extends Component {
           <TabContent activeTab={this.state.activeTab} >
             {this.tabInfo()}
           </TabContent>
-        </div>
+        </div>z
       </div>
     );
   }

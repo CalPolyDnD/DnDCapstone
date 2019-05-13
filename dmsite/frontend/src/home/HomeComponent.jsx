@@ -89,23 +89,24 @@ class Home extends React.Component {
           this.setState({ filesPresent: 0, owner: userRes.data.email });
           return;
         }
-      for (let count = 0; count < response.length; count++) {
-        files.push(
-          new FileObject(
-            response[count].filename,
-            response[count].filename,
-            response[count].classifications,
-            response[count].is_classified,
-          ),
-        );
-      }
-      this.setState({ fileList: files });
+        for (let count = 0; count < response.length; count++) {
+          files.push(
+            new FileObject(
+              response[count].filename,
+              response[count].filename,
+              response[count].classifications,
+              response[count].is_classified,
+            )
+          );
+        }
+        this.setState({ fileList: files });
+      });
     });
   }
 
   render() {
     const {
-      campaign, fileList, selectedFileIndex, filesPresent, owner,
+      campaign, fileList, selectedFileIndex, filesPresent, owner
     } = this.state;
 
     if (filesPresent !== 1)
@@ -126,7 +127,7 @@ class Home extends React.Component {
       filenames += `, ${fileList[count].get_name()}`;
       if (count === 4) filenames += '...';
     }
-    //           <DisplayColumn name="Display Actions" /> - add in the first row after h1
+
     return (
       <Container fluid>
         <Row style={{ justifyContent: 'space-between' }}>

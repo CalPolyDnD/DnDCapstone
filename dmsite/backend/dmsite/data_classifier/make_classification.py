@@ -32,13 +32,12 @@ def make_classifications(body):
     return results, status
 
 
-def save_data(data, db_manager = None):
+def save_data(data, db_manager=None):
     try:
         for item in data:
             names = []
             if 'description' not in item:
                 item['description'] = "Placeholder Description"
-
 
             for classification in item['classifications']:
                 if 'is_sensitive' not in classification:
@@ -46,10 +45,16 @@ def save_data(data, db_manager = None):
                 key = {"name": classification['name'], "campaign": item['campaign']}
                 response = db.get_item("classifications", key, db_manager)
                 if 'Item' not in response:
-                    response = db.add_item("classifications",
-                                           {"name": classification['name'], "campaign": item['campaign'], "owner": item['owner'],
-                                           "examples": classification['examples'], "is_sensitive": classification['is_sensitive']},
-                                           db_manager
+                    response = db.add_item(
+                        "classifications",
+                        {
+                            "name": classification['name'],
+                            "campaign": item['campaign'],
+                            "owner": item['owner'],
+                            "examples": classification['examples'],
+                            "is_sensitive": classification['is_sensitive']
+                        },
+                       db_manager
                     )
                 else:
                     response = db.update_item(

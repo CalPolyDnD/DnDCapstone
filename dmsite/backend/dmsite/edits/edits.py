@@ -12,8 +12,30 @@ def get_classifications(data):
 
 
 def save_classifications(data):
-
     file = data['files']
+    new_classifications = []
+    for classification in file['classifications']:
+        key = {"name": classification['oldName'], "campaign": file['campaign']}
+        response = db.del_item("classifications", key)
+        response = db.add_item(
+            "classifications",
+            {
+                "name": classification['name'],
+                "campaign": file['campaign'],
+                "owner": file['owner'],
+                "examples": classification['examples'],
+                "is_sensitive": classification['is_sensitive']
+            }
+        )
+        del classification['oldName']
+    key = {"filename": file['filename'], "campaign": file['campaign']}
+    response = db.update_item(
+        "files",
+        key,
+        'set #classifications = :values ',
+        {"#classifications": "classifications"},
+        {":values": file['classifications']}
+    )
     return data, 0
 
 '''
