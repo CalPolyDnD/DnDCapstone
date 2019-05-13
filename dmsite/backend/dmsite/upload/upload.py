@@ -14,7 +14,7 @@ def handle_uploaded_file(f, h):
             destination.write(chunk)
 
     header = db.convert_to_dynamodb_types(pd.read_csv(f_name).head(ROWS))
-    handle_file_upload_data({'name': f.name, 'campaign': h['HTTP_CAMPAIGN'], 'labels': header})
+    handle_file_upload_data({'name': f.name, 'campaign': h['HTTP_CAMPAIGN'], 'owner': h['HTTP_OWNER'], 'labels': header})
 
     fm.upload_file_from_path(f_name)
     os.remove(f_name)
@@ -24,7 +24,7 @@ def handle_file_upload_data(data):
     try:
         db.add_item("files",
                     {"filename": data['name'], "campaign": data['campaign'], "classifications": [],
-                     "description": "None",
+                     "description": "None", "owner": data['owner'],
                      "is_classified": 0, "labels": data['labels']})
     except KeyError as e:
         return {"errorMsg": "invalid json format"}, -1

@@ -178,13 +178,17 @@ def check_db():
         print("AWS Error (check_tables): " + e.__str__())
         return -1, {"error": ERR_STR, "errorStr": e.__str__()}
 
-def make_query(table, index, value, compare):
-    if db_status is False:
+
+def make_query(table, index, value, compare, db = None):
+    if db_status is False and db is None:
         status, resp = check_db()
         if status is -1:
             return resp
     try:
-        files = dynamodb.Table(table)
+        if (db is not None):
+            files = db.Table(table)
+        else:
+            files = dynamodb.Table(table)
         response = files.query(IndexName=index, KeyConditionExpression=Key(value).eq(compare))
         return response
     except ClientError as e:
@@ -192,13 +196,16 @@ def make_query(table, index, value, compare):
         return {"error": ERR_STR, "errorStr": e.__str__()}
 
 
-def add_item(table, value):
-    if db_status is False:
+def add_item(table, value, db = None):
+    if db_status is False and db is None:
         status, resp = check_db()
         if status is -1:
             return resp
     try:
-        files = dynamodb.Table(table)
+        if (db is not None):
+            files = db.Table(table)
+        else:
+            files = dynamodb.Table(table)
         response = files.put_item(Item=value)
         return response
     except ClientError as e:
@@ -206,13 +213,16 @@ def add_item(table, value):
         return {"error": ERR_STR, "errorStr": e.__str__()}
 
 
-def update_item(table, key, update, names, values):
-    if db_status is False:
+def update_item(table, key, update, names, values, db = None):
+    if db_status is False and db is None:
         status, resp = check_db()
         if status is -1:
             return resp
     try:
-        tbl = dynamodb.Table(table)
+        if (db is not None):
+            tbl = db.Table(table)
+        else:
+            tbl = dynamodb.Table(table)
         response = tbl.update_item(Key=key,
                                    UpdateExpression=update,
                                    ExpressionAttributeNames=names,
@@ -224,13 +234,16 @@ def update_item(table, key, update, names, values):
         return {"error": ERR_STR, "errorStr": e.__str__()}
 
 
-def get_item(table, key):
-    if db_status is False:
+def get_item(table, key, db = None):
+    if db_status is False and db is None:
         status, resp = check_db()
         if status is -1:
             return resp
     try:
-        tbl = dynamodb.Table(table)
+        if (db is not None):
+            tbl = db.Table(table)
+        else:
+            tbl = dynamodb.Table(table)
         response = tbl.get_item(Key=key)
         return response
     except ClientError as e:

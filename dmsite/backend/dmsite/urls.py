@@ -29,7 +29,7 @@ from django.conf.urls.static import static
 from django.views.generic import TemplateView
 
 # Local addons
-from dmsite.post_requests import files, campaigns, classifier, search, upload
+from dmsite.post_requests import files, campaigns, classifier, search, upload, edits
 
 urlpatterns = [
     path('rest-auth/', include('rest_auth.urls')),
@@ -42,6 +42,8 @@ urlpatterns = [
     path('get_files', files.get_files_by_campaign),
     path('get_campaigns', campaigns.get_campaigns_by_owner),
     path('new_campaign', campaigns.create_new_campaign),
+    path('get_classifications', edits.get_classifications),
+    path('save_classifications', edits.save_classifications),
     re_path(r'^.*', TemplateView.as_view(template_name='index.html')),
 
     # leave this just incase ^^ stops working

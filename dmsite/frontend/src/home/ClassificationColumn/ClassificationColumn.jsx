@@ -7,6 +7,11 @@ import PropTypes from 'prop-types';
 import { FileObject } from '../../Model/FileObject';
 
 class ClassificationColumn extends Component {
+  constructor(props) {
+    super(props);
+    this.editClick = this.editClick.bind(this);
+  }
+
   _handleClick(e) {
     e.preventDefault();
   }
@@ -18,25 +23,25 @@ class ClassificationColumn extends Component {
     return "";
   }
 
-  exitClick() {
-    let route = '/edit_classificatons?=' + this.props.file.name;
-    this.props.history.push(route);
+  editClick() {
+    let route = '/edit_classifications?=' + this.props.campaign + ',' + this.props.file.get_name();
+    this.props.pushRoute(route);
   }
 
   renderClassificationCell() {
     const { file } = this.props;
 
     if (typeof file.classifications !== 'undefined')
-        return file.classifications.map((obj, index) => {
-          return (
-            <ListGroupItem key={ index } style={{ backgroundColor: '#3d3d3d', color: 'white' }}>
-                <div>
-                  <p>{obj.name}</p>
-                  <p style={{ color: 'red', right: "10%"}}>{this.isSensitive(obj.is_sensitive)}</p>
-                </div>
-            </ListGroupItem>
-          );
-        });
+      return file.classifications.map((obj, index) => {
+        return (
+          <ListGroupItem key={ index } style={{ backgroundColor: '#3d3d3d', color: 'white' }}>
+              <div>
+                <p>{obj.name}</p>
+                <p style={{ color: 'red', right: "10%"}}>{this.isSensitive(obj.is_sensitive)}</p>
+              </div>
+          </ListGroupItem>
+      );
+    });
     return null;
   };
 

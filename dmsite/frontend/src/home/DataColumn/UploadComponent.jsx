@@ -15,6 +15,7 @@ function Upload(props){
           process: {
             headers: {
               campaign: props.campaignName,
+              owner: props.owner,
             },
           },
         }}
