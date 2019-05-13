@@ -9,7 +9,6 @@ dynamo_client = boto3.client('dynamodb', region_name='us-east-1', endpoint_url="
 dynamodb = boto3.resource('dynamodb', region_name='us-east-1', endpoint_url="http://dynamodb.us-east-1.amazonaws.com")
 ERR_STR = "There was an error trying to access the AWS database. See 'errorStr' for details."
 
-
 THROUGHPUT = {
    "ReadCapacityUnits": 5,
    "WriteCapacityUnits": 5,
@@ -130,44 +129,45 @@ CAMP_INDEX = [
 
 db_status = False
 
+
 def check_db():
     try:
         tables = dynamo_client.list_tables()
         if FILE_TABLE not in tables['TableNames']:
             print("-----> File table is being created...")
             dynamo_client.create_table(AttributeDefinitions=FILE_ATTRIBUTES,
-                                                 TableName=FILE_TABLE,
-                                                 KeySchema=FILE_SCHEMA,
-                                                 GlobalSecondaryIndexes=FILE_INDEX,
-                                                 BillingMode="PROVISIONED",
-                                                 ProvisionedThroughput=THROUGHPUT)
+                                       TableName=FILE_TABLE,
+                                       KeySchema=FILE_SCHEMA,
+                                       GlobalSecondaryIndexes=FILE_INDEX,
+                                       BillingMode="PROVISIONED",
+                                       ProvisionedThroughput=THROUGHPUT)
 
             response = dynamo_client.describe_table(TableName=FILE_TABLE)
-            while (response['Table']['TableStatus'] != 'ACTIVE'):
+            while response['Table']['TableStatus'] != 'ACTIVE':
                 response = dynamo_client.describe_table(TableName=FILE_TABLE)
 
         if CLASS_TABLE not in tables['TableNames']:
             print("-----> Classification table is being created...")
             dynamo_client.create_table(AttributeDefinitions=CLASS_ATTRIBUTES,
-                                                  TableName=CLASS_TABLE,
-                                                  KeySchema=CLASS_SCHEMA,
-                                                  GlobalSecondaryIndexes=CLASS_INDEX,
-                                                  BillingMode="PROVISIONED",
-                                                  ProvisionedThroughput=THROUGHPUT)
+                                       TableName=CLASS_TABLE,
+                                       KeySchema=CLASS_SCHEMA,
+                                       GlobalSecondaryIndexes=CLASS_INDEX,
+                                       BillingMode="PROVISIONED",
+                                       ProvisionedThroughput=THROUGHPUT)
             response = dynamo_client.describe_table(TableName=FILE_TABLE)
-            while (response['Table']['TableStatus'] != 'ACTIVE'):
+            while response['Table']['TableStatus'] != 'ACTIVE':
                 response = dynamo_client.describe_table(TableName=CLASS_TABLE)
 
         if CAMP_TABLE not in tables['TableNames']:
             print("-----> Campaign table is being created...")
             dynamo_client.create_table(AttributeDefinitions=CAMP_ATTRIBUTES,
-                                                 TableName=CAMP_TABLE,
-                                                 KeySchema=CAMP_SCHEMA,
-                                                 GlobalSecondaryIndexes=CAMP_INDEX,
-                                                 BillingMode="PROVISIONED",
-                                                 ProvisionedThroughput=THROUGHPUT)
+                                       TableName=CAMP_TABLE,
+                                       KeySchema=CAMP_SCHEMA,
+                                       GlobalSecondaryIndexes=CAMP_INDEX,
+                                       BillingMode="PROVISIONED",
+                                       ProvisionedThroughput=THROUGHPUT)
             response = dynamo_client.describe_table(TableName=CAMP_TABLE)
-            while (response['Table']['TableStatus'] != 'ACTIVE'):
+            while response['Table']['TableStatus'] != 'ACTIVE':
                 response = dynamo_client.describe_table(TableName=FILE_TABLE)
 
         print("-----> AWS Database ready!")
@@ -177,6 +177,7 @@ def check_db():
     except ClientError as e:
         print("AWS Error (check_tables): " + e.__str__())
         return -1, {"error": ERR_STR, "errorStr": e.__str__()}
+
 
 def make_query(table, index, value, compare):
     if db_status is False:
@@ -237,7 +238,6 @@ def get_item(table, key):
         print("AWS Error (get_item): " + e.__str__())
         return {"error": ERR_STR, "errorStr": e.__str__()}
 
-
 # ----------------------------------------------------------------------------------------------------------------------
 # Adds a header frame for the uploaded files
 # TODO: add this to file upload
@@ -245,7 +245,7 @@ def get_item(table, key):
 
 def _conversion_helper(dictionary):
 
-    #This method walks through a python dictionary recursively and
+    # This method walks through a python dictionary recursively and
     # converts types to the appropriate DynamoDB supported type.
 
     for k, v in dictionary.items():
@@ -259,10 +259,10 @@ def _conversion_helper(dictionary):
 
 
 def convert_to_dynamodb_types(dataframe):
-    #This method is used to convert a Pandas DataFrame into a dictionary that conforms to DynamoDB types
+    # This method is used to convert a Pandas DataFrame into a dictionary that conforms to DynamoDB types
     return _conversion_helper(dataframe.to_dict())
 
 
 def dataframe_from_dynamo_map(dynamo_map):
-    #This method is used to convert from a dict using DynamoDB supported types to a Pandas DataFrame
+    # This method is used to convert from a dict using DynamoDB supported types to a Pandas DataFrame
     return pd.DataFrame(dynamo_map).apply(pd.to_numeric, errors='ignore')

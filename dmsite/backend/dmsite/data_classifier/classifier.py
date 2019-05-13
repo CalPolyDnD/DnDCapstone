@@ -2,7 +2,6 @@ import joblib as jl
 import pandas as pd
 import numpy as np
 import dmsite.data_classifier.data_wrangler as dw
-import json
 
 GROUPING_THRESHOLD = 0.75
 
@@ -16,7 +15,7 @@ class Classification:
         self.examples.append(example)
 
     def to_json(self):
-        return  {
+        return {
             "name": self.name,
             "columns": self.columns,
             "examples": self.examples
