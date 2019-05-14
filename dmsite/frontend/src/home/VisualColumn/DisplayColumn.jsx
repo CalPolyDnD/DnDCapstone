@@ -24,7 +24,7 @@ class DisplayColumn extends Component {
       const file = new Blob([JSON.stringify(data)], { type: 'application/json' });
       const link = document.createElement('a');
       link.href = window.URL.createObjectURL(file);
-      link.download = campaignName;
+      link.download = `${campaignName}_classifications`;
       link.click();
     }).catch((error) => {
       // TODO: handle errors here
