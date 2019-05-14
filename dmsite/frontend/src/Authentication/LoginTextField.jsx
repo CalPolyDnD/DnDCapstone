@@ -48,7 +48,7 @@ class TextField extends React.Component {
 
     if (error) {
       errorMessage = (
-        <p>{error.message}</p>
+        <p>{error}</p>
       );
     }
 

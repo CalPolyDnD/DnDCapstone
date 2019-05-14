@@ -1,3 +1,4 @@
+#!python3
 #!/usr/bin/env python
 import os
 import sys

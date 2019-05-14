@@ -187,3 +187,7 @@ ACCOUNT_EMAIL_VERIFICATION = None
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
+
+# Not sure if allowing all could be an issue in the future. If so, then we can use the whitelist instead.
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ORIGIN_WHITELIST = ()

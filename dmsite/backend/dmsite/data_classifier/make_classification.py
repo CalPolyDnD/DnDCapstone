@@ -1,11 +1,11 @@
 import dmsite.data_classifier.classifier as c
 import dmsite.file_manager.file_manager as fm
 import dmsite.db_manager.db_manager as db
-import json
 import os
 
+
 def make_classifications(body):
-    #TODO: do some error checking here for stuff
+    # TODO: do some error checking here for stuff
     clsfr = c.Classifier()
     results = []
     count = 0
@@ -45,8 +45,14 @@ def save_data(data):
                 key = {"name": classification['name'], "campaign": item['campaign']}
                 response = db.get_item("classifications", key)
                 if 'Item' not in response:
-                    response = db.add_item("classifications", {"name": classification['name'], "campaign": item['campaign'],
-                                                              "examples": classification['examples'], "is_sensitive": classification['is_sensitive']})
+                    response = db.add_item(
+                        "classifications",
+                        {"name": classification['name'],
+                         "campaign": item['campaign'],
+                         "owner": item['owner'],
+                         "examples": classification['examples'],
+                         "is_sensitive": classification['is_sensitive']}
+                    )
                 else:
                     response = db.update_item(
                         "classifications",
