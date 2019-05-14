@@ -9,10 +9,9 @@ import PropTypes from 'prop-types';
 class SearchResultsCell extends React.Component {
   render() {
     const dataset = this.props.dataset;
-    // TODO: modify the onClick to route the the appropriate link
+    // TODO: modify the onClick to route the the appropriate link (what to do with multiple campaigns
     return (
       <ListGroupItem
-        /* removed onclick feature:  future bug, can't redirect because home has multiple campaigns */
         /* action onClick={() => { this.props.history.push('/home'); }} */
         style={{ backgroundColor: '#3d3d3d', color: 'white' }}
       >
