@@ -26,6 +26,8 @@ class DisplayColumn extends Component {
       link.href = window.URL.createObjectURL(file);
       link.download = campaignName;
       link.click();
+    }).catch((error) => {
+      // TODO: handle errors here
     });
   }
 
