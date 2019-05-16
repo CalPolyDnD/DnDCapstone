@@ -31,6 +31,20 @@ class ClassificationTable extends React.Component {
     this.forceUpdate(); //TODO: maybe move the file object to the state instead of the props
   }
 
+  renderColumns(columns) {
+      let columnStr = "";
+      for (let i = 0; i < columns.length - 1; i++) {
+        columnStr += columns[i] + ", ";
+      }
+      columnStr += columns[columns.length - 1];
+
+      return (
+        <p style={{ margin: '5px', paddingLeft: '30px',  color: '#898989' }}>
+          Column: {columnStr}
+        </p>
+      );
+  }
+
   renderClassificationExamples(examples) {
     return examples.map(example => (
       <div style={{ height: '100%', justifyContent: 'center', alignItems: 'center'}}>
@@ -58,12 +72,11 @@ class ClassificationTable extends React.Component {
                 onClick={() => { cellOnClick(index); }}
                 style={{ color: 'white', backgroundColor: '#3d3d3d', fontSize: '110%' }}
             >
-              <div>
+              <div stype={{ height: '80px'}}>
                 <Input style={{ width: '80%', float:'left' }} type="text" value={classification.name} onChange={(event) => {this.handleTextChange(event, index)}} />
                 <div style={{ float:'right' }} >
-                  <p style={{ margin: '0px' }}>Sensitive</p>
-                  {/*TODO: need to adjust this so it doesn't look terrible */}
-                  <Input style={{ float:'right' }} type="checkbox" onChange={(event) => {this.handleChange(event, index)}} />
+                  <p style={{ margin: '2px', float:'top right' }}>Sensitive</p>
+                  <Input style={{ margin: '2px', float:'bottom right' }} type="checkbox" onChange={(event) => {this.handleChange(event, index)}} />
                 </div>
               </div>
             </ListGroupItem>
@@ -71,9 +84,7 @@ class ClassificationTable extends React.Component {
                 isOpen={selectedClassificationIndex === index}
                 style={{backgroundColor: '#3d3d3d' }}
             >
-              <p style={{ margin: '5px', paddingLeft: '30px',  color: '#898989' }}>
-                Column: {classification.columns[0]}
-              </p>
+              {this.renderColumns(classification.columns)}
               {this.renderClassificationExamples(classification.examples)}
             </Collapse>
           </div>

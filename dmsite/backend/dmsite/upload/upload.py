@@ -13,7 +13,10 @@ def handle_uploaded_file(f, h):
         for chunk in f.chunks():
             destination.write(chunk)
 
-    header = db.convert_to_dynamodb_types(pd.read_csv(f_name).head(ROWS))
+    if f_name[len(f_name)-3:] == 'csv':
+        header = db.convert_to_dynamodb_types(pd.read_csv(f_name).head(ROWS))
+    else:
+        header = []
     handle_file_upload_data({'name': f.name, 'campaign': h['HTTP_CAMPAIGN'], 'owner': h['HTTP_OWNER'], 'labels': header})
 
     fm.upload_file_from_path(f_name)

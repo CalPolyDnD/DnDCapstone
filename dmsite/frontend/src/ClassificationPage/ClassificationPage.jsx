@@ -43,12 +43,19 @@ class ClassificationPage extends Component {
         }).then(data => data.json()).then((result) => {
           let files = result;
           files.forEach((file) => { file.campaign = this.campaignName; file.owner = userRes.data.email;  });
+          files.forEach((file) => {
+            file.unknowns = [];
+            for (let i = 0; i < file.classifications.length; i++) {
+                if (file.classifications[i].name === "Unknown") {
+                    file.unknowns.push(file.classifications[i]);
+                    delete file.classifications[i];
+                }
+            }
+          });
           this.setState({ files: files });
           return ""; // needed for compiler
         });
       });
-
-
   }
 
   toggle(tab) {
@@ -60,9 +67,21 @@ class ClassificationPage extends Component {
   }
 
   onFinish = (completion) => {
+    const { files } = this.state;
+    for (let i = 0; i < files.length; i++) {
+        for (let j = 0; j < files[i].unknowns.length; j++) {
+            files[i].classifications.push({
+              name: files[i].unknowns[j].guess,
+              columns: files[i].unknowns[j].columns,
+              examples: files[i].unknowns[j].examples,
+              is_sensitive: files[i].unknowns[j].is_sensitive
+            });
+        }
+    }
+
     fetch(SAVE_URL, {
       method: 'POST',
-      body: JSON.stringify(this.state.files)
+      body: JSON.stringify(files)
     }).then(data => {
         completion();
         this.props.history.push('/home/' + this.campaignName);
@@ -70,11 +89,15 @@ class ClassificationPage extends Component {
   }
 
   displayClassification(count) {
+    console.log(this.state.files[count]);
     const jsonObj = [];
     let pos = 0;
     const result = this.state.files[count];
     let labels = '';
     for (pos; pos < result.classifications.length; pos++) {
+      if (result.classification[pos] === "undefined") {
+        continue;
+      }
       labels = result.classifications[pos].columns[0];
       for (let i = 1; i < result.classifications[pos].columns.length; i++) {
         labels += `, ${ result.classifications[pos].columns[i]}`;
@@ -149,7 +172,7 @@ class ClassificationPage extends Component {
           <TabContent activeTab={this.state.activeTab} >
             {this.tabInfo()}
           </TabContent>
-        </div>z
+        </div>
       </div>
     );
   }

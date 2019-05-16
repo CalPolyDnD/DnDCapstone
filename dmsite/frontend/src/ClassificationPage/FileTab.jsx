@@ -13,6 +13,7 @@ import { Spin, Icon } from 'antd';
 import ClassificationTable from './ClassificationTable';
 import { FileObject } from '../Model/FileObject';
 import './ClassificationInfo.css';
+import Unknown from './ClassificationUnknown';
 
 class FileTab extends Component {
   static defaultProps = {
@@ -26,17 +27,6 @@ class FileTab extends Component {
       description: props.file.description,
       isSaving: false,
     };
-  }
-
-  displayUnknown() {
-    // TODO actually have it display multiple unknowns
-    return (
-      <ListGroup style={{ color: 'white', borderWidth: 0, borderColor: '#3d3d3d' }}>
-        <ListGroupItem style={{ backgroundColor: '#3d3d3d', color: 'white', borderWidth: 0 }}>Label 1</ListGroupItem>
-        <ListGroupItem style={{ backgroundColor: '#3d3d3d', color: 'white', borderWidth: 0 }}>Label 2</ListGroupItem>
-        <ListGroupItem style={{ backgroundColor: '#3d3d3d', color: 'white', borderWidth: 0 }}>Label 3</ListGroupItem>
-      </ListGroup>
-    );
   }
 
   handleChange = (event) => {
@@ -79,6 +69,8 @@ class FileTab extends Component {
     const { selectedClassificationIndex, description } = this.state;
     const { file } = this.props;
 
+    console.log(file);
+
     if (file === null) {
       return (<div />);
     }
@@ -99,6 +91,7 @@ class FileTab extends Component {
                 />
               </CardBody>
             </Card>
+            {this.renderSaveButton()}
           </Col>
           <Col xs="4">
             <ClassificationTable
@@ -116,12 +109,9 @@ class FileTab extends Component {
                 Unknown Labels
               </CardHeader>
               <CardBody style={{ backgroundColor: '#3d3d3d', color: 'white' }}>
-                <Table style={{ borderWidth: 0 }}>
-                  {this.displayUnknown()}
-                </Table>
+                <Unknown unknowns={file.unknowns} />
               </CardBody>
             </Card>
-            {this.renderSaveButton()}
           </Col>
         </Row>
       </div>

@@ -40,6 +40,8 @@ def save_data(data, db_manager=None):
                 item['description'] = "Placeholder Description"
 
             for classification in item['classifications']:
+                if classification is None:
+                    continue
                 if 'is_sensitive' not in classification:
                     classification['is_sensitive'] = 0
                 key = {"name": classification['name'], "campaign": item['campaign']}

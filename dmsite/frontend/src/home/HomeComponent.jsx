@@ -99,7 +99,7 @@ class Home extends React.Component {
             )
           );
         }
-        this.setState({ fileList: files });
+        this.setState({ fileList: files, owner: userRes.data.email });
       });
     });
   }
