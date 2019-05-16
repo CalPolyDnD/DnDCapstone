@@ -9,6 +9,7 @@ import CreateAccount from './Authentication/CreateAccount';
 import Profile from './Profile/ProfileComponent';
 import Campaign from './CampaignPage/Campaign';
 import ClassificationPage from './ClassificationPage/ClassificationPage';
+import Vis from './Vis/Vis';
 
 const BaseRouter = props => (
   <div>
