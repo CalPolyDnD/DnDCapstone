@@ -75,7 +75,7 @@ export const authLogin = (email, password) => (
         dispatch(checkAuthTimeout(3600));
       })
       .catch((err) => {
-        dispatch(authFail(err));
+        dispatch(authFail(err.response.data.non_field_errors[0]));
       });
   }
 );
@@ -101,7 +101,11 @@ export const authSignup = (email, password1, password2) => (
         dispatch(checkAuthTimeout(ONE_HOUR));
       })
       .catch((err) => {
-        dispatch(authFail(err));
+        const { response } = err;
+        const errField = Object.keys(response.data)[0];
+        const errMsg = response.data[errField];
+
+        dispatch(authFail(errMsg));
       });
   }
 );

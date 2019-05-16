@@ -54,20 +54,25 @@ class DatasetsColumn extends React.Component {
 
   classifyFilesClicked = () => {
     const { fileListData } = this.props;
-    let availableFile = 0;
+    let totalFiles = 0, noComma = 0;
     let route = '/classification/';
     route += `${this.props.campaign}?=`;
 
     for (let i = 0; i < fileListData.length; i++) {
-      if (fileListData[i].header !== "1") {
+      if (fileListData[i].header !== '1') {
         route += fileListData[i].path;
         if (i !== fileListData.length - 1) {
           route += ',';
+        } else {
+          noComma = 1;
         }
+        totalFiles += 1;
       }
-      availableFile = 1;
     }
-    if (availableFile === 1)
+
+    if (totalFiles !== fileListData.length && noComma === 0)
+        route = route.substring(0, route.length - 1);
+    if (totalFiles !== 0)
         this.props.history.push(route);
     else
         return

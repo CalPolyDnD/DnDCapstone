@@ -37,7 +37,7 @@ class Home extends React.Component {
 
   handleFileChange = (index) => {
     this.setState({ selectedFileIndex: index });
-  }
+  };
 
   getNameAccess() {
     return (
@@ -81,8 +81,14 @@ class Home extends React.Component {
       }
 
       for (let count = 0; count < response.length; count++) {
-        files.push(new FileObject(response[count].filename,
-          response[count].filename, response[count].classifications, response[count].is_classified));
+        files.push(
+          new FileObject(
+            response[count].filename,
+            response[count].filename,
+            response[count].classifications,
+            response[count].is_classified,
+          ),
+        );
       }
       this.setState({ fileList: files });
     });
@@ -90,10 +96,10 @@ class Home extends React.Component {
 
   render() {
     const {
-      campaign, fileList, selectedFileIndex,
+      campaign, fileList, selectedFileIndex, filesPresent,
     } = this.state;
 
-    if (this.state.filesPresent !== 1)
+    if (filesPresent !== 1)
         return (
           <Container fluid>
             <h1 style={{ color: 'white' }}>Campaign: {campaign} </h1>
@@ -104,11 +110,11 @@ class Home extends React.Component {
           </Container>
         );
 
-    if (this.state.fileList.length === 0) return null;
+    if (fileList.length === 0) return null;
 
-    let filenames = this.state.fileList[0].get_name();
-    for (let count = 1; count < this.state.fileList.length && count < 5; count++) {
-      filenames += `, ${this.state.fileList[count].get_name()}`;
+    let filenames = fileList[0].get_name();
+    for (let count = 1; count < fileList.length && count < 5; count++) {
+      filenames += `, ${fileList[count].get_name()}`;
       if (count === 4) filenames += '...';
     }
 
@@ -135,7 +141,7 @@ Campaign:
               cellOnClick={this._handleFileChange}
               campaign={campaign}
             />
-            {this.getNameAccess()}
+            {/*{this.getNameAccess()}*/}
           </Col>
           <Col md="7">
             <ClassificationColumn name="Classifications" file={fileList[selectedFileIndex]} />
