@@ -6,8 +6,9 @@ import {
   Col,
   Input,
   Table,
-  ListGroup,
-  ListGroupItem, CardHeader, CardBody, Card,
+  CardHeader, 
+  CardBody, 
+  Card,
 } from 'reactstrap';
 import { Spin, Icon } from 'antd';
 import ClassificationTable from './ClassificationTable';
