@@ -33,7 +33,6 @@ class Unknown extends React.Component {
     }
 
     handleChange = (event, index) => {
-      console.log(this.props.unknowns);
       let classifications = this.props.unknowns;
       if (event.target.checked === true)
         classifications[index].is_sensitive = 1;
