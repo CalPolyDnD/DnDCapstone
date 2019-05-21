@@ -23,5 +23,33 @@ def find_files(data):
     return response['Items'], 0
 
 
-#TODO: add a POST request to update a file's description
+def download_file(request):
+    if request.method == 'GET':
+        try:
+            data = db.get_table('classifications')
+            if 'error' in data:
+                return JsonResponse({"error": data['errorStr']}, status=400)
+            formattedResponse = formatClassificationJson(data)
+            response = JsonResponse(formattedResponse, status=200)
+            return response
+        except Exception as e:
+            print(e)
+            return JsonResponse({"error": e}, status=400)
+    return JsonResponse({"error": "not a POST request"}, status=400)
 
+def formatClassificationJson(classifications):
+    results = {}
+    if not classifications:
+        return results
+
+    for classification in classifications:
+        classificationObject = {
+            'campaign': classification['campaign'],
+            'examples': classification['examples'],
+            'is_sensitive': classification['is_sensitive'],
+        }
+        results[classification['name']] = classificationObject
+
+    return results
+
+#TODO: add a POST request to update a file's description

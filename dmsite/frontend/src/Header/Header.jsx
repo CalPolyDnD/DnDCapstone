@@ -22,7 +22,7 @@ class Header extends React.Component {
       }}
       >
         {
-          location.pathname === '/login'
+          location.pathname === '/login' || location.pathname === '/register'
             ? <LoginHeader {...this.props} />
             : <StandardHeader {...this.props} />
         }

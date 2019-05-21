@@ -1,0 +1,56 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly with no classifications 1`] = `
+<div
+  className="card"
+  id="classifications"
+  style={
+    Object {
+      "borderWidth": 0,
+    }
+  }
+>
+  <h3
+    className="card-header"
+    style={
+      Object {
+        "backgroundColor": "#303030",
+        "color": "white",
+      }
+    }
+  >
+    Classifications
+  </h3>
+  <div
+    className="card-body"
+    style={
+      Object {
+        "backgroundColor": "#3d3d3d",
+        "color": "white",
+      }
+    }
+  >
+    <ul
+      className="list-group list-group-flush"
+    />
+    <input
+      className="mt-3 form-control"
+      placeholder="Search Classification"
+      style={
+        Object {
+          "backgroundColor": "#303030",
+          "borderWidth": 0,
+        }
+      }
+      type="text"
+    />
+    <button
+      aria-label={null}
+      className="mr-0 btn-block mt-2 mb-2 btn btn-primary"
+      onClick={[Function]}
+    >
+      Edit Classifications
+    </button>
+  </div>
+</div>
+`;

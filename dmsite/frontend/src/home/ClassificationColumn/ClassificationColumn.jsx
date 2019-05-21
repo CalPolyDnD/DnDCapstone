@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import 'filepond/dist/filepond.min.css';
 import {
-    Input, Card, Button, CardBody, ListGroup, ListGroupItem, CardHeader
+  Input, Card, Button, CardBody, ListGroup, ListGroupItem, CardHeader,
 } from 'reactstrap';
 import PropTypes from 'prop-types';
 import { FileObject } from '../../Model/FileObject';
@@ -13,7 +13,7 @@ class ClassificationColumn extends Component {
 
   // TODO: fix this
   isSensitive(val) {
-    if (val == true) { // == works, but === doesn't, for bools or numbers - need to fix
+    if (val === "1") {
         return "Sensitive!";
      }
     return "";
@@ -27,7 +27,7 @@ class ClassificationColumn extends Component {
         <ListGroupItem key={ index } style={{ backgroundColor: '#3d3d3d', color: 'white' }}>
             <div>
               <p>{obj.name}</p>
-              <p style={{ color: 'red',     right: "10%"}}>{this.isSensitive(obj.is_sensitive)}</p>
+              <p style={{ color: 'red', right: "10%"}}>{this.isSensitive(obj.is_sensitive)}</p>
             </div>
         </ListGroupItem>
       );

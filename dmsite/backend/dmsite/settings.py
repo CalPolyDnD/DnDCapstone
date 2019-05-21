@@ -97,24 +97,26 @@ WSGI_APPLICATION = 'dmsite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 
+try:
+    creds = open("credentials", "r")
+    PGUSER = creds.readline()
+    PGUSER = PGUSER[: len(PGUSER) - 1]
+    PGPW = creds.readline()
+    PGPW = PGPW[: len(PGPW) - 1]
+    PGURL = creds.readline()
 
-creds = open("credentials", "r")
-PGUSER = creds.readline()
-PGUSER = PGUSER[: len(PGUSER) - 1]
-PGPW = creds.readline()
-PGPW = PGPW[: len(PGPW) - 1]
-PGURL = creds.readline()
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'postgres',
-        'USER': PGUSER,
-        'PASSWORD': PGPW,
-        'HOST': PGURL,
-        'PORT': '5432'
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'postgres',
+            'USER': PGUSER,
+            'PASSWORD': PGPW,
+            'HOST': PGURL,
+            'PORT': '5432'
+        }
     }
-}
+except Exception as e:
+    print("WARNING - no credentials file found; add the credentials file to continue.")
 
 
 
@@ -185,3 +187,7 @@ ACCOUNT_EMAIL_VERIFICATION = None
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
+
+# Not sure if allowing all could be an issue in the future. If so, then we can use the whitelist instead.
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ORIGIN_WHITELIST = ()

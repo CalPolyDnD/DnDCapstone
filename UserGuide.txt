@@ -1,0 +1,58 @@
+Install:
+Required Software:
+   Python 3.6 or 3.7
+   NPM
+   Postgres SQL (or a Postgres SQL database hosted remotely)
+   A Web Browser
+
+If using Windows, use the files that end in .bat
+If using MacOS or Linux, use the files that end in .sh
+
+Download/Clone our git repo: https://github.com/CalPolyDnD/DnDCapstone
+Open up a command line interface.
+Navigate to 'dmsite' using the 'cd' command.
+If using Linux/MacOS, run 'source setup.sh'. If using Windows, run 'setup.bat'
+Run the 'build' script
+Navigate to 'backend'
+Add a file called "credentials" (note: there is no file suffix to that, just
+have it named "credentials") to the folder containing these three elements, in order, on their own line:
+   Your PostgresSQL username
+   Your PostgresSQL password associated with the above username
+   The URL to your PostgresSQL database (if it's running on the same system as the server is, use 'localhost')
+If you do not have your own PostgresSQL database to use, please contact us and we can provide our own database for you to utilize.
+
+
+If you are using your own AWS account, please make sure your AWS "credentials" file is up to date with the correct token information! 
+(file is located in "C:\Users\<UserName>\.aws" for Windows, and "<home directory>\.aws" for MacOS/Linux).
+
+
+Running the Server:
+Navigate to the program's main directoy. Navigate to the 'dmsite' directory, then run the 'run' script.
+To close the server, click on the terminal, hold down Control and press C.
+
+
+
+User Guide:
+Launch the server using the above guide, then connect to 'localhost:8000/login' if running locally, or to the URL of the remote page that you've set the server up with.
+You should be prompted with this page (image 1). If you have an account, go ahead and log in. Otherwise, click the "Create an Account" button.
+The "Create an Account" page requires some basic information from you, such as your first and last name, a contact email to be used as an account name, a password for the account, and optionally the organization you work for. (image 2)
+Once you have an account, you can log in.
+Upon successful login, you will be shown a list of campaigns (or projects) that you have. Most likely, this will be empty initially. However, we've provided one as an example. (image 3)
+If you click on the text for a campaign, you will be taken to that campaign's page. If you have no campaign, click on the "Create New Campaign" button to be propted with this popup. (image 4)
+Enter a name for the campaign (note: campaign names are unique per account) and then click OK.
+Once you are in a campaign, you will be prompted with the campain page. By default, if no files have been added, you can drag and drop to add some now. (image 5)
+Once the files turn gree, click "OK" to continue to the home page. (image 6)
+There's a lot to take in, so lets go one part at a time.
+   At the very top is a search bar, which will eventually let you search through the classifications, files, and labels within the files, that you've uploaded. TO the right of that are an inactive help button (?), an inactive settins button, and a profile button, where you can log out and see your profile page. The profile page is still in development, but you'll be able to see basic information about your account.
+   At the top is the name of the campaign, and a small listing of files that are associated, or have been uploaded, to this campaign. Directly to the right are the "Show Table", "Show Graph", and "Download Campaign" buttons. These are placeholder buttons and are a WIP still, so they don't do anything.
+   Moving down, just below the name is the list of datasets (or files) that you've uploaded. You can filter these by name using the search bar. You can also add more files by clicking the "Add Files" button and dragging the new files into the new box (image 7). The classification button performs classification, but we'll go over that in a second.
+   To the right of that is the classifications table. It's empty right now, because we haven't classified any files yet. There is also an "edit classifications" button that is currently inactive.
+   Finally, at the bottom is the user control. While still a WIP, eventually, we want to be able to add the ability to select specific accounts and allow those accounts to see the classifications you've made.
+Once you've uploaded all of your files, and are ready to classify them, you can click the "Classify" button. Something worth mentioning - once a file has been classified, it's classifications can be edited, but the file cannot be reclassified.
+Once classification has finished, you will be prompted with this page (image 8)
+   At the top, the tabs allow you to switch between different files that were classified.
+   The "Description" box on the left lets you add a custom description of the file.
+   The "Classifications" box contains all of the classifications made by the system. What that means is that a label within the file was found to match, or be similar to, one of the collected data points. You can click on each name to see some examples of what that classification is. The checkbox on the right lets you mark data as sensitive, allowing you to hide potentially sensitive information, such as social security numbers. Finally, you can change the name of the classification by typing in the box containing the classification's name.
+   On the right is a placeholder box for unknown, or confusing, labels.
+Once you're done editing the data, click the "Save" button and you will be sent back to the homepage, and the information will be stored in the database.
+The classifications table, mentioned previously, should now list the classifications that the classifier found. (image 9)

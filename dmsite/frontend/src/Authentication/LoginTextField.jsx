@@ -18,77 +18,81 @@ import * as actions from '../store/actions/auth';
 const antSpinner = <Icon type="loading" style={{ fontSize: 24 }} spin />;
 
 class TextField extends React.Component {
-    handleSubmit = (e) => {
-      const {
-        history, form, onAuth, error,
-      } = this.props;
-      e.preventDefault();
-      form.validateFields((err, values) => {
-        if (!err) {
-          onAuth(values.email, values.password)
-            .then(() => {
-              // TODO:This needs to be fixed, right now error is not being set properly
-              // I think this is broken because state isn't updated until component is re-rendered
-              // May need to use redux-saga middleware to handle this issue
-              if (!error) {
-                history.push('/campaign');
-              }
-            });
-        }
-      });
-    };
+  componentDidUpdate = () => {
+    const {
+      history, isAuthenticated,
+    } = this.props;
 
-    render() {
-      const { form, loading, error } = this.props;
-      const { getFieldDecorator } = form;
-      let errorMessage = null;
+    if (isAuthenticated) {
+      history.push('/campaign');
+    }
+  };
 
-      if (error) {
-        errorMessage = (
-          <p>{error.message}</p>
-        );
+  handleSubmit = (e) => {
+    const {
+      form, onAuth,
+    } = this.props;
+    e.preventDefault();
+    form.validateFields((err, values) => {
+      if (!err) {
+        onAuth(values.email, values.password)
+          .then(newState => this.setState({ ...newState }));
       }
+    });
+  };
 
-      return (
-        <Form onSubmit={this.handleSubmit} className="login-form">
-          <Form.Item>
-            {getFieldDecorator('email', {
-              rules: [{ required: true, message: 'Please input your email!' }],
-            })(
-              <Input
-                type="email"
-                placeholder="Email"
-                style={{ backgroundColor: '#303030', borderWidth: 0, color: 'white' }}
-              />,
-            )}
-          </Form.Item>
-          <Form.Item>
-            {getFieldDecorator('password', {
-              rules: [{ required: true, message: 'Please input your Password!' }],
-            })(
-              <Input
-                type="password"
-                placeholder="Password"
-                style={{ backgroundColor: '#303030', borderWidth: 0, color: 'white' }}
-              />,
-            )}
-          </Form.Item>
-          <Form.Item>
-            {getFieldDecorator('remember', {
-              valuePropName: 'checked',
-              initialValue: true,
-            })(
-              <Checkbox style={{ color: 'white' }}> Remember me</Checkbox>,
-            )}
-          </Form.Item>
-          <Form.Item style={{ color: 'white' }}>
-            <a className="login-form-forgot" href="/register">Forgot password </a>
-              or{' '}
-            <a href="/register">Create an account now!</a>
-          </Form.Item>
-          { errorMessage }
-          <Form.Item>
-            {
+  render() {
+    const { form, loading, error } = this.props;
+    const { getFieldDecorator } = form;
+    let errorMessage = null;
+
+    if (error) {
+      errorMessage = (
+        <p>{error}</p>
+      );
+    }
+
+    return (
+      <Form onSubmit={this.handleSubmit} className="login-form">
+        <Form.Item>
+          {getFieldDecorator('email', {
+            rules: [{ required: true, message: 'Please input your email!' }],
+          })(
+            <Input
+              type="email"
+              placeholder="Email"
+              style={{ backgroundColor: '#303030', borderWidth: 0, color: 'white' }}
+            />,
+          )}
+        </Form.Item>
+        <Form.Item>
+          {getFieldDecorator('password', {
+            rules: [{ required: true, message: 'Please input your Password!' }],
+          })(
+            <Input
+              type="password"
+              placeholder="Password"
+              style={{ backgroundColor: '#303030', borderWidth: 0, color: 'white' }}
+            />,
+          )}
+        </Form.Item>
+        <Form.Item>
+          {getFieldDecorator('remember', {
+            valuePropName: 'checked',
+            initialValue: true,
+          })(
+            <Checkbox style={{ color: 'white' }}> Remember me</Checkbox>,
+          )}
+        </Form.Item>
+        <Form.Item style={{ color: 'white' }}>
+          <a className="login-form-forgot" href="/register">Forgot password </a>
+            or
+          {' '}
+          <a href="/register">Create an account now!</a>
+        </Form.Item>
+        { errorMessage }
+        <Form.Item>
+          {
               loading
                 ? <Spin indicator={antSpinner} />
 
@@ -98,19 +102,20 @@ class TextField extends React.Component {
                     htmlType="submit"
                     className="btn-block mt0 login-form-button"
                   >
-                    Login
+                        Login
                   </Button>
                 )
             }
-          </Form.Item>
-        </Form>
-      );
-    }
+        </Form.Item>
+      </Form>
+    );
+  }
 }
 
 const mapStateToProps = state => ({
   loading: state.loading,
   error: state.error,
+  isAuthenticated: state.token !== null,
 });
 
 const mapDispatchToProps = dispatch => ({
