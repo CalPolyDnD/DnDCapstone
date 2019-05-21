@@ -89,7 +89,6 @@ class ClassificationPage extends Component {
   }
 
   displayClassification(count) {
-    console.log(this.state.files[count]);
     const jsonObj = [];
     let pos = 0;
     const result = this.state.files[count];
