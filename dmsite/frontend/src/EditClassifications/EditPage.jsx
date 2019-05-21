@@ -43,7 +43,6 @@ class EditClassifications extends React.Component {
             for (let i = 0; i < newResult.classifications.length; i++) {
                 newResult.classifications[i].oldName = newResult.classifications[i].name;
             }
-            console.log(newResult)
             this.setState({ file: newResult });
           });
     }
