@@ -5,9 +5,9 @@ import {
   Row,
   Col,
   Input,
-  Table,
-  ListGroup,
-  ListGroupItem, CardHeader, CardBody, Card,
+  CardHeader, 
+  CardBody, 
+  Card,
 } from 'reactstrap';
 import { Spin, Icon } from 'antd';
 import ClassificationTable from './ClassificationTable';
@@ -68,8 +68,6 @@ class FileTab extends Component {
   render() {
     const { selectedClassificationIndex, description } = this.state;
     const { file } = this.props;
-
-    console.log(file);
 
     if (file === null) {
       return (<div />);

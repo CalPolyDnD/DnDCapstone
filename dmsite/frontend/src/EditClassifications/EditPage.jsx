@@ -10,7 +10,6 @@ import {
   ListGroupItem,
 } from 'reactstrap';
 import { Spin, Icon } from 'antd';
-import axios from 'axios';
 
 const GET_URL = 'http://localhost:8000/get_classifications';
 const SAVE_URL = 'http://localhost:8000/save_classifications';
@@ -43,7 +42,6 @@ class EditClassifications extends React.Component {
             for (let i = 0; i < newResult.classifications.length; i++) {
                 newResult.classifications[i].oldName = newResult.classifications[i].name;
             }
-            console.log(newResult)
             this.setState({ file: newResult });
           });
     }

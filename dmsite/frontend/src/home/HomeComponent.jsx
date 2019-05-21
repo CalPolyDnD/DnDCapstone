@@ -134,7 +134,7 @@ class Home extends React.Component {
           <h1 style={{ color: 'white' }}>
             Campaign: {campaign}
           </h1>
-          <DisplayColumn name="Display Actions" />
+          <DisplayColumn campaignName={this.state.campaign} />
         </Row>
         <p style={{ color: '#afafaf' }}>
           This campaign organizes {filenames}
