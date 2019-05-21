@@ -10,7 +10,6 @@ import {
   ListGroupItem,
 } from 'reactstrap';
 import { Spin, Icon } from 'antd';
-import axios from 'axios';
 
 const GET_URL = 'http://localhost:8000/get_classifications';
 const SAVE_URL = 'http://localhost:8000/save_classifications';
