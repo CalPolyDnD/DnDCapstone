@@ -11,7 +11,8 @@ class SearchResultsCell extends React.Component {
     const dataset = this.props.dataset;
     // TODO: modify the onClick to route the the appropriate link (what to do with multiple campaigns
     return (
-      <ListGroupItem
+      <ListGroupItem2
+        /* removed onclick feature:  future bug, can't redirect because home has multiple campaigns */
         /* action onClick={() => { this.props.history.push('/home'); }} */
         style={{ backgroundColor: '#3d3d3d', color: 'white' }}
       >
