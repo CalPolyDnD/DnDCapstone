@@ -16,8 +16,10 @@ import Upload from './DataColumn/UploadComponent';
 import DisplayColumn from './VisualColumn/DisplayColumn';
 import ClassificationColumn from './ClassificationColumn/ClassificationColumn';
 import { FileObject } from '../Model/FileObject';
+import axios from 'axios';
 
 const FETCH_URL = 'http://localhost:8000/get_files';
+const FETCH_CURRENT_USER_URL = 'http://localhost:8000/rest-auth/user/';
 
 class Home extends React.Component {
   constructor(props) {
@@ -27,8 +29,10 @@ class Home extends React.Component {
       fileList: [],
       selectedFileIndex: 0,
       filesPresent: 1,
+      owner: "",
     };
     this._handleFileChange = this.handleFileChange.bind(this);
+    this.pushRoute = this.pushRoute.bind(this);
   }
 
   onClick() {
@@ -67,36 +71,42 @@ class Home extends React.Component {
     );
   }
 
-  componentDidMount() {
-    fetch(FETCH_URL, {
-      method: 'POST',
-      body: JSON.stringify({
-        campaign: this.state.campaign,
-      }),
-    }).then(data => data.json()).then((response) => {
-      const files = [];
-      if (response.length === 0) {
-        this.setState({ filesPresent: 0 });
-        return;
-      }
+  pushRoute(route) {
+    this.props.history.push(route);
+  }
 
-      for (let count = 0; count < response.length; count++) {
-        files.push(
-          new FileObject(
-            response[count].filename,
-            response[count].filename,
-            response[count].classifications,
-            response[count].is_classified,
-          ),
-        );
-      }
-      this.setState({ fileList: files });
+  componentDidMount() {
+    axios.get(FETCH_CURRENT_USER_URL)
+    .then((userRes) => {
+      fetch(FETCH_URL, {
+        method: 'POST',
+        body: JSON.stringify({
+          campaign: this.state.campaign,
+        }),
+      }).then(data => data.json()).then((response) => {
+        const files = [];
+        if (response.length === 0) {
+          this.setState({ filesPresent: 0, owner: userRes.data.email });
+          return;
+        }
+        for (let count = 0; count < response.length; count++) {
+          files.push(
+            new FileObject(
+              response[count].filename,
+              response[count].filename,
+              response[count].classifications,
+              response[count].is_classified,
+            )
+          );
+        }
+        this.setState({ fileList: files, owner: userRes.data.email });
+      });
     });
   }
 
   render() {
     const {
-      campaign, fileList, selectedFileIndex, filesPresent,
+      campaign, fileList, selectedFileIndex, filesPresent, owner
     } = this.state;
 
     if (filesPresent !== 1)
@@ -104,7 +114,7 @@ class Home extends React.Component {
           <Container fluid>
             <h1 style={{ color: 'white' }}>Campaign: {campaign} </h1>
             <p style={{ color: '#afafaf' }}> This campaign has no files! Add some files to classify.  </p>
-            <Upload campaignName={campaign} />
+            <Upload campaignName={campaign} owner={owner} />
               <Button color="primary" size="md" className="btn-block mt-3"
                       onClick={this.onClick}>Save & Continue </Button>
           </Container>
@@ -118,15 +128,11 @@ class Home extends React.Component {
       if (count === 4) filenames += '...';
     }
 
-    //           <DisplayColumn name="Display Actions" /> - add in the first row after h1
     return (
       <Container fluid>
         <Row style={{ justifyContent: 'space-between' }}>
           <h1 style={{ color: 'white' }}>
-Campaign:
-            {campaign}
-            {' '}
-
+            Campaign: {campaign}
           </h1>
           <DisplayColumn campaignName={this.state.campaign} />
         </Row>
@@ -140,11 +146,17 @@ Campaign:
               selectedFileIndex={selectedFileIndex}
               cellOnClick={this._handleFileChange}
               campaign={campaign}
+              owner={owner}
             />
             {/*{this.getNameAccess()}*/}
           </Col>
           <Col md="7">
-            <ClassificationColumn name="Classifications" file={fileList[selectedFileIndex]} />
+            <ClassificationColumn
+              name="Classifications"
+              file={fileList[selectedFileIndex]}
+              campaign={campaign}
+              pushRoute={this.pushRoute}
+            />
           </Col>
         </Row>
 

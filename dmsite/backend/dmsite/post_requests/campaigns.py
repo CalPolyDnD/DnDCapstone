@@ -28,15 +28,16 @@ def create_new_campaign(request):
 
 
 def find_campaigns(data):
-    response = db.make_query("campaigns", "owner-index", "owner", data['owner'])
+    response = db.scan("campaigns", "owner", data['owner'])
     if 'Items' not in response:
         return {"errorMsg": "no campaigns owned by " + data['owner']}, -1
     return response['Items'], 0
 
 
 def new_campaign(data):
+    key = {'name': data['campName']}
     obj = {'name': data['campName'], 'owner': data['owner']}
-    response = db.get_item("campaigns", obj)
+    response = db.get_item("campaigns", key)
     if ('Item' in response):
         str = 'campaign ' + data['campName'] + ' already exists'
         return {'errorMsg': str}, -1

@@ -32,7 +32,7 @@ def make_classifications(body):
     return results, status
 
 
-def save_data(data):
+def save_data(data, db_manager=None):
     try:
         for item in data:
             names = []
@@ -40,18 +40,23 @@ def save_data(data):
                 item['description'] = "Placeholder Description"
 
             for classification in item['classifications']:
+                if classification is None:
+                    continue
                 if 'is_sensitive' not in classification:
                     classification['is_sensitive'] = 0
                 key = {"name": classification['name'], "campaign": item['campaign']}
-                response = db.get_item("classifications", key)
+                response = db.get_item("classifications", key, db_manager)
                 if 'Item' not in response:
                     response = db.add_item(
                         "classifications",
-                        {"name": classification['name'],
-                         "campaign": item['campaign'],
-                         "owner": item['owner'],
-                         "examples": classification['examples'],
-                         "is_sensitive": classification['is_sensitive']}
+                        {
+                            "name": classification['name'],
+                            "campaign": item['campaign'],
+                            "owner": item['owner'],
+                            "examples": classification['examples'],
+                            "is_sensitive": classification['is_sensitive']
+                        },
+                       db_manager
                     )
                 else:
                     response = db.update_item(
@@ -59,7 +64,8 @@ def save_data(data):
                         key,
                         'set #classifications = list_append(if_not_exists(#classifications, :empty_list), :values)',
                         {'#classifications': 'examples'},
-                        {':values': classification['examples'], ':empty_list': []}
+                        {':values': classification['examples'], ':empty_list': []},
+                        db_manager
                     )
                 names.append({"name": classification['name'], "is_sensitive": classification["is_sensitive"]})
 
@@ -68,21 +74,24 @@ def save_data(data):
                 {"filename": item['filename'], 'campaign': item['campaign']},
                 'set #description = :description',
                 {'#description': 'description'},
-                {':description': item['description']}
+                {':description': item['description']},
+                db_manager
             )
             response = db.update_item(
                 "files",
                 {"filename": item['filename'], 'campaign': item['campaign']},
                 'set #classifications = list_append(if_not_exists(#classifications, :empty_list), :values)',
                 {'#classifications': 'classifications'},
-                {':values': names, ':empty_list': []}
+                {':values': names, ':empty_list': []},
+                db_manager
             )
             response = db.update_item(
                 "files",
                 {"filename": item['filename'], 'campaign': item['campaign']},
                 'set #is_classified = :value',
                 {'#is_classified': 'is_classified'},
-                {':value': 1}
+                {':value': 1},
+                db_manager
             )
 
     except KeyError as e:
