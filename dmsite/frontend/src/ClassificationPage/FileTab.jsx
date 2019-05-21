@@ -69,8 +69,6 @@ class FileTab extends Component {
     const { selectedClassificationIndex, description } = this.state;
     const { file } = this.props;
 
-    console.log(file);
-
     if (file === null) {
       return (<div />);
     }
