@@ -1,12 +1,36 @@
 import React, { Component } from 'react';
 import 'filepond/dist/filepond.min.css';
+import PropTypes from 'prop-types';
 import {
   Button,
 } from 'reactstrap';
 import VisualTableModal from './VisualTableModal';
 import VisualGraphModal from './VisualGraphModal';
 
+const DOWNLOAD_URL = 'http://localhost:8000/download_file';
+
 class DisplayColumn extends Component {
+  uploadPressed = () => {
+    const { campaignName } = this.props;
+
+    fetch(DOWNLOAD_URL, {
+      method: 'GET',
+    }).then((response) => {
+      if (response.ok) {
+        return response.json();
+      }
+      throw new Error('Request failed...');
+    }).then((data) => {
+      const file = new Blob([JSON.stringify(data)], { type: 'application/json' });
+      const link = document.createElement('a');
+      link.href = window.URL.createObjectURL(file);
+      link.download = `${campaignName}_classifications`;
+      link.click();
+    }).catch((error) => {
+      // TODO: handle errors here
+    });
+  }
+
   render() {
     return (
       <div className="d-flex justify-content-center pt-2">
@@ -26,5 +50,9 @@ class DisplayColumn extends Component {
     );
   }
 }
+
+DisplayColumn.propTypes = {
+  campaignName: PropTypes.string.isRequired,
+};
 
 export default DisplayColumn;

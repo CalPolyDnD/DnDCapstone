@@ -26,9 +26,10 @@ class SearchResultsPage extends React.Component {
   }
 
   getFilterTagFromRoutePath() {
-    const prefix = _.get(this.props.location.pathname.split('/'), '[2]', '');
+    const { location } = this.props;
+    const prefix = _.get(location.pathname.split('/'), '[2]', '');
 
-    const searchString = this.props.location.search.replace('?=', '');
+    const searchString = location.search.replace('?=', '');
 
     if (searchString) {
       return [{
@@ -60,7 +61,8 @@ class SearchResultsPage extends React.Component {
   }
 
   removeFilterTag(index) {
-    const filterTagsCopy = [...this.state.filterTags];
+    const { filterTags } = this.state;
+    const filterTagsCopy = [...filterTags];
     filterTagsCopy.splice(index, 1);
     this.setState({ filterTags: filterTagsCopy });
   }
@@ -84,22 +86,32 @@ class SearchResultsPage extends React.Component {
         attributes: ['cap', 'stone', 'y'],
       },
     ];
+    const { history } = this.props;
     return searchResults.map(result => (
-      <SearchResultsCell dataset={result} history={this.props.history} />
+      <SearchResultsCell dataset={result} history={history} />
     ));
   }
 
   renderFilterTags() {
     const xIcon = '\u2A09';
-    return this.state.filterTags.map((tag, index) => (
-      <Button id="filterTag" color="secondary" size="sm" style={{ marginLeft: '.25rem' }} onClick={(index) => { this.removeFilterTag(index); }}>
+    const { filterTags } = this.state;
+
+    return filterTags.map((tag, index) => (
+      <Button
+        id="filterTag"
+        color="secondary"
+        size="sm"
+        style={{ marginLeft: '.25rem' }}
+        onClick={() => { this.removeFilterTag(index); }}
+      >
         {`${xIcon} ${tag.type}: ${tag.value}`}
       </Button>
     ));
   }
 
   renderFilterTagSection() {
-    if (this.state.filterTags === undefined || this.state.filterTags.length === 0) {
+    const { filterTags } = this.state;
+    if (filterTags === undefined || filterTags.length === 0) {
       return (null);
     }
     return (
@@ -138,19 +150,23 @@ class SearchResultsPage extends React.Component {
   }
 
   renderFilterSection() {
-    const caretDirection = this.state.filterSectionCollapse ? 'up' : 'down';
+    const { filterSectionCollapse } = this.state;
+    const caretDirection = filterSectionCollapse ? 'up' : 'down';
 
     return (
-      <div style={{ marginBottom: '1rem', display: 'flex', justifyContent: 'center', paddingTop: '3%' }}>
+      <div style={{
+        marginBottom: '1rem', display: 'flex', justifyContent: 'center', paddingTop: '3%',
+      }}
+      >
         {this.renderFilterTagSection()}
         <div onClick={this.toggleCollapse}>
-          <ButtonDropdown direction={caretDirection} isOpen={this.state.filterSectionCollapse} toggle={() => {}} style={{ marginBottom: '.5rem' }}>
+          <ButtonDropdown direction={caretDirection} isOpen={filterSectionCollapse} toggle={() => {}} style={{ marginBottom: '.5rem' }}>
             <DropdownToggle caret color="link">
               FILTER
             </DropdownToggle>
           </ButtonDropdown>
         </div>
-        <Collapse isOpen={this.state.filterSectionCollapse}>
+        <Collapse isOpen={filterSectionCollapse}>
           {this.renderFilterSectionForms('Name')}
           {this.renderFilterSectionForms('Classification')}
           {this.renderFilterSectionForms('Attribute')}

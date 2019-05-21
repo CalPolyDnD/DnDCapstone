@@ -238,6 +238,24 @@ def get_item(table, key):
         print("AWS Error (get_item): " + e.__str__())
         return {"error": ERR_STR, "errorStr": e.__str__()}
 
+def get_table(table):
+    if db_status is False:
+        status, resp = check_db()
+        if status is -1:
+            return resp
+    try:
+        table = dynamodb.Table(table)
+        response = table.scan()
+        data = response['Items']
+
+        while 'LastEvaluatedKey' in response:
+            response = table.scan(ExclusiveStartKey=response['LastEvaluatedKey'])
+            data.extend(response['Items'])
+        return data
+    except ClientError as e:
+        print("AWS Error (scan): " + e.__str__())
+        return {"error": ERR_STR, "errorStr": e.__str__()}
+      
 # ----------------------------------------------------------------------------------------------------------------------
 # Adds a header frame for the uploaded files
 # TODO: add this to file upload
