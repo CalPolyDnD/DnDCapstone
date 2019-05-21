@@ -25,7 +25,7 @@ else
       echo "Virtual environment created"
    fi
    ./setup.sh
-   exit
+   return
 fi
 
 echo "Installing npm packages..."
