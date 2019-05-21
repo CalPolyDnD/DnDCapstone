@@ -42,6 +42,7 @@ urlpatterns = [
     path('get_files', files.get_files_by_campaign),
     path('get_campaigns', campaigns.get_campaigns_by_owner),
     path('new_campaign', campaigns.create_new_campaign),
+    path('download_file', files.download_file),
     re_path(r'^.*', TemplateView.as_view(template_name='index.html')),
 
     # leave this just incase ^^ stops working
