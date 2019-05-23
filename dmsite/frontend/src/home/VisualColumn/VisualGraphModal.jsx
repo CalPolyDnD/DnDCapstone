@@ -17,9 +17,8 @@ class VisualGraphModal extends React.Component {
   }
 
   toggle() {
-    this.setState({
-      modal: !this.state.modal,
-    });
+    const path = '/vis';
+    this.props.history.push(path);
   }
 
   render() {

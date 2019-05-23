@@ -6,12 +6,12 @@ const FETCH_URL = 'http://localhost:8000/get_files';
 const FETCH_CURRENT_USER_URL = 'http://localhost:8000/rest-auth/user/';
 
 class Vis extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            fileObject: []
-        }
-    };
+ 	constructor(props) {
+    	super(props);
+    	this.state = {
+      		fileObject: [],
+    	};
+  	}
 
     componentWillMount() {
         axios.get(FETCH_CURRENT_USER_URL)
