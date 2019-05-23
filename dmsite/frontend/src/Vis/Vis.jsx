@@ -1,6 +1,5 @@
 import React from 'react';
 import Graph from 'react-graph-vis';
-import { render } from "react-dom";
 import { withRouter } from 'react-router-dom';
 import axios from 'axios';
 const FETCH_URL = 'http://localhost:8000/get_files';
