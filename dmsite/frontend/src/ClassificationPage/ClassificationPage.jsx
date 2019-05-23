@@ -12,9 +12,11 @@ import {
 } from 'antd';
 import FileTab from './FileTab';
 import './ClassificationInfo.css';
+import axios from 'axios';
 
-let FETCH_URL = 'http://localhost:8000/classify_files';
-let SAVE_URL =  'http://localhost:8000/classify_files/save';
+const FETCH_URL = 'http://localhost:8000/classify_files';
+const SAVE_URL =  'http://localhost:8000/classify_files/save';
+const FETCH_CURRENT_USER_URL = 'http://localhost:8000/rest-auth/user/';
 
 class ClassificationPage extends Component {
   constructor(props) {
@@ -33,15 +35,27 @@ class ClassificationPage extends Component {
     const fileNames = location.search.replace('?=', '').split(',');
     const formattedBody = fileNames.map(fileName => ({ filename: fileName }));
 
-    fetch(FETCH_URL, {
-      method: 'POST',
-      body: JSON.stringify(formattedBody)
-    }).then(data => data.json()).then((result) => {
-      let files = result;
-      files.forEach((file) => { file.campaign = this.campaignName; });
-      this.setState({ files: files });
-      return ""; // needed for compiler
-    });
+    axios.get(FETCH_CURRENT_USER_URL)
+      .then((userRes) => {
+        fetch(FETCH_URL, {
+          method: 'POST',
+          body: JSON.stringify(formattedBody)
+        }).then(data => data.json()).then((result) => {
+          let files = result;
+          files.forEach((file) => { file.campaign = this.campaignName; file.owner = userRes.data.email;  });
+          files.forEach((file) => {
+            file.unknowns = [];
+            for (let i = 0; i < file.classifications.length; i++) {
+                if (file.classifications[i].name === "Unknown") {
+                    file.unknowns.push(file.classifications[i]);
+                    delete file.classifications[i];
+                }
+            }
+          });
+          this.setState({ files: files });
+          return ""; // needed for compiler
+        });
+      });
   }
 
   toggle(tab) {
@@ -53,9 +67,21 @@ class ClassificationPage extends Component {
   }
 
   onFinish = (completion) => {
+    const { files } = this.state;
+    for (let i = 0; i < files.length; i++) {
+        for (let j = 0; j < files[i].unknowns.length; j++) {
+            files[i].classifications.push({
+              name: files[i].unknowns[j].guess,
+              columns: files[i].unknowns[j].columns,
+              examples: files[i].unknowns[j].examples,
+              is_sensitive: files[i].unknowns[j].is_sensitive
+            });
+        }
+    }
+
     fetch(SAVE_URL, {
       method: 'POST',
-      body: JSON.stringify(this.state.files)
+      body: JSON.stringify(files)
     }).then(data => {
         completion();
         this.props.history.push('/home/' + this.campaignName);
@@ -68,6 +94,9 @@ class ClassificationPage extends Component {
     const result = this.state.files[count];
     let labels = '';
     for (pos; pos < result.classifications.length; pos++) {
+      if (result.classification[pos] === "undefined") {
+        continue;
+      }
       labels = result.classifications[pos].columns[0];
       for (let i = 1; i < result.classifications[pos].columns.length; i++) {
         labels += `, ${ result.classifications[pos].columns[i]}`;
@@ -133,7 +162,6 @@ class ClassificationPage extends Component {
         </div>
       );
     }
-
     return (
       <div className="classification-page">
         <div>

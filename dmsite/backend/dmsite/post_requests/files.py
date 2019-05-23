@@ -22,14 +22,16 @@ def find_files(data):
 
     return response['Items'], 0
 
-
+@csrf_exempt
 def download_file(request):
-    if request.method == 'GET':
+    print('top of download_file')
+    if request.method == 'POST':
         try:
-            data = db.get_table('classifications')
-            if 'error' in data:
+            requestBody = json.loads(str(request.body, encoding='utf8'))
+            data = db.scan('classifications', 'campaign', request['campaign_name'])
+            if 'Items' not in data:
                 return JsonResponse({"error": data['errorStr']}, status=400)
-            formattedResponse = formatClassificationJson(data)
+            formattedResponse = formatClassificationJson(data['Items'])
             response = JsonResponse(formattedResponse, status=200)
             return response
         except Exception as e:

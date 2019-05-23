@@ -94,35 +94,12 @@ CAMP_ATTRIBUTES = [
    {
       "AttributeName": "name",
       "AttributeType": "S",
-   },
-   {
-      "AttributeName": "owner",
-      "AttributeType": "S",
    }
 ]
 CAMP_SCHEMA = [
    {
       "AttributeName": "name",
       "KeyType": "HASH"
-   },
-   {
-      "AttributeName": "owner",
-      "KeyType": "RANGE",
-   }
-]
-CAMP_INDEX = [
-   {
-      "IndexName": "owner-index",
-      "KeySchema": [
-         {
-            "AttributeName": "owner",
-            "KeyType": "HASH"
-         }
-      ],
-      "Projection": {
-         "ProjectionType": "ALL",
-      },
-      "ProvisionedThroughput": THROUGHPUT
    }
 ]
 
@@ -163,7 +140,6 @@ def check_db():
             dynamo_client.create_table(AttributeDefinitions=CAMP_ATTRIBUTES,
                                        TableName=CAMP_TABLE,
                                        KeySchema=CAMP_SCHEMA,
-                                       GlobalSecondaryIndexes=CAMP_INDEX,
                                        BillingMode="PROVISIONED",
                                        ProvisionedThroughput=THROUGHPUT)
             response = dynamo_client.describe_table(TableName=CAMP_TABLE)
@@ -179,13 +155,54 @@ def check_db():
         return -1, {"error": ERR_STR, "errorStr": e.__str__()}
 
 
-def make_query(table, index, value, compare):
-    if db_status is False:
+def scan(table, attrib, comp, db=None):
+    if db_status is False and db is None:
+        status, resp = check_db();
+        if status is -1:
+            return resp
+    try:
+        if db is not None:
+            files = db.Table(table)
+        else:
+            files = dynamodb.Table(table)
+        response = files.scan(
+            TableName=table,
+            FilterExpression="#attrib = :comp",
+            ExpressionAttributeNames={'#attrib': attrib},
+            ExpressionAttributeValues={':comp': comp}
+        )
+        return response
+    except ClientError as e:
+        print("AWS Error (scan): " + e.__str__())
+        return {"error": ERR_STR, "errorStr": e.__str__()}
+
+def del_item(table, key, db=None):
+    if db_status is False and db is None:
+        status, resp = check_db();
+        if status is -1:
+            return resp
+    try:
+        if db is not None:
+            files = db.Table(table)
+        else:
+            files = dynamodb.Table(table)
+            response = files.delete_item(Key=key)
+        return response
+    except ClientError as e:
+        print("AWS Error (scan): " + e.__str__())
+        return {"error": ERR_STR, "errorStr": e.__str__()}
+
+
+def make_query(table, index, value, compare, db = None):
+    if db_status is False and db is None:
         status, resp = check_db()
         if status is -1:
             return resp
     try:
-        files = dynamodb.Table(table)
+        if (db is not None):
+            files = db.Table(table)
+        else:
+            files = dynamodb.Table(table)
         response = files.query(IndexName=index, KeyConditionExpression=Key(value).eq(compare))
         return response
     except ClientError as e:
@@ -193,13 +210,16 @@ def make_query(table, index, value, compare):
         return {"error": ERR_STR, "errorStr": e.__str__()}
 
 
-def add_item(table, value):
-    if db_status is False:
+def add_item(table, value, db = None):
+    if db_status is False and db is None:
         status, resp = check_db()
         if status is -1:
             return resp
     try:
-        files = dynamodb.Table(table)
+        if (db is not None):
+            files = db.Table(table)
+        else:
+            files = dynamodb.Table(table)
         response = files.put_item(Item=value)
         return response
     except ClientError as e:
@@ -207,13 +227,16 @@ def add_item(table, value):
         return {"error": ERR_STR, "errorStr": e.__str__()}
 
 
-def update_item(table, key, update, names, values):
-    if db_status is False:
+def update_item(table, key, update, names, values, db = None):
+    if db_status is False and db is None:
         status, resp = check_db()
         if status is -1:
             return resp
     try:
-        tbl = dynamodb.Table(table)
+        if (db is not None):
+            tbl = db.Table(table)
+        else:
+            tbl = dynamodb.Table(table)
         response = tbl.update_item(Key=key,
                                    UpdateExpression=update,
                                    ExpressionAttributeNames=names,
@@ -225,37 +248,22 @@ def update_item(table, key, update, names, values):
         return {"error": ERR_STR, "errorStr": e.__str__()}
 
 
-def get_item(table, key):
-    if db_status is False:
+def get_item(table, key, db = None):
+    if db_status is False and db is None:
         status, resp = check_db()
         if status is -1:
             return resp
     try:
-        tbl = dynamodb.Table(table)
+        if (db is not None):
+            tbl = db.Table(table)
+        else:
+            tbl = dynamodb.Table(table)
         response = tbl.get_item(Key=key)
         return response
     except ClientError as e:
         print("AWS Error (get_item): " + e.__str__())
         return {"error": ERR_STR, "errorStr": e.__str__()}
 
-def get_table(table):
-    if db_status is False:
-        status, resp = check_db()
-        if status is -1:
-            return resp
-    try:
-        table = dynamodb.Table(table)
-        response = table.scan()
-        data = response['Items']
-
-        while 'LastEvaluatedKey' in response:
-            response = table.scan(ExclusiveStartKey=response['LastEvaluatedKey'])
-            data.extend(response['Items'])
-        return data
-    except ClientError as e:
-        print("AWS Error (scan): " + e.__str__())
-        return {"error": ERR_STR, "errorStr": e.__str__()}
-      
 # ----------------------------------------------------------------------------------------------------------------------
 # Adds a header frame for the uploaded files
 # TODO: add this to file upload

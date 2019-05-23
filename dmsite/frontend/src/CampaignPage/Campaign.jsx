@@ -70,7 +70,7 @@ class Campaign extends React.Component {
   checkError() {
     if (this.state.error === 1)
       return (
-          <h6 style={{ color:'red'}}> Error - campaign already exists </h6>
+          <h6 style={{ color:'red'}}> Error - campaign already exists. Campaigns must be globally unique. </h6>
       );
     else
       return null;

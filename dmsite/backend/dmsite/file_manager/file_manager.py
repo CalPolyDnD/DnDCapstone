@@ -21,7 +21,7 @@ def check_bucket():
             hash_val = hashlib.sha256(id.encode('utf-8')).hexdigest()
             bucket_string = BUCKET_NAME + hash_val
             bucket_string = bucket_string[:BUCKET_NAME_MAX_LEN - 1]
-            
+
             try:
                 s3.meta.client.head_bucket(Bucket=bucket_string)
             except ClientError as e:
@@ -37,15 +37,25 @@ def check_bucket():
 def upload_file_from_path(path_to_file):
     if (check_bucket() != -1):
         with open(path_to_file, 'rb') as file:
-            s3.Object(bucket_string, os.path.basename(path_to_file)).put(Body=file)
+            try:
+                s3.Object(bucket_string, os.path.basename(path_to_file)).put(Body=file)
+            except ClientError as e:
+                print("AWS Error (upload_file_from_path): " + e.__str__())
+
 
 
 def upload_file(file, name):
     if (check_bucket() != -1):
-        s3.Object(bucket_string, name.put(Body=file))
+        try:
+            s3.Object(bucket_string, name.put(Body=file))
+        except ClientError as e:
+            print("AWS Error (upload_file): " + e.__str__())
 
 
 def fetch_file(file_name):
     if (check_bucket() != -1):
         filepath = "media/" + file_name
-        s3.Bucket(bucket_string).download_file(file_name, filepath)
+        try:
+            s3.Bucket(bucket_string).download_file(file_name, filepath)
+        except ClientError as e:
+            print("AWS Error (fetch_file): " + e.__str__())

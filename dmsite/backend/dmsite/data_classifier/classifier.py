@@ -14,12 +14,18 @@ class Classification:
     def add_example(self, example):
         self.examples.append(example)
 
+    def append_examples(self, examples):
+        self.examples = self.examples + examples
+
     def to_json(self):
-        return {
+        dict = {
             "name": self.name,
             "columns": self.columns,
-            "examples": self.examples
+            "examples": self.examples,
         }
+        if self.guess is not None:
+            dict['guess'] = self.guess
+        return dict
 
     def __eq__(self, other):
         return isinstance(other, self.__class__) and (self.name == other.name)
@@ -30,10 +36,11 @@ class Classification:
             Examples: {self.examples}
         """
 
-    def __init__(self, name):
+    def __init__(self, name, guess):
         self.name = name
         self.examples = []
         self.columns = []
+        self.guess = guess
 
 
 class Classifier:
@@ -68,17 +75,25 @@ class Classifier:
                 if guess == 'Unknown':
                     classification_map[k] = [guess, second_best_guess]
                 else:
-                    classification_map[k] = [guess]
+                    classification_map[k] = [guess, None]
 
         classifications = []
         for k, v in classification_map.items():
-            for c in v:
-                classification = Classification(c)
-                if classification not in classifications:
-                    classification.add_column(k)
-                    for ex in df[df['category'] == k]['value'].head():
-                        classification.add_example(ex)
-                    classifications.append(classification)
+            is_found = 0
+            classification = None
+            for c in classifications:
+                if v[0] is not "Unknown" and c.name == v[0]:
+                    classification = c
+                    is_found = 1
+
+            if classification is None:
+                classification = Classification(v[0], v[1])
+
+            classification.add_column(k)
+            for ex in df[df['category'] == k]['value'].head():
+                classification.add_example(ex)
+            if not is_found:
+                classifications.append(classification)
 
         return classifications
 
