@@ -32,10 +32,11 @@ class DisplayColumn extends Component {
   }
 
   render() {
+    const { campaign } = this.props;
     return (
       <div className="d-flex justify-content-center pt-2">
         <VisualTableModal />
-        <VisualGraphModal />
+        <VisualGraphModal campaign={campaign} />
         <div>
           <Button
             color="primary"
