@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import {
   Button,
 } from 'reactstrap';
-import VisualTableModal from './VisualTableModal';
 import VisualGraphModal from './VisualGraphModal';
 
 const DOWNLOAD_URL = 'http://localhost:8000/download_file';
@@ -12,9 +11,13 @@ const DOWNLOAD_URL = 'http://localhost:8000/download_file';
 class DisplayColumn extends Component {
   uploadPressed = () => {
     const { campaignName } = this.props;
+    const body = {
+      campaign_name: campaignName,
+    };
 
     fetch(DOWNLOAD_URL, {
-      method: 'GET',
+      method: 'POST',
+      body: JSON.stringify(body),
     }).then((response) => {
       if (response.ok) {
         return response.json();
@@ -32,11 +35,10 @@ class DisplayColumn extends Component {
   }
 
   render() {
-    const { campaign } = this.props;
+    const { campaignName } = this.props;
     return (
       <div className="d-flex justify-content-center pt-2">
-        <VisualTableModal />
-        <VisualGraphModal campaign={campaign} />
+        <VisualGraphModal campaign={campaignName}/>
         <div>
           <Button
             color="primary"
