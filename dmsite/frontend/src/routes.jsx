@@ -22,6 +22,7 @@ const BaseRouter = props => (
     <Route path="/home" component={Home} />
     <Route path="/campaign" component={Campaign} />
     <Route path="/classification" component={ClassificationPage} />
+    <Route exact path="/vis" component={Vis} />
   </div>
 );
 
