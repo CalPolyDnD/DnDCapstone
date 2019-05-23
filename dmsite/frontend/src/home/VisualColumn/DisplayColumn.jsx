@@ -12,9 +12,13 @@ const DOWNLOAD_URL = 'http://localhost:8000/download_file';
 class DisplayColumn extends Component {
   uploadPressed = () => {
     const { campaignName } = this.props;
+    const body = {
+      campaign_name: campaignName,
+    };
 
     fetch(DOWNLOAD_URL, {
-      method: 'GET',
+      method: 'POST',
+      body: JSON.stringify(body),
     }).then((response) => {
       if (response.ok) {
         return response.json();
