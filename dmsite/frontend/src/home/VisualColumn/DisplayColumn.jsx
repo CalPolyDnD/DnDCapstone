@@ -10,6 +10,10 @@ import VisualGraphModal from './VisualGraphModal';
 const DOWNLOAD_URL = 'http://localhost:8000/download_file';
 
 class DisplayColumn extends Component {
+  constructor(props) {
+    super(props);
+  }
+
   uploadPressed = () => {
     const { campaignName } = this.props;
 
@@ -32,10 +36,11 @@ class DisplayColumn extends Component {
   }
 
   render() {
+    const { campaignName } = this.props;
+    console.log(campaignName);
     return (
       <div className="d-flex justify-content-center pt-2">
-        <VisualTableModal />
-        <VisualGraphModal />
+        <VisualGraphModal campaign={campaignName}/>
         <div>
           <Button
             color="primary"

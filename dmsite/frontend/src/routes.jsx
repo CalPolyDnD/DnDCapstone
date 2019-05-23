@@ -9,7 +9,6 @@ import CreateAccount from './Authentication/CreateAccount';
 import Profile from './Profile/ProfileComponent';
 import Campaign from './CampaignPage/Campaign';
 import ClassificationPage from './ClassificationPage/ClassificationPage';
-import Vis from './Vis/Vis';
 
 const BaseRouter = props => (
   <div>
@@ -22,7 +21,6 @@ const BaseRouter = props => (
     <Route path="/home" component={Home} />
     <Route path="/campaign" component={Campaign} />
     <Route path="/classification" component={ClassificationPage} />
-    <Route exact path="/vis" component={Vis} />
   </div>
 );
 

@@ -14,12 +14,14 @@ class Vis extends React.Component {
   	}
 
     componentWillMount() {
+ 	    const {campaign}=this.props;
+ 	    console.log(campaign);
         axios.get(FETCH_CURRENT_USER_URL)
            .then((userRes) => {
              fetch(FETCH_URL, {
                method: 'POST',
                body: JSON.stringify({
-                 campaign: 'test_campaign',
+                 campaign: campaign,
                }),
              }).then(data => data.json()).then((response) => {
                  this.setState( { fileObject: response});
@@ -60,7 +62,6 @@ class Vis extends React.Component {
             nodes: my_nodes,
             edges: gd
         }
-
         return graph;
     }
 

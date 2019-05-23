@@ -5,6 +5,7 @@ import {
   Button, Modal, ModalHeader, ModalBody, ModalFooter,
 } from 'reactstrap';
 import VisualTableDisplay from './VisualGraphDisplay';
+import Vis from '../../Vis/Vis';
 
 class VisualGraphModal extends React.Component {
   constructor(props) {
@@ -17,11 +18,14 @@ class VisualGraphModal extends React.Component {
   }
 
   toggle() {
-    const path = '/vis';
-    this.props.history.push(path);
+    this.setState({
+      modal: !this.state.modal,
+    });
   }
 
   render() {
+    const {campaign}=this.props;
+    console.log(campaign);
     return (
       <div style={{ paddingRight: '5px' }}>
         <Button color="primary" size="md" className="mr-1 btn-block mt-0" onClick={this.toggle}>Show Graph</Button>
@@ -29,11 +33,10 @@ class VisualGraphModal extends React.Component {
         <Modal size="lg" isOpen={this.state.modal} toggle={this.toggle} className={this.props.className} >
           <ModalHeader toggle={this.toggle}>Table Visualization</ModalHeader>
           <ModalBody>
-            <VisualTableDisplay />
+            <Vis campaign={campaign}/>
           </ModalBody>
           <ModalFooter>
-            <Button color="primary" onClick={this.toggle}>Do Something</Button>{' '}
-            <Button color="secondary" onClick={this.toggle}>Cancel</Button>
+            <Button color="secondary" onClick={this.toggle}>Close</Button>
           </ModalFooter>
         </Modal>
       </div>

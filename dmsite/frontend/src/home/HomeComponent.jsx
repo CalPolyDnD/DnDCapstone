@@ -128,7 +128,7 @@ Campaign:
             {' '}
 
           </h1>
-          <DisplayColumn campaignName={this.state.campaign} />
+          <DisplayColumn campaignName={campaign} />
         </Row>
         <p style={{ color: '#afafaf' }}>
           This campaign organizes {filenames}
