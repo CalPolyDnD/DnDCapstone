@@ -4,7 +4,6 @@ import React from 'react';
 import {
   Button, Modal, ModalHeader, ModalBody, ModalFooter,
 } from 'reactstrap';
-import VisualTableDisplay from './VisualGraphDisplay';
 import Vis from '../../Vis/Vis';
 
 class VisualGraphModal extends React.Component {
@@ -25,7 +24,6 @@ class VisualGraphModal extends React.Component {
 
   render() {
     const {campaign}=this.props;
-    console.log(campaign);
     return (
       <div style={{ paddingRight: '5px' }}>
         <Button color="primary" size="md" className="mr-1 btn-block mt-0" onClick={this.toggle}>Show Graph</Button>

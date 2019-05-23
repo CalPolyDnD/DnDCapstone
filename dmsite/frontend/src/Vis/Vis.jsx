@@ -15,7 +15,6 @@ class Vis extends React.Component {
 
     componentWillMount() {
  	    const {campaign}=this.props;
- 	    console.log(campaign);
         axios.get(FETCH_CURRENT_USER_URL)
            .then((userRes) => {
              fetch(FETCH_URL, {
