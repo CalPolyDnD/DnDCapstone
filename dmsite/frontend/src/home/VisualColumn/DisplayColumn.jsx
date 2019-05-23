@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import {
   Button,
 } from 'reactstrap';
-import VisualTableModal from './VisualTableModal';
 import VisualGraphModal from './VisualGraphModal';
 
 const DOWNLOAD_URL = 'http://localhost:8000/download_file';
@@ -36,10 +35,10 @@ class DisplayColumn extends Component {
   }
 
   render() {
+    const { campaignName } = this.props;
     return (
       <div className="d-flex justify-content-center pt-2">
-        <VisualTableModal />
-        <VisualGraphModal />
+        <VisualGraphModal campaign={campaignName}/>
         <div>
           <Button
             color="primary"
