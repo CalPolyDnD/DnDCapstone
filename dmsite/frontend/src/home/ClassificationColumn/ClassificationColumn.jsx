@@ -13,26 +13,24 @@ class ClassificationColumn extends Component {
 
   // TODO: fix this
   isSensitive(val) {
-    if (val === "1") {
-        return "Sensitive!";
-     }
-    return "";
+    if (val === '1') {
+      return 'Sensitive!';
+    }
+    return '';
   }
 
   renderClassificationCell() {
     const { file } = this.props;
 
-    return file.classifications.map((obj, index) => {
-      return (
-        <ListGroupItem key={ index } style={{ backgroundColor: '#3d3d3d', color: 'white' }}>
-            <div>
-              <p>{obj.name}</p>
-              <p style={{ color: 'red', right: "10%"}}>{this.isSensitive(obj.is_sensitive)}</p>
-            </div>
-        </ListGroupItem>
-      );
-    });
-  };
+    return file.classifications.map((obj, index) => (
+      <ListGroupItem key={index} style={{ backgroundColor: '#3d3d3d', color: 'white' }}>
+        <div>
+          <p>{obj.name}</p>
+          <p style={{ color: 'red', right: '10%' }}>{this.isSensitive(obj.is_sensitive)}</p>
+        </div>
+      </ListGroupItem>
+    ));
+  }
 
   render() {
     return (

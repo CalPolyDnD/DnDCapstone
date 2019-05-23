@@ -94,22 +94,7 @@ class Home extends React.Component {
     });
   }
 
-  render() {
-    const {
-      campaign, fileList, selectedFileIndex, filesPresent,
-    } = this.state;
-
-    if (filesPresent !== 1)
-        return (
-          <Container fluid>
-            <h1 style={{ color: 'white' }}>Campaign: {campaign} </h1>
-            <p style={{ color: '#afafaf' }}> This campaign has no files! Add some files to classify.  </p>
-            <Upload campaignName={campaign} />
-              <Button color="primary" size="md" className="btn-block mt-3"
-                      onClick={this.onClick}>Save & Continue </Button>
-          </Container>
-        );
-
+  getFileData(fileList) {
     if (fileList.length === 0) return null;
 
     let filenames = fileList[0].get_name();
@@ -117,8 +102,46 @@ class Home extends React.Component {
       filenames += `, ${fileList[count].get_name()}`;
       if (count === 4) filenames += '...';
     }
+    return filenames;
+  }
 
-    //           <DisplayColumn name="Display Actions" /> - add in the first row after h1
+  noFilesPresentDisplay(campaign) {
+    return (
+      <Container fluid>
+        <h1 style={{ color: 'white' }}>
+Campaign:
+          {campaign}
+          {' '}
+
+        </h1>
+        <p style={{ color: '#afafaf' }}> This campaign has no files! Add some files to classify.  </p>
+        <Upload campaignName={campaign} />
+        <Button
+          color="primary"
+          size="md"
+          className="btn-block mt-3"
+          onClick={this.onClick}
+        >
+Save & Continue
+        </Button>
+      </Container>
+    );
+  }
+
+  render() {
+    // initializes file and classification data requested from database
+    const {
+      campaign, fileList, selectedFileIndex, filesPresent,
+    } = this.state;
+
+    // display for no files
+    if (filesPresent !== 1) this.noFilesPresentDisplay(campaign);
+
+    if (fileList.length === 0) return null;
+
+    // organizes file data to be displayed in return statement below
+    const filenames = this.getFileData(fileList);
+
     return (
       <Container fluid>
         <Row style={{ justifyContent: 'space-between' }}>
@@ -131,7 +154,9 @@ Campaign:
           <DisplayColumn campaignName={this.state.campaign} />
         </Row>
         <p style={{ color: '#afafaf' }}>
-          This campaign organizes {filenames}
+          This campaign organizes
+          {' '}
+          {filenames}
         </p>
         <Row>
           <Col md="3">
@@ -141,7 +166,7 @@ Campaign:
               cellOnClick={this._handleFileChange}
               campaign={campaign}
             />
-            {/*{this.getNameAccess()}*/}
+            {/* {this.getNameAccess()} */}
           </Col>
           <Col md="7">
             <ClassificationColumn name="Classifications" file={fileList[selectedFileIndex]} />

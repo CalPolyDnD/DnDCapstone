@@ -150,8 +150,7 @@ class Profile extends React.Component {
 Username
                   <br />
                   <br />
-                    ..................................
-                  {this.state.username}
+                    {`\t\t${  this.state.username}`}
                 </label>
               </div>
               <div style={{ paddingBottom: '10%' }}>
@@ -159,8 +158,7 @@ Username
 Email
                   <br />
                   <br />
-                    ..................................
-                  {this.state.email}
+                    {`\t\t${  this.state.email}`}
                 </label>
               </div>
               <div style={{
