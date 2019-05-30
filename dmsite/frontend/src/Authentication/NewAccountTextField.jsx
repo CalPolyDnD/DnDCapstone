@@ -85,7 +85,10 @@ class NewAccountTextField extends React.Component {
       }
 
       return (
-        <Form onSubmit={this.handleSubmit}>
+        <Form
+          onSubmit={this.handleSubmit}
+          autoComplete="new-password"
+        >
           <Form.Item>
             {getFieldDecorator('username', {
               rules: [{ required: true, message: 'Please input your username!' }],
@@ -93,6 +96,7 @@ class NewAccountTextField extends React.Component {
               <Input
                 style={{ backgroundColor: '#303030', borderWidth: 0, color: 'white' }}
                 placeholder="*Username"
+                autoComplete="off"
               />,
             )}
           </Form.Item>
@@ -103,17 +107,18 @@ class NewAccountTextField extends React.Component {
               <Input
                 style={{ backgroundColor: '#303030', borderWidth: 0, color: 'white' }}
                 placeholder="*Email"
+                autoComplete="off"
               />,
             )}
           </Form.Item>
-          {/*<Form.Item>*/}
-            {/*{getFieldDecorator('organization')(*/}
-              {/*<Input*/}
-                {/*style={{ backgroundColor: '#303030', borderWidth: 0, color: 'white' }}*/}
-                {/*placeholder="Organization"*/}
-              {/*/>,*/}
-            {/*)}*/}
-          {/*</Form.Item>*/}
+          {/* <Form.Item> */}
+          {/* {getFieldDecorator('organization')( */}
+          {/* <Input */}
+          {/* style={{ backgroundColor: '#303030', borderWidth: 0, color: 'white' }} */}
+          {/* placeholder="Organization" */}
+          {/* />, */}
+          {/* )} */}
+          {/* </Form.Item> */}
           <Form.Item>
             {getFieldDecorator('password', {
               rules: [
@@ -125,6 +130,7 @@ class NewAccountTextField extends React.Component {
                 type="password"
                 placeholder="*Password"
                 style={{ backgroundColor: '#303030', borderWidth: 0, color: 'white' }}
+                autoComplete="off"
               />,
             )}
           </Form.Item>
@@ -140,6 +146,7 @@ class NewAccountTextField extends React.Component {
                 type="password"
                 placeholder="*Confirm Password"
                 onBlur={this.handleConfirmBlur}
+                autoComplete="off"
               />,
             )}
           </Form.Item>
