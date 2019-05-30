@@ -40,7 +40,7 @@ class Unknown extends React.Component {
     renderExamples(classification) {    
         return classification.examples.map(example => (
           <div style={{ height: '100%', justifyContent: 'center', alignItems: 'center'}}>
-            <p style={{ margin: '5px', paddingLeft: '30px',  color: '#898989' }}>
+            <p style={{ margin: '5px', paddingLeft: '30px',  color: '#d6d7d8' }}>
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{`${example}`}
             </p>
           </div>
@@ -78,7 +78,7 @@ class Unknown extends React.Component {
                         isOpen={cell === index}
                         style={{backgroundColor: '#3d3d3d' }}
                     >
-                    <p style={{ margin: '5px', paddingLeft: '30px',  color: '#898989' }}>
+                    <p style={{ margin: '5px', paddingLeft: '30px',  color: '#d6d7d8' }}>
                       Examples:
                     </p>
                     {this.renderExamples(classification)}

@@ -43,7 +43,7 @@ class NewAccountTextField extends React.Component {
     };
 
     handleConfirmBlur = (e) => {
-      const { value } = e.target;
+      const { value } = e.targe t;
       this.setState((prevState) => {
         const { confirmDirty } = this.state;
         return {
@@ -56,7 +56,7 @@ class NewAccountTextField extends React.Component {
     compareToFirstPassword = (rule, value, callback) => {
       const { form } = this.props;
       if (value && value !== form.getFieldValue('password')) {
-        callback('The two passwords you entered are inconsistent');
+        callback('The two passwords you entered don\'t match!');
       } else {
         callback();
       }
