@@ -23,17 +23,23 @@ class VisualGraphModal extends React.Component {
   }
 
   render() {
-    const {campaign}=this.props;
+    const { campaign } = this.props;
     return (
-      <div style={{ paddingRight: '5px' }}>
+      <div style={{ paddingRight: '5px', fontColor: 'white', color: 'white' }}>
         <Button color="primary" size="md" className="mr-1 btn-block mt-0" onClick={this.toggle}>Show Graph</Button>
 
-        <Modal size="lg" isOpen={this.state.modal} toggle={this.toggle} className={this.props.className} >
-          <ModalHeader toggle={this.toggle}>Table Visualization</ModalHeader>
-          <ModalBody>
-            <Vis campaign={campaign}/>
+        <Modal
+          size="lg"
+          isOpen={this.state.modal}
+          toggle={this.toggle}
+          className={this.props.className}
+          style={{ backgroundColor: '#3d3d3d', color: 'white', borderWidth: '0'}}
+        >
+          <ModalHeader style={{backgroundColor: '#303030'}}/>
+          <ModalBody style={{ backgroundColor: '#3d3d3d', color: 'white'}}>
+            <Vis campaign={campaign} />
           </ModalBody>
-          <ModalFooter>
+          <ModalFooter style={{ backgroundColor: '#303030', color: 'white', borderWidth: '0' }}>
             <Button color="secondary" onClick={this.toggle}>Close</Button>
           </ModalFooter>
         </Modal>

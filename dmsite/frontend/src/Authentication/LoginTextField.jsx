@@ -53,7 +53,11 @@ class TextField extends React.Component {
     }
 
     return (
-      <Form onSubmit={this.handleSubmit} className="login-form">
+      <Form
+        onSubmit={this.handleSubmit}
+        className="login-form"
+        autoComplete="new-password"
+      >
         <Form.Item>
           {getFieldDecorator('email', {
             rules: [{ required: true, message: 'Please input your email!' }],
@@ -62,6 +66,7 @@ class TextField extends React.Component {
               type="email"
               placeholder="Email"
               style={{ backgroundColor: '#303030', borderWidth: 0, color: 'white' }}
+              autoComplete="off"
             />,
           )}
         </Form.Item>
@@ -73,6 +78,7 @@ class TextField extends React.Component {
               type="password"
               placeholder="Password"
               style={{ backgroundColor: '#303030', borderWidth: 0, color: 'white' }}
+              autoComplete="off"
             />,
           )}
         </Form.Item>

@@ -106,12 +106,18 @@ class StandardHeader extends React.Component {
 
     const antIcon = <Icon type="loading" style={{ fontSize: 24 }} spin />;
     return (
-      <Menu>
+      <Menu style={{ backgroundColor: '#303030'}}>
         {
           isAuthenticated
             ? ([
               <MenuItem>
-                <a href="/profile" key="profile">Profile</a>
+                <a
+                  href="/profile"
+                  key="profile"
+                  style={{ backgroundColor: '#303030', color: 'white' }}
+                >
+                         Profile
+                </a>
               </MenuItem>,
 
               <MenuItem>
@@ -119,13 +125,13 @@ class StandardHeader extends React.Component {
                   onClick={e => this.handleLogout(e)}
                   href="/login"
                   key="logout"
-                  style={{ color: 'red' }}
+                  style={{ backgroundColor: '#303030', color: '#1890ff' }}
                 >
                   Logout
                 </a>
                 <Modal isOpen={modalIsVisible}>
                   <ModalBody style={{ textAlign: 'center' }}>
-                    <Spin style={{ backgroundColor: 'transparent' }} indicator={antIcon} tip='Logging out...' backdrop='static'/>
+                    <Spin style={{ backgroundColor: 'transparent' }} indicator={antIcon} tip="Logging out..." backdrop="static" />
                   </ModalBody>
                 </Modal>
               </MenuItem>,
@@ -161,7 +167,9 @@ class StandardHeader extends React.Component {
           className="mx-1"
           htmlType="button"
         />
-        <Dropdown overlay={this.renderProfileDropdown()}>
+        <Dropdown
+          overlay={this.renderProfileDropdown()}
+        >
           <Button
             icon="user"
             shape="circle-outline"
