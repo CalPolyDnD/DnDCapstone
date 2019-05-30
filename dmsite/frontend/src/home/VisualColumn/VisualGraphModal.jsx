@@ -33,8 +33,7 @@ class VisualGraphModal extends React.Component {
           isOpen={this.state.modal}
           toggle={this.toggle}
           className={this.props.className}
-          style={{ backgroundColor: '#3d3d3d', color: 'white', borderWidth: '0', maxHeight: '30%'}}
-          maxHeight={ {'30%'} }
+          style={{ backgroundColor: '#3d3d3d', color: 'white', borderWidth: '0'}}
         >
           <ModalHeader style={{backgroundColor: '#303030'}}/>
           <ModalBody style={{ backgroundColor: '#3d3d3d', color: 'white'}}>
