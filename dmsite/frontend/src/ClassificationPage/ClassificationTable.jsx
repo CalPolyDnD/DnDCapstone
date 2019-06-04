@@ -39,7 +39,7 @@ class ClassificationTable extends React.Component {
       columnStr += columns[columns.length - 1];
 
       return (
-        <p style={{ margin: '5px', paddingLeft: '30px',  color: '#898989' }}>
+        <p style={{ margin: '5px', paddingLeft: '30px',  color: '#d6d7d8' }}>
           Column: {columnStr}
         </p>
       );
@@ -48,7 +48,7 @@ class ClassificationTable extends React.Component {
   renderClassificationExamples(examples) {
     return examples.map(example => (
       <div style={{ height: '100%', justifyContent: 'center', alignItems: 'center'}}>
-        <p style={{ margin: '5px', paddingLeft: '30px',  color: '#898989' }}>
+        <p style={{ margin: '5px', paddingLeft: '30px',  color: '#d6d7d8' }}>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{`${example}`}
         </p>
       </div>

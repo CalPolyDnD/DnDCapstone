@@ -24,11 +24,10 @@ def find_files(data):
 
 @csrf_exempt
 def download_file(request):
-    print('top of download_file')
     if request.method == 'POST':
         try:
             requestBody = json.loads(str(request.body, encoding='utf8'))
-            data = db.scan('classifications', 'campaign', request['campaign_name'])
+            data = db.scan('classifications', 'campaign', requestBody['campaign_name'])
             if 'Items' not in data:
                 return JsonResponse({"error": data['errorStr']}, status=400)
             formattedResponse = formatClassificationJson(data['Items'])

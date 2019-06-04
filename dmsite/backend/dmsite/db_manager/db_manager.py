@@ -4,7 +4,6 @@ from boto3.dynamodb.conditions import Key
 from decimal import Decimal
 import pandas as pd
 
-
 dynamo_client = boto3.client('dynamodb', region_name='us-east-1', endpoint_url="http://dynamodb.us-east-1.amazonaws.com")
 dynamodb = boto3.resource('dynamodb', region_name='us-east-1', endpoint_url="http://dynamodb.us-east-1.amazonaws.com")
 ERR_STR = "There was an error trying to access the AWS database. See 'errorStr' for details."
