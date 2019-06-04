@@ -43,7 +43,7 @@ class NewAccountTextField extends React.Component {
     };
 
     handleConfirmBlur = (e) => {
-      const { value } = e.targe t;
+      const { value } = e.target;
       this.setState((prevState) => {
         const { confirmDirty } = this.state;
         return {
