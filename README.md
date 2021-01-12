@@ -1,4 +1,8 @@
 # DnDCapstone
+
+WARNING
+This is a project that was used for a final as part of a college class. It has not been updated in a long time, and has a known security vulnerability in it. Use this projet at your own risk.
+
 Welcome to Data-n-DataSets github!
 Here the DnD team is developing a DataMaster a data classifier.
 
