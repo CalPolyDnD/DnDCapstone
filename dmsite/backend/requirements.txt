@@ -24,7 +24,7 @@ pandas==0.23.4
 pluggy==0.8.1
 plumber==1.5
 psycopg2==2.7.7
-py==1.7.0
+py==1.10.0
 pytest==4.0.1
 pytest-django==3.4.8
 python-dateutil==2.7.5
