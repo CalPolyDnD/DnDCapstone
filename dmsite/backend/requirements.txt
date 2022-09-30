@@ -14,7 +14,7 @@ djangorestframework==3.9.1
 docutils==0.14
 idna==2.8
 jmespath==0.9.3
-joblib==0.13.1
+joblib==1.2.0
 more-itertools==5.0.0
 node==0.9.22
 numpy==1.15.3
