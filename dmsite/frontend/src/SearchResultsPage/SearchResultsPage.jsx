@@ -22,6 +22,7 @@ class SearchResultsPage extends React.Component {
       filterSectionCollapse: false,
       filterTags: this.getFilterTagFromRoutePath(),
     };
+    this.filterList = []
     this.toggleCollapse = this.toggleCollapse.bind(this);
   }
 
@@ -47,9 +48,11 @@ class SearchResultsPage extends React.Component {
   }
 
   addFilterTag(type, value) {
-    if (!value) {
+    if(!value || this.filterList.includes(type + value)) {
       return;
     }
+
+    this.filterList.push(type + value);
 
     const newTag = {
       type,
@@ -61,8 +64,9 @@ class SearchResultsPage extends React.Component {
   }
 
   removeFilterTag(index) {
-    const { filterTags } = this.state;
-    const filterTagsCopy = [...filterTags];
+    this.filterList.pop(index.type + index.value);
+    const filterTagsCopy = [...this.state.filterTags];
+        
     filterTagsCopy.splice(index, 1);
     this.setState({ filterTags: filterTagsCopy });
   }
@@ -124,7 +128,6 @@ class SearchResultsPage extends React.Component {
   }
 
   renderFilterSectionForms(fieldName) {
-    let text = '';
     return (
       <div>
         { /* <Label for={`${fieldName}FilterField`}>{fieldName}</Label> */ }
@@ -135,11 +138,11 @@ class SearchResultsPage extends React.Component {
               type="text"
               style={{ backgroundColor: '#303030', borderWidth: 0 }}
               placeholder={`Dataset ${fieldName}`}
-              onChange={(event) => { text = event.target.value; }}
+              onChange={(event) => { this.state.text = event.target.value; }}
             />
             <Button
               color="primary"
-              onClick={() => { this.addFilterTag(fieldName, text); }}
+              onClick={() => { this.addFilterTag(fieldName, this.state.text); }}
             >
               Add
             </Button>
